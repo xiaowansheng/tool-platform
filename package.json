@@ -1,0 +1,23 @@
+{
+  "name": "tool-platform",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.1",
+  "scripts": {
+    "dev": "pnpm generate:tools && turbo run dev --parallel",
+    "build": "pnpm generate:tools && turbo run build",
+    "lint": "pnpm generate:tools && turbo run lint",
+    "test": "pnpm generate:tools && turbo run test",
+    "generate:tools": "node ./scripts/generate-tool-registry.mjs",
+    "create-tool": "node ./scripts/create-tool/index.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "fast-glob": "^3.3.2",
+    "tsx": "^4.20.6",
+    "turbo": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}
