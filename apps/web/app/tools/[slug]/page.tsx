@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Topbar } from "@/components/topbar";
+import { ToolRuntimeCard } from "@/components/tool-runtime-card";
 import { getCategoryMeta, getToolRecord } from "@tool-platform/tool-sdk";
 
 export async function generateMetadata({
@@ -65,10 +66,19 @@ export default async function ToolPage({
               <h3>Manifest</h3>
               <p>{record.manifest.id}</p>
             </article>
+            <article className="detail-card">
+              <h3>Worker</h3>
+              <p>{record.manifest.worker ? "enabled" : "not required"}</p>
+            </article>
+            <article className="detail-card">
+              <h3>Permissions</h3>
+              <p>{record.manifest.permissions?.join(" / ") ?? "none"}</p>
+            </article>
           </div>
         </section>
 
         <ToolComponent manifest={record.manifest} />
+        <ToolRuntimeCard manifest={record.manifest} />
 
         <section className="tool-docs">
           <article>
@@ -80,6 +90,11 @@ export default async function ToolPage({
             <p className="eyebrow">Lifecycle</p>
             <h3>Manifest → Registry → Route</h3>
             <p>工具接入后会先注册，再进入分类、搜索和动态工具页面。</p>
+          </article>
+          <article>
+            <p className="eyebrow">Phase Two</p>
+            <h3>Runtime → Worker → OPFS</h3>
+            <p>重工具开始通过 runtime manager、Worker RPC 和 OPFS 存储脱离主线程执行。</p>
           </article>
         </section>
       </div>

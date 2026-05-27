@@ -4,6 +4,8 @@ import JsonFormatterTool from "@tool-platform/json-formatter/tool";
 import JsonFormatterManifest from "@tool-platform/json-formatter/manifest";
 import RegexTesterTool from "@tool-platform/regex-tester/tool";
 import RegexTesterManifest from "@tool-platform/regex-tester/manifest";
+import TextInspectorTool from "@tool-platform/text-inspector/tool";
+import TextInspectorManifest from "@tool-platform/text-inspector/manifest";
 
 import type { ToolRecord } from "../types";
 
@@ -19,5 +21,9 @@ export const toolRecords: ToolRecord[] = [
   {
     manifest: RegexTesterManifest,
     component: RegexTesterTool
+  },
+  {
+    manifest: TextInspectorManifest,
+    component: TextInspectorTool
   }
 ];

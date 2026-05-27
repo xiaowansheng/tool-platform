@@ -13,7 +13,8 @@
     "@tool-platform/tool-contracts": "workspace:*",
     "@tool-platform/base64-studio": "workspace:*",
     "@tool-platform/json-formatter": "workspace:*",
-    "@tool-platform/regex-tester": "workspace:*"
+    "@tool-platform/regex-tester": "workspace:*",
+    "@tool-platform/text-inspector": "workspace:*"
   },
   "peerDependencies": {
     "react": "^19.0.0"

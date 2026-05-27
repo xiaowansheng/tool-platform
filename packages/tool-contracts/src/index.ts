@@ -8,6 +8,14 @@ export type ToolRuntime =
   | "sandbox"
   | "realtime";
 
+export type ToolPermission =
+  | "clipboard"
+  | "filesystem"
+  | "camera"
+  | "microphone"
+  | "webgpu"
+  | "notification";
+
 export type ToolCategory =
   | "developer"
   | "ai"
@@ -33,7 +41,7 @@ export interface ToolManifest {
   version?: string;
   isolation?: "inline" | "worker" | "iframe";
   sandbox?: boolean;
-  permissions?: string[];
+  permissions?: ToolPermission[];
   capabilities?: string[];
   preload?: string[];
   memoryLimit?: number;

@@ -9,6 +9,9 @@ const toolsDir = path.join(rootDir, "tools");
 const toolSdkDir = path.join(rootDir, "packages", "tool-sdk");
 const generatedRegistryPath = path.join(toolSdkDir, "src", "generated", "registry.ts");
 const toolSdkPackagePath = path.join(toolSdkDir, "package.json");
+const preservedToolSdkDependencies = new Set([
+  "@tool-platform/tool-contracts"
+]);
 
 function pascalCase(value) {
   return value
@@ -84,11 +87,7 @@ async function syncToolSdkDependencies(tools) {
   const nextDependencies = { ...(packageJson.dependencies ?? {}) };
 
   for (const dependencyName of Object.keys(nextDependencies)) {
-    if (
-      dependencyName.startsWith("@tool-platform/") &&
-      dependencyName !== "@tool-platform/tool-sdk" &&
-      dependencyName !== "@tool-platform/tool-contracts"
-    ) {
+    if (dependencyName.startsWith("@tool-platform/") && !preservedToolSdkDependencies.has(dependencyName)) {
       delete nextDependencies[dependencyName];
     }
   }

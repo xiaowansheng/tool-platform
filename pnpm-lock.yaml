@@ -32,6 +32,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-sdk':
         specifier: workspace:*
         version: link:../../packages/tool-sdk
@@ -67,6 +70,28 @@ importers:
         specifier: ^4.0.0
         version: 4.3.0
 
+  packages/runtime: {}
+
+  packages/storage: {}
+
+  packages/tool-browser-sdk:
+    dependencies:
+      '@tool-platform/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@tool-platform/storage':
+        specifier: workspace:*
+        version: link:../storage
+      '@tool-platform/wasm-runtime':
+        specifier: workspace:*
+        version: link:../wasm-runtime
+      '@tool-platform/worker-runtime':
+        specifier: workspace:*
+        version: link:../worker-runtime
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   packages/tool-contracts:
     dependencies:
       react:
@@ -84,12 +109,23 @@ importers:
       '@tool-platform/regex-tester':
         specifier: workspace:*
         version: link:../../tools/regex-tester
+      '@tool-platform/text-inspector':
+        specifier: workspace:*
+        version: link:../../tools/text-inspector
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../tool-contracts
       react:
         specifier: ^19.0.0
         version: 19.2.6
+
+  packages/wasm-runtime: {}
+
+  packages/worker-runtime:
+    dependencies:
+      '@tool-platform/runtime':
+        specifier: workspace:*
+        version: link:../runtime
 
   tools/base64-studio:
     dependencies:
@@ -111,6 +147,18 @@ importers:
 
   tools/regex-tester:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/text-inspector:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts

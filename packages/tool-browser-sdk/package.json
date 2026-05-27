@@ -1,0 +1,21 @@
+{
+  "name": "@tool-platform/tool-browser-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "scripts": {
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tool-platform/runtime": "workspace:*",
+    "@tool-platform/storage": "workspace:*",
+    "@tool-platform/wasm-runtime": "workspace:*",
+    "@tool-platform/worker-runtime": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}
