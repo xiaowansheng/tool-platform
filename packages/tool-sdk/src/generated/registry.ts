@@ -1,27 +1,77 @@
 import AiSandboxLabTool from "@tool-platform/ai-sandbox-lab/tool";
 import AiSandboxLabManifest from "@tool-platform/ai-sandbox-lab/manifest";
+import AspectRatioCalculatorTool from "@tool-platform/aspect-ratio-calculator/tool";
+import AspectRatioCalculatorManifest from "@tool-platform/aspect-ratio-calculator/manifest";
 import Base64StudioTool from "@tool-platform/base64-studio/tool";
 import Base64StudioManifest from "@tool-platform/base64-studio/manifest";
+import CaseConverterTool from "@tool-platform/case-converter/tool";
+import CaseConverterManifest from "@tool-platform/case-converter/manifest";
 import ColorConverterTool from "@tool-platform/color-converter/tool";
 import ColorConverterManifest from "@tool-platform/color-converter/manifest";
+import ColorPaletteGeneratorTool from "@tool-platform/color-palette-generator/tool";
+import ColorPaletteGeneratorManifest from "@tool-platform/color-palette-generator/manifest";
 import CronHelperTool from "@tool-platform/cron-helper/tool";
 import CronHelperManifest from "@tool-platform/cron-helper/manifest";
+import CssClampGeneratorTool from "@tool-platform/css-clamp-generator/tool";
+import CssClampGeneratorManifest from "@tool-platform/css-clamp-generator/manifest";
+import CsvJsonConverterTool from "@tool-platform/csv-json-converter/tool";
+import CsvJsonConverterManifest from "@tool-platform/csv-json-converter/manifest";
+import EnvParserTool from "@tool-platform/env-parser/tool";
+import EnvParserManifest from "@tool-platform/env-parser/manifest";
+import GitignoreGeneratorTool from "@tool-platform/gitignore-generator/tool";
+import GitignoreGeneratorManifest from "@tool-platform/gitignore-generator/manifest";
 import HashGeneratorTool from "@tool-platform/hash-generator/tool";
 import HashGeneratorManifest from "@tool-platform/hash-generator/manifest";
+import HtmlEntityCodecTool from "@tool-platform/html-entity-codec/tool";
+import HtmlEntityCodecManifest from "@tool-platform/html-entity-codec/manifest";
+import HttpStatusReferenceTool from "@tool-platform/http-status-reference/tool";
+import HttpStatusReferenceManifest from "@tool-platform/http-status-reference/manifest";
+import Ipv4CidrCalculatorTool from "@tool-platform/ipv4-cidr-calculator/tool";
+import Ipv4CidrCalculatorManifest from "@tool-platform/ipv4-cidr-calculator/manifest";
 import JsonFormatterTool from "@tool-platform/json-formatter/tool";
 import JsonFormatterManifest from "@tool-platform/json-formatter/manifest";
+import JsonToTsTool from "@tool-platform/json-to-ts/tool";
+import JsonToTsManifest from "@tool-platform/json-to-ts/manifest";
 import JwtDecoderTool from "@tool-platform/jwt-decoder/tool";
 import JwtDecoderManifest from "@tool-platform/jwt-decoder/manifest";
+import LoremIpsumGeneratorTool from "@tool-platform/lorem-ipsum-generator/tool";
+import LoremIpsumGeneratorManifest from "@tool-platform/lorem-ipsum-generator/manifest";
 import MarkdownPreviewTool from "@tool-platform/markdown-preview/tool";
 import MarkdownPreviewManifest from "@tool-platform/markdown-preview/manifest";
+import MarkdownTableGeneratorTool from "@tool-platform/markdown-table-generator/tool";
+import MarkdownTableGeneratorManifest from "@tool-platform/markdown-table-generator/manifest";
+import MimeTypeLookupTool from "@tool-platform/mime-type-lookup/tool";
+import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
+import NumberBaseConverterTool from "@tool-platform/number-base-converter/tool";
+import NumberBaseConverterManifest from "@tool-platform/number-base-converter/manifest";
+import PasswordGeneratorTool from "@tool-platform/password-generator/tool";
+import PasswordGeneratorManifest from "@tool-platform/password-generator/manifest";
+import PercentageCalculatorTool from "@tool-platform/percentage-calculator/tool";
+import PercentageCalculatorManifest from "@tool-platform/percentage-calculator/manifest";
+import QueryParamBuilderTool from "@tool-platform/query-param-builder/tool";
+import QueryParamBuilderManifest from "@tool-platform/query-param-builder/manifest";
 import RegexTesterTool from "@tool-platform/regex-tester/tool";
 import RegexTesterManifest from "@tool-platform/regex-tester/manifest";
+import RobotsTxtGeneratorTool from "@tool-platform/robots-txt-generator/tool";
+import RobotsTxtGeneratorManifest from "@tool-platform/robots-txt-generator/manifest";
+import SlugGeneratorTool from "@tool-platform/slug-generator/tool";
+import SlugGeneratorManifest from "@tool-platform/slug-generator/manifest";
+import SqlFormatterTool from "@tool-platform/sql-formatter/tool";
+import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
+import TextDiffTool from "@tool-platform/text-diff/tool";
+import TextDiffManifest from "@tool-platform/text-diff/manifest";
 import TextInspectorTool from "@tool-platform/text-inspector/tool";
 import TextInspectorManifest from "@tool-platform/text-inspector/manifest";
 import TimestampConverterTool from "@tool-platform/timestamp-converter/tool";
 import TimestampConverterManifest from "@tool-platform/timestamp-converter/manifest";
+import UnitConverterTool from "@tool-platform/unit-converter/tool";
+import UnitConverterManifest from "@tool-platform/unit-converter/manifest";
 import UrlCodecTool from "@tool-platform/url-codec/tool";
 import UrlCodecManifest from "@tool-platform/url-codec/manifest";
+import UserAgentParserTool from "@tool-platform/user-agent-parser/tool";
+import UserAgentParserManifest from "@tool-platform/user-agent-parser/manifest";
+import UtmBuilderTool from "@tool-platform/utm-builder/tool";
+import UtmBuilderManifest from "@tool-platform/utm-builder/manifest";
 import UuidGeneratorTool from "@tool-platform/uuid-generator/tool";
 import UuidGeneratorManifest from "@tool-platform/uuid-generator/manifest";
 
@@ -33,36 +83,124 @@ export const toolRecords: ToolRecord[] = [
     component: AiSandboxLabTool
   },
   {
+    manifest: AspectRatioCalculatorManifest,
+    component: AspectRatioCalculatorTool
+  },
+  {
     manifest: Base64StudioManifest,
     component: Base64StudioTool
+  },
+  {
+    manifest: CaseConverterManifest,
+    component: CaseConverterTool
   },
   {
     manifest: ColorConverterManifest,
     component: ColorConverterTool
   },
   {
+    manifest: ColorPaletteGeneratorManifest,
+    component: ColorPaletteGeneratorTool
+  },
+  {
     manifest: CronHelperManifest,
     component: CronHelperTool
+  },
+  {
+    manifest: CssClampGeneratorManifest,
+    component: CssClampGeneratorTool
+  },
+  {
+    manifest: CsvJsonConverterManifest,
+    component: CsvJsonConverterTool
+  },
+  {
+    manifest: EnvParserManifest,
+    component: EnvParserTool
+  },
+  {
+    manifest: GitignoreGeneratorManifest,
+    component: GitignoreGeneratorTool
   },
   {
     manifest: HashGeneratorManifest,
     component: HashGeneratorTool
   },
   {
+    manifest: HtmlEntityCodecManifest,
+    component: HtmlEntityCodecTool
+  },
+  {
+    manifest: HttpStatusReferenceManifest,
+    component: HttpStatusReferenceTool
+  },
+  {
+    manifest: Ipv4CidrCalculatorManifest,
+    component: Ipv4CidrCalculatorTool
+  },
+  {
     manifest: JsonFormatterManifest,
     component: JsonFormatterTool
+  },
+  {
+    manifest: JsonToTsManifest,
+    component: JsonToTsTool
   },
   {
     manifest: JwtDecoderManifest,
     component: JwtDecoderTool
   },
   {
+    manifest: LoremIpsumGeneratorManifest,
+    component: LoremIpsumGeneratorTool
+  },
+  {
     manifest: MarkdownPreviewManifest,
     component: MarkdownPreviewTool
   },
   {
+    manifest: MarkdownTableGeneratorManifest,
+    component: MarkdownTableGeneratorTool
+  },
+  {
+    manifest: MimeTypeLookupManifest,
+    component: MimeTypeLookupTool
+  },
+  {
+    manifest: NumberBaseConverterManifest,
+    component: NumberBaseConverterTool
+  },
+  {
+    manifest: PasswordGeneratorManifest,
+    component: PasswordGeneratorTool
+  },
+  {
+    manifest: PercentageCalculatorManifest,
+    component: PercentageCalculatorTool
+  },
+  {
+    manifest: QueryParamBuilderManifest,
+    component: QueryParamBuilderTool
+  },
+  {
     manifest: RegexTesterManifest,
     component: RegexTesterTool
+  },
+  {
+    manifest: RobotsTxtGeneratorManifest,
+    component: RobotsTxtGeneratorTool
+  },
+  {
+    manifest: SlugGeneratorManifest,
+    component: SlugGeneratorTool
+  },
+  {
+    manifest: SqlFormatterManifest,
+    component: SqlFormatterTool
+  },
+  {
+    manifest: TextDiffManifest,
+    component: TextDiffTool
   },
   {
     manifest: TextInspectorManifest,
@@ -73,8 +211,20 @@ export const toolRecords: ToolRecord[] = [
     component: TimestampConverterTool
   },
   {
+    manifest: UnitConverterManifest,
+    component: UnitConverterTool
+  },
+  {
     manifest: UrlCodecManifest,
     component: UrlCodecTool
+  },
+  {
+    manifest: UserAgentParserManifest,
+    component: UserAgentParserTool
+  },
+  {
+    manifest: UtmBuilderManifest,
+    component: UtmBuilderTool
   },
   {
     manifest: UuidGeneratorManifest,
