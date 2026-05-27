@@ -13,9 +13,17 @@
     "@tool-platform/tool-contracts": "workspace:*",
     "@tool-platform/ai-sandbox-lab": "workspace:*",
     "@tool-platform/base64-studio": "workspace:*",
+    "@tool-platform/color-converter": "workspace:*",
+    "@tool-platform/cron-helper": "workspace:*",
+    "@tool-platform/hash-generator": "workspace:*",
     "@tool-platform/json-formatter": "workspace:*",
+    "@tool-platform/jwt-decoder": "workspace:*",
+    "@tool-platform/markdown-preview": "workspace:*",
     "@tool-platform/regex-tester": "workspace:*",
-    "@tool-platform/text-inspector": "workspace:*"
+    "@tool-platform/text-inspector": "workspace:*",
+    "@tool-platform/timestamp-converter": "workspace:*",
+    "@tool-platform/url-codec": "workspace:*",
+    "@tool-platform/uuid-generator": "workspace:*"
   },
   "peerDependencies": {
     "react": "^19.0.0"

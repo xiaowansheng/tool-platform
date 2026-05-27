@@ -119,18 +119,42 @@ importers:
       '@tool-platform/base64-studio':
         specifier: workspace:*
         version: link:../../tools/base64-studio
+      '@tool-platform/color-converter':
+        specifier: workspace:*
+        version: link:../../tools/color-converter
+      '@tool-platform/cron-helper':
+        specifier: workspace:*
+        version: link:../../tools/cron-helper
+      '@tool-platform/hash-generator':
+        specifier: workspace:*
+        version: link:../../tools/hash-generator
       '@tool-platform/json-formatter':
         specifier: workspace:*
         version: link:../../tools/json-formatter
+      '@tool-platform/jwt-decoder':
+        specifier: workspace:*
+        version: link:../../tools/jwt-decoder
+      '@tool-platform/markdown-preview':
+        specifier: workspace:*
+        version: link:../../tools/markdown-preview
       '@tool-platform/regex-tester':
         specifier: workspace:*
         version: link:../../tools/regex-tester
       '@tool-platform/text-inspector':
         specifier: workspace:*
         version: link:../../tools/text-inspector
+      '@tool-platform/timestamp-converter':
+        specifier: workspace:*
+        version: link:../../tools/timestamp-converter
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../tool-contracts
+      '@tool-platform/url-codec':
+        specifier: workspace:*
+        version: link:../../tools/url-codec
+      '@tool-platform/uuid-generator':
+        specifier: workspace:*
+        version: link:../../tools/uuid-generator
       react:
         specifier: ^19.0.0
         version: 19.2.6
@@ -164,7 +188,52 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/color-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/cron-helper:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/hash-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/json-formatter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/jwt-decoder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/markdown-preview:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -187,6 +256,33 @@ importers:
       '@tool-platform/tool-browser-sdk':
         specifier: workspace:*
         version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/timestamp-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/url-codec:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/uuid-generator:
+    dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
