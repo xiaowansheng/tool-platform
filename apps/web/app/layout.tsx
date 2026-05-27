@@ -32,7 +32,14 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme:light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)}catch(e){}})();`
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${notoSansSc.variable} ${jetbrainsMono.variable}`}>
         <PlatformShell>{children}</PlatformShell>
       </body>

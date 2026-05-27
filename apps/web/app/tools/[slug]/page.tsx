@@ -51,7 +51,9 @@ export default async function ToolPage({
               <h2>{record.manifest.name}</h2>
               <p>{record.manifest.description}</p>
             </div>
-            <span className="pill">{record.manifest.runtime}</span>
+            <span className="pill pill--runtime" data-runtime={record.manifest.runtime}>
+              {record.manifest.runtime}
+            </span>
           </div>
           <div className="detail-grid">
             <article className="detail-card">

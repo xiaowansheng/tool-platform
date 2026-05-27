@@ -5,6 +5,12 @@ import { useRef } from "react";
 import { createToolSdk, useToolRuntime } from "@tool-platform/tool-browser-sdk";
 import type { ToolManifest } from "@tool-platform/tool-sdk";
 
+function statusClass(status: string) {
+  if (status === "running") return "status-dot--running";
+  if (status === "error") return "status-dot--error";
+  return "status-dot--idle";
+}
+
 export function ToolRuntimeCard({ manifest }: { manifest: ToolManifest }) {
   const sdkRef = useRef<ReturnType<typeof createToolSdk> | null>(null);
 
@@ -26,12 +32,17 @@ export function ToolRuntimeCard({ manifest }: { manifest: ToolManifest }) {
           <p className="eyebrow">Runtime Control</p>
           <h2>{manifest.runtime} session</h2>
         </div>
-        <p>第二阶段把工具从静态页面推进到可管理的 runtime 生命周期。</p>
+        <span className="pill pill--runtime" data-runtime={manifest.runtime}>
+          {manifest.runtime}
+        </span>
       </div>
       <div className="detail-grid">
         <article className="detail-card">
           <h3>Status</h3>
-          <p>{runtime.status}</p>
+          <p>
+            <span className={`status-dot ${statusClass(runtime.status)}`} />
+            {runtime.status}
+          </p>
         </article>
         <article className="detail-card">
           <h3>Memory Limit</h3>

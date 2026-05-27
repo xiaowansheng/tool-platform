@@ -37,9 +37,15 @@ export function SearchSurface({
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <button type="button" onClick={() => setQuery("")}>
-          清空
-        </button>
+        {query ? (
+          <button type="button" onClick={() => setQuery("")}>
+            清空
+          </button>
+        ) : (
+          <button type="button" disabled style={{ opacity: 0.4 }}>
+            清空
+          </button>
+        )}
       </div>
       {filteredTools.length > 0 ? (
         <div className="card-grid">

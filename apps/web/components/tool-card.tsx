@@ -12,7 +12,9 @@ export function ToolCard({ tool }: { tool: ToolManifest }) {
           <p className="eyebrow">{category?.label ?? tool.category}</p>
           <h3>{tool.name}</h3>
         </div>
-        <span className="pill">{tool.runtime}</span>
+        <span className="pill pill--runtime" data-runtime={tool.runtime}>
+          {tool.runtime}
+        </span>
       </div>
       <p>{tool.description}</p>
       <div className="tag-list">
@@ -22,7 +24,7 @@ export function ToolCard({ tool }: { tool: ToolManifest }) {
           </span>
         ))}
       </div>
-      <Link className="button-link" href={`/tools/${tool.id}`}>
+      <Link className="button-link button-link--accent" href={`/tools/${tool.id}`}>
         进入工具
       </Link>
     </article>
