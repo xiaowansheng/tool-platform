@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tool-platform/tool-contracts": "workspace:*",
+    "@tool-platform/ai-sandbox-lab": "workspace:*",
     "@tool-platform/base64-studio": "workspace:*",
     "@tool-platform/json-formatter": "workspace:*",
     "@tool-platform/regex-tester": "workspace:*",

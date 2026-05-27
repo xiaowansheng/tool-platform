@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 
+import { createAiRuntime as createAiRuntimeCore, createLocalTextModelProvider } from "@tool-platform/ai-runtime";
 import { createToolRuntimeManager, type ToolRuntimeFactory, type ToolRuntimeSnapshot } from "@tool-platform/runtime";
+import {
+  DEFAULT_IFRAME_SANDBOX,
+  IframeSandboxClient,
+  createIframeSandboxClient,
+  createSandboxDocument
+} from "@tool-platform/sandbox-runtime";
 import {
   deleteOpfsFile,
   isOpfsSupported,
@@ -191,6 +198,11 @@ export function createToolSdk() {
     createWorkerRuntime(handleFactory: () => InlineWorkerHandle) {
       return new WorkerToolRuntime(handleFactory);
     },
+    createAiRuntime(provider = createLocalTextModelProvider()) {
+      return createAiRuntimeCore(provider);
+    },
+    createSandboxDocument,
+    createIframeSandboxClient,
     loadWasm,
     preloadWasm,
     clearWasmCache
@@ -198,3 +210,4 @@ export function createToolSdk() {
 }
 
 export { WorkerClient, WorkerToolRuntime, createInlineWorker, createWorkerClient };
+export { DEFAULT_IFRAME_SANDBOX, IframeSandboxClient, createIframeSandboxClient, createSandboxDocument };

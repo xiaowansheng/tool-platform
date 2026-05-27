@@ -10,7 +10,9 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@tool-platform/ai-runtime": "workspace:*",
     "@tool-platform/runtime": "workspace:*",
+    "@tool-platform/sandbox-runtime": "workspace:*",
     "@tool-platform/storage": "workspace:*",
     "@tool-platform/wasm-runtime": "workspace:*",
     "@tool-platform/worker-runtime": "workspace:*"

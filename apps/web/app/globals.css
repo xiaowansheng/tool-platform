@@ -338,6 +338,14 @@ button:hover,
   font-family: var(--font-mono), monospace;
 }
 
+.sandbox-frame {
+  width: 100%;
+  min-height: 22rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: #101316;
+}
+
 .workspace {
   display: grid;
   gap: 1rem;
