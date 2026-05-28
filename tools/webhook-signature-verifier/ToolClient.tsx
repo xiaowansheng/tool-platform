@@ -27,6 +27,36 @@ function prefix(provider: Provider) {
   return "";
 }
 
+function signatureCandidates(provider: Provider, header: string) {
+  const trimmed = header.trim();
+
+  if (provider !== "stripe") {
+    return [trimmed];
+  }
+
+  const v1Values = trimmed
+    .split(",")
+    .map((part) => part.trim().split("="))
+    .filter(([key, value]) => key === "v1" && Boolean(value))
+    .map(([, value]) => value ?? "");
+
+  return v1Values.length > 0 ? v1Values : [trimmed];
+}
+
+function timingSafeEqual(left: string, right: string) {
+  if (left.length !== right.length) {
+    return false;
+  }
+
+  let diff = 0;
+
+  for (let index = 0; index < left.length; index += 1) {
+    diff |= left.charCodeAt(index) ^ right.charCodeAt(index);
+  }
+
+  return diff === 0;
+}
+
 export default function WebhookSignatureVerifierTool({ manifest }: ToolClientProps) {
   const [provider, setProvider] = useState<Provider>("github");
   const [secret, setSecret] = useState("webhook-secret");
@@ -36,8 +66,12 @@ export default function WebhookSignatureVerifierTool({ manifest }: ToolClientPro
   const [result, setResult] = useState("尚未验证");
 
   async function verify() {
-    const expected = `${prefix(provider)}${await hmacSha256(secret, buildSignedPayload(provider, body, timestamp))}`;
-    setResult(signature.trim() === expected ? `Valid: ${expected}` : `Invalid. Expected: ${expected}`);
+    const digest = await hmacSha256(secret, buildSignedPayload(provider, body, timestamp));
+    const expected = `${prefix(provider)}${digest}`;
+    const expectedHeader = provider === "stripe" ? `t=${timestamp},v1=${digest}` : expected;
+    const valid = signatureCandidates(provider, signature).some((candidate) => timingSafeEqual(candidate, expected));
+
+    setResult(valid ? `Valid: ${expectedHeader}` : `Invalid. Expected: ${expectedHeader}`);
   }
 
   return (

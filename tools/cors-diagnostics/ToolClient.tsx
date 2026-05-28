@@ -14,19 +14,33 @@ export default function CorsDiagnosticsTool({ manifest }: ToolClientProps) {
   const [methods, setMethods] = useState("GET,POST,OPTIONS");
   const [headers, setHeaders] = useState("Content-Type,Authorization");
   const [credentials, setCredentials] = useState(true);
-  const originAllowed = splitCsv(allowedOrigins).includes(origin) || allowedOrigins.trim() === "*";
-  const responseOrigin = credentials && allowedOrigins.trim() === "*" ? origin : allowedOrigins.trim();
-  const generated = [
-    `Access-Control-Allow-Origin: ${responseOrigin}`,
-    `Access-Control-Allow-Methods: ${methods}`,
-    `Access-Control-Allow-Headers: ${headers}`,
-    credentials ? "Access-Control-Allow-Credentials: true" : ""
-  ].filter(Boolean).join("\n");
+  const [copied, setCopied] = useState(false);
+  const allowedOriginList = splitCsv(allowedOrigins);
+  const wildcardAllowed = allowedOrigins.trim() === "*";
+  const originAllowed = allowedOriginList.includes(origin) || wildcardAllowed;
+  const responseOrigin = originAllowed
+    ? wildcardAllowed
+      ? credentials ? origin : "*"
+      : origin
+    : "";
+  const generated = originAllowed
+    ? [
+        `Access-Control-Allow-Origin: ${responseOrigin}`,
+        `Access-Control-Allow-Methods: ${methods}`,
+        `Access-Control-Allow-Headers: ${headers}`,
+        credentials ? "Access-Control-Allow-Credentials: true" : ""
+      ].filter(Boolean).join("\n")
+    : "不返回 Access-Control-Allow-Origin；当前 Origin 未被允许。";
   const issues = [
     credentials && allowedOrigins.trim() === "*" ? "Credentials 模式不能返回 wildcard origin，需要回显具体 Origin。" : "",
     originAllowed ? "" : "当前请求 Origin 不在允许列表中。",
     splitCsv(methods).includes("OPTIONS") ? "" : "预检请求通常需要允许 OPTIONS。"
   ].filter(Boolean);
+
+  async function copyHeaders() {
+    await navigator.clipboard.writeText(generated);
+    setCopied(true);
+  }
 
   return (
     <section className="tool-panel">
@@ -43,6 +57,7 @@ export default function CorsDiagnosticsTool({ manifest }: ToolClientProps) {
         <label className="tool-field tool-field--compact"><span>Methods</span><input value={methods} onChange={(event) => setMethods(event.target.value)} /></label>
         <label className="tool-field tool-field--compact"><span>Headers</span><input value={headers} onChange={(event) => setHeaders(event.target.value)} /></label>
         <label className="tool-check"><input type="checkbox" checked={credentials} onChange={(event) => setCredentials(event.target.checked)} /><span>Credentials</span></label>
+        <button type="button" onClick={() => void copyHeaders()}>{copied ? "已复制" : "复制 Headers"}</button>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field"><span>Generated Headers</span><textarea value={generated} readOnly spellCheck={false} /></label>

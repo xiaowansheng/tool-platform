@@ -131,14 +131,21 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolClientProps)
   const [target, setTarget] = useState<Format>("json");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   function convert() {
     try {
       setOutput(serializeByFormat(parseByFormat(input, source), target));
       setError("");
+      setCopied(false);
     } catch (convertError) {
       setError(convertError instanceof Error ? convertError.message : "配置转换失败");
     }
+  }
+
+  async function copyOutput() {
+    await navigator.clipboard.writeText(output);
+    setCopied(true);
   }
 
   return (
@@ -168,6 +175,7 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolClientProps)
           </select>
         </label>
         <button type="button" onClick={convert}>转换</button>
+        <button type="button" onClick={() => void copyOutput()} disabled={!output}>{copied ? "已复制" : "复制输出"}</button>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">

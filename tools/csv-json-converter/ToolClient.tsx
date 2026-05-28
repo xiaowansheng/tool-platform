@@ -4,14 +4,15 @@ import { useState } from "react";
 
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
-function parseCsvLine(line: string) {
-  const cells: string[] = [];
+function parseCsvRecords(input: string) {
+  const rows: string[][] = [];
+  let row: string[] = [];
   let current = "";
   let inQuotes = false;
 
-  for (let index = 0; index < line.length; index += 1) {
-    const character = line[index];
-    const next = line[index + 1];
+  for (let index = 0; index < input.length; index += 1) {
+    const character = input[index];
+    const next = input[index + 1];
 
     if (character === "\"" && inQuotes && next === "\"") {
       current += "\"";
@@ -19,30 +20,39 @@ function parseCsvLine(line: string) {
     } else if (character === "\"") {
       inQuotes = !inQuotes;
     } else if (character === "," && !inQuotes) {
-      cells.push(current);
+      row.push(current);
       current = "";
+    } else if ((character === "\n" || character === "\r") && !inQuotes) {
+      row.push(current);
+      rows.push(row);
+      row = [];
+      current = "";
+
+      if (character === "\r" && next === "\n") {
+        index += 1;
+      }
     } else {
       current += character;
     }
   }
 
-  cells.push(current);
-  return cells;
+  if (current !== "" || row.length > 0 || input.length > 0) {
+    row.push(current);
+    rows.push(row);
+  }
+
+  return rows;
 }
 
 function csvToJson(input: string) {
-  const lines = input.trim().split(/\r?\n/).filter(Boolean);
+  const records = parseCsvRecords(input).filter((row) => row.some((cell) => cell.trim() !== ""));
 
-  if (lines.length === 0) {
+  if (records.length === 0) {
     return "[]";
   }
 
-  const headers = parseCsvLine(lines[0] ?? "");
-  const rows = lines.slice(1).map((line) => {
-    const cells = parseCsvLine(line);
-
-    return Object.fromEntries(headers.map((header, index) => [header, cells[index] ?? ""]));
-  });
+  const headers = records[0] ?? [];
+  const rows = records.slice(1).map((cells) => Object.fromEntries(headers.map((header, index) => [header, cells[index] ?? ""])));
 
   return JSON.stringify(rows, null, 2);
 }

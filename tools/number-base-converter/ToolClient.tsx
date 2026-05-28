@@ -13,8 +13,30 @@ const bases = [
 
 type Radix = (typeof bases)[number]["radix"];
 
+function stripRadixPrefix(input: string, radix: Radix) {
+  const trimmed = input.trim();
+  const sign = trimmed.startsWith("-") || trimmed.startsWith("+") ? trimmed.slice(0, 1) : "";
+  const unsigned = sign ? trimmed.slice(1) : trimmed;
+  const prefixByRadix: Partial<Record<Radix, RegExp>> = {
+    2: /^0b/i,
+    8: /^0o/i,
+    16: /^0x/i
+  };
+  const matchingPrefix = prefixByRadix[radix];
+
+  if (matchingPrefix?.test(unsigned)) {
+    return `${sign}${unsigned.replace(matchingPrefix, "")}`;
+  }
+
+  if (/^0[bBoOxX]/.test(unsigned)) {
+    throw new Error("输入前缀与所选进制不匹配");
+  }
+
+  return trimmed;
+}
+
 function parseInteger(input: string, radix: Radix) {
-  const normalized = input.trim().replace(/^0[bBoOxX]/, "");
+  const normalized = stripRadixPrefix(input, radix);
 
   if (!normalized) {
     throw new Error("请输入整数");
@@ -85,7 +107,7 @@ export default function NumberBaseConverterTool({ manifest }: ToolClientProps) {
             <article key={base.radix} className="detail-card">
               <div className="tool-card__header">
                 <h3>{base.label}</h3>
-                <button type="button" onClick={() => void copy(base.label, output)}>
+                <button type="button" onClick={() => void copy(base.label, output)} disabled={Boolean(error)}>
                   {copied === base.label ? "已复制" : "复制"}
                 </button>
               </div>

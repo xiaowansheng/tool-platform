@@ -6,13 +6,12 @@ const manifest: ToolManifest = {
   description: "生成常见转码、裁剪、缩放和抽帧 FFmpeg 命令，并预览本地媒体文件信息。",
   category: "video",
   subCategory: "media",
-  tags: ["ffmpeg", "video", "audio", "transcode", "wasm"],
+  tags: ["ffmpeg", "video", "audio", "transcode"],
   icon: "film",
-  runtime: "wasm",
-  isolation: "worker",
+  runtime: "simple",
   featured: false,
-  permissions: ["filesystem"],
-  capabilities: ["command-builder", "media-preview", "wasm-ready"]
+  permissions: ["filesystem", "clipboard"],
+  capabilities: ["command-builder", "media-preview"]
 };
 
 export default manifest;

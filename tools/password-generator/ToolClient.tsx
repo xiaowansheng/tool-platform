@@ -26,7 +26,11 @@ function clamp(value: number, min: number, max: number) {
 
 function secureIndex(max: number) {
   const random = new Uint32Array(1);
-  crypto.getRandomValues(random);
+  const limit = Math.floor(0x100000000 / max) * max;
+
+  do {
+    crypto.getRandomValues(random);
+  } while (random[0] >= limit);
 
   return random[0] % max;
 }

@@ -11,6 +11,7 @@ const manifest: ToolManifest = {
   runtime: "ai",
   featured: false,
   ai: true,
+  permissions: ["clipboard"],
   capabilities: ["streaming-chat", "prompt-workbench", "local-simulation"]
 };
 

@@ -115,8 +115,11 @@ export default function ImageCompressorTool({ manifest }: ToolClientProps) {
 
   useEffect(() => () => {
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+  }, [sourceUrl]);
+
+  useEffect(() => () => {
     if (result?.url) URL.revokeObjectURL(result.url);
-  }, [sourceUrl, result?.url]);
+  }, [result?.url]);
 
   function handleFile(nextFile: File | null) {
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);

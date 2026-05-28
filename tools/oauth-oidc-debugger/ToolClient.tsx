@@ -15,10 +15,14 @@ async function pkceChallenge(verifier: string) {
 }
 
 function decodeJwtPayload(token: string) {
-  const payload = token.split(".")[1];
-  if (!payload) return "No JWT payload";
-  const normalized = payload.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(payload.length / 4) * 4, "=");
-  return JSON.stringify(JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(normalized), (character) => character.charCodeAt(0)))), null, 2);
+  try {
+    const payload = token.split(".")[1];
+    if (!payload) return "No JWT payload";
+    const normalized = payload.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(payload.length / 4) * 4, "=");
+    return JSON.stringify(JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(normalized), (character) => character.charCodeAt(0)))), null, 2);
+  } catch (error) {
+    return error instanceof Error ? error.message : "ID Token payload 解码失败";
+  }
 }
 
 export default function OAuthOidcDebuggerTool({ manifest }: ToolClientProps) {
@@ -26,6 +30,7 @@ export default function OAuthOidcDebuggerTool({ manifest }: ToolClientProps) {
   const [idToken, setIdToken] = useState("");
   const [verifier, setVerifier] = useState("tool-platform-pkce-verifier");
   const [challenge, setChallenge] = useState("");
+  const [copied, setCopied] = useState(false);
 
   let params: Array<[string, string]> = [];
   let urlError = "";
@@ -39,6 +44,12 @@ export default function OAuthOidcDebuggerTool({ manifest }: ToolClientProps) {
 
   async function generatePkce() {
     setChallenge(await pkceChallenge(verifier));
+    setCopied(false);
+  }
+
+  async function copyChallenge() {
+    await navigator.clipboard.writeText(challenge);
+    setCopied(true);
   }
 
   return (
@@ -69,12 +80,17 @@ export default function OAuthOidcDebuggerTool({ manifest }: ToolClientProps) {
           <textarea value={idToken ? decodeJwtPayload(idToken) : "粘贴 ID Token 以解码 payload"} readOnly spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>PKCE</span>
-          <textarea value={`verifier: ${verifier}\nchallenge: ${challenge}`} onChange={(event) => setVerifier(event.target.value)} spellCheck={false} />
+          <span>PKCE Verifier</span>
+          <textarea value={verifier} onChange={(event) => setVerifier(event.target.value)} spellCheck={false} />
+        </label>
+        <label className="tool-field">
+          <span>PKCE S256 Challenge</span>
+          <textarea value={challenge || "点击生成 S256 Challenge"} readOnly spellCheck={false} />
         </label>
       </div>
       <div className="tool-toolbar">
         <button type="button" onClick={() => void generatePkce()}>生成 S256 Challenge</button>
+        <button type="button" onClick={() => void copyChallenge()} disabled={!challenge}>{copied ? "已复制" : "复制 Challenge"}</button>
       </div>
     </section>
   );

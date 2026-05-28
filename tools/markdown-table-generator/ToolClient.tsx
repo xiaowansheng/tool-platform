@@ -5,11 +5,48 @@ import { useState } from "react";
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 function parseRows(input: string) {
-  return input.trim().split(/\r?\n/).filter(Boolean).map((line) => line.split(line.includes("\t") ? "\t" : ",").map((cell) => cell.trim()));
+  const delimiter = input.includes("\t") ? "\t" : ",";
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let inQuotes = false;
+
+  for (let index = 0; index < input.length; index += 1) {
+    const character = input[index];
+    const next = input[index + 1];
+
+    if (character === "\"" && inQuotes && next === "\"") {
+      cell += "\"";
+      index += 1;
+    } else if (character === "\"") {
+      inQuotes = !inQuotes;
+    } else if (character === delimiter && !inQuotes) {
+      row.push(cell.trim());
+      cell = "";
+    } else if ((character === "\n" || character === "\r") && !inQuotes) {
+      row.push(cell.trim());
+      rows.push(row);
+      row = [];
+      cell = "";
+
+      if (character === "\r" && next === "\n") {
+        index += 1;
+      }
+    } else {
+      cell += character;
+    }
+  }
+
+  if (cell !== "" || row.length > 0 || input.length > 0) {
+    row.push(cell.trim());
+    rows.push(row);
+  }
+
+  return rows.filter((item) => item.some((value) => value !== ""));
 }
 
 function escapeCell(value: string) {
-  return value.replace(/\|/g, "\\|");
+  return value.replace(/\|/g, "\\|").replace(/\r?\n/g, "<br>");
 }
 
 function toMarkdownTable(input: string) {

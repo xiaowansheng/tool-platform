@@ -9,7 +9,8 @@ const manifest: ToolManifest = {
   tags: ["prometheus", "promql", "metrics", "alerting"],
   icon: "activity",
   runtime: "simple",
-  featured: false
+  featured: false,
+  permissions: ["clipboard"]
 };
 
 export default manifest;

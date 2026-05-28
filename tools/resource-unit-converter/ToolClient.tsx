@@ -92,17 +92,25 @@ function kubernetesSnippet(group: ResourceGroup, value: number, unit: string) {
     ${key}: ${Math.round(mebibytes * 2)}Mi`;
 }
 
+const defaultInputs: Record<ResourceGroup, { value: number; unit: string }> = {
+  cpu: { value: 250, unit: "m" },
+  memory: { value: 256, unit: "Mi" },
+  storage: { value: 1, unit: "Gi" }
+};
+
 export default function ResourceUnitConverterTool({ manifest }: ToolClientProps) {
   const [group, setGroup] = useState<ResourceGroup>("cpu");
-  const [value, setValue] = useState(250);
-  const [fromUnit, setFromUnit] = useState("m");
+  const [value, setValue] = useState(defaultInputs.cpu.value);
+  const [fromUnit, setFromUnit] = useState(defaultInputs.cpu.unit);
   const meta = unitGroups[group];
   const results = convert(value, fromUnit, group);
 
   function updateGroup(nextGroup: ResourceGroup) {
+    const defaults = defaultInputs[nextGroup];
+
     setGroup(nextGroup);
-    setFromUnit(unitGroups[nextGroup].units[0]?.unit ?? "");
-    setValue(nextGroup === "cpu" ? 250 : 256);
+    setFromUnit(defaults.unit);
+    setValue(defaults.value);
   }
 
   return (

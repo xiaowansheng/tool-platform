@@ -70,8 +70,15 @@ export default function WebsocketClientTool({ manifest }: ToolClientProps) {
   }
 
   function disconnect() {
-    socketRef.current?.close(1000, "Client closed");
+    const socket = socketRef.current;
+
+    if (!socket) {
+      return;
+    }
+
     socketRef.current = null;
+    socket.close(1000, "Client closed");
+    setState("closed");
   }
 
   function connect() {
@@ -89,21 +96,25 @@ export default function WebsocketClientTool({ manifest }: ToolClientProps) {
       append("system", `Connecting to ${url}`);
 
       socket.addEventListener("open", () => {
+        if (socketRef.current !== socket) return;
         setState("open");
         append("system", "Connection opened");
       });
 
       socket.addEventListener("message", (event) => {
+        if (socketRef.current !== socket) return;
         append("in", formatInbound(event.data as string | ArrayBuffer | Blob));
       });
 
       socket.addEventListener("close", (event) => {
+        if (socketRef.current !== socket) return;
         setState(event.wasClean ? "closed" : "error");
         append("system", `Closed ${event.code}${event.reason ? `: ${event.reason}` : ""}`);
         socketRef.current = null;
       });
 
       socket.addEventListener("error", () => {
+        if (socketRef.current !== socket) return;
         setState("error");
         append("system", "Socket error");
       });

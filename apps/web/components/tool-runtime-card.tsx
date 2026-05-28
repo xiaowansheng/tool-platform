@@ -1,18 +1,20 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { createToolSdk, useToolRuntime } from "@tool-platform/tool-browser-sdk";
 import type { ToolManifest } from "@tool-platform/tool-sdk";
 
 function statusClass(status: string) {
-  if (status === "running") return "status-dot--running";
+  if (status === "initializing" || status === "mounted") return "status-dot--running";
   if (status === "error") return "status-dot--error";
+  if (status === "active") return "";
   return "status-dot--idle";
 }
 
 export function ToolRuntimeCard({ manifest }: { manifest: ToolManifest }) {
   const sdkRef = useRef<ReturnType<typeof createToolSdk> | null>(null);
+  const [controlError, setControlError] = useState("");
 
   if (!sdkRef.current) {
     sdkRef.current = createToolSdk();
@@ -21,8 +23,26 @@ export function ToolRuntimeCard({ manifest }: { manifest: ToolManifest }) {
   const sdk = sdkRef.current;
   const runtime = useToolRuntime(manifest.id);
 
-  if (manifest.runtime === "simple") {
+  if (manifest.runtime === "simple" || runtime.status === "unregistered") {
     return null;
+  }
+
+  async function restartRuntime() {
+    try {
+      setControlError("");
+      await sdk.restartTool(manifest.id);
+    } catch (error) {
+      setControlError(error instanceof Error ? error.message : "Failed to restart runtime");
+    }
+  }
+
+  async function closeRuntime() {
+    try {
+      setControlError("");
+      await sdk.closeTool(manifest.id);
+    } catch (error) {
+      setControlError(error instanceof Error ? error.message : "Failed to close runtime");
+    }
   }
 
   return (
@@ -54,13 +74,14 @@ export function ToolRuntimeCard({ manifest }: { manifest: ToolManifest }) {
         </article>
       </div>
       <div className="tool-toolbar">
-        <button type="button" onClick={() => void sdk.restartTool(manifest.id)}>
+        <button type="button" onClick={() => void restartRuntime()}>
           Restart Runtime
         </button>
-        <button type="button" onClick={() => void sdk.closeTool(manifest.id)}>
+        <button type="button" onClick={() => void closeRuntime()}>
           Close Runtime
         </button>
       </div>
+      {controlError ? <p className="tool-error">{controlError}</p> : null}
       {runtime.error ? <p className="tool-error">{runtime.error}</p> : null}
     </section>
   );

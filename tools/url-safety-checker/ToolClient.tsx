@@ -44,15 +44,24 @@ function isPrivateIpv4(hostname: string) {
     || first === 0;
 }
 
+function isPrivateIpv6Literal(hostname: string) {
+  const normalized = hostname.toLowerCase().replace(/^\[|\]$/g, "");
+
+  if (!normalized.includes(":")) {
+    return false;
+  }
+
+  return normalized === "::1"
+    || /^fe[89ab][0-9a-f]:/.test(normalized)
+    || /^f[cd][0-9a-f]{2}:/.test(normalized);
+}
+
 function isPrivateHost(hostname: string) {
   const normalized = hostname.toLowerCase().replace(/^\[|\]$/g, "");
 
   return normalized === "localhost"
     || normalized.endsWith(".local")
-    || normalized === "::1"
-    || normalized.startsWith("fe80:")
-    || normalized.startsWith("fc")
-    || normalized.startsWith("fd")
+    || isPrivateIpv6Literal(normalized)
     || isPrivateIpv4(normalized);
 }
 

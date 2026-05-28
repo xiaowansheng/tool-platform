@@ -16,11 +16,13 @@ export default function UrlCodecTool({ manifest }: ToolClientProps) {
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<"component" | "full">("component");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   function handleEncode() {
     try {
       setOutput(mode === "component" ? encodeURIComponent(input) : encodeURI(input));
       setError("");
+      setCopied(false);
     } catch (encodeError) {
       setError(encodeError instanceof Error ? encodeError.message : "URL 编码失败");
     }
@@ -30,9 +32,15 @@ export default function UrlCodecTool({ manifest }: ToolClientProps) {
     try {
       setOutput(mode === "component" ? decodeURIComponent(input) : decodeURI(input));
       setError("");
+      setCopied(false);
     } catch (decodeError) {
       setError(decodeError instanceof Error ? decodeError.message : "URL 解码失败");
     }
+  }
+
+  async function copyOutput() {
+    await navigator.clipboard.writeText(output);
+    setCopied(true);
   }
 
   const queryEntries = parseQuery(input);
@@ -59,6 +67,9 @@ export default function UrlCodecTool({ manifest }: ToolClientProps) {
         </button>
         <button type="button" onClick={handleDecode}>
           解码
+        </button>
+        <button type="button" onClick={() => void copyOutput()} disabled={!output}>
+          {copied ? "已复制" : "复制输出"}
         </button>
       </div>
       <div className="workspace workspace--two-column">

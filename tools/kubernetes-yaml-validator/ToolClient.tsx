@@ -68,6 +68,34 @@ function scalar(source: string, key: string) {
   return match?.[1]?.trim().replace(/^["']|["']$/g, "") ?? "";
 }
 
+function metadataName(source: string) {
+  const lines = source.split(/\r?\n/);
+  let metadataIndent = -1;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+
+    const indent = line.match(/^\s*/)?.[0].length ?? 0;
+
+    if (metadataIndent >= 0 && indent <= metadataIndent) {
+      break;
+    }
+
+    if (metadataIndent >= 0) {
+      const match = line.match(/^\s*name:\s*([^\n#]+)/);
+      if (match) return match[1]?.trim().replace(/^["']|["']$/g, "") ?? "";
+      continue;
+    }
+
+    if (/^metadata:\s*$/.test(trimmed)) {
+      metadataIndent = indent;
+    }
+  }
+
+  return "";
+}
+
 function parseDocuments(source: string): ResourceDoc[] {
   return source
     .split(/^---\s*$/m)
@@ -78,7 +106,7 @@ function parseDocuments(source: string): ResourceDoc[] {
       source: doc,
       apiVersion: scalar(doc, "apiVersion"),
       kind: scalar(doc, "kind"),
-      name: scalar(doc, "name")
+      name: metadataName(doc)
     }));
 }
 

@@ -85,6 +85,21 @@ function normalizeLicense(value: unknown) {
   return licenses.length ? licenses.join(" OR ") : "NOASSERTION";
 }
 
+function normalizeExternalRef(value: unknown) {
+  if (typeof value === "string") return value;
+  if (!Array.isArray(value)) return "";
+
+  const purlRef = value.find((entry) => {
+    if (!isRecord(entry)) return false;
+    const referenceType = asString(entry.referenceType).toLowerCase();
+    const locator = asString(entry.referenceLocator);
+
+    return referenceType === "purl" || locator.startsWith("pkg:");
+  });
+
+  return isRecord(purlRef) ? asString(purlRef.referenceLocator) : "";
+}
+
 function vulnerabilityCountFor(ref: string, vulnerabilities: unknown) {
   if (!Array.isArray(vulnerabilities)) return 0;
 
@@ -153,7 +168,7 @@ function parseSpdxJson(document: Record<string, unknown>): ParsedSbom {
         type: "package",
         license: asString(pkg.licenseConcluded) || asString(pkg.licenseDeclared) || "NOASSERTION",
         supplier: asString(pkg.supplier, "unknown"),
-        purl: asString(pkg.externalRefs),
+        purl: normalizeExternalRef(pkg.externalRefs),
         dependencyCount,
         vulnerabilityCount: 0
       };

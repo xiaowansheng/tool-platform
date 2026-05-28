@@ -77,6 +77,7 @@ export default function OpenApiWorkbenchTool({ manifest }: ToolClientProps) {
   const [right, setRight] = useState(sampleSpec.replace("List tools", "List available tools"));
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   function run(action: "format" | "summary" | "diff" | "mock") {
     try {
@@ -86,9 +87,15 @@ export default function OpenApiWorkbenchTool({ manifest }: ToolClientProps) {
       if (action === "diff") setOutput(diffLines(JSON.stringify(parseSpec(left), null, 2), JSON.stringify(parseSpec(right), null, 2)));
       if (action === "mock") setOutput(mockFromSpec(spec));
       setError("");
+      setCopied(false);
     } catch (runError) {
       setError(runError instanceof Error ? runError.message : "OpenAPI 处理失败");
     }
+  }
+
+  async function copyOutput() {
+    await navigator.clipboard.writeText(output);
+    setCopied(true);
   }
 
   return (
@@ -105,6 +112,7 @@ export default function OpenApiWorkbenchTool({ manifest }: ToolClientProps) {
         <button type="button" onClick={() => run("summary")}>查看摘要</button>
         <button type="button" onClick={() => run("diff")}>Diff</button>
         <button type="button" onClick={() => run("mock")}>Mock</button>
+        <button type="button" onClick={() => void copyOutput()} disabled={!output}>{copied ? "已复制" : "复制输出"}</button>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">

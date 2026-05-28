@@ -28,6 +28,12 @@ function withGroup(groupBy: string) {
   return cleanGroup ? ` by (${cleanGroup})` : "";
 }
 
+function withLabelFilter(required: string, labels: string) {
+  const cleanLabels = labels.trim();
+
+  return cleanLabels ? `${required},${cleanLabels}` : required;
+}
+
 function buildQuery(mode: QueryMode, metric: string, window: string, labels: string, groupBy: string) {
   if (mode === "rate") return `sum${withGroup(groupBy)}(rate(${selector(metric, labels)}[${window}]))`;
   if (mode === "sum") return `sum${withGroup(groupBy)}(${selector(metric, labels)})`;
@@ -39,9 +45,10 @@ function buildQuery(mode: QueryMode, metric: string, window: string, labels: str
     return `histogram_quantile(0.95, sum by (${histogramGroup})(rate(${selector(bucketMetric, labels)}[${window}])))`;
   }
   if (mode === "errorRate") {
-    const labelSuffix = labels.trim() ? `,${labels.trim()}` : "";
+    const errorSelector = selector("http_requests_total", withLabelFilter('status=~"5.."', labels));
+    const totalSelector = selector("http_requests_total", labels);
 
-    return `sum(rate(http_requests_total{status=~"5.."${labelSuffix}}[${window}])) / sum(rate(http_requests_total{status!~"5.."${labelSuffix}}[${window}]))`;
+    return `sum(rate(${errorSelector}[${window}])) / sum(rate(${totalSelector}[${window}]))`;
   }
   if (mode === "cpu") {
     const labelSuffix = labels.trim() ? `,${labels.trim()}` : "";
