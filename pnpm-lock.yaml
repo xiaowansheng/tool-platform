@@ -122,9 +122,18 @@ importers:
       '@tool-platform/base64-studio':
         specifier: workspace:*
         version: link:../../tools/base64-studio
+      '@tool-platform/basic-auth-generator':
+        specifier: workspace:*
+        version: link:../../tools/basic-auth-generator
+      '@tool-platform/box-shadow-generator':
+        specifier: workspace:*
+        version: link:../../tools/box-shadow-generator
       '@tool-platform/case-converter':
         specifier: workspace:*
         version: link:../../tools/case-converter
+      '@tool-platform/chmod-calculator':
+        specifier: workspace:*
+        version: link:../../tools/chmod-calculator
       '@tool-platform/color-converter':
         specifier: workspace:*
         version: link:../../tools/color-converter
@@ -140,18 +149,30 @@ importers:
       '@tool-platform/csv-json-converter':
         specifier: workspace:*
         version: link:../../tools/csv-json-converter
+      '@tool-platform/curl-builder':
+        specifier: workspace:*
+        version: link:../../tools/curl-builder
+      '@tool-platform/data-url-generator':
+        specifier: workspace:*
+        version: link:../../tools/data-url-generator
       '@tool-platform/env-parser':
         specifier: workspace:*
         version: link:../../tools/env-parser
       '@tool-platform/gitignore-generator':
         specifier: workspace:*
         version: link:../../tools/gitignore-generator
+      '@tool-platform/gradient-generator':
+        specifier: workspace:*
+        version: link:../../tools/gradient-generator
       '@tool-platform/hash-generator':
         specifier: workspace:*
         version: link:../../tools/hash-generator
       '@tool-platform/html-entity-codec':
         specifier: workspace:*
         version: link:../../tools/html-entity-codec
+      '@tool-platform/http-header-parser':
+        specifier: workspace:*
+        version: link:../../tools/http-header-parser
       '@tool-platform/http-status-reference':
         specifier: workspace:*
         version: link:../../tools/http-status-reference
@@ -167,6 +188,9 @@ importers:
       '@tool-platform/jwt-decoder':
         specifier: workspace:*
         version: link:../../tools/jwt-decoder
+      '@tool-platform/line-tools':
+        specifier: workspace:*
+        version: link:../../tools/line-tools
       '@tool-platform/lorem-ipsum-generator':
         specifier: workspace:*
         version: link:../../tools/lorem-ipsum-generator
@@ -188,6 +212,9 @@ importers:
       '@tool-platform/percentage-calculator':
         specifier: workspace:*
         version: link:../../tools/percentage-calculator
+      '@tool-platform/port-reference':
+        specifier: workspace:*
+        version: link:../../tools/port-reference
       '@tool-platform/query-param-builder':
         specifier: workspace:*
         version: link:../../tools/query-param-builder
@@ -215,6 +242,9 @@ importers:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../tool-contracts
+      '@tool-platform/unicode-inspector':
+        specifier: workspace:*
+        version: link:../../tools/unicode-inspector
       '@tool-platform/unit-converter':
         specifier: workspace:*
         version: link:../../tools/unit-converter
@@ -272,7 +302,34 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/basic-auth-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/box-shadow-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/case-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/chmod-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -326,6 +383,24 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/curl-builder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/data-url-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/env-parser:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -344,6 +419,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/gradient-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/hash-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -354,6 +438,15 @@ importers:
         version: 19.2.6
 
   tools/html-entity-codec:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/http-header-parser:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -399,6 +492,15 @@ importers:
         version: 19.2.6
 
   tools/jwt-decoder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/line-tools:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -462,6 +564,15 @@ importers:
         version: 19.2.6
 
   tools/percentage-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/port-reference:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -537,6 +648,15 @@ importers:
         version: 19.2.6
 
   tools/timestamp-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/unicode-inspector:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

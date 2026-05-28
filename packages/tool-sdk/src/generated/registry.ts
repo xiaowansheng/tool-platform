@@ -4,8 +4,14 @@ import AspectRatioCalculatorTool from "@tool-platform/aspect-ratio-calculator/to
 import AspectRatioCalculatorManifest from "@tool-platform/aspect-ratio-calculator/manifest";
 import Base64StudioTool from "@tool-platform/base64-studio/tool";
 import Base64StudioManifest from "@tool-platform/base64-studio/manifest";
+import BasicAuthGeneratorTool from "@tool-platform/basic-auth-generator/tool";
+import BasicAuthGeneratorManifest from "@tool-platform/basic-auth-generator/manifest";
+import BoxShadowGeneratorTool from "@tool-platform/box-shadow-generator/tool";
+import BoxShadowGeneratorManifest from "@tool-platform/box-shadow-generator/manifest";
 import CaseConverterTool from "@tool-platform/case-converter/tool";
 import CaseConverterManifest from "@tool-platform/case-converter/manifest";
+import ChmodCalculatorTool from "@tool-platform/chmod-calculator/tool";
+import ChmodCalculatorManifest from "@tool-platform/chmod-calculator/manifest";
 import ColorConverterTool from "@tool-platform/color-converter/tool";
 import ColorConverterManifest from "@tool-platform/color-converter/manifest";
 import ColorPaletteGeneratorTool from "@tool-platform/color-palette-generator/tool";
@@ -16,14 +22,22 @@ import CssClampGeneratorTool from "@tool-platform/css-clamp-generator/tool";
 import CssClampGeneratorManifest from "@tool-platform/css-clamp-generator/manifest";
 import CsvJsonConverterTool from "@tool-platform/csv-json-converter/tool";
 import CsvJsonConverterManifest from "@tool-platform/csv-json-converter/manifest";
+import CurlBuilderTool from "@tool-platform/curl-builder/tool";
+import CurlBuilderManifest from "@tool-platform/curl-builder/manifest";
+import DataUrlGeneratorTool from "@tool-platform/data-url-generator/tool";
+import DataUrlGeneratorManifest from "@tool-platform/data-url-generator/manifest";
 import EnvParserTool from "@tool-platform/env-parser/tool";
 import EnvParserManifest from "@tool-platform/env-parser/manifest";
 import GitignoreGeneratorTool from "@tool-platform/gitignore-generator/tool";
 import GitignoreGeneratorManifest from "@tool-platform/gitignore-generator/manifest";
+import GradientGeneratorTool from "@tool-platform/gradient-generator/tool";
+import GradientGeneratorManifest from "@tool-platform/gradient-generator/manifest";
 import HashGeneratorTool from "@tool-platform/hash-generator/tool";
 import HashGeneratorManifest from "@tool-platform/hash-generator/manifest";
 import HtmlEntityCodecTool from "@tool-platform/html-entity-codec/tool";
 import HtmlEntityCodecManifest from "@tool-platform/html-entity-codec/manifest";
+import HttpHeaderParserTool from "@tool-platform/http-header-parser/tool";
+import HttpHeaderParserManifest from "@tool-platform/http-header-parser/manifest";
 import HttpStatusReferenceTool from "@tool-platform/http-status-reference/tool";
 import HttpStatusReferenceManifest from "@tool-platform/http-status-reference/manifest";
 import Ipv4CidrCalculatorTool from "@tool-platform/ipv4-cidr-calculator/tool";
@@ -34,6 +48,8 @@ import JsonToTsTool from "@tool-platform/json-to-ts/tool";
 import JsonToTsManifest from "@tool-platform/json-to-ts/manifest";
 import JwtDecoderTool from "@tool-platform/jwt-decoder/tool";
 import JwtDecoderManifest from "@tool-platform/jwt-decoder/manifest";
+import LineToolsTool from "@tool-platform/line-tools/tool";
+import LineToolsManifest from "@tool-platform/line-tools/manifest";
 import LoremIpsumGeneratorTool from "@tool-platform/lorem-ipsum-generator/tool";
 import LoremIpsumGeneratorManifest from "@tool-platform/lorem-ipsum-generator/manifest";
 import MarkdownPreviewTool from "@tool-platform/markdown-preview/tool";
@@ -48,6 +64,8 @@ import PasswordGeneratorTool from "@tool-platform/password-generator/tool";
 import PasswordGeneratorManifest from "@tool-platform/password-generator/manifest";
 import PercentageCalculatorTool from "@tool-platform/percentage-calculator/tool";
 import PercentageCalculatorManifest from "@tool-platform/percentage-calculator/manifest";
+import PortReferenceTool from "@tool-platform/port-reference/tool";
+import PortReferenceManifest from "@tool-platform/port-reference/manifest";
 import QueryParamBuilderTool from "@tool-platform/query-param-builder/tool";
 import QueryParamBuilderManifest from "@tool-platform/query-param-builder/manifest";
 import RegexTesterTool from "@tool-platform/regex-tester/tool";
@@ -64,6 +82,8 @@ import TextInspectorTool from "@tool-platform/text-inspector/tool";
 import TextInspectorManifest from "@tool-platform/text-inspector/manifest";
 import TimestampConverterTool from "@tool-platform/timestamp-converter/tool";
 import TimestampConverterManifest from "@tool-platform/timestamp-converter/manifest";
+import UnicodeInspectorTool from "@tool-platform/unicode-inspector/tool";
+import UnicodeInspectorManifest from "@tool-platform/unicode-inspector/manifest";
 import UnitConverterTool from "@tool-platform/unit-converter/tool";
 import UnitConverterManifest from "@tool-platform/unit-converter/manifest";
 import UrlCodecTool from "@tool-platform/url-codec/tool";
@@ -91,8 +111,20 @@ export const toolRecords: ToolRecord[] = [
     component: Base64StudioTool
   },
   {
+    manifest: BasicAuthGeneratorManifest,
+    component: BasicAuthGeneratorTool
+  },
+  {
+    manifest: BoxShadowGeneratorManifest,
+    component: BoxShadowGeneratorTool
+  },
+  {
     manifest: CaseConverterManifest,
     component: CaseConverterTool
+  },
+  {
+    manifest: ChmodCalculatorManifest,
+    component: ChmodCalculatorTool
   },
   {
     manifest: ColorConverterManifest,
@@ -115,6 +147,14 @@ export const toolRecords: ToolRecord[] = [
     component: CsvJsonConverterTool
   },
   {
+    manifest: CurlBuilderManifest,
+    component: CurlBuilderTool
+  },
+  {
+    manifest: DataUrlGeneratorManifest,
+    component: DataUrlGeneratorTool
+  },
+  {
     manifest: EnvParserManifest,
     component: EnvParserTool
   },
@@ -123,12 +163,20 @@ export const toolRecords: ToolRecord[] = [
     component: GitignoreGeneratorTool
   },
   {
+    manifest: GradientGeneratorManifest,
+    component: GradientGeneratorTool
+  },
+  {
     manifest: HashGeneratorManifest,
     component: HashGeneratorTool
   },
   {
     manifest: HtmlEntityCodecManifest,
     component: HtmlEntityCodecTool
+  },
+  {
+    manifest: HttpHeaderParserManifest,
+    component: HttpHeaderParserTool
   },
   {
     manifest: HttpStatusReferenceManifest,
@@ -149,6 +197,10 @@ export const toolRecords: ToolRecord[] = [
   {
     manifest: JwtDecoderManifest,
     component: JwtDecoderTool
+  },
+  {
+    manifest: LineToolsManifest,
+    component: LineToolsTool
   },
   {
     manifest: LoremIpsumGeneratorManifest,
@@ -177,6 +229,10 @@ export const toolRecords: ToolRecord[] = [
   {
     manifest: PercentageCalculatorManifest,
     component: PercentageCalculatorTool
+  },
+  {
+    manifest: PortReferenceManifest,
+    component: PortReferenceTool
   },
   {
     manifest: QueryParamBuilderManifest,
@@ -209,6 +265,10 @@ export const toolRecords: ToolRecord[] = [
   {
     manifest: TimestampConverterManifest,
     component: TimestampConverterTool
+  },
+  {
+    manifest: UnicodeInspectorManifest,
+    component: UnicodeInspectorTool
   },
   {
     manifest: UnitConverterManifest,
