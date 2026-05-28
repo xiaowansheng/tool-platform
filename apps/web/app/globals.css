@@ -937,6 +937,11 @@ button:active,
   font-size: 0.86rem;
 }
 
+.tool-table__row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .tool-table__row--head {
   color: var(--text-primary);
   font-weight: 600;
@@ -949,6 +954,17 @@ button:active,
   border: 1px solid var(--card-border);
   border-radius: var(--radius-xl);
   background: var(--bg-inset);
+}
+
+.code-preview {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.code-preview svg {
+  width: min(100%, 22rem);
+  max-height: 22rem;
 }
 
 .shadow-preview {
@@ -965,6 +981,195 @@ button:active,
   border-radius: var(--radius-xl);
   background: var(--card-bg);
   color: var(--text-secondary);
+}
+
+
+.css-layout-preview {
+  overflow: auto;
+  padding: 1rem;
+}
+
+.css-grid-preview,
+.css-flex-preview {
+  min-width: min(100%, 32rem);
+}
+
+.css-layout-cell {
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(94, 234, 212, 0.18);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(94, 234, 212, 0.14), rgba(56, 189, 248, 0.08));
+  color: var(--text-primary);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+}
+
+.css-flex-preview {
+  min-height: 16rem;
+}
+
+.css-flex-preview__item {
+  min-height: 4rem;
+}
+
+.tailwind-preview-surface {
+  display: grid;
+  min-height: 14rem;
+  place-items: center;
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(45deg, rgba(134, 162, 196, 0.06) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(134, 162, 196, 0.06) 25%, transparent 25%),
+    var(--bg-inset);
+  background-size: 1.25rem 1.25rem;
+}
+
+.tailwind-preview-surface strong,
+.tailwind-preview-surface span {
+  display: block;
+}
+
+.tailwind-preview-surface span {
+  max-width: 24rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  opacity: 0.82;
+}
+
+.specificity-table {
+  display: grid;
+  overflow: auto;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-inset);
+}
+
+.specificity-table__row {
+  display: grid;
+  grid-template-columns: minmax(16rem, 1fr) repeat(4, minmax(4.5rem, 0.22fr));
+  gap: 0.75rem;
+  align-items: center;
+  min-width: 42rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+}
+
+.specificity-table__row--head {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: var(--bg-muted);
+}
+
+.specificity-table code,
+.specificity-table strong,
+.type-scale-preview code {
+  font-family: var(--font-mono), monospace;
+}
+
+.specificity-table code {
+  overflow-wrap: anywhere;
+  color: var(--text-primary);
+}
+
+.specificity-table strong {
+  color: var(--accent-primary);
+}
+
+.type-scale-preview {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-inset);
+}
+
+.type-scale-preview__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  padding: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+}
+
+.type-scale-preview__row strong {
+  display: block;
+}
+
+.type-scale-preview__row code {
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+}
+
+.media-preview,
+.media-audio-preview {
+  width: 100%;
+  max-height: 22rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-inset);
+}
+
+.media-preview {
+  object-fit: contain;
+}
+
+.media-audio-preview {
+  padding: 0.75rem;
+}
+
+.chat-transcript {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  max-height: 38rem;
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-inset);
+}
+
+.chat-message {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 88%;
+  padding: 0.85rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+}
+
+.chat-message p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.chat-message--user {
+  justify-self: end;
+  border-color: rgba(94, 234, 212, 0.2);
+  background: var(--accent-primary-dim);
+}
+
+.chat-message--assistant {
+  justify-self: start;
+}
+
+.chat-message--system {
+  justify-self: center;
+  max-width: 100%;
 }
 
 .mono-output {
@@ -1145,6 +1350,187 @@ button:active,
 }
 
 /* ==========================================================================
+   Design Tool Previews
+   ========================================================================== */
+
+.asset-preview-grid,
+.font-scale-list {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+
+.svg-preview,
+.favicon-stage,
+.contrast-preview,
+.theme-preview,
+.easing-runner {
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.svg-preview img {
+  max-width: min(100%, 28rem);
+  max-height: 18rem;
+}
+
+.svg-preview span {
+  color: var(--text-tertiary);
+}
+
+.favicon-stage {
+  gap: 0.85rem;
+  text-align: center;
+}
+
+.favicon-stage img {
+  width: 9rem;
+  height: 9rem;
+  image-rendering: auto;
+}
+
+.og-card,
+.serp-preview {
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-subtle);
+  box-shadow: var(--card-shadow);
+}
+
+.og-card__image {
+  aspect-ratio: 1200 / 630;
+  display: grid;
+  place-items: center;
+  background: var(--bg-inset);
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+.og-card__image strong {
+  font-size: clamp(1.1rem, 3vw, 2rem);
+}
+
+.og-card__body {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem;
+}
+
+.og-card__body span,
+.og-card__body small,
+.serp-preview cite {
+  color: var(--text-tertiary);
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+.og-card__body h3,
+.serp-preview h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.og-card__body p,
+.serp-preview p,
+.contrast-preview p,
+.theme-preview p,
+.easing-runner p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.serp-preview {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+}
+
+.serp-preview h3 {
+  color: #7aa7ff;
+}
+
+[data-theme="light"] .serp-preview h3 {
+  color: #1a0dab;
+}
+
+.contrast-preview {
+  min-height: 10rem;
+  justify-items: start;
+  gap: 0.5rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+}
+
+.theme-preview {
+  min-height: 12rem;
+  justify-items: start;
+  gap: 0.4rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--card-border);
+}
+
+.theme-preview strong {
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+}
+
+.easing-plot svg {
+  width: 100%;
+  min-height: 14rem;
+  overflow: visible;
+}
+
+.easing-plot line {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.easing-plot polyline {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 2.5;
+}
+
+.easing-plot circle {
+  fill: var(--accent-secondary);
+}
+
+.easing-runner {
+  min-height: 12rem;
+  justify-items: stretch;
+  align-content: center;
+  gap: 1rem;
+}
+
+.easing-runner__dot {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  box-shadow: 0 0 30px var(--accent-primary-dim);
+  animation-name: easingTravel;
+  animation-fill-mode: both;
+}
+
+@keyframes easingTravel {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100% - 3rem)); }
+}
+
+.font-scale-list .detail-card {
+  align-content: start;
+}
+
+.font-scale-list strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
    Tool Panel
    ========================================================================== */
 
@@ -1292,7 +1678,8 @@ button:active,
 
   .hero__stats,
   .tool-toolbar--grid,
-  .param-row {
+  .param-row,
+  .type-scale-preview__row {
     grid-template-columns: 1fr;
   }
 

@@ -2,11 +2,11 @@ import type { ToolManifest } from "@tool-platform/tool-contracts";
 
 const manifest: ToolManifest = {
   id: "gradient-generator",
-  name: "Gradient Generator",
-  description: "生成线性渐变 CSS，并提供即时预览。",
+  name: "Gradient Theme Token Generator",
+  description: "从渐变和品牌色生成 palette、语义色与 CSS theme tokens。",
   category: "design",
   subCategory: "css",
-  tags: ["gradient", "css", "design", "color"],
+  tags: ["gradient", "css", "design", "color", "palette", "theme tokens"],
   icon: "paintbrush",
   runtime: "simple",
   featured: false,

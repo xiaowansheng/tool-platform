@@ -1,10 +1,28 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useState } from "react";
 
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 type CssUnit = "px" | "rem";
+
+interface TypeToken {
+  name: string;
+  step: number;
+  lineHeight: string;
+  usage: string;
+}
+
+const typeTokens: TypeToken[] = [
+  { name: "xs", step: -2, lineHeight: "1.45", usage: "辅助文字" },
+  { name: "sm", step: -1, lineHeight: "1.55", usage: "说明文字" },
+  { name: "base", step: 0, lineHeight: "1.65", usage: "正文" },
+  { name: "lg", step: 1, lineHeight: "1.45", usage: "强调正文" },
+  { name: "xl", step: 2, lineHeight: "1.25", usage: "小标题" },
+  { name: "2xl", step: 3, lineHeight: "1.15", usage: "章节标题" },
+  { name: "3xl", step: 4, lineHeight: "1.08", usage: "页面标题" }
+];
 
 function round(value: number) {
   return Number(value.toFixed(4));
@@ -26,29 +44,84 @@ function buildClamp(minSize: number, maxSize: number, minViewport: number, maxVi
   return `clamp(${round(minSize)}${unit}, ${preferred}, ${round(maxSize)}${unit})`;
 }
 
+function scaleValue(base: number, ratio: number, step: number) {
+  return base * (ratio ** step);
+}
+
+function buildTypeScale(
+  minBase: number,
+  maxBase: number,
+  minRatio: number,
+  maxRatio: number,
+  minViewport: number,
+  maxViewport: number,
+  unit: CssUnit
+) {
+  return typeTokens.map((token) => {
+    const minSize = scaleValue(minBase, minRatio, token.step);
+    const maxSize = Math.max(scaleValue(maxBase, maxRatio, token.step), minSize);
+
+    return {
+      ...token,
+      minSize: round(minSize),
+      maxSize: round(maxSize),
+      clamp: buildClamp(minSize, maxSize, minViewport, maxViewport, unit)
+    };
+  });
+}
+
 export default function CssClampGeneratorTool({ manifest }: ToolClientProps) {
-  const [minSize, setMinSize] = useState(1);
-  const [maxSize, setMaxSize] = useState(2.5);
+  const [minBase, setMinBase] = useState(1);
+  const [maxBase, setMaxBase] = useState(1.125);
   const [minViewport, setMinViewport] = useState(360);
   const [maxViewport, setMaxViewport] = useState(1440);
+  const [minRatio, setMinRatio] = useState(1.125);
+  const [maxRatio, setMaxRatio] = useState(1.25);
   const [unit, setUnit] = useState<CssUnit>("rem");
+  const [prefix, setPrefix] = useState("font");
   const [copied, setCopied] = useState(false);
 
-  let output = "";
+  let scale: ReturnType<typeof buildTypeScale> = [];
+  let css = "";
   let error = "";
 
   try {
-    output = buildClamp(minSize, maxSize, minViewport, maxViewport, unit);
+    scale = buildTypeScale(minBase, maxBase, minRatio, maxRatio, minViewport, maxViewport, unit);
+    css = [
+      ":root {",
+      ...scale.map((token) => `  --${prefix}-${token.name}: ${token.clamp};`),
+      "}",
+      "",
+      ".fluid-type {",
+      `  font-size: var(--${prefix}-base);`,
+      "  line-height: 1.65;",
+      "}",
+      "",
+      ".fluid-type h1 {",
+      `  font-size: var(--${prefix}-3xl);`,
+      "  line-height: 1.08;",
+      "}",
+      "",
+      ".fluid-type h2 {",
+      `  font-size: var(--${prefix}-2xl);`,
+      "  line-height: 1.15;",
+      "}",
+      "",
+      ".fluid-type h3 {",
+      `  font-size: var(--${prefix}-xl);`,
+      "  line-height: 1.25;",
+      "}"
+    ].join("\n");
   } catch (buildError) {
     error = buildError instanceof Error ? buildError.message : "clamp 生成失败";
   }
 
   async function handleCopy() {
-    if (!output) {
+    if (!css) {
       return;
     }
 
-    await navigator.clipboard.writeText(output);
+    await navigator.clipboard.writeText(css);
     setCopied(true);
   }
 
@@ -63,12 +136,12 @@ export default function CssClampGeneratorTool({ manifest }: ToolClientProps) {
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>最小尺寸</span>
-          <input type="number" step="0.1" value={minSize} onChange={(event) => setMinSize(Number(event.target.value))} />
+          <span>移动端正文</span>
+          <input type="number" step="0.025" value={minBase} onChange={(event) => setMinBase(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>最大尺寸</span>
-          <input type="number" step="0.1" value={maxSize} onChange={(event) => setMaxSize(Number(event.target.value))} />
+          <span>桌面端正文</span>
+          <input type="number" step="0.025" value={maxBase} onChange={(event) => setMaxBase(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
           <span>最小视口 px</span>
@@ -79,25 +152,67 @@ export default function CssClampGeneratorTool({ manifest }: ToolClientProps) {
           <input type="number" value={maxViewport} onChange={(event) => setMaxViewport(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
+          <span>移动端比例</span>
+          <input type="number" step="0.025" value={minRatio} onChange={(event) => setMinRatio(Number(event.target.value))} />
+        </label>
+        <label className="tool-field tool-field--compact">
+          <span>桌面端比例</span>
+          <input type="number" step="0.025" value={maxRatio} onChange={(event) => setMaxRatio(Number(event.target.value))} />
+        </label>
+        <label className="tool-field tool-field--compact">
           <span>单位</span>
           <select value={unit} onChange={(event) => setUnit(event.target.value as CssUnit)}>
             <option value="rem">rem</option>
             <option value="px">px</option>
           </select>
         </label>
+        <label className="tool-field tool-field--compact">
+          <span>Token 前缀</span>
+          <input value={prefix} onChange={(event) => setPrefix(event.target.value.replace(/[^a-z0-9-]/gi, ""))} />
+        </label>
         <button type="button" onClick={() => void handleCopy()}>
-          {copied ? "已复制" : "复制"}
+          {copied ? "已复制" : "复制 CSS"}
         </button>
       </div>
+
+      <div className="detail-grid">
+        <article className="detail-card">
+          <h3>Token</h3>
+          <p>{scale.length} 个字体尺寸</p>
+        </article>
+        <article className="detail-card">
+          <h3>Viewport</h3>
+          <p>{minViewport}px - {maxViewport}px</p>
+        </article>
+        <article className="detail-card">
+          <h3>Ratio</h3>
+          <p>{minRatio} - {maxRatio}</p>
+        </article>
+      </div>
+
+      <div className="type-scale-preview">
+        {scale.map((token) => {
+          const style: CSSProperties = {
+            fontSize: token.clamp,
+            lineHeight: token.lineHeight
+          };
+
+          return (
+            <article key={token.name} className="type-scale-preview__row">
+              <div>
+                <p className="eyebrow">--{prefix}-{token.name}</p>
+                <strong style={style}>{token.usage}</strong>
+              </div>
+              <code>{token.minSize}{unit} → {token.maxSize}{unit}</code>
+            </article>
+          );
+        })}
+      </div>
+
       <label className="tool-field">
         <span>CSS</span>
-        <textarea value={output ? `font-size: ${output};` : ""} readOnly spellCheck={false} />
+        <textarea value={css} readOnly spellCheck={false} />
       </label>
-      <article className="detail-card clamp-preview">
-        <p className="eyebrow">Preview</p>
-        <strong style={output ? { fontSize: output } : undefined}>Fluid typography preview</strong>
-        <p>拖动浏览器宽度可观察 clamp() 在最小和最大尺寸之间平滑变化。</p>
-      </article>
       {error ? <p className="tool-error">{error}</p> : null}
     </section>
   );
