@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "ipv4-cidr-calculator",
   name: "IPv4 CIDR Calculator",
   description: "计算 IPv4 CIDR 网段、掩码、广播地址和可用主机数。",
-  category: "站长工具",
+  category: "webmaster-tools",
   subCategory: "ip",
   tags: ["ipv4", "cidr", "subnet", "network"],
   icon: "network",

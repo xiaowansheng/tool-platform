@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "parquet-arrow-preview",
   name: "Parquet Arrow Preview",
   description: "预览 Parquet、Arrow IPC 与 Feather 文件的格式标记、页脚和字节结构。",
-  category: "数据工具",
+  category: "data-tools",
   subCategory: "data",
   tags: ["parquet", "arrow", "feather", "preview"],
   icon: "database",

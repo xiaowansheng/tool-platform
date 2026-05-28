@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "markdown-preview",
   name: "Markdown Preview",
   description: "在浏览器中编辑 Markdown，并用安全的 React 渲染器预览常见语法。",
-  category: "文本工具",
+  category: "text-tools",
   subCategory: "markdown",
   tags: ["markdown", "preview", "editor", "docs"],
   icon: "file-text",

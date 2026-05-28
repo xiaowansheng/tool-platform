@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "unit-converter",
   name: "Unit Converter",
   description: "换算长度、重量、数据大小和温度等常用单位。",
-  category: "计算工具",
+  category: "calculator-tools",
   subCategory: "calculator",
   tags: ["unit", "converter", "length", "temperature"],
   icon: "scale",

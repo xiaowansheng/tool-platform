@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "open-graph-preview",
   name: "Open Graph Image Preview",
   description: "预览链接在 Facebook、LinkedIn、X 等平台中的 Open Graph 展示效果。",
-  category: "社媒工具",
+  category: "social-tools",
   subCategory: "seo",
   tags: ["open graph", "og image", "social preview", "twitter card", "seo"],
   icon: "panel-top",

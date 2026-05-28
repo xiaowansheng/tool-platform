@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "notification-payload-tester",
   name: "Notification Payload Tester",
   description: "配置、预览和复制浏览器 Notification API payload，记录授权状态与发送历史。",
-  category: "效率工具",
+  category: "productivity-tools",
   subCategory: "browser",
   tags: ["notification", "permission", "browser", "payload", "preview"],
   icon: "bell",

@@ -78,69 +78,85 @@
     "en": "English"
   },
   "categories": {
-    "encoding": {
-      "label": "编码转换",
-      "description": "处理 Base64、URL、HTML 实体、进制、哈希和常见文本编码转换。"
+    "ai-tools": {
+      "label": "AI工具",
+      "description": "面向 LLM、Prompt、RAG、智能体、AI 安全、评测和模型成本的工具。"
     },
-    "data-processing": {
-      "label": "数据处理",
-      "description": "面向 JSON、CSV、YAML、Parquet、Schema、清洗、生成和结构化预览。"
+    "developer-tools": {
+      "label": "开发工具",
+      "description": "覆盖 API、代码、Git、类型生成、调试、构建和开发辅助工作流。"
     },
-    "api-debugging": {
-      "label": "API调试",
-      "description": "覆盖 HTTP 请求构造、OpenAPI、GraphQL、Webhook、鉴权令牌和接口文档辅助。"
+    "ops-tools": {
+      "label": "运维工具",
+      "description": "聚合 Linux、Docker、Kubernetes、云原生、日志、监控、SLO 和故障处理工具。"
     },
-    "network": {
-      "label": "网络工具",
-      "description": "面向 DNS、TLS、端口、CIDR、Header、HAR、CORS、Cookie 与实时连接排查。"
+    "security-tools": {
+      "label": "网络安全",
+      "description": "覆盖安全扫描、密钥、供应链、CVSS、CSP、PII、证书和网络风险检查。"
     },
-    "linux-ops": {
-      "label": "Linux运维",
-      "description": "聚合日志、权限、定时任务、环境配置和日常排障工具。"
+    "file-tools": {
+      "label": "文件工具",
+      "description": "处理文件结构、归档、校验、元数据、批量文件和文档文件转换。"
     },
-    "docker-k8s": {
-      "label": "Docker/K8s",
-      "description": "校验 Dockerfile、Compose、Kubernetes YAML、Helm Values 与容器资源配置。"
+    "image-tools": {
+      "label": "图片工具",
+      "description": "面向图片压缩、EXIF、二维码、图标资产、OCR 和视觉输入预处理。"
     },
-    "security": {
-      "label": "安全工具",
-      "description": "覆盖密钥扫描、SAST、依赖与供应链风险、CVSS、CSP、PII 和威胁建模。"
+    "media-tools": {
+      "label": "视频音频",
+      "description": "处理音视频编辑、媒体设备、音视频素材和多媒体调试场景。"
     },
-    "database": {
-      "label": "数据库工具",
-      "description": "提供 SQL 格式化、查询计划解释、SQLite 试验和数据库结构辅助。"
+    "text-tools": {
+      "label": "文本工具",
+      "description": "提供文本编码、转换、检查、Diff、Markdown、正则和批量文本处理。"
     },
-    "frontend": {
-      "label": "前端开发",
-      "description": "面向 CSS 布局、响应式排版、颜色可访问性、图标资产、Source Map、浏览器能力和前端调试。"
+    "data-tools": {
+      "label": "数据工具",
+      "description": "面向 JSON、CSV、YAML、SQL、Schema、Parquet、Mock 和结构化数据处理。"
     },
-    "backend": {
-      "label": "后端开发",
-      "description": "聚合配置解析、类型生成、正则、时间、MIME、UUID 和服务端开发辅助。"
+    "office-tools": {
+      "label": "办公工具",
+      "description": "支持 README、ADR、发布说明、报告、PDF、表格和日常办公文档生成。"
     },
-    "git": {
-      "label": "Git工具",
-      "description": "支持提交信息、Gitignore、Diff、变更风险、发布记录和代码评审流程。"
+    "design-tools": {
+      "label": "设计工具",
+      "description": "覆盖颜色、排版、布局、阴影、渐变、动效和界面视觉调试。"
     },
-    "cloud-native": {
-      "label": "云原生",
-      "description": "聚合 Terraform、Prometheus、Grafana、OpenTelemetry、事故时间线和可观测性工作流。"
+    "seo-tools": {
+      "label": "SEO工具",
+      "description": "面向 Meta、Open Graph、robots、slug、UTM 和搜索展示优化。"
     },
-    "ai-development": {
-      "label": "AI开发",
-      "description": "面向 LLM 应用、Prompt 迭代、评测、RAG、智能体日志、成本估算和 AI 安全开发。"
+    "webmaster-tools": {
+      "label": "站长工具",
+      "description": "提供 DNS、HTTP、端口、CIDR、Header、Cookie、HAR 和网站诊断工具。"
     },
-    "ocr-cv": {
-      "label": "OCR/CV",
-      "description": "处理图像元数据、压缩、二维码/条码、媒体采集和视觉输入预处理。"
+    "learning-tools": {
+      "label": "学习工具",
+      "description": "辅助学习、示例生成、知识检查、事实核查和练习材料准备。"
     },
-    "productivity": {
+    "calculator-tools": {
+      "label": "计算工具",
+      "description": "提供百分比、单位、比例、进制、时间、成本和资源换算计算。"
+    },
+    "social-tools": {
+      "label": "社媒工具",
+      "description": "支持社交媒体分享预览、链接参数、图片卡片和平台素材准备。"
+    },
+    "ecommerce-tools": {
+      "label": "电商工具",
+      "description": "面向电商内容、商品资料、转化追踪、隐私合规和运营辅助。"
+    },
+    "productivity-tools": {
       "label": "效率工具",
-      "description": "提供计算、单位换算、批量文本、通知预览和日常工作台辅助。"
+      "description": "聚合日常效率、自动化、通知测试、清单生成和工作流辅助工具。"
     },
-    "documentation": {
-      "label": "文档工具",
-      "description": "覆盖 Markdown、README、ADR、Mermaid、PDF、目录锚点、隐私文案和文档质量检查。"
+    "entertainment-tools": {
+      "label": "娱乐工具",
+      "description": "承载轻量创作、趣味生成、随机内容和休闲互动工具。"
+    },
+    "discovery-tools": {
+      "label": "导航发现",
+      "description": "用于工具目录、资源导航、站点索引、发现入口和集合整理。"
     }
   }
 }

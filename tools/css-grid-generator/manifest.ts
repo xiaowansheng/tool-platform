@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "css-grid-generator",
   name: "CSS Grid Generator",
   description: "可视化调整列、行、间距和 auto-fit，生成可复制的 CSS Grid 布局代码。",
-  category: "设计工具",
+  category: "design-tools",
   subCategory: "css",
   tags: ["css", "grid", "layout", "visual"],
   icon: "layout-grid",

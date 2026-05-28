@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "utm-builder",
   name: "UTM Builder",
   description: "生成带 UTM 参数的营销链接，并保留原始查询参数。",
-  category: "社媒工具",
+  category: "social-tools",
   subCategory: "seo",
   tags: ["utm", "url", "campaign", "analytics"],
   icon: "chart-no-axes-combined",

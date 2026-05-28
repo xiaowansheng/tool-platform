@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "percentage-calculator",
   name: "Percentage Calculator",
   description: "计算百分比、增减幅和 A 相对 B 的占比。",
-  category: "计算工具",
+  category: "calculator-tools",
   subCategory: "calculator",
   tags: ["percentage", "calculator", "growth", "ratio"],
   icon: "percent",

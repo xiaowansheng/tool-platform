@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "qr-barcode-tool",
   name: "QR Barcode Tool",
   description: "生成本地 QR Code 与 Code 128 条形码，并通过浏览器 BarcodeDetector 解析图片。",
-  category: "图片工具",
+  category: "image-tools",
   subCategory: "code",
   tags: ["qr", "barcode", "code128", "scanner"],
   icon: "qr-code",

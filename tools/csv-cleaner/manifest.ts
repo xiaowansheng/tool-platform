@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "csv-cleaner",
   name: "CSV Cleaner",
   description: "清洗、去重、排序和筛选 CSV 表格，并输出可复制的标准 CSV。",
-  category: "数据工具",
+  category: "data-tools",
   subCategory: "data",
   tags: ["csv", "clean", "dedupe", "sort", "filter"],
   icon: "table-properties",

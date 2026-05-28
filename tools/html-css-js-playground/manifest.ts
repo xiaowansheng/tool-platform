@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "html-css-js-playground",
   name: "HTML CSS JS Playground",
   description: "在 iframe sandbox 中预览 HTML、CSS 和 JavaScript 片段，并导出完整单文件示例。",
-  category: "开发工具",
+  category: "developer-tools",
   subCategory: "sandbox",
   tags: ["html", "css", "javascript", "sandbox", "preview"],
   icon: "code-2",

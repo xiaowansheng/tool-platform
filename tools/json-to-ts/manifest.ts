@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "json-to-ts",
   name: "JSON to TypeScript",
   description: "根据 JSON 示例生成 TypeScript interface 草稿。",
-  category: "开发工具",
+  category: "developer-tools",
   subCategory: "typescript",
   tags: ["json", "typescript", "interface", "types"],
   icon: "braces",

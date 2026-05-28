@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "slug-generator",
   name: "Slug Generator",
   description: "把标题、文件名或标签转换为 URL 友好的 slug。",
-  category: "SEO工具",
+  category: "seo-tools",
   subCategory: "seo",
   tags: ["slug", "seo", "url", "text"],
   icon: "link-2",

@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "tls-certificate-parser",
   name: "TLS Certificate Parser",
   description: "解析 PEM 证书的 DER 摘要、指纹和可读 ASN.1 字符串线索。",
-  category: "网络安全",
+  category: "security-tools",
   subCategory: "tls",
   tags: ["tls", "certificate", "pem", "x509"],
   icon: "certificate",

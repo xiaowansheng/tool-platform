@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "unicode-inspector",
   name: "Unicode Inspector",
   description: "查看字符、码点、十六进制表示和 UTF-8 字节。",
-  category: "文本工具",
+  category: "text-tools",
   subCategory: "analysis",
   tags: ["unicode", "utf8", "codepoint", "text"],
   icon: "pilcrow",

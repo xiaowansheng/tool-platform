@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "browser-sandbox-console",
   name: "Browser Sandbox Console",
   description: "在隔离 iframe 中运行 HTML/CSS/JS 片段，捕获 console 输出并生成可复制的 srcdoc。",
-  category: "开发工具",
+  category: "developer-tools",
   subCategory: "sandbox",
   tags: ["sandbox", "iframe", "html", "css", "javascript", "console"],
   icon: "square-terminal",

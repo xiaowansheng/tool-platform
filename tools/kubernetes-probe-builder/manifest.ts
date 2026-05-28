@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "kubernetes-probe-builder",
   name: "Kubernetes Probe Builder",
   description: "生成 liveness、readiness、startup probes，并计算失败窗口、启动预算和常见误配置风险。",
-  category: "运维工具",
+  category: "ops-tools",
   subCategory: "kubernetes",
   tags: ["kubernetes", "probe", "liveness", "readiness", "startup"],
   icon: "heart-pulse",

@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "ffmpeg-editor",
   name: "FFmpeg Editor",
   description: "生成常见转码、裁剪、缩放和抽帧 FFmpeg 命令，并预览本地媒体文件信息。",
-  category: "视频音频",
+  category: "media-tools",
   subCategory: "media",
   tags: ["ffmpeg", "video", "audio", "transcode"],
   icon: "film",

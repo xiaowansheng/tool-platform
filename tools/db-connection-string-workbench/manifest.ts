@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "db-connection-string-workbench",
   name: "DB Connection String Workbench",
   description: "解析和重建 PostgreSQL、MySQL、Redis 连接串，输出脱敏摘要、环境变量和客户端命令。",
-  category: "数据工具",
+  category: "data-tools",
   subCategory: "connection",
   tags: ["database", "postgres", "mysql", "redis", "url", "dsn"],
   icon: "database",

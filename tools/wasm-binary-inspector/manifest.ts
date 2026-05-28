@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "wasm-binary-inspector",
   name: "WASM Binary Inspector",
   description: "解析 WebAssembly 二进制模块的 section、import/export、大小结构，并用 WASM runtime 编译校验。",
-  category: "开发工具",
+  category: "developer-tools",
   subCategory: "wasm",
   tags: ["wasm", "webassembly", "binary", "sections", "runtime"],
   icon: "box",

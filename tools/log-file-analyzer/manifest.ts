@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "log-file-analyzer",
   name: "Log File Analyzer",
   description: "统计日志级别、时间分布、错误样本、状态码和高频词，辅助快速定位异常。",
-  category: "运维工具",
+  category: "ops-tools",
   subCategory: "logs",
   tags: ["log", "analyzer", "errors", "ops"],
   icon: "file-search",

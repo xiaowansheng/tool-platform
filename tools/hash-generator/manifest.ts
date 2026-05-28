@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "hash-generator",
   name: "Hash Generator",
   description: "使用 Web Crypto 生成 SHA 摘要，适合校验文本与配置片段。",
-  category: "文本工具",
+  category: "text-tools",
   subCategory: "crypto",
   tags: ["hash", "sha", "digest", "checksum"],
   icon: "hash",

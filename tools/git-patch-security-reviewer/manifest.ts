@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "git-patch-security-reviewer",
   name: "Git Patch Security Reviewer",
   description: "扫描 Git diff 中新增的密钥、危险 API、弱加密、认证绕过和注入风险。",
-  category: "网络安全",
+  category: "security-tools",
   subCategory: "security",
   tags: ["git", "patch", "diff", "review", "security"],
   icon: "git-pull-request-arrow",

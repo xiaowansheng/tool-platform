@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "markdown-table-generator",
   name: "Markdown Table Generator",
   description: "从 CSV 或制表符文本生成 Markdown 表格。",
-  category: "文本工具",
+  category: "text-tools",
   subCategory: "markdown",
   tags: ["markdown", "table", "csv", "docs"],
   icon: "table-2",

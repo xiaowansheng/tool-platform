@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "access-log-parser",
   name: "Access Log Parser",
   description: "解析 Nginx 和 Apache combined/common access log，汇总状态码、路径、IP 与延迟。",
-  category: "运维工具",
+  category: "ops-tools",
   subCategory: "logs",
   tags: ["nginx", "apache", "access-log", "http"],
   icon: "server",

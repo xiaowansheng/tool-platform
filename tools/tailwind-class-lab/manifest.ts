@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "tailwind-class-lab",
   name: "Tailwind Class Lab",
   description: "整理 Tailwind class 顺序，预览常见 utility 的视觉结果并标记重复分组。",
-  category: "设计工具",
+  category: "design-tools",
   subCategory: "css",
   tags: ["tailwind", "css", "sort", "preview"],
   icon: "wind",

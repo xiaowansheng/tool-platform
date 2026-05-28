@@ -78,69 +78,85 @@
     "en": "English"
   },
   "categories": {
-    "encoding": {
-      "label": "Encoding",
-      "description": "Base64, URL, HTML entities, base conversion, hashing, and common text encoding."
+    "ai-tools": {
+      "label": "AI Tools",
+      "description": "Tools for LLMs, prompts, RAG, agents, AI safety, evaluation, and model costs."
     },
-    "data-processing": {
-      "label": "Data Processing",
-      "description": "JSON, CSV, YAML, Parquet, Schema, data cleaning, generation, and structured preview."
+    "developer-tools": {
+      "label": "Developer Tools",
+      "description": "APIs, code, Git, type generation, debugging, builds, and developer workflows."
     },
-    "api-debugging": {
-      "label": "API Debugging",
-      "description": "HTTP request builder, OpenAPI, GraphQL, Webhook, auth tokens, and API docs."
+    "ops-tools": {
+      "label": "Ops Tools",
+      "description": "Linux, Docker, Kubernetes, cloud native, logs, monitoring, SLOs, and troubleshooting."
     },
-    "network": {
-      "label": "Network",
-      "description": "DNS, TLS, ports, CIDR, headers, HAR, CORS, cookies, and live connection diagnostics."
+    "security-tools": {
+      "label": "Security Tools",
+      "description": "Security scanning, secrets, supply chain, CVSS, CSP, PII, certificates, and risk checks."
     },
-    "linux-ops": {
-      "label": "Linux Ops",
-      "description": "Logs, permissions, cron jobs, environment config, and day-to-day troubleshooting."
+    "file-tools": {
+      "label": "File Tools",
+      "description": "File structures, archives, checksums, metadata, batch files, and document conversion."
     },
-    "docker-k8s": {
-      "label": "Docker/K8s",
-      "description": "Validate Dockerfile, Compose, Kubernetes YAML, Helm Values, and container resources."
+    "image-tools": {
+      "label": "Image Tools",
+      "description": "Image compression, EXIF, QR codes, icon assets, OCR, and visual input preprocessing."
     },
-    "security": {
-      "label": "Security",
-      "description": "Secret scanning, SAST, dependency & supply chain risks, CVSS, CSP, PII, and threat modeling."
+    "media-tools": {
+      "label": "Media Tools",
+      "description": "Audio and video editing, media devices, media assets, and multimedia debugging."
     },
-    "database": {
-      "label": "Database",
-      "description": "SQL formatting, query plan analysis, SQLite sandbox, and database schema tools."
+    "text-tools": {
+      "label": "Text Tools",
+      "description": "Text encoding, conversion, inspection, diffing, Markdown, regex, and bulk text handling."
     },
-    "frontend": {
-      "label": "Frontend",
-      "description": "CSS layouts, responsive design, color accessibility, icon assets, Source Maps, and browser APIs."
+    "data-tools": {
+      "label": "Data Tools",
+      "description": "JSON, CSV, YAML, SQL, Schema, Parquet, mock data, and structured data processing."
     },
-    "backend": {
-      "label": "Backend",
-      "description": "Config parsing, type generation, regex, dates, MIME, UUID, and server-side dev tools."
+    "office-tools": {
+      "label": "Office Tools",
+      "description": "README, ADR, release notes, reports, PDF, tables, and office document generation."
     },
-    "git": {
-      "label": "Git",
-      "description": "Commit messages, gitignore, diffs, change risk, release notes, and code review workflow."
+    "design-tools": {
+      "label": "Design Tools",
+      "description": "Color, typography, layout, shadow, gradient, motion, and UI visual debugging."
     },
-    "cloud-native": {
-      "label": "Cloud Native",
-      "description": "Terraform, Prometheus, Grafana, OpenTelemetry, incident timelines, and observability."
+    "seo-tools": {
+      "label": "SEO Tools",
+      "description": "Meta tags, Open Graph, robots.txt, slugs, UTM, and search presentation optimization."
     },
-    "ai-development": {
-      "label": "AI Development",
-      "description": "LLM apps, prompt iteration, evaluation, RAG, agent logs, cost estimation, and AI safety."
+    "webmaster-tools": {
+      "label": "Webmaster Tools",
+      "description": "DNS, HTTP, ports, CIDR, headers, cookies, HAR, and website diagnostics."
     },
-    "ocr-cv": {
-      "label": "OCR/CV",
-      "description": "Image metadata, compression, QR/barcodes, media capture, and visual input preprocessing."
+    "learning-tools": {
+      "label": "Learning Tools",
+      "description": "Study planning, examples, knowledge checks, fact-checking, and practice material prep."
     },
-    "productivity": {
-      "label": "Productivity",
-      "description": "Calculator, unit conversion, batch text, notification preview, and daily workspace tools."
+    "calculator-tools": {
+      "label": "Calculator Tools",
+      "description": "Percentages, units, ratios, bases, time, costs, and resource conversion calculators."
     },
-    "documentation": {
-      "label": "Documentation",
-      "description": "Markdown, README, ADR, Mermaid, PDF, TOC anchors, privacy policy text, and doc quality."
+    "social-tools": {
+      "label": "Social Tools",
+      "description": "Social previews, link parameters, image cards, captions, and platform assets."
+    },
+    "ecommerce-tools": {
+      "label": "Ecommerce Tools",
+      "description": "Ecommerce copy, product data, conversion tracking, privacy compliance, and operations."
+    },
+    "productivity-tools": {
+      "label": "Productivity Tools",
+      "description": "Productivity, automation, notification testing, checklist generation, and workflow helpers."
+    },
+    "entertainment-tools": {
+      "label": "Entertainment Tools",
+      "description": "Light creative work, random content, and casual interaction tools."
+    },
+    "discovery-tools": {
+      "label": "Discovery Tools",
+      "description": "Tool directories, resource navigation, site indexes, discovery entry points, and collections."
     }
   }
 }

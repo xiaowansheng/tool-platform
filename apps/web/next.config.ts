@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,9 +13,10 @@ function getInternalPackages() {
   const names = [];
 
   for (const directoryName of readdirSync(packagesDir)) {
+    const directoryPath = path.join(packagesDir, directoryName);
     const packagePath = path.join(packagesDir, directoryName, "package.json");
 
-    if (statSync(path.join(packagesDir, directoryName)).isDirectory()) {
+    if (statSync(directoryPath).isDirectory() && existsSync(packagePath)) {
       const packageJson = JSON.parse(readFileSync(packagePath, "utf8"));
 
       if (typeof packageJson.name === "string") {
@@ -25,11 +26,15 @@ function getInternalPackages() {
   }
 
   for (const directoryName of readdirSync(toolsDir)) {
+    const directoryPath = path.join(toolsDir, directoryName);
     const packagePath = path.join(toolsDir, directoryName, "package.json");
-    const packageJson = JSON.parse(readFileSync(packagePath, "utf8"));
 
-    if (typeof packageJson.name === "string") {
-      names.push(packageJson.name);
+    if (statSync(directoryPath).isDirectory() && existsSync(packagePath)) {
+      const packageJson = JSON.parse(readFileSync(packagePath, "utf8"));
+
+      if (typeof packageJson.name === "string") {
+        names.push(packageJson.name);
+      }
     }
   }
 

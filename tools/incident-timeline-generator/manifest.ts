@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "incident-timeline-generator",
   name: "Incident Timeline Generator",
   description: "把事件记录转换成事故时间线、状态更新和复盘草稿。",
-  category: "运维工具",
+  category: "ops-tools",
   subCategory: "incident",
   tags: ["incident", "timeline", "postmortem", "sre"],
   icon: "list-checks",

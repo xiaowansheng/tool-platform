@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "token-cost-calculator",
   name: "Token Cost Calculator",
   description: "按输入/输出 token、运行次数和可编辑单价估算 LLM 调用成本。",
-  category: "AI工具",
+  category: "ai-tools",
   subCategory: "trusted-development",
   tags: ["tokens", "cost", "pricing", "budget", "llm"],
   icon: "calculator",

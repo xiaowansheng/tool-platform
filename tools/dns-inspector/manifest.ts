@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "dns-inspector",
   name: "DNS Inspector",
   description: "通过 DNS-over-HTTPS 查询 A、AAAA、MX、TXT、NS、SOA、CAA 等记录并展示 TTL 与响应状态。",
-  category: "站长工具",
+  category: "webmaster-tools",
   subCategory: "dns",
   tags: ["dns", "doh", "records", "mx", "txt"],
   icon: "network",

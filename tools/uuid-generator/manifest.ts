@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "uuid-generator",
   name: "UUID Generator",
   description: "批量生成 UUID v4，并支持快速复制。",
-  category: "开发工具",
+  category: "developer-tools",
   subCategory: "identifiers",
   tags: ["uuid", "id", "random"],
   icon: "fingerprint",

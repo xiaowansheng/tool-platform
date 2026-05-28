@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "ecommerce-margin-calculator",
   name: "Ecommerce Margin Calculator",
   description: "按售价、成本、平台费、广告费、物流和退货率计算电商毛利、净利、保本 ROAS 和建议售价。",
-  category: "电商工具",
+  category: "ecommerce-tools",
   subCategory: "pricing",
   tags: ["ecommerce", "margin", "roas", "pricing", "profit"],
   icon: "shopping-cart",
