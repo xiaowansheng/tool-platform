@@ -46,6 +46,8 @@ import ColorPaletteGeneratorTool from "@tool-platform/color-palette-generator/to
 import ColorPaletteGeneratorManifest from "@tool-platform/color-palette-generator/manifest";
 import ConventionalCommitHelperTool from "@tool-platform/conventional-commit-helper/tool";
 import ConventionalCommitHelperManifest from "@tool-platform/conventional-commit-helper/manifest";
+import CookieParserTool from "@tool-platform/cookie-parser/tool";
+import CookieParserManifest from "@tool-platform/cookie-parser/manifest";
 import CorsDiagnosticsTool from "@tool-platform/cors-diagnostics/tool";
 import CorsDiagnosticsManifest from "@tool-platform/cors-diagnostics/manifest";
 import CronHelperTool from "@tool-platform/cron-helper/tool";
@@ -72,6 +74,8 @@ import DataUrlGeneratorTool from "@tool-platform/data-url-generator/tool";
 import DataUrlGeneratorManifest from "@tool-platform/data-url-generator/manifest";
 import DependencyRiskExplainerTool from "@tool-platform/dependency-risk-explainer/tool";
 import DependencyRiskExplainerManifest from "@tool-platform/dependency-risk-explainer/manifest";
+import DnsInspectorTool from "@tool-platform/dns-inspector/tool";
+import DnsInspectorManifest from "@tool-platform/dns-inspector/manifest";
 import DockerComposeValidatorTool from "@tool-platform/docker-compose-validator/tool";
 import DockerComposeValidatorManifest from "@tool-platform/docker-compose-validator/manifest";
 import DockerfileLinterTool from "@tool-platform/dockerfile-linter/tool";
@@ -182,6 +186,8 @@ import PasswordGeneratorTool from "@tool-platform/password-generator/tool";
 import PasswordGeneratorManifest from "@tool-platform/password-generator/manifest";
 import PdfMetadataToolTool from "@tool-platform/pdf-metadata-tool/tool";
 import PdfMetadataToolManifest from "@tool-platform/pdf-metadata-tool/manifest";
+import PdfToolsTool from "@tool-platform/pdf-tools/tool";
+import PdfToolsManifest from "@tool-platform/pdf-tools/manifest";
 import PemJwkToolkitTool from "@tool-platform/pem-jwk-toolkit/tool";
 import PemJwkToolkitManifest from "@tool-platform/pem-jwk-toolkit/manifest";
 import PercentageCalculatorTool from "@tool-platform/percentage-calculator/tool";
@@ -224,6 +230,8 @@ import SemgrepRulePlaygroundTool from "@tool-platform/semgrep-rule-playground/to
 import SemgrepRulePlaygroundManifest from "@tool-platform/semgrep-rule-playground/manifest";
 import SlugGeneratorTool from "@tool-platform/slug-generator/tool";
 import SlugGeneratorManifest from "@tool-platform/slug-generator/manifest";
+import SourceMapExplorerTool from "@tool-platform/source-map-explorer/tool";
+import SourceMapExplorerManifest from "@tool-platform/source-map-explorer/manifest";
 import SqlExplainVisualizerTool from "@tool-platform/sql-explain-visualizer/tool";
 import SqlExplainVisualizerManifest from "@tool-platform/sql-explain-visualizer/manifest";
 import SqlFormatterTool from "@tool-platform/sql-formatter/tool";
@@ -270,6 +278,8 @@ import UuidGeneratorTool from "@tool-platform/uuid-generator/tool";
 import UuidGeneratorManifest from "@tool-platform/uuid-generator/manifest";
 import WebhookSignatureVerifierTool from "@tool-platform/webhook-signature-verifier/tool";
 import WebhookSignatureVerifierManifest from "@tool-platform/webhook-signature-verifier/manifest";
+import WebsocketClientTool from "@tool-platform/websocket-client/tool";
+import WebsocketClientManifest from "@tool-platform/websocket-client/manifest";
 import YamlJsonTomlConverterTool from "@tool-platform/yaml-json-toml-converter/tool";
 import YamlJsonTomlConverterManifest from "@tool-platform/yaml-json-toml-converter/manifest";
 
@@ -373,6 +383,10 @@ export const toolRecords: ToolRecord[] = [
     component: ConventionalCommitHelperTool
   },
   {
+    manifest: CookieParserManifest,
+    component: CookieParserTool
+  },
+  {
     manifest: CorsDiagnosticsManifest,
     component: CorsDiagnosticsTool
   },
@@ -423,6 +437,10 @@ export const toolRecords: ToolRecord[] = [
   {
     manifest: DependencyRiskExplainerManifest,
     component: DependencyRiskExplainerTool
+  },
+  {
+    manifest: DnsInspectorManifest,
+    component: DnsInspectorTool
   },
   {
     manifest: DockerComposeValidatorManifest,
@@ -645,6 +663,10 @@ export const toolRecords: ToolRecord[] = [
     component: PdfMetadataToolTool
   },
   {
+    manifest: PdfToolsManifest,
+    component: PdfToolsTool
+  },
+  {
     manifest: PemJwkToolkitManifest,
     component: PemJwkToolkitTool
   },
@@ -727,6 +749,10 @@ export const toolRecords: ToolRecord[] = [
   {
     manifest: SlugGeneratorManifest,
     component: SlugGeneratorTool
+  },
+  {
+    manifest: SourceMapExplorerManifest,
+    component: SourceMapExplorerTool
   },
   {
     manifest: SqlExplainVisualizerManifest,
@@ -819,6 +845,10 @@ export const toolRecords: ToolRecord[] = [
   {
     manifest: WebhookSignatureVerifierManifest,
     component: WebhookSignatureVerifierTool
+  },
+  {
+    manifest: WebsocketClientManifest,
+    component: WebsocketClientTool
   },
   {
     manifest: YamlJsonTomlConverterManifest,

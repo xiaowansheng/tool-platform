@@ -194,6 +194,9 @@ importers:
       '@tool-platform/conventional-commit-helper':
         specifier: workspace:*
         version: link:../../tools/conventional-commit-helper
+      '@tool-platform/cookie-parser':
+        specifier: workspace:*
+        version: link:../../tools/cookie-parser
       '@tool-platform/cors-diagnostics':
         specifier: workspace:*
         version: link:../../tools/cors-diagnostics
@@ -233,6 +236,9 @@ importers:
       '@tool-platform/dependency-risk-explainer':
         specifier: workspace:*
         version: link:../../tools/dependency-risk-explainer
+      '@tool-platform/dns-inspector':
+        specifier: workspace:*
+        version: link:../../tools/dns-inspector
       '@tool-platform/docker-compose-validator':
         specifier: workspace:*
         version: link:../../tools/docker-compose-validator
@@ -398,6 +404,9 @@ importers:
       '@tool-platform/pdf-metadata-tool':
         specifier: workspace:*
         version: link:../../tools/pdf-metadata-tool
+      '@tool-platform/pdf-tools':
+        specifier: workspace:*
+        version: link:../../tools/pdf-tools
       '@tool-platform/pem-jwk-toolkit':
         specifier: workspace:*
         version: link:../../tools/pem-jwk-toolkit
@@ -461,6 +470,9 @@ importers:
       '@tool-platform/slug-generator':
         specifier: workspace:*
         version: link:../../tools/slug-generator
+      '@tool-platform/source-map-explorer':
+        specifier: workspace:*
+        version: link:../../tools/source-map-explorer
       '@tool-platform/sql-explain-visualizer':
         specifier: workspace:*
         version: link:../../tools/sql-explain-visualizer
@@ -533,6 +545,9 @@ importers:
       '@tool-platform/webhook-signature-verifier':
         specifier: workspace:*
         version: link:../../tools/webhook-signature-verifier
+      '@tool-platform/websocket-client':
+        specifier: workspace:*
+        version: link:../../tools/websocket-client
       '@tool-platform/yaml-json-toml-converter':
         specifier: workspace:*
         version: link:../../tools/yaml-json-toml-converter
@@ -788,6 +803,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/cookie-parser:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/cors-diagnostics:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -897,6 +921,15 @@ importers:
         version: 19.2.6
 
   tools/dependency-risk-explainer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/dns-inspector:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1409,6 +1442,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/pdf-tools:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/pem-jwk-toolkit:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1599,6 +1641,15 @@ importers:
         version: 19.2.6
 
   tools/slug-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/source-map-explorer:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1818,6 +1869,15 @@ importers:
         version: 19.2.6
 
   tools/webhook-signature-verifier:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/websocket-client:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
