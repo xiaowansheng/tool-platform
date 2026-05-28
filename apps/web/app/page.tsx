@@ -1,5 +1,4 @@
 import { CategoryPanel } from "@/components/category-panel";
-import { SearchSurface } from "@/components/search-surface";
 import { ToolCard } from "@/components/tool-card";
 import { Topbar } from "@/components/topbar";
 import { categories, getAllTools, getFeaturedTools } from "@tool-platform/tool-sdk";
@@ -35,10 +34,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <div className="content-grid">
-          <SearchSurface tools={allTools} title="全局搜索" subtitle="搜索优先于导航，支持工具名、标签、描述和分类。" />
-          <CategoryPanel />
-        </div>
+        <CategoryPanel />
 
         <section className="stat-card">
           <div className="section-header">
