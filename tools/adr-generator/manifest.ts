@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "adr-generator",
   name: "ADR 生成器",
   description: "生成 Architecture Decision Record，覆盖背景、决策、备选方案和后果。",
-  category: "developer",
+  category: "办公工具",
   subCategory: "architecture",
   tags: ["adr", "architecture", "decision-record", "docs"],
   icon: "file-signature",

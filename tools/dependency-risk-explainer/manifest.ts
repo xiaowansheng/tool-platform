@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "dependency-risk-explainer",
   name: "Dependency Risk Explainer",
   description: "从依赖清单中提取维护、版本、安全和供应链风险信号。",
-  category: "developer",
+  category: "网络安全",
   subCategory: "security",
   tags: ["dependencies", "supply-chain", "risk", "npm", "package"],
   icon: "shield-alert",

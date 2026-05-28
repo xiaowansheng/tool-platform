@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "sql-formatter",
   name: "SQL Formatter",
   description: "对常见 SQL 关键字换行缩进，便于快速阅读查询语句。",
-  category: "developer",
+  category: "数据工具",
   subCategory: "database",
   tags: ["sql", "formatter", "database", "query"],
   icon: "database",

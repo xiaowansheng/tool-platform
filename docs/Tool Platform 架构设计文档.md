@@ -203,16 +203,26 @@ tool-platform/
 ## 6.1 推荐分类
 
 ```text
+AI工具
 开发工具
-AI 工具
-文本工具
-图片工具
-视频工具
-文件工具
-网络工具
 运维工具
+网络安全
+文件工具
+图片工具
+视频音频
+文本工具
+数据工具
+办公工具
 设计工具
+SEO工具
+站长工具
+学习工具
+计算工具
+社媒工具
+电商工具
 效率工具
+娱乐工具
+导航发现
 ```
 
 ---
@@ -368,7 +378,7 @@ export default {
 
   description: "JSON 格式化工具",
 
-  category: "developer",
+  category: "数据工具",
 
   tags: ["json", "formatter"],
 

@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "webhook-signature-verifier",
   name: "Webhook Signature Verifier",
   description: "本地验证 GitHub、Stripe、Slack Webhook HMAC 签名。",
-  category: "developer",
+  category: "网络安全",
   subCategory: "security",
   tags: ["webhook", "github", "stripe", "slack", "hmac"],
   icon: "webhook",

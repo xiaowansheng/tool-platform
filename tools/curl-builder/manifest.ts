@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "curl-builder",
   name: "cURL Builder",
   description: "根据 URL、方法、Header 和 Body 生成可复制的 cURL 命令。",
-  category: "developer",
+  category: "开发工具",
   subCategory: "api",
   tags: ["curl", "api", "http", "request"],
   icon: "terminal",

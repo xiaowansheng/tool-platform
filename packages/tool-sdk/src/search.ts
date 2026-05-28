@@ -22,6 +22,7 @@ export function searchTools(tools: ToolManifest[], query: string) {
       tool.category,
       category?.label ?? "",
       category?.description ?? "",
+      category?.keywords?.join(" ") ?? "",
       tool.tags.join(" "),
       tool.subCategory ?? ""
     ];

@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "readme-quality-checker",
   name: "README 质量检查器",
   description: "按项目介绍、安装、使用、配置、许可证等维度评估 README 完整度。",
-  category: "developer",
+  category: "办公工具",
   subCategory: "documentation",
   tags: ["readme", "quality", "checklist", "documentation"],
   icon: "clipboard-check",

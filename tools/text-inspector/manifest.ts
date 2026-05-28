@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "text-inspector",
   name: "Text Inspector",
   description: "在 Worker 中分析大文本，并把报告缓存到 OPFS。",
-  category: "text",
+  category: "文本工具",
   subCategory: "analysis",
   tags: ["worker", "opfs", "text", "analysis"],
   icon: "file-search",

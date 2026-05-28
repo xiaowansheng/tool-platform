@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "privacy-cookie-copy-generator",
   name: "Privacy / Cookie Copy Generator",
   description: "根据数据类型、用途和 Cookie 分类生成隐私政策与 Cookie 文案草稿。",
-  category: "text",
+  category: "电商工具",
   subCategory: "privacy",
   tags: ["privacy", "cookie", "policy", "gdpr", "copy"],
   icon: "scroll-text",

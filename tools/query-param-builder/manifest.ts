@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "query-param-builder",
   name: "Query Param Builder",
   description: "解析、编辑并重建 URL 查询参数。",
-  category: "network",
+  category: "开发工具",
   subCategory: "url",
   tags: ["query", "url", "params", "builder"],
   icon: "list-plus",

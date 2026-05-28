@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "http-status-reference",
   name: "HTTP Status Reference",
   description: "快速查询常见 HTTP 状态码含义和使用场景。",
-  category: "network",
+  category: "导航发现",
   subCategory: "reference",
   tags: ["http", "status", "api", "reference"],
   icon: "server",

@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "resource-unit-converter",
   name: "Resource Unit Converter",
   description: "换算 Kubernetes CPU、内存和存储单位，生成 requests/limits 参考值。",
-  category: "ops",
+  category: "运维工具",
   subCategory: "kubernetes",
   tags: ["kubernetes", "cpu", "memory", "storage"],
   icon: "cpu",

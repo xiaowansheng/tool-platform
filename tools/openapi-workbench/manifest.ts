@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "openapi-workbench",
   name: "OpenAPI Workbench",
   description: "查看、格式化、Diff OpenAPI/Swagger JSON，并生成基础 Mock 响应。",
-  category: "developer",
+  category: "开发工具",
   subCategory: "api",
   tags: ["openapi", "swagger", "diff", "mock"],
   icon: "route",

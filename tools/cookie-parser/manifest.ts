@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "cookie-parser",
   name: "Cookie Parser",
   description: "解析 Cookie 与 Set-Cookie，展开属性并诊断 Secure、HttpOnly、SameSite 等 Flags。",
-  category: "network",
+  category: "站长工具",
   subCategory: "http",
   tags: ["cookie", "set-cookie", "httponly", "samesite", "security"],
   icon: "cookie",

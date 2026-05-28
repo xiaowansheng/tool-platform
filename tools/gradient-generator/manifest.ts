@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "gradient-generator",
   name: "Gradient Theme Token Generator",
   description: "从渐变和品牌色生成 palette、语义色与 CSS theme tokens。",
-  category: "design",
+  category: "设计工具",
   subCategory: "css",
   tags: ["gradient", "css", "design", "color", "palette", "theme tokens"],
   icon: "paintbrush",

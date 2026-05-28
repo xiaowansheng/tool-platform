@@ -17,16 +17,26 @@ export type ToolPermission =
   | "notification";
 
 export type ToolCategory =
-  | "developer"
-  | "ai"
-  | "text"
-  | "image"
-  | "video"
-  | "file"
-  | "network"
-  | "ops"
-  | "design"
-  | "productivity";
+  | "AI工具"
+  | "开发工具"
+  | "运维工具"
+  | "网络安全"
+  | "文件工具"
+  | "图片工具"
+  | "视频音频"
+  | "文本工具"
+  | "数据工具"
+  | "办公工具"
+  | "设计工具"
+  | "SEO工具"
+  | "站长工具"
+  | "学习工具"
+  | "计算工具"
+  | "社媒工具"
+  | "电商工具"
+  | "效率工具"
+  | "娱乐工具"
+  | "导航发现";
 
 export interface ToolManifest {
   id: string;
@@ -62,4 +72,6 @@ export interface CategoryMeta {
   id: ToolCategory;
   label: string;
   description: string;
+  icon?: string;
+  keywords?: string[];
 }

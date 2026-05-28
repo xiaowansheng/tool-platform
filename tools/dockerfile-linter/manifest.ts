@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "dockerfile-linter",
   name: "Dockerfile Linter",
   description: "检查 Dockerfile 的基础镜像、缓存、安全和运行时风险。",
-  category: "ops",
+  category: "运维工具",
   subCategory: "container",
   tags: ["docker", "dockerfile", "container", "lint"],
   icon: "container",

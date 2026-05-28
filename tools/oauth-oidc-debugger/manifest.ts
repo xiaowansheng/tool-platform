@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "oauth-oidc-debugger",
   name: "OAuth OIDC Debugger",
   description: "解析授权 URL、OIDC ID Token，并生成 PKCE challenge。",
-  category: "developer",
+  category: "开发工具",
   subCategory: "security",
   tags: ["oauth", "oidc", "pkce", "token"],
   icon: "key-square",

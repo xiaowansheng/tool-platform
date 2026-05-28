@@ -583,7 +583,7 @@ export default {
 
   name: "Image Compressor",
 
-  category: "image",
+  category: "图片工具",
 
   runtime: "wasm"
 }

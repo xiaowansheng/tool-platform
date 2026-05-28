@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "ai-sandbox-lab",
   name: "AI Sandbox Lab",
   description: "流式生成 AI 响应，并在隔离 iframe 中预览结果。",
-  category: "ai",
+  category: "AI工具",
   subCategory: "runtime",
   tags: ["ai", "stream", "sandbox", "iframe"],
   icon: "bot",

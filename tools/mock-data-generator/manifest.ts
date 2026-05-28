@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "mock-data-generator",
   name: "Mock Data Generator",
   description: "按字段 schema 生成可复现的 mock 数据，并导出 JSON、NDJSON 或 CSV。",
-  category: "developer",
+  category: "数据工具",
   subCategory: "data",
   tags: ["mock", "faker", "json", "csv", "seed"],
   icon: "dice-5",

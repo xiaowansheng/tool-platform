@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "number-base-converter",
   name: "Number Base Converter",
   description: "在二进制、八进制、十进制和十六进制之间转换整数。",
-  category: "developer",
+  category: "计算工具",
   subCategory: "number",
   tags: ["binary", "hex", "decimal", "converter"],
   icon: "binary",

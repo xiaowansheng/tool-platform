@@ -1,0 +1,53 @@
+name: Feature request
+description: Suggest a new tool, platform capability, or documentation improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What workflow should this improve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the tool, platform change, or documentation update.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - AI工具
+        - 开发工具
+        - 运维工具
+        - 网络安全
+        - 文件工具
+        - 图片工具
+        - 视频音频
+        - 文本工具
+        - 数据工具
+        - 办公工具
+        - 设计工具
+        - SEO工具
+        - 站长工具
+        - 学习工具
+        - 计算工具
+        - 社媒工具
+        - 电商工具
+        - 效率工具
+        - 娱乐工具
+        - 导航发现
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: risks
+    attributes:
+      label: Security or privacy considerations
+      description: Does this process files, secrets, PII, media devices, network requests, or AI/API calls?

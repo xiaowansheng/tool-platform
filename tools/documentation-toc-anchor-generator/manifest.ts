@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "documentation-toc-anchor-generator",
   name: "文档目录 / 锚点生成器",
   description: "从 Markdown 标题生成 GitHub 风格目录、锚点清单和带 TOC 标记的文档。",
-  category: "text",
+  category: "办公工具",
   subCategory: "markdown",
   tags: ["markdown", "toc", "anchor", "docs"],
   icon: "list-tree",

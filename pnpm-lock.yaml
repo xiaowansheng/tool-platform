@@ -161,6 +161,9 @@ importers:
       '@tool-platform/aspect-ratio-calculator':
         specifier: workspace:*
         version: link:../../tools/aspect-ratio-calculator
+      '@tool-platform/audio-tone-generator':
+        specifier: workspace:*
+        version: link:../../tools/audio-tone-generator
       '@tool-platform/base64-studio':
         specifier: workspace:*
         version: link:../../tools/base64-studio
@@ -245,9 +248,15 @@ importers:
       '@tool-platform/db-connection-string-workbench':
         specifier: workspace:*
         version: link:../../tools/db-connection-string-workbench
+      '@tool-platform/decision-wheel':
+        specifier: workspace:*
+        version: link:../../tools/decision-wheel
       '@tool-platform/dependency-risk-explainer':
         specifier: workspace:*
         version: link:../../tools/dependency-risk-explainer
+      '@tool-platform/discount-stack-calculator':
+        specifier: workspace:*
+        version: link:../../tools/discount-stack-calculator
       '@tool-platform/dns-inspector':
         specifier: workspace:*
         version: link:../../tools/dns-inspector
@@ -266,6 +275,9 @@ importers:
       '@tool-platform/easing-cubic-bezier-debugger':
         specifier: workspace:*
         version: link:../../tools/easing-cubic-bezier-debugger
+      '@tool-platform/ecommerce-margin-calculator':
+        specifier: workspace:*
+        version: link:../../tools/ecommerce-margin-calculator
       '@tool-platform/env-diff-merge-sanitizer':
         specifier: workspace:*
         version: link:../../tools/env-diff-merge-sanitizer
@@ -284,6 +296,12 @@ importers:
       '@tool-platform/ffmpeg-editor':
         specifier: workspace:*
         version: link:../../tools/ffmpeg-editor
+      '@tool-platform/file-name-batch-renamer':
+        specifier: workspace:*
+        version: link:../../tools/file-name-batch-renamer
+      '@tool-platform/flashcard-cloze-builder':
+        specifier: workspace:*
+        version: link:../../tools/flashcard-cloze-builder
       '@tool-platform/flexbox-generator':
         specifier: workspace:*
         version: link:../../tools/flexbox-generator
@@ -299,6 +317,9 @@ importers:
       '@tool-platform/gitignore-generator':
         specifier: workspace:*
         version: link:../../tools/gitignore-generator
+      '@tool-platform/grade-weight-calculator':
+        specifier: workspace:*
+        version: link:../../tools/grade-weight-calculator
       '@tool-platform/gradient-generator':
         specifier: workspace:*
         version: link:../../tools/gradient-generator
@@ -317,6 +338,9 @@ importers:
       '@tool-platform/helm-values-diff':
         specifier: workspace:*
         version: link:../../tools/helm-values-diff
+      '@tool-platform/html-css-js-playground':
+        specifier: workspace:*
+        version: link:../../tools/html-css-js-playground
       '@tool-platform/html-entity-codec':
         specifier: workspace:*
         version: link:../../tools/html-entity-codec
@@ -371,6 +395,9 @@ importers:
       '@tool-platform/line-tools':
         specifier: workspace:*
         version: link:../../tools/line-tools
+      '@tool-platform/link-collection-curator':
+        specifier: workspace:*
+        version: link:../../tools/link-collection-curator
       '@tool-platform/llm-eval-case-generator':
         specifier: workspace:*
         version: link:../../tools/llm-eval-case-generator
@@ -446,6 +473,9 @@ importers:
       '@tool-platform/pii-detector':
         specifier: workspace:*
         version: link:../../tools/pii-detector
+      '@tool-platform/pomodoro-focus-timer':
+        specifier: workspace:*
+        version: link:../../tools/pomodoro-focus-timer
       '@tool-platform/port-reference':
         specifier: workspace:*
         version: link:../../tools/port-reference
@@ -470,6 +500,9 @@ importers:
       '@tool-platform/rag-chunk-token-estimator':
         specifier: workspace:*
         version: link:../../tools/rag-chunk-token-estimator
+      '@tool-platform/random-team-generator':
+        specifier: workspace:*
+        version: link:../../tools/random-team-generator
       '@tool-platform/readme-badge-generator':
         specifier: workspace:*
         version: link:../../tools/readme-badge-generator
@@ -500,12 +533,21 @@ importers:
       '@tool-platform/semgrep-rule-playground':
         specifier: workspace:*
         version: link:../../tools/semgrep-rule-playground
+      '@tool-platform/sku-generator':
+        specifier: workspace:*
+        version: link:../../tools/sku-generator
       '@tool-platform/slo-error-budget-calculator':
         specifier: workspace:*
         version: link:../../tools/slo-error-budget-calculator
       '@tool-platform/slug-generator':
         specifier: workspace:*
         version: link:../../tools/slug-generator
+      '@tool-platform/social-caption-hashtag-formatter':
+        specifier: workspace:*
+        version: link:../../tools/social-caption-hashtag-formatter
+      '@tool-platform/social-post-scheduler':
+        specifier: workspace:*
+        version: link:../../tools/social-post-scheduler
       '@tool-platform/source-map-explorer':
         specifier: workspace:*
         version: link:../../tools/source-map-explorer
@@ -527,6 +569,9 @@ importers:
       '@tool-platform/stack-trace-explainer':
         specifier: workspace:*
         version: link:../../tools/stack-trace-explainer
+      '@tool-platform/study-plan-scheduler':
+        specifier: workspace:*
+        version: link:../../tools/study-plan-scheduler
       '@tool-platform/svg-optimizer-viewbox-editor':
         specifier: workspace:*
         version: link:../../tools/svg-optimizer-viewbox-editor
@@ -536,6 +581,9 @@ importers:
       '@tool-platform/tailwind-class-lab':
         specifier: workspace:*
         version: link:../../tools/tailwind-class-lab
+      '@tool-platform/task-priority-matrix':
+        specifier: workspace:*
+        version: link:../../tools/task-priority-matrix
       '@tool-platform/terraform-plan-formatter':
         specifier: workspace:*
         version: link:../../tools/terraform-plan-formatter
@@ -729,6 +777,15 @@ importers:
         version: 19.2.6
 
   tools/aspect-ratio-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/audio-tone-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -998,7 +1055,25 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/decision-wheel:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/dependency-risk-explainer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/discount-stack-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1053,6 +1128,15 @@ importers:
         version: 19.2.6
 
   tools/easing-cubic-bezier-debugger:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/ecommerce-margin-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1118,6 +1202,24 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/file-name-batch-renamer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/flashcard-cloze-builder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/flexbox-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1155,6 +1257,15 @@ importers:
         version: 19.2.6
 
   tools/gitignore-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/grade-weight-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1209,6 +1320,15 @@ importers:
         version: 19.2.6
 
   tools/helm-values-diff:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/html-css-js-playground:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1371,6 +1491,15 @@ importers:
         version: 19.2.6
 
   tools/line-tools:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/link-collection-curator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1610,6 +1739,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/pomodoro-focus-timer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/port-reference:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1684,6 +1822,15 @@ importers:
       '@tool-platform/ai-trust-tools':
         specifier: workspace:*
         version: link:../../packages/ai-trust-tools
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/random-team-generator:
+    dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -1781,6 +1928,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/sku-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/slo-error-budget-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1791,6 +1947,24 @@ importers:
         version: 19.2.6
 
   tools/slug-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/social-caption-hashtag-formatter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/social-post-scheduler:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1865,6 +2039,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/study-plan-scheduler:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/svg-optimizer-viewbox-editor:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1884,6 +2067,15 @@ importers:
         version: 19.2.6
 
   tools/tailwind-class-lab:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/task-priority-matrix:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

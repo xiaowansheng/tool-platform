@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "url-codec",
   name: "URL Codec",
   description: "编码、解码 URL 片段并解析查询参数。",
-  category: "network",
+  category: "文本工具",
   subCategory: "encoding",
   tags: ["url", "encode", "decode", "query"],
   icon: "link",

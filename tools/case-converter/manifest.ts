@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "case-converter",
   name: "Case Converter",
   description: "在 camelCase、snake_case、kebab-case、Title Case 等命名风格之间转换。",
-  category: "text",
+  category: "文本工具",
   subCategory: "transform",
   tags: ["case", "string", "text", "naming"],
   icon: "case-sensitive",

@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "pdf-tools",
   name: "PDF Tools",
   description: "本地合并、拆分和无损整理压缩 PDF，适合快速处理常见未加密 PDF。",
-  category: "file",
+  category: "文件工具",
   subCategory: "document",
   tags: ["pdf", "merge", "split", "compress", "document"],
   icon: "files",

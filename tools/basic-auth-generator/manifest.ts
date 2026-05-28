@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "basic-auth-generator",
   name: "Basic Auth Generator",
   description: "生成 HTTP Basic Authorization header，所有处理都在本地完成。",
-  category: "developer",
+  category: "开发工具",
   subCategory: "security",
   tags: ["basic-auth", "http", "authorization", "header"],
   icon: "key",

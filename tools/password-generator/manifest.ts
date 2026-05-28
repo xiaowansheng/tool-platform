@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "password-generator",
   name: "Password Generator",
   description: "使用浏览器 Crypto API 生成随机密码和口令片段。",
-  category: "developer",
+  category: "网络安全",
   subCategory: "security",
   tags: ["password", "security", "random", "crypto"],
   icon: "shield-keyhole",

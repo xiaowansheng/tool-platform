@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "prometheus-query-helper",
   name: "Prometheus Query Helper",
   description: "按常见监控场景生成 PromQL，并提示窗口、标签和告警规则风险。",
-  category: "ops",
+  category: "运维工具",
   subCategory: "observability",
   tags: ["prometheus", "promql", "metrics", "alerting"],
   icon: "activity",

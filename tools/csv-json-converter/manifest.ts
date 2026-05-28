@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "csv-json-converter",
   name: "CSV JSON Converter",
   description: "在 CSV 表格和 JSON 数组之间互转，适合小型数据整理。",
-  category: "developer",
+  category: "数据工具",
   subCategory: "data",
   tags: ["csv", "json", "table", "converter"],
   icon: "table",
