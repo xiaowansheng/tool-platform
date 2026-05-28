@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "title": "Tool Platform",
+    "description": "基于 Manifest、分类、搜索与动态路由的工具平台第一阶段实现。"
+  },
+  "layout": {
+    "sidebarDescription": "面向插件化工具的浏览器工作台，优先实现文档中的第一阶段能力。",
+    "home": "首页",
+    "search": "搜索",
+    "footerFocus": "阶段聚焦：平台骨架、Manifest、动态路由、分类与搜索。"
+  },
+  "topbar": {
+    "searchTools": "搜索工具",
+    "openExample": "打开示例"
+  },
+  "theme": {
+    "lightMode": "浅色模式",
+    "darkMode": "深色模式"
+  },
+  "home": {
+    "subtitle": "Browser Tool OS 的第一阶段骨架，先把工具入口、分类与搜索跑通。",
+    "heroTitle": "把工具当成插件，而不是普通页面。",
+    "heroDescription": "当前实现按仓库文档先完成平台骨架、Manifest 自动注册、动态工具路由、分类系统、搜索系统以及 `simple` 工具示例，后续再向 Worker / WASM / AI Runtime 推进。",
+    "statTools": "已注册工具",
+    "statCategories": "推荐分类",
+    "statFeatured": "精选入口",
+    "quickTools": "快捷工具",
+    "quickToolsDescription": "首页优先给出可直接进入的工具入口，而不是营销文案。"
+  },
+  "categoryPanel": {
+    "title": "分类入口",
+    "description": "按文档中的推荐分类组织工具，并保留未来扩展空间。"
+  },
+  "search": {
+    "title": "搜索工具",
+    "subtitle": "支持按工具名、分类、标签和描述检索。",
+    "placeholder": "输入工具名、标签或分类，例如 json / 前端开发 / api",
+    "emptyTitle": "没有命中当前查询",
+    "emptyDescription": "尝试按标签或分类搜索，例如 `formatter`、`前端开发`、`encoding`。",
+    "clear": "清空",
+    "ariaLabel": "搜索工具"
+  },
+  "searchPage": {
+    "subtitle": "文档强调搜索是核心入口，这里单独给出完整检索页。"
+  },
+  "categoryPage": {
+    "filterTitle": "筛选{category}",
+    "subtitle": "在当前分类内按工具名、标签、运行时或描述缩小列表。",
+    "searchPlaceholder": "在{category}中搜索名称、标签或运行时",
+    "emptyFiltered": "没有命中当前筛选",
+    "emptyCategory": "这个分类还没有落地工具",
+    "emptyFilteredDescription": "换一个关键词试试，例如工具名称、标签或运行时类型。",
+    "emptyCategoryDescription": "分类体系已经建立，后续工具接入后会自动进入当前目录和搜索索引。"
+  },
+  "toolPage": {
+    "subtitle": "动态工具路由来自自动生成的 Tool Registry。",
+    "workspaceLayout": "遵循 UI 文档里强调的工作区结构，优先突出输入、处理与结果区。",
+    "lifecycle": "工具接入后会先注册，再进入分类、搜索和动态工具页面。",
+    "runtimeWorker": "重工具开始通过 runtime manager、Worker RPC 和 OPFS 存储脱离主线程执行。"
+  },
+  "toolCard": {
+    "enterTool": "进入工具",
+    "tagsLabel": "标签：{tags}",
+    "moreTags": "还有 {count} 个标签"
+  },
+  "toolLoader": {
+    "loadError": "工具组件未注册或无法加载。",
+    "loading": "工具组件加载中。"
+  },
+  "notFound": {
+    "title": "404 — 页面未找到",
+    "description": "检查 slug 是否存在，或者回到首页查看当前已经注册的工具。",
+    "backHome": "返回首页"
+  },
+  "localeSwitcher": {
+    "label": "语言",
+    "zh": "中文",
+    "en": "English"
+  },
+  "categories": {
+    "encoding": {
+      "label": "编码转换",
+      "description": "处理 Base64、URL、HTML 实体、进制、哈希和常见文本编码转换。"
+    },
+    "data-processing": {
+      "label": "数据处理",
+      "description": "面向 JSON、CSV、YAML、Parquet、Schema、清洗、生成和结构化预览。"
+    },
+    "api-debugging": {
+      "label": "API调试",
+      "description": "覆盖 HTTP 请求构造、OpenAPI、GraphQL、Webhook、鉴权令牌和接口文档辅助。"
+    },
+    "network": {
+      "label": "网络工具",
+      "description": "面向 DNS、TLS、端口、CIDR、Header、HAR、CORS、Cookie 与实时连接排查。"
+    },
+    "linux-ops": {
+      "label": "Linux运维",
+      "description": "聚合日志、权限、定时任务、环境配置和日常排障工具。"
+    },
+    "docker-k8s": {
+      "label": "Docker/K8s",
+      "description": "校验 Dockerfile、Compose、Kubernetes YAML、Helm Values 与容器资源配置。"
+    },
+    "security": {
+      "label": "安全工具",
+      "description": "覆盖密钥扫描、SAST、依赖与供应链风险、CVSS、CSP、PII 和威胁建模。"
+    },
+    "database": {
+      "label": "数据库工具",
+      "description": "提供 SQL 格式化、查询计划解释、SQLite 试验和数据库结构辅助。"
+    },
+    "frontend": {
+      "label": "前端开发",
+      "description": "面向 CSS 布局、响应式排版、颜色可访问性、图标资产、Source Map、浏览器能力和前端调试。"
+    },
+    "backend": {
+      "label": "后端开发",
+      "description": "聚合配置解析、类型生成、正则、时间、MIME、UUID 和服务端开发辅助。"
+    },
+    "git": {
+      "label": "Git工具",
+      "description": "支持提交信息、Gitignore、Diff、变更风险、发布记录和代码评审流程。"
+    },
+    "cloud-native": {
+      "label": "云原生",
+      "description": "聚合 Terraform、Prometheus、Grafana、OpenTelemetry、事故时间线和可观测性工作流。"
+    },
+    "ai-development": {
+      "label": "AI开发",
+      "description": "面向 LLM 应用、Prompt 迭代、评测、RAG、智能体日志、成本估算和 AI 安全开发。"
+    },
+    "ocr-cv": {
+      "label": "OCR/CV",
+      "description": "处理图像元数据、压缩、二维码/条码、媒体采集和视觉输入预处理。"
+    },
+    "productivity": {
+      "label": "效率工具",
+      "description": "提供计算、单位换算、批量文本、通知预览和日常工作台辅助。"
+    },
+    "documentation": {
+      "label": "文档工具",
+      "description": "覆盖 Markdown、README、ADR、Mermaid、PDF、目录锚点、隐私文案和文档质量检查。"
+    }
+  }
+}

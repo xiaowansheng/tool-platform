@@ -1,29 +1,21 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { categories, getAllTools } from "@tool-platform/tool-sdk";
 
-const categoryIcons: Record<string, string> = {
-  developer: "</>",
-  ai: "✦",
-  text: "Aa",
-  image: "◇",
-  video: "▶",
-  file: "☰",
-  network: "◉",
-  ops: "⌘",
-  design: "◎",
-  productivity: "⚡"
-};
+import { Link } from "@/i18n/navigation";
+
 
 export function CategoryPanel() {
+  const t = useTranslations("categoryPanel");
+  const ct = useTranslations("categories");
   const tools = getAllTools();
 
   return (
     <section className="stat-card">
       <div className="section-header">
         <div>
-          <h2>分类入口</h2>
-          <p>按文档中的推荐分类组织工具，并保留未来扩展空间。</p>
+          <h2>{t("title")}</h2>
+          <p>{t("description")}</p>
         </div>
       </div>
       <div className="detail-grid">
@@ -33,10 +25,10 @@ export function CategoryPanel() {
           return (
             <Link key={category.id} className="detail-card" href={`/categories/${category.id}`}>
               <div className="detail-card__icon">
-                {categoryIcons[category.id] ?? "·"}
+                {category.icon ?? "·"}
               </div>
-              <h3>{category.label}</h3>
-              <p>{category.description}</p>
+              <h3>{ct(`${category.id}.label`)}</h3>
+              <p>{ct(`${category.id}.description`)}</p>
               <span className="pill">{count} tools</span>
             </Link>
           );

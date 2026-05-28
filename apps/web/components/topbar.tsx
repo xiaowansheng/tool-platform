@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
 
 export function Topbar({
   title,
@@ -7,6 +9,8 @@ export function Topbar({
   title: string;
   subtitle: string;
 }) {
+  const t = useTranslations("topbar");
+
   return (
     <header className="topbar">
       <div className="topbar__title">
@@ -20,10 +24,10 @@ export function Topbar({
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
-          搜索工具
+          {t("searchTools")}
         </Link>
         <Link className="button-link button-link--accent" href="/tools/json-formatter">
-          打开示例
+          {t("openExample")}
         </Link>
       </div>
     </header>

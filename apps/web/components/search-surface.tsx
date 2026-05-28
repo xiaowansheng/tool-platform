@@ -1,6 +1,7 @@
 "use client";
 
 import { useDeferredValue, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { searchTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
@@ -9,11 +10,11 @@ import { ToolCard } from "./tool-card";
 export function SearchSurface({
   tools,
   initialQuery = "",
-  title = "搜索工具",
-  subtitle = "支持按工具名、分类、标签和描述检索。",
-  placeholder = "输入工具名、标签或分类，例如 json / 开发 / encoding",
-  emptyTitle = "没有命中当前查询",
-  emptyDescription = "尝试按标签或分类搜索，例如 `formatter`、`开发工具`、`encoding`。"
+  title,
+  subtitle,
+  placeholder,
+  emptyTitle,
+  emptyDescription
 }: {
   tools: ToolManifest[];
   initialQuery?: string;
@@ -23,6 +24,7 @@ export function SearchSurface({
   emptyTitle?: string;
   emptyDescription?: string;
 }) {
+  const t = useTranslations("search");
   const [query, setQuery] = useState(initialQuery);
   const deferredQuery = useDeferredValue(query);
   const filteredTools = searchTools(tools, deferredQuery);
@@ -31,25 +33,25 @@ export function SearchSurface({
     <section className="search-surface">
       <div className="section-header">
         <div>
-          <h2>{title}</h2>
-          <p>{subtitle}</p>
+          <h2>{title ?? t("title")}</h2>
+          <p>{subtitle ?? t("subtitle")}</p>
         </div>
         <span className="pill">{filteredTools.length} results</span>
       </div>
       <div className="search-row">
         <input
-          aria-label="搜索工具"
-          placeholder={placeholder}
+          aria-label={t("ariaLabel")}
+          placeholder={placeholder ?? t("placeholder")}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
         {query ? (
           <button type="button" onClick={() => setQuery("")}>
-            清空
+            {t("clear")}
           </button>
         ) : (
           <button type="button" disabled style={{ opacity: 0.4 }}>
-            清空
+            {t("clear")}
           </button>
         )}
       </div>
@@ -61,8 +63,8 @@ export function SearchSurface({
         </div>
       ) : (
         <div className="empty-state">
-          <strong>{emptyTitle}</strong>
-          <p>{emptyDescription}</p>
+          <strong>{emptyTitle ?? t("emptyTitle")}</strong>
+          <p>{emptyDescription ?? t("emptyDescription")}</p>
         </div>
       )}
     </section>

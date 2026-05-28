@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "title": "Tool Platform",
+    "description": "A plugin-based tool platform with Manifest, categories, search, and dynamic routing."
+  },
+  "layout": {
+    "sidebarDescription": "A browser workstation for plugin-based tools, focused on Phase One capabilities.",
+    "home": "Home",
+    "search": "Search",
+    "footerFocus": "Phase focus: platform skeleton, Manifest, dynamic routing, categories & search."
+  },
+  "topbar": {
+    "searchTools": "Search Tools",
+    "openExample": "Open Example"
+  },
+  "theme": {
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode"
+  },
+  "home": {
+    "subtitle": "Phase one skeleton of Browser Tool OS — get tool entries, categories, and search working first.",
+    "heroTitle": "Treat tools as plugins, not ordinary pages.",
+    "heroDescription": "The current implementation focuses on platform skeleton, Manifest auto-registration, dynamic tool routing, category system, search system, and `simple` tool examples. Worker / WASM / AI Runtime support will follow.",
+    "statTools": "Registered Tools",
+    "statCategories": "Categories",
+    "statFeatured": "Featured",
+    "quickTools": "Quick Access",
+    "quickToolsDescription": "The homepage prioritizes direct tool entries over marketing copy."
+  },
+  "categoryPanel": {
+    "title": "Categories",
+    "description": "Tools organized by recommended categories with room for future expansion."
+  },
+  "search": {
+    "title": "Search Tools",
+    "subtitle": "Search by tool name, category, tags, and description.",
+    "placeholder": "Enter tool name, tag, or category, e.g. json / frontend / api",
+    "emptyTitle": "No results found",
+    "emptyDescription": "Try searching by tag or category, e.g. `formatter`, `frontend`, `encoding`.",
+    "clear": "Clear",
+    "ariaLabel": "Search tools"
+  },
+  "searchPage": {
+    "subtitle": "Search is a core entry point — this page provides the full search experience."
+  },
+  "categoryPage": {
+    "filterTitle": "Filter {category}",
+    "subtitle": "Narrow the list by tool name, tags, runtime, or description within this category.",
+    "searchPlaceholder": "Search name, tags, or runtime in {category}",
+    "emptyFiltered": "No matches for current filter",
+    "emptyCategory": "No tools in this category yet",
+    "emptyFilteredDescription": "Try a different keyword, such as tool name, tag, or runtime type.",
+    "emptyCategoryDescription": "The category system is in place — tools will appear here as they are registered."
+  },
+  "toolPage": {
+    "subtitle": "Dynamic tool routing from the auto-generated Tool Registry.",
+    "workspaceLayout": "Workspace structure emphasizing input, processing, and output areas.",
+    "lifecycle": "Tools register first, then appear in categories, search, and dynamic tool pages.",
+    "runtimeWorker": "Heavy tools run off the main thread via runtime manager, Worker RPC, and OPFS storage."
+  },
+  "toolCard": {
+    "enterTool": "Open Tool",
+    "tagsLabel": "Tags: {tags}",
+    "moreTags": "{count} more tags"
+  },
+  "toolLoader": {
+    "loadError": "Tool component not registered or failed to load.",
+    "loading": "Loading tool component..."
+  },
+  "notFound": {
+    "title": "404 — Page Not Found",
+    "description": "Check if the slug exists, or go back to the homepage to see registered tools.",
+    "backHome": "Back to Home"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "zh": "中文",
+    "en": "English"
+  },
+  "categories": {
+    "encoding": {
+      "label": "Encoding",
+      "description": "Base64, URL, HTML entities, base conversion, hashing, and common text encoding."
+    },
+    "data-processing": {
+      "label": "Data Processing",
+      "description": "JSON, CSV, YAML, Parquet, Schema, data cleaning, generation, and structured preview."
+    },
+    "api-debugging": {
+      "label": "API Debugging",
+      "description": "HTTP request builder, OpenAPI, GraphQL, Webhook, auth tokens, and API docs."
+    },
+    "network": {
+      "label": "Network",
+      "description": "DNS, TLS, ports, CIDR, headers, HAR, CORS, cookies, and live connection diagnostics."
+    },
+    "linux-ops": {
+      "label": "Linux Ops",
+      "description": "Logs, permissions, cron jobs, environment config, and day-to-day troubleshooting."
+    },
+    "docker-k8s": {
+      "label": "Docker/K8s",
+      "description": "Validate Dockerfile, Compose, Kubernetes YAML, Helm Values, and container resources."
+    },
+    "security": {
+      "label": "Security",
+      "description": "Secret scanning, SAST, dependency & supply chain risks, CVSS, CSP, PII, and threat modeling."
+    },
+    "database": {
+      "label": "Database",
+      "description": "SQL formatting, query plan analysis, SQLite sandbox, and database schema tools."
+    },
+    "frontend": {
+      "label": "Frontend",
+      "description": "CSS layouts, responsive design, color accessibility, icon assets, Source Maps, and browser APIs."
+    },
+    "backend": {
+      "label": "Backend",
+      "description": "Config parsing, type generation, regex, dates, MIME, UUID, and server-side dev tools."
+    },
+    "git": {
+      "label": "Git",
+      "description": "Commit messages, gitignore, diffs, change risk, release notes, and code review workflow."
+    },
+    "cloud-native": {
+      "label": "Cloud Native",
+      "description": "Terraform, Prometheus, Grafana, OpenTelemetry, incident timelines, and observability."
+    },
+    "ai-development": {
+      "label": "AI Development",
+      "description": "LLM apps, prompt iteration, evaluation, RAG, agent logs, cost estimation, and AI safety."
+    },
+    "ocr-cv": {
+      "label": "OCR/CV",
+      "description": "Image metadata, compression, QR/barcodes, media capture, and visual input preprocessing."
+    },
+    "productivity": {
+      "label": "Productivity",
+      "description": "Calculator, unit conversion, batch text, notification preview, and daily workspace tools."
+    },
+    "documentation": {
+      "label": "Documentation",
+      "description": "Markdown, README, ADR, Mermaid, PDF, TOC anchors, privacy policy text, and doc quality."
+    }
+  }
+}

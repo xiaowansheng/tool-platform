@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type Theme = "dark" | "light";
 
@@ -13,6 +14,7 @@ function getPreferredTheme(): Theme {
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("dark");
+  const t = useTranslations("theme");
 
   useEffect(() => {
     setTheme(getPreferredTheme());
@@ -27,7 +29,7 @@ export function ThemeToggle() {
 
   return (
     <button type="button" className="theme-toggle" onClick={toggle}>
-      <span>{theme === "dark" ? "浅色模式" : "深色模式"}</span>
+      <span>{theme === "dark" ? t("lightMode") : t("darkMode")}</span>
       <span className="theme-toggle__icons">
         <svg
           className="theme-toggle__sun"

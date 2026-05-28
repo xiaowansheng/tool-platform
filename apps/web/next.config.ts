@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const repoRoot = path.resolve(fileURLToPath(new URL("../..", import.meta.url)));
 const toolsDir = path.join(repoRoot, "tools");
@@ -39,4 +40,5 @@ const nextConfig: NextConfig = {
   transpilePackages: getInternalPackages()
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+export default withNextIntl(nextConfig);

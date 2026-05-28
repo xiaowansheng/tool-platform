@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { ToolClientLoader } from "@/components/tool-client-loader";
 import { Topbar } from "@/components/topbar";
@@ -40,14 +41,21 @@ export default async function ToolPage({
 
   const category = getCategoryMeta(manifest.category);
 
+  return <ToolPageContent manifest={manifest} categoryLabel={category?.label ?? manifest.category} />;
+}
+
+function ToolPageContent({ manifest, categoryLabel }: { manifest: NonNullable<ReturnType<typeof getToolManifest>>; categoryLabel: string }) {
+  const t = useTranslations("toolPage");
+  const ct = useTranslations("categories");
+
   return (
     <>
-      <Topbar title={manifest.name} subtitle="动态工具路由来自自动生成的 Tool Registry。" />
+      <Topbar title={manifest.name} subtitle={t("subtitle")} />
       <div className="tool-page">
         <section className="tool-panel">
           <div className="tool-page__headline">
             <div>
-              <p className="eyebrow">{category?.label ?? manifest.category}</p>
+              <p className="eyebrow">{ct(`${manifest.category}.label`)}</p>
               <h2>{manifest.name}</h2>
               <p>{manifest.description}</p>
             </div>
@@ -86,17 +94,17 @@ export default async function ToolPage({
           <article>
             <p className="eyebrow">Workspace Layout</p>
             <h3>Input → Processing → Output</h3>
-            <p>遵循 UI 文档里强调的工作区结构，优先突出输入、处理与结果区。</p>
+            <p>{t("workspaceLayout")}</p>
           </article>
           <article>
             <p className="eyebrow">Lifecycle</p>
             <h3>Manifest → Registry → Route</h3>
-            <p>工具接入后会先注册，再进入分类、搜索和动态工具页面。</p>
+            <p>{t("lifecycle")}</p>
           </article>
           <article>
             <p className="eyebrow">Phase Two</p>
             <h3>Runtime → Worker → OPFS</h3>
-            <p>重工具开始通过 runtime manager、Worker RPC 和 OPFS 存储脱离主线程执行。</p>
+            <p>{t("runtimeWorker")}</p>
           </article>
         </section>
       </div>

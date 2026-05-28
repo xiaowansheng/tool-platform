@@ -1,11 +1,13 @@
 "use client";
 
 import { lazy, Suspense, useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 import { loadToolComponent } from "@tool-platform/tool-sdk/client";
 import type { ToolClientProps, ToolManifest } from "@tool-platform/tool-sdk";
 
 function MissingTool({ manifest }: ToolClientProps) {
+  const t = useTranslations("toolLoader");
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
@@ -13,13 +15,14 @@ function MissingTool({ manifest }: ToolClientProps) {
           <p className="eyebrow">Load Error</p>
           <h2>{manifest.name}</h2>
         </div>
-        <p>工具组件未注册或无法加载。</p>
+        <p>{t("loadError")}</p>
       </div>
     </section>
   );
 }
 
 function ToolLoadingPanel({ manifest }: { manifest: ToolManifest }) {
+  const t = useTranslations("toolLoader");
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
@@ -27,7 +30,7 @@ function ToolLoadingPanel({ manifest }: { manifest: ToolManifest }) {
           <p className="eyebrow">Loading</p>
           <h2>{manifest.name}</h2>
         </div>
-        <p>工具组件加载中。</p>
+        <p>{t("loading")}</p>
       </div>
     </section>
   );
