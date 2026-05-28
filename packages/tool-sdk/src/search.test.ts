@@ -30,6 +30,7 @@ test("searchTools matches by name, tag, and category metadata", () => {
   assert.equal(searchTools(tools, "json").length, 1);
   assert.equal(searchTools(tools, "编码").length, 1);
   assert.equal(searchTools(tools, "开发").length, 1);
+  assert.equal(searchTools(tools, "simple").length, 2);
 });
 
 test("groupToolsByCategory returns all documented categories in order", () => {

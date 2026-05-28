@@ -18,6 +18,7 @@ export function searchTools(tools: ToolManifest[], query: string) {
     const haystacks = [
       tool.name,
       tool.description,
+      tool.runtime,
       tool.category,
       category?.label ?? "",
       category?.description ?? "",

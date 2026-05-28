@@ -10,12 +10,18 @@ export function SearchSurface({
   tools,
   initialQuery = "",
   title = "搜索工具",
-  subtitle = "支持按工具名、分类、标签和描述检索。"
+  subtitle = "支持按工具名、分类、标签和描述检索。",
+  placeholder = "输入工具名、标签或分类，例如 json / 开发 / encoding",
+  emptyTitle = "没有命中当前查询",
+  emptyDescription = "尝试按标签或分类搜索，例如 `formatter`、`开发工具`、`encoding`。"
 }: {
   tools: ToolManifest[];
   initialQuery?: string;
   title?: string;
   subtitle?: string;
+  placeholder?: string;
+  emptyTitle?: string;
+  emptyDescription?: string;
 }) {
   const [query, setQuery] = useState(initialQuery);
   const deferredQuery = useDeferredValue(query);
@@ -33,7 +39,7 @@ export function SearchSurface({
       <div className="search-row">
         <input
           aria-label="搜索工具"
-          placeholder="输入工具名、标签或分类，例如 json / 开发 / encoding"
+          placeholder={placeholder}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
@@ -55,8 +61,8 @@ export function SearchSurface({
         </div>
       ) : (
         <div className="empty-state">
-          <strong>没有命中当前查询</strong>
-          <p>尝试按标签或分类搜索，例如 `formatter`、`开发工具`、`encoding`。</p>
+          <strong>{emptyTitle}</strong>
+          <p>{emptyDescription}</p>
         </div>
       )}
     </section>
