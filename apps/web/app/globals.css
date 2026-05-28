@@ -84,6 +84,9 @@
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
 
+  /* Mobile navigation */
+  --mobile-topbar-height: 3.55rem;
+
   /* Input — extended */
   --input-bg-disabled: rgba(6, 14, 22, 0.45);
   --input-border-disabled: rgba(134, 162, 196, 0.08);
@@ -1948,6 +1951,20 @@ button.button--danger:hover {
 
 .mobile-topbar {
   display: none;
+  min-height: var(--mobile-topbar-height);
+  transform: translateY(0);
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+  will-change: transform;
+}
+
+.mobile-topbar--hidden {
+  transform: translateY(calc(-100% - 1px));
+}
+
+.mobile-topbar--hidden:focus-within {
+  transform: translateY(0);
 }
 
 .hamburger {
@@ -2036,6 +2053,11 @@ button.button--danger:hover {
   }
 
   .mobile-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 80;
     display: flex;
     align-items: center;
     gap: 0.65rem;
@@ -2043,6 +2065,7 @@ button.button--danger:hover {
     border-bottom: 1px solid var(--border-subtle);
     background: var(--sidebar-bg);
     backdrop-filter: blur(20px) saturate(1.2);
+    box-shadow: var(--shadow-sm);
   }
 
   .sidebar--drawer {
@@ -2081,6 +2104,10 @@ button.button--danger:hover {
     grid-template-columns: 1fr;
   }
 
+  .main {
+    padding-top: calc(var(--mobile-topbar-height) + 1.5rem);
+  }
+
   .topbar {
     margin-bottom: 1rem;
     padding: 0.85rem 1rem;
@@ -2093,7 +2120,7 @@ button.button--danger:hover {
 
 @media (max-width: 720px) {
   .main {
-    padding: 0.85rem;
+    padding: calc(var(--mobile-topbar-height) + 0.85rem) 0.85rem 0.85rem;
   }
 
   .topbar,
@@ -2183,7 +2210,7 @@ button.button--danger:hover {
 
 @media (max-width: 480px) {
   .main {
-    padding: 0.6rem;
+    padding: calc(var(--mobile-topbar-height) + 0.6rem) 0.6rem 0.6rem;
   }
 
   .hero__stats {
@@ -2202,5 +2229,11 @@ button.button--danger:hover {
   .topbar {
     padding: 0.7rem 0.85rem;
     border-radius: var(--radius-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-topbar {
+    transition: none;
   }
 }
