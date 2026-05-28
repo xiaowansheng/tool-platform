@@ -7,7 +7,8 @@ import fg from "fast-glob";
 const rootDir = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
 const toolsDir = path.join(rootDir, "tools");
 const toolSdkDir = path.join(rootDir, "packages", "tool-sdk");
-const generatedRegistryPath = path.join(toolSdkDir, "src", "generated", "registry.ts");
+const generatedManifestsPath = path.join(toolSdkDir, "src", "generated", "manifests.ts");
+const generatedClientLoadersPath = path.join(toolSdkDir, "src", "generated", "client-loaders.ts");
 const toolSdkPackagePath = path.join(toolSdkDir, "package.json");
 const preservedToolSdkDependencies = new Set([
   "@tool-platform/tool-contracts"
@@ -33,12 +34,15 @@ async function loadToolPackages() {
       const toolDir = path.dirname(packageFile);
       const manifestPath = path.join(toolDir, "manifest.ts");
       const toolComponentPath = path.join(toolDir, "ToolClient.tsx");
+      const manifestExists = await fileExists(manifestPath);
+      const componentExists = await fileExists(toolComponentPath);
 
       return {
         directoryName: path.basename(toolDir),
         packageName: packageJson.name,
-        manifestExists: await fileExists(manifestPath),
-        componentExists: await fileExists(toolComponentPath)
+        manifestExists,
+        componentExists,
+        toolId: manifestExists ? await readManifestId(manifestPath, path.basename(toolDir)) : path.basename(toolDir)
       };
     })
   );
@@ -46,6 +50,13 @@ async function loadToolPackages() {
   return tools
     .filter((tool) => tool.manifestExists && tool.componentExists)
     .sort((left, right) => left.directoryName.localeCompare(right.directoryName));
+}
+
+async function readManifestId(manifestPath, fallback) {
+  const source = await fs.readFile(manifestPath, "utf8");
+  const match = source.match(/\bid:\s*["']([^"']+)["']/);
+
+  return match?.[1] ?? fallback;
 }
 
 async function fileExists(targetPath) {
@@ -57,29 +68,48 @@ async function fileExists(targetPath) {
   }
 }
 
-async function writeRegistry(tools) {
+async function writeManifests(tools) {
   const importLines = [];
-  const recordLines = [];
+  const manifestLines = [];
 
   for (const tool of tools) {
     const symbol = pascalCase(tool.directoryName);
-    importLines.push(`import ${symbol}Tool from "${tool.packageName}/tool";`);
     importLines.push(`import ${symbol}Manifest from "${tool.packageName}/manifest";`);
-    recordLines.push(
-      `  {\n    manifest: ${symbol}Manifest,\n    component: ${symbol}Tool\n  }`
-    );
+    manifestLines.push(`  ${symbol}Manifest`);
   }
 
   const source = `${importLines.join("\n")}
 
-import type { ToolRecord } from "../types";
+import type { ToolManifest } from "../types";
 
-export const toolRecords: ToolRecord[] = [
-${recordLines.join(",\n")}
+export const toolManifests: ToolManifest[] = [
+${manifestLines.join(",\n")}
 ];
 `;
 
-  await fs.writeFile(generatedRegistryPath, source, "utf8");
+  await fs.writeFile(generatedManifestsPath, source, "utf8");
+}
+
+async function writeClientLoaders(tools) {
+  const loaderLines = tools.map(
+    (tool) => `  ${JSON.stringify(tool.toolId)}: () => import("${tool.packageName}/tool")`
+  );
+  const source = `import type { ComponentType } from "react";
+
+import type { ToolClientProps } from "../types";
+
+export type ToolComponentModule = {
+  default: ComponentType<ToolClientProps>;
+};
+
+export type ToolComponentLoader = () => Promise<ToolComponentModule>;
+
+export const toolComponentLoaders = {
+${loaderLines.join(",\n")}
+} satisfies Record<string, ToolComponentLoader>;
+`;
+
+  await fs.writeFile(generatedClientLoadersPath, source, "utf8");
 }
 
 async function syncToolSdkDependencies(tools) {
@@ -103,7 +133,8 @@ async function syncToolSdkDependencies(tools) {
 async function main() {
   const tools = await loadToolPackages();
 
-  await writeRegistry(tools);
+  await writeManifests(tools);
+  await writeClientLoaders(tools);
   await syncToolSdkDependencies(tools);
 
   console.log(`generated ${tools.length} tool registrations`);
