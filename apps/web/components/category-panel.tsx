@@ -18,18 +18,17 @@ export function CategoryPanel() {
           <p>{t("description")}</p>
         </div>
       </div>
-      <div className="detail-grid">
+      <div className="category-grid">
         {categories.map((category) => {
           const count = tools.filter((tool) => tool.category === category.id).length;
 
           return (
-            <Link key={category.id} className="detail-card" href={`/categories/${category.id}`}>
-              <div className="detail-card__icon">
-                {category.icon ?? "·"}
-              </div>
+            <Link key={category.id} className="category-card" href={`/categories/${category.id}`}>
+              <span className="category-card__icon">{category.icon ?? "·"}</span>
               <h3>{ct(`${category.id}.label`)}</h3>
-              <p>{ct(`${category.id}.description`)}</p>
-              <span className="pill">{count} tools</span>
+              <p title={ct(`${category.id}.description`)}>{ct(`${category.id}.description`)}</p>
+              <span className="category-card__count">{count}</span>
+              <span className="category-card__tooltip">{ct(`${category.id}.description`)}</span>
             </Link>
           );
         })}
