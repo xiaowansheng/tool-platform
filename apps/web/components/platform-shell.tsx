@@ -11,6 +11,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 function SidebarContent({ tools }: { tools: ToolManifest[] }) {
   const t = useTranslations("layout");
+  const ct = useTranslations("categories");
 
   return (
     <>
@@ -47,7 +48,7 @@ function SidebarContent({ tools }: { tools: ToolManifest[] }) {
               <span style={{ width: 18, textAlign: "center", fontSize: "0.72rem", opacity: 0.6, flexShrink: 0 }}>
                 {category.icon ?? "·"}
               </span>
-              <span>{category.label}</span>
+              <span>{ct(`${category.id}.label`)}</span>
               <span className="sidebar__link-count">{count}</span>
             </Link>
           );
