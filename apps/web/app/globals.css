@@ -2112,6 +2112,31 @@ a.category-card:hover .category-card__tooltip {
   box-shadow: none;
 }
 
+.locale-switcher {
+  width: 100%;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.7rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.locale-switcher:hover,
+.locale-switcher:focus {
+  background: var(--sidebar-link-hover);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+.locale-switcher option {
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+
 .theme-toggle__icons {
   display: flex;
   align-items: center;
