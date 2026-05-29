@@ -46,7 +46,7 @@ export function ToolRuntimeCard({ manifest }: { manifest: ToolManifest }) {
   }
 
   return (
-    <section className="tool-panel">
+    <section className="tool-panel tool-panel--runtime">
       <div className="tool-panel__header">
         <div>
           <p className="eyebrow">Runtime Control</p>
@@ -56,23 +56,23 @@ export function ToolRuntimeCard({ manifest }: { manifest: ToolManifest }) {
           {manifest.runtime}
         </span>
       </div>
-      <div className="detail-grid">
-        <article className="detail-card">
-          <h3>Status</h3>
-          <p>
+      <dl className="detail-grid detail-grid--meta">
+        <div className="detail-card detail-card--meta">
+          <dt>Status</dt>
+          <dd>
             <span className={`status-dot ${statusClass(runtime.status)}`} />
             {runtime.status}
-          </p>
-        </article>
-        <article className="detail-card">
-          <h3>Memory Limit</h3>
-          <p>{manifest.memoryLimit ? `${manifest.memoryLimit} MB` : "not set"}</p>
-        </article>
-        <article className="detail-card">
-          <h3>Permissions</h3>
-          <p>{manifest.permissions?.join(" / ") ?? "none"}</p>
-        </article>
-      </div>
+          </dd>
+        </div>
+        <div className="detail-card detail-card--meta">
+          <dt>Memory Limit</dt>
+          <dd>{manifest.memoryLimit ? `${manifest.memoryLimit} MB` : "not set"}</dd>
+        </div>
+        <div className="detail-card detail-card--meta">
+          <dt>Permissions</dt>
+          <dd>{manifest.permissions?.join(" / ") ?? "none"}</dd>
+        </div>
+      </dl>
       <div className="tool-toolbar">
         <button type="button" onClick={() => void restartRuntime()}>
           Restart Runtime

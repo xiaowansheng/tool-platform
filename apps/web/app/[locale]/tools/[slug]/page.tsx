@@ -52,39 +52,43 @@ function ToolPageContent({ manifest, categoryLabel }: { manifest: NonNullable<Re
     <>
       <Topbar title={manifest.name} subtitle={t("subtitle")} />
       <div className="tool-page">
-        <section className="tool-panel">
+        <section className="tool-panel tool-panel--info">
           <div className="tool-page__headline">
-            <div>
+            <div className="tool-page__headline-text">
               <p className="eyebrow">{ct(`${manifest.category}.label`)}</p>
               <h2>{manifest.name}</h2>
-              <p>{manifest.description}</p>
+              <p className="tool-page__desc">{manifest.description}</p>
             </div>
             <span className="pill pill--runtime" data-runtime={manifest.runtime}>
               {manifest.runtime}
             </span>
           </div>
-          <div className="detail-grid">
-            <article className="detail-card">
-              <h3>Runtime</h3>
-              <p>{manifest.runtime}</p>
-            </article>
-            <article className="detail-card">
-              <h3>Tags</h3>
-              <p>{manifest.tags.join(" / ")}</p>
-            </article>
-            <article className="detail-card">
-              <h3>Manifest</h3>
-              <p>{manifest.id}</p>
-            </article>
-            <article className="detail-card">
-              <h3>Worker</h3>
-              <p>{manifest.worker ? "enabled" : "not required"}</p>
-            </article>
-            <article className="detail-card">
-              <h3>Permissions</h3>
-              <p>{manifest.permissions?.join(" / ") ?? "none"}</p>
-            </article>
-          </div>
+          <dl className="detail-grid detail-grid--meta">
+            <div className="detail-card detail-card--meta">
+              <dt>Runtime</dt>
+              <dd>{manifest.runtime}</dd>
+            </div>
+            <div className="detail-card detail-card--meta">
+              <dt>Tags</dt>
+              <dd>{manifest.tags.join(" / ")}</dd>
+            </div>
+            <div className="detail-card detail-card--meta">
+              <dt>Manifest</dt>
+              <dd className="detail-card__mono">{manifest.id}</dd>
+            </div>
+            <div className="detail-card detail-card--meta">
+              <dt>Worker</dt>
+              <dd>
+                <span className={`status-label ${manifest.worker ? "status-label--on" : "status-label--off"}`}>
+                  {manifest.worker ? "enabled" : "not required"}
+                </span>
+              </dd>
+            </div>
+            <div className="detail-card detail-card--meta">
+              <dt>Permissions</dt>
+              <dd>{manifest.permissions?.join(" / ") ?? "none"}</dd>
+            </div>
+          </dl>
         </section>
 
         <ToolClientLoader manifest={manifest} />
