@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { ToolUsageTracker } from "@/components/common-tools";
 import { ToolClientLoader } from "@/components/tool-client-loader";
 import { Topbar } from "@/components/topbar";
 import { ToolRuntimeCard } from "@/components/tool-runtime-card";
@@ -50,6 +51,7 @@ function ToolPageContent({ manifest, categoryLabel }: { manifest: NonNullable<Re
 
   return (
     <>
+      <ToolUsageTracker toolId={manifest.id} />
       <Topbar title={manifest.name} subtitle={t("subtitle")} />
       <div className="tool-page">
         <section className="tool-panel tool-panel--info">

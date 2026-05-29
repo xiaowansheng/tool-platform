@@ -705,6 +705,37 @@ textarea {
   margin-top: auto;
 }
 
+.common-tools__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.tool-card__usage {
+  margin-top: auto;
+  font-size: 0.76rem;
+  color: var(--text-tertiary);
+}
+
+.tool-card__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+}
+
+.tool-card__actions .button-link,
+.tool-card__actions button {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.category-card__icon svg {
+  flex-shrink: 0;
+}
+
+
 /* ==========================================================================
    Category Cards / Detail Cards
    ========================================================================== */
@@ -2717,6 +2748,10 @@ a.category-card:hover .category-card__tooltip {
   }
 
   .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card__actions {
     grid-template-columns: 1fr;
   }
 

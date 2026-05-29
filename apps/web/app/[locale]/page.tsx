@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { CategoryPanel } from "@/components/category-panel";
 import { ToolCard } from "@/components/tool-card";
 import { Topbar } from "@/components/topbar";
+import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
 import { categories, getAllTools, getFeaturedTools } from "@tool-platform/tool-sdk";
 
 export default function HomePage() {
@@ -24,7 +25,7 @@ export default function HomePage() {
               <span>{t("statTools")}</span>
             </article>
             <article className="stat-card">
-              <strong>{categories.length}</strong>
+              <strong>{categories.length + LOCAL_TOOL_CATEGORY_COUNT}</strong>
               <span>{t("statCategories")}</span>
             </article>
             <article className="stat-card">

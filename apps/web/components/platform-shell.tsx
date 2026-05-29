@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { categories, getAllTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
 import { Link } from "@/i18n/navigation";
+import { CommonToolsSidebarLink } from "./common-tools";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigation } from "./mobile-navigation";
 import { SiteFooter } from "./site-footer";
@@ -42,6 +43,7 @@ function SidebarContent({ tools }: { tools: ToolManifest[] }) {
       </nav>
 
       <div className="sidebar__section">
+        <CommonToolsSidebarLink />
         {categories.map((category) => {
           const count = tools.filter((tool) => tool.category === category.id).length;
           return (

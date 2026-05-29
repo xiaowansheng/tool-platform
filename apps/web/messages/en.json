@@ -67,6 +67,25 @@
     "emptyFilteredDescription": "Try a different keyword, such as tool name, tag, or runtime type.",
     "emptyCategoryDescription": "The category system is in place — tools will appear here as they are registered."
   },
+  "commonTools": {
+    "title": "Common Tools",
+    "description": "Tools used in this browser are saved locally and can be removed anytime.",
+    "categoryDescription": "Collects tools opened in this browser. The list stays local to this device.",
+    "filterTitle": "Filter Common Tools",
+    "filterDescription": "Filter locally saved common tools by name, category, tags, or runtime.",
+    "searchPlaceholder": "Search common tools by name, tag, or runtime",
+    "searchAriaLabel": "Search common tools",
+    "results": "{count} results",
+    "clear": "Clear Common",
+    "clearSearch": "Clear",
+    "emptyTitle": "No common tools yet",
+    "emptyDescription": "Open any tool and it will appear here automatically.",
+    "emptyFiltered": "No matches for current filter",
+    "emptyFilteredDescription": "Try another keyword, or open more tools first.",
+    "usageCount": "Used {count}x",
+    "remove": "Remove",
+    "removeAria": "Remove {name} from common tools"
+  },
   "toolPage": {
     "subtitle": "Dynamic tool routing from the auto-generated Tool Registry."
   },

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { categories, getAllTools, type ToolCategory } from "@tool-platform/tool-sdk";
 
 import { Link } from "@/i18n/navigation";
+import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
 
 const footerCategoryIds: ToolCategory[] = [
   "developer-tools",
@@ -67,7 +68,7 @@ export function SiteFooter() {
       </div>
 
       <div className="site-footer__bottom">
-        <span>{t("summary", { tools: tools.length, categories: categories.length })}</span>
+        <span>{t("summary", { tools: tools.length, categories: categories.length + LOCAL_TOOL_CATEGORY_COUNT })}</span>
         <span>{t("copyright", { year: new Date().getFullYear() })}</span>
       </div>
     </footer>

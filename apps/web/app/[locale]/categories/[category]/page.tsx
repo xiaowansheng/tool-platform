@@ -1,25 +1,33 @@
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { CommonToolsPage } from "@/components/common-tools";
 import { SearchSurface } from "@/components/search-surface";
 import { Topbar } from "@/components/topbar";
-import { getCategoryMeta, getToolsByCategory, getAllTools, type ToolCategory } from "@tool-platform/tool-sdk";
+import { COMMON_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
+import { categories, getToolsByCategory, getAllTools, type ToolCategory, type ToolManifest } from "@tool-platform/tool-sdk";
 
 export default async function CategoryPage({
   params
 }: {
-  params: Promise<{ category: ToolCategory }>;
+  params: Promise<{ category: string }>;
 }) {
   const { category } = await params;
-  const meta = getCategoryMeta(category);
+  const allTools = getAllTools();
+
+  if (category === COMMON_TOOLS_CATEGORY_ID) {
+    return <CommonToolsCategoryPage tools={allTools} />;
+  }
+
+  const meta = categories.find((item) => item.id === category);
 
   if (!meta) {
     notFound();
   }
 
-  const tools = getToolsByCategory(getAllTools(), category);
+  const tools = getToolsByCategory(allTools, meta.id);
 
-  return <CategoryPageContent category={category} tools={tools} />;
+  return <CategoryPageContent category={meta.id} tools={tools} />;
 }
 
 function CategoryPageContent({ category, tools }: { category: ToolCategory; tools: ReturnType<typeof getAllTools> }) {
@@ -43,6 +51,17 @@ function CategoryPageContent({ category, tools }: { category: ToolCategory; tool
           }
         />
       </div>
+    </>
+  );
+}
+
+function CommonToolsCategoryPage({ tools }: { tools: ToolManifest[] }) {
+  const t = useTranslations("commonTools");
+
+  return (
+    <>
+      <Topbar title={t("title")} subtitle={t("description")} />
+      <CommonToolsPage tools={tools} />
     </>
   );
 }

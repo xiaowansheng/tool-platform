@@ -67,6 +67,25 @@
     "emptyFilteredDescription": "换一个关键词试试，例如工具名称、标签或运行时类型。",
     "emptyCategoryDescription": "分类体系已经建立，后续工具接入后会自动进入当前目录和搜索索引。"
   },
+  "commonTools": {
+    "title": "常用工具",
+    "description": "当前浏览器里使用过的工具会保存在本地，可随时移除。",
+    "categoryDescription": "自动收集当前浏览器里打开过的工具，数据只保存在本地。",
+    "filterTitle": "筛选常用工具",
+    "filterDescription": "按名称、分类、标签或运行时过滤本地常用工具。",
+    "searchPlaceholder": "在常用工具中搜索名称、标签或运行时",
+    "searchAriaLabel": "搜索常用工具",
+    "results": "{count} 个结果",
+    "clear": "清空常用",
+    "clearSearch": "清空",
+    "emptyTitle": "还没有常用工具",
+    "emptyDescription": "打开任意工具后，它会自动出现在这里。",
+    "emptyFiltered": "没有命中当前筛选",
+    "emptyFilteredDescription": "换一个关键词，或先打开更多工具。",
+    "usageCount": "使用 {count} 次",
+    "remove": "移除",
+    "removeAria": "从常用工具中移除 {name}"
+  },
   "toolPage": {
     "subtitle": "动态工具路由来自自动生成的 Tool Registry。"
   },
