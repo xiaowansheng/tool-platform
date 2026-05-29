@@ -6,6 +6,7 @@ import { getMessages } from "next-intl/server";
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 
 import { PlatformShell } from "@/components/platform-shell";
+import { ThemeSync } from "@/components/theme-sync";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
@@ -59,6 +60,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body className={`${inter.variable} ${notoSansSc.variable} ${jetbrainsMono.variable}`}>
+        <ThemeSync />
         <NextIntlClientProvider messages={messages}>
           <PlatformShell>{children}</PlatformShell>
         </NextIntlClientProvider>
