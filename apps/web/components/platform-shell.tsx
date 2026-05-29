@@ -6,6 +6,7 @@ import { categories, getAllTools, type ToolManifest } from "@tool-platform/tool-
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigation } from "./mobile-navigation";
+import { SiteFooter } from "./site-footer";
 import { ThemeToggle } from "./theme-toggle";
 
 
@@ -77,7 +78,10 @@ export function PlatformShell({ children }: { children: ReactNode }) {
         <SidebarContent tools={tools} />
       </MobileNavigation>
 
-      <main className="main">{children}</main>
+      <main className="main">
+        <div className="main__content">{children}</div>
+        <SiteFooter />
+      </main>
     </div>
   );
 }

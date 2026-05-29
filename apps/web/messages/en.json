@@ -9,6 +9,21 @@
     "search": "Search",
     "footerFocus": "Phase focus: platform skeleton, Manifest, dynamic routing, categories & search."
   },
+  "siteFooter": {
+    "ariaLabel": "Site footer",
+    "description": "Tools registered by Manifest, organized by categories and search. Runs locally in the browser for development, data, security, text, and office workflows.",
+    "principles": "Platform principles",
+    "localFirst": "Local-first",
+    "manifestDriven": "Manifest-driven",
+    "workerReady": "Worker-ready",
+    "explore": "Explore",
+    "home": "Home",
+    "search": "Search",
+    "categories": "Categories",
+    "popularTools": "Popular Tools",
+    "summary": "{tools} tools · {categories} categories",
+    "copyright": "© {year} Tool Platform"
+  },
   "topbar": {
     "searchTools": "Search Tools",
     "openExample": "Open Example"
@@ -53,10 +68,7 @@
     "emptyCategoryDescription": "The category system is in place — tools will appear here as they are registered."
   },
   "toolPage": {
-    "subtitle": "Dynamic tool routing from the auto-generated Tool Registry.",
-    "workspaceLayout": "Workspace structure emphasizing input, processing, and output areas.",
-    "lifecycle": "Tools register first, then appear in categories, search, and dynamic tool pages.",
-    "runtimeWorker": "Heavy tools run off the main thread via runtime manager, Worker RPC, and OPFS storage."
+    "subtitle": "Dynamic tool routing from the auto-generated Tool Registry."
   },
   "toolCard": {
     "enterTool": "Open Tool",

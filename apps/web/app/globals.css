@@ -309,7 +309,7 @@ textarea {
 .detail-card,
 .search-surface,
 .tool-panel,
-.tool-docs article,
+.site-footer,
 .empty-state,
 .pill,
 .tag {
@@ -374,7 +374,6 @@ textarea {
 .empty-state p,
 .tool-panel__header p,
 .tool-meta,
-.tool-docs p,
 .tool-field span,
 .eyebrow {
   color: var(--text-secondary);
@@ -451,6 +450,14 @@ textarea {
 .main {
   padding: 1.5rem 1.75rem;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__content {
+  flex: 1 0 auto;
+  min-width: 0;
 }
 
 /* ==========================================================================
@@ -542,7 +549,6 @@ textarea {
 .hero__stats,
 .card-grid,
 .tool-results,
-.tool-docs,
 .tool-toolbar {
   display: grid;
   gap: 0.75rem;
@@ -556,7 +562,6 @@ textarea {
 .stat-card,
 .tool-card,
 .detail-card,
-.tool-docs article,
 .tool-panel,
 .search-surface,
 .empty-state {
@@ -608,7 +613,6 @@ textarea {
 .section-header h2,
 .tool-card h3,
 .detail-card h3,
-.tool-docs h3,
 .tool-panel__header h2 {
   margin: 0 0 0.15rem;
   font-weight: 600;
@@ -2022,14 +2026,6 @@ a.category-card:hover .category-card__tooltip {
   }
 }
 
-.tool-docs {
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-}
-
-.tool-docs h3 {
-  font-size: 0.95rem;
-}
-
 /* ==========================================================================
    Eyebrow / Section Label
    ========================================================================== */
@@ -2148,6 +2144,101 @@ a.category-card:hover .category-card__tooltip {
   width: 14px;
   height: 14px;
   transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+/* ==========================================================================
+   Site Footer
+   ========================================================================== */
+
+.site-footer {
+  flex-shrink: 0;
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.site-footer h3,
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.site-footer__brand {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 40rem;
+}
+
+.site-footer__brand .pill {
+  width: max-content;
+}
+
+.site-footer__brand p {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.site-footer__principles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.site-footer__nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.site-footer__group {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+}
+
+.site-footer__group h3 {
+  margin-bottom: 0.1rem;
+  color: var(--text-tertiary);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-footer__group a {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.site-footer__group a:hover {
+  color: var(--accent-primary);
+}
+
+.site-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-tertiary);
+  font-size: 0.74rem;
+  line-height: 1.5;
 }
 
 /* ==========================================================================
@@ -2383,10 +2474,6 @@ a.category-card:hover .category-card__tooltip {
     grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
   }
 
-  .tool-docs {
-    grid-template-columns: 1fr;
-  }
-
   .tool-table__row {
     grid-template-columns: minmax(6rem, 1fr) minmax(0, 1fr);
     gap: 0.5rem;
@@ -2415,6 +2502,43 @@ a.category-card:hover .category-card__tooltip {
     flex-direction: column;
     align-items: start;
   }
+
+  .site-footer__content {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer {
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.1rem;
+  }
+
+  .site-footer__content {
+    gap: 1rem;
+  }
+
+  .site-footer__brand {
+    gap: 0.45rem;
+  }
+
+  .site-footer__brand p {
+    font-size: 0.78rem;
+  }
+
+  .site-footer__nav {
+    gap: 1rem;
+  }
+
+  .site-footer__group {
+    gap: 0.3rem;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-top: 0.75rem;
+    font-size: 0.72rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2442,6 +2566,18 @@ a.category-card:hover .category-card__tooltip {
   .topbar {
     padding: 0.7rem 0.85rem;
     border-radius: var(--radius-lg);
+  }
+
+  .site-footer {
+    margin-top: 1rem;
+  }
+
+  .site-footer__nav {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__principles .tag {
+    max-width: 100%;
   }
 }
 

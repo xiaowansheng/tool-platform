@@ -9,6 +9,21 @@
     "search": "搜索",
     "footerFocus": "阶段聚焦：平台骨架、Manifest、动态路由、分类与搜索。"
   },
+  "siteFooter": {
+    "ariaLabel": "站点底部",
+    "description": "按 Manifest 注册工具，通过分类和搜索组织入口。优先在浏览器本地运行，覆盖开发、数据、安全、文本与办公场景。",
+    "principles": "平台原则",
+    "localFirst": "本地优先",
+    "manifestDriven": "Manifest 驱动",
+    "workerReady": "Worker 就绪",
+    "explore": "探索",
+    "home": "首页",
+    "search": "搜索",
+    "categories": "分类",
+    "popularTools": "常用工具",
+    "summary": "{tools} 个工具 · {categories} 个分类",
+    "copyright": "© {year} Tool Platform"
+  },
   "topbar": {
     "searchTools": "搜索工具",
     "openExample": "打开示例"
@@ -53,10 +68,7 @@
     "emptyCategoryDescription": "分类体系已经建立，后续工具接入后会自动进入当前目录和搜索索引。"
   },
   "toolPage": {
-    "subtitle": "动态工具路由来自自动生成的 Tool Registry。",
-    "workspaceLayout": "遵循 UI 文档里强调的工作区结构，优先突出输入、处理与结果区。",
-    "lifecycle": "工具接入后会先注册，再进入分类、搜索和动态工具页面。",
-    "runtimeWorker": "重工具开始通过 runtime manager、Worker RPC 和 OPFS 存储脱离主线程执行。"
+    "subtitle": "动态工具路由来自自动生成的 Tool Registry。"
   },
   "toolCard": {
     "enterTool": "进入工具",

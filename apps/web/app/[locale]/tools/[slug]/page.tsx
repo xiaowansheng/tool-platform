@@ -89,24 +89,6 @@ function ToolPageContent({ manifest, categoryLabel }: { manifest: NonNullable<Re
 
         <ToolClientLoader manifest={manifest} />
         <ToolRuntimeCard manifest={manifest} />
-
-        <section className="tool-docs">
-          <article>
-            <p className="eyebrow">Workspace Layout</p>
-            <h3>Input → Processing → Output</h3>
-            <p>{t("workspaceLayout")}</p>
-          </article>
-          <article>
-            <p className="eyebrow">Lifecycle</p>
-            <h3>Manifest → Registry → Route</h3>
-            <p>{t("lifecycle")}</p>
-          </article>
-          <article>
-            <p className="eyebrow">Phase Two</p>
-            <h3>Runtime → Worker → OPFS</h3>
-            <p>{t("runtimeWorker")}</p>
-          </article>
-        </section>
       </div>
     </>
   );
