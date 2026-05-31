@@ -25,20 +25,20 @@ interface GrafanaDashboard {
 
 const sampleDashboard = JSON.stringify({
   uid: "api-overview",
-  title: "API Overview",
+  title: "API 概览",
   schemaVersion: 39,
   tags: ["api", "sre"],
   panels: [
     {
       id: 1,
-      title: "Request rate",
+      title: "请求速率",
       type: "timeseries",
       datasource: { type: "prometheus", uid: "prometheus" },
       targets: [{ refId: "A", expr: "sum(rate(http_requests_total[5m]))" }]
     },
     {
       id: 2,
-      title: "P95 latency",
+      title: "P95 延迟",
       type: "timeseries",
       datasource: { type: "prometheus", uid: "prometheus" },
       targets: [{ refId: "A", expr: "histogram_quantile(0.95, sum by (le)(rate(http_request_duration_seconds_bucket[5m])))" }]
@@ -133,7 +133,7 @@ export default function GrafanaDashboardFormatterTool({ manifest }: ToolClientPr
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Grafana Utility</p>
+          <p className="eyebrow">Grafana 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -141,11 +141,11 @@ export default function GrafanaDashboardFormatterTool({ manifest }: ToolClientPr
       <div className="tool-toolbar">
         <button type="button" onClick={() => formatSource("pretty")}>格式化</button>
         <button type="button" onClick={() => formatSource("compact")}>压缩</button>
-        <button type="button" onClick={() => formatSource("inventory")}>Panel 清单</button>
+        <button type="button" onClick={() => formatSource("inventory")}>面板清单</button>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Dashboard JSON</span>
+          <span>仪表盘 JSON</span>
           <textarea value={source} onChange={(event) => setSource(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
@@ -155,19 +155,19 @@ export default function GrafanaDashboardFormatterTool({ manifest }: ToolClientPr
       </div>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Title</h3>
-          <p>{dashboard?.title ?? "invalid"}</p>
+          <h3>标题</h3>
+          <p>{dashboard?.title ?? "无效"}</p>
         </article>
         <article className="detail-card">
-          <h3>Panels</h3>
+          <h3>面板数</h3>
           <p>{panels.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Schema</h3>
-          <p>{dashboard?.schemaVersion ?? "missing"}</p>
+          <h3>Schema 版本</h3>
+          <p>{dashboard?.schemaVersion ?? "缺失"}</p>
         </article>
         <article className="detail-card">
-          <h3>Findings</h3>
+          <h3>问题数</h3>
           <p>{findings.length}</p>
         </article>
       </div>

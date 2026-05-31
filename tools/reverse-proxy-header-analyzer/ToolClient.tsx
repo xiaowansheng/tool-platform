@@ -102,7 +102,7 @@ export default function ReverseProxyHeaderAnalyzerTool({ manifest }: ToolClientP
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network</p>
+          <p className="eyebrow">网络工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -118,10 +118,10 @@ export default function ReverseProxyHeaderAnalyzerTool({ manifest }: ToolClientP
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Client IP</h3><p>{result.clientIp || "-"}</p></article>
-        <article className="detail-card"><h3>Proto</h3><p>{result.proto}</p></article>
-        <article className="detail-card"><h3>Host</h3><p>{result.host}</p></article>
-        <article className="detail-card"><h3>Risks</h3><p>{result.risks.length}</p></article>
+        <article className="detail-card"><h3>客户端 IP</h3><p>{result.clientIp || "-"}</p></article>
+        <article className="detail-card"><h3>协议</h3><p>{result.proto}</p></article>
+        <article className="detail-card"><h3>主机</h3><p>{result.host}</p></article>
+        <article className="detail-card"><h3>风险数</h3><p>{result.risks.length}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">
@@ -134,7 +134,7 @@ export default function ReverseProxyHeaderAnalyzerTool({ manifest }: ToolClientP
         </label>
         <div className="workspace workspace--stack">
           <div className="tool-table">
-            <div className="tool-table__row tool-table__row--head"><span>Hop</span><span>Address</span></div>
+            <div className="tool-table__row tool-table__row--head"><span>跳数</span><span>地址</span></div>
             {result.chain.map((ip, index) => (
               <div className="tool-table__row" key={`${ip}-${index}`}>
                 <span>{index + 1}</span>
@@ -144,7 +144,7 @@ export default function ReverseProxyHeaderAnalyzerTool({ manifest }: ToolClientP
           </div>
           {result.risks.map((risk) => <p className="tool-error" key={risk}>{risk}</p>)}
           <label className="tool-field">
-            <span>JSON report</span>
+            <span>JSON 报告</span>
             <textarea value={report} readOnly spellCheck={false} />
           </label>
         </div>

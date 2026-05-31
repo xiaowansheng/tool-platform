@@ -5,8 +5,8 @@ import { useState } from "react";
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 const ports = [
-  { port: 20, service: "FTP Data", protocol: "TCP" },
-  { port: 21, service: "FTP Control", protocol: "TCP" },
+  { port: 20, service: "FTP 数据", protocol: "TCP" },
+  { port: 21, service: "FTP 控制", protocol: "TCP" },
   { port: 22, service: "SSH", protocol: "TCP" },
   { port: 25, service: "SMTP", protocol: "TCP" },
   { port: 53, service: "DNS", protocol: "TCP/UDP" },
@@ -17,8 +17,8 @@ const ports = [
   { port: 443, service: "HTTPS", protocol: "TCP" },
   { port: 5432, service: "PostgreSQL", protocol: "TCP" },
   { port: 6379, service: "Redis", protocol: "TCP" },
-  { port: 8000, service: "Dev server", protocol: "TCP" },
-  { port: 8080, service: "HTTP alternate", protocol: "TCP" },
+  { port: 8000, service: "开发服务器", protocol: "TCP" },
+  { port: 8080, service: "HTTP 备用端口", protocol: "TCP" },
   { port: 27017, service: "MongoDB", protocol: "TCP" }
 ];
 
@@ -35,7 +35,7 @@ export default function PortReferenceTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network Reference</p>
+          <p className="eyebrow">网络速查</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

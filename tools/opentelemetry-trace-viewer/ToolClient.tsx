@@ -178,7 +178,7 @@ export default function OpenTelemetryTraceViewerTool({ manifest }: ToolClientPro
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Tracing Utility</p>
+          <p className="eyebrow">链路追踪工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -189,23 +189,23 @@ export default function OpenTelemetryTraceViewerTool({ manifest }: ToolClientPro
       </label>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Spans</h3>
+          <h3>Span 数</h3>
           <p>{spans.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Services</h3>
+          <h3>服务数</h3>
           <p>{new Set(spans.map((span) => span.serviceName)).size}</p>
         </article>
         <article className="detail-card">
-          <h3>Trace Duration</h3>
+          <h3>Trace 耗时</h3>
           <p>{formatMs(totalDuration)}</p>
         </article>
         <article className="detail-card">
-          <h3>Slowest Span</h3>
-          <p>{slowest ? `${slowest.name} ${formatMs(duration(slowest))}` : "none"}</p>
+          <h3>最慢 Span</h3>
+          <p>{slowest ? `${slowest.name} ${formatMs(duration(slowest))}` : "无"}</p>
         </article>
       </div>
-      <article className="diff-view" aria-label="Trace timeline">
+      <article className="diff-view" aria-label="Trace 时间线">
         {rows.map((row) => (
           <div key={row.spanId} className="diff-line diff-line--equal">
             <span>{row.depth}</span>
@@ -217,7 +217,7 @@ export default function OpenTelemetryTraceViewerTool({ manifest }: ToolClientPro
         <h3>服务耗时</h3>
         <ul className="compact-list">
           {serviceStats(spans).map(([service, stat]) => (
-            <li key={service}>{service}: {stat.count} spans, {formatMs(stat.totalMs)}</li>
+            <li key={service}>{service}: {stat.count} 个 span， {formatMs(stat.totalMs)}</li>
           ))}
         </ul>
       </article>

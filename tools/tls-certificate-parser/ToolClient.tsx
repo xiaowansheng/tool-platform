@@ -83,15 +83,15 @@ export default function TlsCertificateParserTool({ manifest }: ToolClientProps) 
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">TLS Utility</p>
+          <p className="eyebrow">TLS 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar"><button type="button" onClick={() => void parseCertificate()}>解析证书</button></div>
       <div className="workspace workspace--two-column">
-        <label className="tool-field"><span>Certificate PEM</span><textarea value={pem} onChange={(event) => setPem(event.target.value)} spellCheck={false} /></label>
-        <label className="tool-field"><span>Report</span><textarea value={report} readOnly spellCheck={false} /></label>
+        <label className="tool-field"><span>证书 PEM</span><textarea value={pem} onChange={(event) => setPem(event.target.value)} spellCheck={false} /></label>
+        <label className="tool-field"><span>报告</span><textarea value={report} readOnly spellCheck={false} /></label>
       </div>
       <p className="tool-note">轻量 ASN.1 扫描用于本地检查摘要和可读字段；完整 X.509 语义解析后续可接入专用解析器。</p>
     </section>

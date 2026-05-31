@@ -133,7 +133,7 @@ export default function HarViewerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network Trace</p>
+          <p className="eyebrow">网络请求追踪</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -183,17 +183,17 @@ export default function HarViewerTool({ manifest }: ToolClientProps) {
       </div>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "5rem minmax(14rem, 1fr) 5rem 6rem 7rem" }}>
-          <span>Method</span>
+          <span>方法</span>
           <span>URL</span>
-          <span>Status</span>
-          <span>Time</span>
-          <span>Size</span>
+          <span>状态</span>
+          <span>耗时</span>
+          <span>体积</span>
         </div>
         {data.slowest.map((entry, index) => (
           <div key={`${entry.request?.url}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "5rem minmax(14rem, 1fr) 5rem 6rem 7rem" }}>
             <span>{entry.request?.method ?? "GET"}</span>
             <span>{entry.request?.url ?? ""}</span>
-            <span>{entry.response?.status ?? "n/a"}</span>
+            <span>{entry.response?.status ?? "无"}</span>
             <span>{(entry.time ?? 0).toFixed(0)} ms</span>
             <span>{formatBytes(Math.max(0, entry.response?.content?.size ?? 0))}</span>
           </div>

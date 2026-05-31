@@ -162,7 +162,7 @@ export default function DnsInspectorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">DNS Debugging</p>
+          <p className="eyebrow">DNS 调试</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -180,7 +180,7 @@ export default function DnsInspectorTool({ manifest }: ToolClientProps) {
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>DoH Provider</span>
+          <span>DoH 提供方</span>
           <select value={provider} onChange={(event) => setProvider(event.target.value as Provider)}>
             <option value="cloudflare">Cloudflare</option>
             <option value="google">Google</option>
@@ -200,17 +200,17 @@ export default function DnsInspectorTool({ manifest }: ToolClientProps) {
         </article>
         <article className="detail-card">
           <h3>状态</h3>
-          <p>{statuses || "n/a"}</p>
+          <p>{statuses || "无"}</p>
         </article>
       </div>
 
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "5rem minmax(10rem, 1fr) 5rem 5rem minmax(12rem, 1.3fr)" }}>
           <span>查询</span>
-          <span>Name</span>
-          <span>Type</span>
+          <span>名称</span>
+          <span>类型</span>
           <span>TTL</span>
-          <span>Data</span>
+          <span>数据</span>
         </div>
         {records.length > 0 ? records.map((record, index) => (
           <div key={`${record.queryType}-${record.name}-${record.type}-${record.data}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "5rem minmax(10rem, 1fr) 5rem 5rem minmax(12rem, 1.3fr)" }}>
@@ -228,7 +228,7 @@ export default function DnsInspectorTool({ manifest }: ToolClientProps) {
       </div>
 
       {results.some((result) => result.flags.length > 0) ? (
-        <p className="tool-note">响应 Flags：{results.map((result) => `${result.type}=${result.flags.join(",") || "none"}`).join(" / ")}</p>
+        <p className="tool-note">响应 Flags：{results.map((result) => `${result.type}=${result.flags.join(",") || "无"}`).join(" / ")}</p>
       ) : null}
       {error ? <p className="tool-error">{error}</p> : null}
     </section>

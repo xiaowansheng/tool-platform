@@ -92,14 +92,14 @@ export default function AccessLogParserTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Access Logs</p>
+          <p className="eyebrow">访问日志</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar">
         <label className="tool-field tool-field--compact">
-          <span>导入 access log</span>
+          <span>导入访问日志</span>
           <input type="file" accept=".log,.txt" onChange={(event) => void loadFile(event)} />
         </label>
         <button type="button" onClick={() => void copyJson()}>
@@ -107,7 +107,7 @@ export default function AccessLogParserTool({ manifest }: ToolClientProps) {
         </button>
       </div>
       <label className="tool-field">
-        <span>Access log</span>
+        <span>访问日志</span>
         <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
       </label>
       <div className="detail-grid">
@@ -143,7 +143,7 @@ export default function AccessLogParserTool({ manifest }: ToolClientProps) {
         </div>
         <div className="tool-table">
           <div className="tool-table__row tool-table__row--head">
-            <span>Method</span>
+            <span>方法</span>
             <span>次数</span>
           </div>
           {methodCounts.map(([method, count]) => (
@@ -156,7 +156,7 @@ export default function AccessLogParserTool({ manifest }: ToolClientProps) {
       </div>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Top path</span>
+          <span>热门路径</span>
           <span>次数</span>
         </div>
         {topPaths.map(([path, count]) => (
@@ -169,10 +169,10 @@ export default function AccessLogParserTool({ manifest }: ToolClientProps) {
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "7rem 5rem minmax(12rem, 1fr) 5rem 6rem" }}>
           <span>IP</span>
-          <span>Method</span>
-          <span>Path</span>
-          <span>Status</span>
-          <span>Bytes</span>
+          <span>方法</span>
+          <span>路径</span>
+          <span>状态</span>
+          <span>字节数</span>
         </div>
         {parsed.entries.slice(0, 12).map((entry, index) => (
           <div key={`${entry.ip}-${entry.path}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "7rem 5rem minmax(12rem, 1fr) 5rem 6rem" }}>

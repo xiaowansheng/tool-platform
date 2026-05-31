@@ -581,6 +581,116 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为 T 恤的颜色和尺码组合生成 SKU。", "导出 CSV 映射表交给运营或库存系统导入。"]
   },
+  "log-file-analyzer": {
+    name: "日志文件分析器",
+    description: "分析日志级别、状态码、高频词和错误样本，适合快速定位异常。",
+    intro: "粘贴或导入 .log/.txt 日志后，工具会按行统计 ERROR、WARN、INFO、DEBUG、状态码和高频词，并提取错误样本。",
+    steps: [
+      "粘贴日志内容，或导入本地日志文件。",
+      "查看级别分布、状态码统计、高频词和错误样本。",
+      "复制 JSON 报告，带到排障记录或工单中继续分析。"
+    ],
+    examples: ["从服务日志里提取 5xx 错误样本。", "比较部署前后 WARN/ERROR 数量变化。"]
+  },
+  "har-viewer": {
+    name: "HAR 请求查看器",
+    description: "解析 HAR 文件，汇总请求数、耗时、体积、域名和最慢请求。",
+    intro: "把浏览器 DevTools 导出的 HAR JSON 粘贴或导入，快速查看网络请求概况和慢请求清单。",
+    steps: [
+      "导入 .har 文件或粘贴 HAR JSON。",
+      "查看请求数、总耗时、传输体积和域名分布。",
+      "重点检查最慢请求、异常状态码和大体积资源。"
+    ],
+    examples: ["排查页面首屏加载慢的关键请求。", "比较 API、CDN 和第三方域名的请求占比。"]
+  },
+  "access-log-parser": {
+    name: "访问日志解析器",
+    description: "解析 Nginx/Apache combined access log，统计状态码、方法、路径和传输量。",
+    intro: "粘贴访问日志后，工具会结构化提取 IP、方法、路径、状态码、字节数和 User-Agent，适合快速检查流量异常。",
+    steps: [
+      "粘贴 combined access log，或导入 .log/.txt 文件。",
+      "查看请求数、解析失败数、5xx 数量和传输量。",
+      "按状态码、方法和热门路径定位异常流量。"
+    ],
+    examples: ["找出 5xx 请求对应的热门路径。", "检查静态资源 304 与接口 2xx 的比例。"]
+  },
+  "opentelemetry-trace-viewer": {
+    name: "OpenTelemetry Trace 查看器",
+    description: "解析 OTLP 或扁平 Span JSON，展示 Trace 时间线、服务耗时和最慢 Span。",
+    intro: "粘贴 trace/span JSON 后，工具会按 parentSpanId 生成调用树，并汇总每个服务的耗时。",
+    steps: [
+      "粘贴 OTLP resourceSpans 或扁平 Span 数组。",
+      "查看 Span 数、服务数、Trace 总耗时和最慢 Span。",
+      "沿时间线定位慢服务、慢数据库调用或外部依赖。"
+    ],
+    examples: ["分析一次 checkout 请求中 payments 服务耗时。", "检查 trace 是否缺少 parentSpanId 或 service.name。"]
+  },
+  "prometheus-query-helper": {
+    name: "Prometheus 查询助手",
+    description: "按常见监控场景生成 PromQL，并提示高基数和低效查询风险。",
+    intro: "选择速率、求和、平均、P95、错误率、K8s CPU 或内存场景，输入指标、窗口和标签后生成 PromQL。",
+    steps: [
+      "选择查询场景并填写指标名、时间窗口和标签过滤。",
+      "按需设置分组标签，生成 PromQL 和告警规则。",
+      "查看查询提示，避免高成本正则、过短 rate 窗口和过多 group by 标签。"
+    ],
+    examples: ["生成 HTTP 5xx 错误率 PromQL。", "为 Kubernetes Pod CPU 使用率生成按 namespace/pod 分组的查询。"]
+  },
+  "grafana-dashboard-formatter": {
+    name: "Grafana 仪表盘格式化工具",
+    description: "格式化、压缩 Grafana Dashboard JSON，并生成面板清单和导入检查。",
+    intro: "粘贴 Grafana Dashboard JSON 后，可以美化、压缩或导出面板 inventory，并检查 uid、schemaVersion、datasource、targets 等常见导入问题。",
+    steps: [
+      "粘贴 Dashboard JSON。",
+      "选择格式化、压缩或面板清单输出。",
+      "查看标题、面板数、Schema 版本和导入检查结果。"
+    ],
+    examples: ["提交仪表盘前格式化 JSON。", "导出所有面板标题、类型和 PromQL targets。"]
+  },
+  "reverse-proxy-header-analyzer": {
+    name: "反向代理 Header 分析器",
+    description: "解析 X-Forwarded-For、Forwarded、Via 等头，推导客户端 IP 和代理链风险。",
+    intro: "粘贴经过网关、负载均衡和反向代理后的请求头，按信任代理跳数推导客户端地址并提示常见信任边界问题。",
+    steps: [
+      "粘贴原始请求 Header。",
+      "设置可信代理跳数，查看客户端 IP、协议、主机和 hop 链。",
+      "根据风险提示修正代理清洗、TLS termination 和限流配置。"
+    ],
+    examples: ["排查 X-Forwarded-For 链路长度和可信代理配置。", "确认应用是否错误信任外部传入的转发头。"]
+  },
+  "tls-certificate-parser": {
+    name: "TLS 证书解析器",
+    description: "解析 PEM 证书的字节数、SHA-256 指纹和可读字段，适合本地快速检查。",
+    intro: "粘贴 PEM 证书后，工具会在浏览器本地计算 SHA-256 指纹，并扫描证书中的可读字段。",
+    steps: [
+      "粘贴完整 PEM 证书。",
+      "点击解析证书，查看字节数、指纹和可读字段。",
+      "将指纹与服务器、监控或证书管理系统中的记录比对。"
+    ],
+    examples: ["确认线上证书 SHA-256 指纹是否符合预期。", "快速查看证书中出现的域名和组织字段。"]
+  },
+  "dns-inspector": {
+    name: "DNS 记录检查器",
+    description: "通过 DoH 查询 A、AAAA、CNAME、MX、TXT、NS、SOA、CAA 等 DNS 记录。",
+    intro: "输入域名并选择记录类型后，工具会调用 Cloudflare 或 Google DoH 接口返回 DNS 状态、记录和响应 flags。",
+    steps: [
+      "输入域名，也可以粘贴完整 URL 自动提取 hostname。",
+      "选择记录类型和 DoH 提供方。",
+      "查看状态、记录、TTL、Authority 和响应 flags。"
+    ],
+    examples: ["检查域名 A/AAAA 是否解析到新地址。", "排查 TXT、MX 或 CAA 记录配置是否生效。"]
+  },
+  "port-reference": {
+    name: "端口服务速查",
+    description: "按端口号、服务名或协议快速查询常见网络端口用途。",
+    intro: "输入端口号、协议或服务关键词，快速筛选常见 TCP/UDP 端口，适合排障、防火墙规则和文档编写。",
+    steps: [
+      "输入端口号、服务名或协议关键词。",
+      "查看匹配端口的协议和常见服务用途。",
+      "结合实际进程、云安全组或防火墙配置复核开放端口。"
+    ],
+    examples: ["确认 5432 通常用于 PostgreSQL。", "排查 8080 是否是备用 HTTP 或开发服务端口。"]
+  },
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {

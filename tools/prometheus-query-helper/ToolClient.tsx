@@ -4,16 +4,16 @@ import { useMemo, useState } from "react";
 
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
-type QueryMode = "rate" | "sum" | "avg" | "p95" | "errorRate" | "cpu" | "memory";
+type QueryMode = "rate" | "sum" | "avg" | "p95" | "error速率" | "cpu" | "memory";
 
 const modes: Array<{ value: QueryMode; label: string }> = [
-  { value: "rate", label: "Rate" },
-  { value: "sum", label: "Sum by" },
-  { value: "avg", label: "Avg by" },
-  { value: "p95", label: "Histogram P95" },
-  { value: "errorRate", label: "HTTP 5xx ratio" },
+  { value: "rate", label: "速率" },
+  { value: "sum", label: "按标签求和" },
+  { value: "avg", label: "按标签平均" },
+  { value: "p95", label: "直方图 P95" },
+  { value: "error速率", label: "HTTP 5xx 比例" },
   { value: "cpu", label: "K8s CPU" },
-  { value: "memory", label: "K8s memory" }
+  { value: "memory", label: "K8s 内存" }
 ];
 
 function selector(metric: string, labels: string) {
@@ -44,7 +44,7 @@ function buildQuery(mode: QueryMode, metric: string, window: string, labels: str
 
     return `histogram_quantile(0.95, sum by (${histogramGroup})(rate(${selector(bucketMetric, labels)}[${window}])))`;
   }
-  if (mode === "errorRate") {
+  if (mode === "error速率") {
     const errorSelector = selector("http_requests_total", withLabelFilter('status=~"5.."', labels));
     const totalSelector = selector("http_requests_total", labels);
 
@@ -92,7 +92,7 @@ function alertRule(query: string) {
         labels:
           severity: warning
         annotations:
-          summary: Generated alert expression`;
+          summary: 生成的告警表达式`;
 }
 
 export default function PrometheusQueryHelperTool({ manifest }: ToolClientProps) {
@@ -112,7 +112,7 @@ export default function PrometheusQueryHelperTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Observability Utility</p>
+          <p className="eyebrow">可观测性工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -125,7 +125,7 @@ export default function PrometheusQueryHelperTool({ manifest }: ToolClientProps)
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Metric</span>
+          <span>指标</span>
           <input value={metric} onChange={(event) => setMetric(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
@@ -133,7 +133,7 @@ export default function PrometheusQueryHelperTool({ manifest }: ToolClientProps)
           <input value={window} onChange={(event) => setWindow(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Group by</span>
+          <span>分组标签</span>
           <input value={groupBy} onChange={(event) => setGroupBy(event.target.value)} />
         </label>
       </div>
@@ -150,7 +150,7 @@ export default function PrometheusQueryHelperTool({ manifest }: ToolClientProps)
           <textarea value={query} readOnly spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Alert rule</span>
+          <span>告警规则</span>
           <textarea value={alertRule(query)} readOnly spellCheck={false} />
         </label>
       </div>

@@ -130,7 +130,7 @@ export default function LogFileAnalyzerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Log Analysis</p>
+          <p className="eyebrow">日志分析</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
