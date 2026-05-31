@@ -206,7 +206,7 @@ export default function SystemdUnitAnalyzerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Linux Ops</p>
+          <p className="eyebrow">Linux 运维</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -219,26 +219,26 @@ export default function SystemdUnitAnalyzerTool({ manifest }: ToolClientProps) {
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>OK</h3>
+          <h3>通过</h3>
           <p>{analysis.summary.ok}</p>
         </article>
         <article className="detail-card">
-          <h3>Warn</h3>
+          <h3>警告</h3>
           <p>{analysis.summary.warn}</p>
         </article>
         <article className="detail-card">
-          <h3>Risk</h3>
+          <h3>风险</h3>
           <p>{analysis.summary.risk}</p>
         </article>
         <article className="detail-card">
-          <h3>Sections</h3>
+          <h3>段落</h3>
           <p>{analysis.sections.size}</p>
         </article>
       </div>
 
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Unit file</span>
+          <span>Unit 文件</span>
           <textarea value={input} onChange={(event) => {
             setInput(event.target.value);
             setCopied(false);

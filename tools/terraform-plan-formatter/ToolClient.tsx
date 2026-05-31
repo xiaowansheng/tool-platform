@@ -111,7 +111,7 @@ export default function TerraformPlanFormatterTool({ manifest }: ToolClientProps
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">IaC Utility</p>
+          <p className="eyebrow">IaC 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -121,11 +121,11 @@ export default function TerraformPlanFormatterTool({ manifest }: ToolClientProps
           <span>过滤操作</span>
           <select value={filter} onChange={(event) => setFilter(event.target.value as Filter)}>
             <option value="all">全部</option>
-            <option value="create">Create</option>
-            <option value="update">Update</option>
-            <option value="delete">Delete</option>
-            <option value="replace">Replace</option>
-            <option value="read">Read</option>
+            <option value="create">创建</option>
+            <option value="update">更新</option>
+            <option value="delete">删除</option>
+            <option value="replace">替换</option>
+            <option value="read">读取</option>
           </select>
         </label>
       </div>
@@ -135,19 +135,19 @@ export default function TerraformPlanFormatterTool({ manifest }: ToolClientProps
       </label>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Create</h3>
+          <h3>创建</h3>
           <p>{summary.create}</p>
         </article>
         <article className="detail-card">
-          <h3>Update</h3>
+          <h3>更新</h3>
           <p>{summary.update}</p>
         </article>
         <article className="detail-card">
-          <h3>Delete</h3>
+          <h3>删除</h3>
           <p>{summary.delete}</p>
         </article>
         <article className="detail-card">
-          <h3>Replace</h3>
+          <h3>替换</h3>
           <p>{summary.replace}</p>
         </article>
       </div>

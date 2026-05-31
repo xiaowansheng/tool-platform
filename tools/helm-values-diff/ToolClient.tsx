@@ -151,36 +151,36 @@ export default function HelmValuesDiffTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Helm Utility</p>
+          <p className="eyebrow">Helm 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Base values.yaml</span>
+          <span>基准 values.yaml</span>
           <textarea value={left} onChange={(event) => setLeft(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Overlay values.yaml</span>
+          <span>覆盖 values.yaml</span>
           <textarea value={right} onChange={(event) => setRight(event.target.value)} spellCheck={false} />
         </label>
       </div>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Changed</h3>
+          <h3>变更</h3>
           <p>{summary.changed}</p>
         </article>
         <article className="detail-card">
-          <h3>Added</h3>
+          <h3>新增</h3>
           <p>{summary.added}</p>
         </article>
         <article className="detail-card">
-          <h3>Removed</h3>
+          <h3>移除</h3>
           <p>{summary.removed}</p>
         </article>
         <article className="detail-card">
-          <h3>Risk Signals</h3>
+          <h3>风险信号</h3>
           <p>{risks.length}</p>
         </article>
       </div>
