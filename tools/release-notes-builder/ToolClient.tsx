@@ -74,57 +74,57 @@ export default function ReleaseNotesBuilderTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Release Utility</p>
+          <p className="eyebrow">发布工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Version</span>
+          <span>版本</span>
           <input value={version} onChange={(event) => setVersion(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Date</span>
+          <span>日期</span>
           <input value={date} onChange={(event) => setDate(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Audience</span>
+          <span>受众</span>
           <select value={audience} onChange={(event) => setAudience(event.target.value)}>
             {audiences.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
         </label>
-        <button type="button" onClick={() => void copyNotes()}>{copied ? "已复制" : "复制 Release Notes"}</button>
+        <button type="button" onClick={() => void copyNotes()}>{copied ? "已复制" : "复制发布说明"}</button>
       </div>
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Summary</span>
+            <span>概要</span>
             <textarea value={summary} onChange={(event) => {
               setSummary(event.target.value);
               setCopied(false);
             }} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Highlights</span>
+            <span>亮点</span>
             <textarea value={highlights} onChange={(event) => setHighlights(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Fixes</span>
+            <span>修复</span>
             <textarea value={fixes} onChange={(event) => setFixes(event.target.value)} spellCheck={false} />
           </label>
         </div>
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Breaking Changes</span>
+            <span>破坏性变更</span>
             <textarea value={breakingChanges} onChange={(event) => setBreakingChanges(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Upgrade Notes</span>
+            <span>升级说明</span>
             <textarea value={migration} onChange={(event) => setMigration(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Contributors / Links</span>
+            <span>贡献者 / 链接</span>
             <textarea value={`${contributors}\n\n${links}`} onChange={(event) => {
               const [nextContributors = "", ...nextLinks] = event.target.value.split(/\n\s*\n/);
               setContributors(nextContributors);
@@ -134,7 +134,7 @@ export default function ReleaseNotesBuilderTool({ manifest }: ToolClientProps) {
         </div>
       </div>
       <label className="tool-field">
-        <span>Release notes</span>
+        <span>发布说明</span>
         <textarea value={notes} readOnly spellCheck={false} />
       </label>
     </section>

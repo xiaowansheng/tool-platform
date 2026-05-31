@@ -7,10 +7,10 @@ import type { ToolClientProps } from "@tool-platform/tool-contracts";
 type CookieCategory = "necessary" | "analytics" | "personalization" | "marketing";
 
 const cookieLabels: Record<CookieCategory, string> = {
-  necessary: "Necessary",
-  analytics: "Analytics",
-  personalization: "Personalization",
-  marketing: "Marketing"
+  necessary: "必要",
+  analytics: "分析",
+  personalization: "个性化",
+  marketing: "营销"
 };
 
 const initialCookies: Record<CookieCategory, boolean> = {
@@ -40,7 +40,7 @@ function buildCopy(input: {
   cookies: Record<CookieCategory, boolean>;
 }) {
   const enabledCookies = (Object.keys(input.cookies) as CookieCategory[]).filter((key) => input.cookies[key]);
-  const cookieLines = enabledCookies.map((key) => `- ${cookieLabels[key]} cookies: ${key === "necessary"
+  const cookieLines = enabledCookies.map((key) => `- ${cookieLabels[key]} Cookie：${key === "necessary"
     ? "用于登录、安全、防欺诈和偏好保存。"
     : key === "analytics"
       ? "用于统计访问、页面性能和产品使用情况。"
@@ -78,7 +78,7 @@ function buildCopy(input: {
       ? "您可以接受全部 Cookie，也可以仅启用必要 Cookie。"
       : "当前仅启用提供服务所必需的 Cookie。",
     "",
-    "Cookie categories:",
+    "Cookie 类别：",
     cookieLines.join("\n")
   ].join("\n");
 
@@ -122,7 +122,7 @@ export default function PrivacyCookieCopyGeneratorTool({ manifest }: ToolClientP
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Privacy Copy</p>
+          <p className="eyebrow">隐私文案</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -130,19 +130,19 @@ export default function PrivacyCookieCopyGeneratorTool({ manifest }: ToolClientP
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>App name</span>
+          <span>应用名称</span>
           <input value={appName} onChange={(event) => setAppName(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Company</span>
+          <span>公司</span>
           <input value={company} onChange={(event) => setCompany(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Region</span>
+          <span>适用区域</span>
           <input value={region} onChange={(event) => setRegion(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Contact</span>
+          <span>联系方式</span>
           <input value={contact} onChange={(event) => setContact(event.target.value)} />
         </label>
       </div>
@@ -158,35 +158,35 @@ export default function PrivacyCookieCopyGeneratorTool({ manifest }: ToolClientP
 
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Data types</span>
+          <span>数据类型</span>
           <textarea value={dataTypes} onChange={(event) => setDataTypes(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Purposes</span>
+          <span>使用目的</span>
           <textarea value={purposes} onChange={(event) => setPurposes(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Vendors</span>
+          <span>供应商</span>
           <textarea value={vendors} onChange={(event) => setVendors(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Retention</span>
+          <span>保留期限</span>
           <textarea value={retention} onChange={(event) => setRetention(event.target.value)} spellCheck={false} />
         </label>
       </div>
 
       <div className="tool-toolbar">
         <button type="button" onClick={() => void copyText("policy", copy.privacyPolicy)}>{copied === "policy" ? "已复制政策" : "复制政策"}</button>
-        <button type="button" onClick={() => void copyText("banner", copy.cookieBanner)}>{copied === "banner" ? "已复制 Banner" : "复制 Banner"}</button>
+        <button type="button" onClick={() => void copyText("banner", copy.cookieBanner)}>{copied === "banner" ? "已复制 Cookie Banner" : "复制 Cookie Banner"}</button>
       </div>
 
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Privacy policy draft</span>
+          <span>隐私政策草稿</span>
           <textarea value={copy.privacyPolicy} readOnly spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Cookie banner draft</span>
+          <span>Cookie Banner 草稿</span>
           <textarea value={copy.cookieBanner} readOnly spellCheck={false} />
         </label>
       </div>

@@ -84,7 +84,7 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">SEO Utility</p>
+          <p className="eyebrow">SEO 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -92,11 +92,11 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Title</span>
+          <span>标题</span>
           <input value={title} onChange={(event) => setTitle(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Site name</span>
+          <span>站点名称</span>
           <input value={siteName} onChange={(event) => setSiteName(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
@@ -104,11 +104,11 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolClientProps) {
           <input value={url} onChange={(event) => setUrl(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Canonical</span>
+          <span>规范链接</span>
           <input value={canonical} onChange={(event) => setCanonical(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Robots</span>
+          <span>爬虫指令</span>
           <select value={robots} onChange={(event) => setRobots(event.target.value)}>
             <option value="index, follow">index, follow</option>
             <option value="noindex, follow">noindex, follow</option>
@@ -117,36 +117,36 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolClientProps) {
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>OG image</span>
+          <span>OG 图片</span>
           <input value={image} onChange={(event) => setImage(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Keywords</span>
+          <span>关键词</span>
           <input value={keywords} onChange={(event) => setKeywords(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Author</span>
+          <span>作者</span>
           <input value={author} onChange={(event) => setAuthor(event.target.value)} />
         </label>
       </div>
 
       <label className="tool-field">
-        <span>Description</span>
+        <span>描述</span>
         <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
       </label>
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Title length</h3>
-          <p>{title.length} chars - {scoreLength(title.length, 30, 60)}</p>
+          <h3>标题长度</h3>
+          <p>{title.length} 字符 - {scoreLength(title.length, 30, 60)}</p>
         </article>
         <article className="detail-card">
-          <h3>Description length</h3>
-          <p>{description.length} chars - {scoreLength(description.length, 70, 160)}</p>
+          <h3>描述长度</h3>
+          <p>{description.length} 字符 - {scoreLength(description.length, 70, 160)}</p>
         </article>
         <article className="detail-card">
-          <h3>Indexing</h3>
-          <p>{robots.includes("noindex") ? "Noindex" : "Indexable"}</p>
+          <h3>收录状态</h3>
+          <p>{robots.includes("noindex") ? "不收录" : "可收录"}</p>
         </article>
       </div>
 
@@ -169,11 +169,11 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolClientProps) {
       </div>
 
       <label className="tool-field">
-        <span>Meta tags</span>
+        <span>Meta 标签</span>
         <textarea value={meta} readOnly spellCheck={false} />
       </label>
 
-      <button type="button" onClick={() => void copyMeta()}>{copied ? "已复制" : "复制 Meta Tags"}</button>
+      <button type="button" onClick={() => void copyMeta()}>{copied ? "已复制" : "复制 Meta 标签"}</button>
     </section>
   );
 }

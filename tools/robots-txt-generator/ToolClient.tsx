@@ -43,7 +43,7 @@ export default function RobotsTxtGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">SEO Utility</p>
+          <p className="eyebrow">SEO 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

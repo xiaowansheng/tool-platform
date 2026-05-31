@@ -64,61 +64,61 @@ export default function AdrGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Architecture Utility</p>
+          <p className="eyebrow">架构工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>ADR number</span>
+          <span>ADR 编号</span>
           <input value={number} onChange={(event) => setNumber(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Status</span>
+          <span>状态</span>
           <select value={status} onChange={(event) => setStatus(event.target.value)}>
             {statuses.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Date</span>
+          <span>日期</span>
           <input value={date} onChange={(event) => setDate(event.target.value)} />
         </label>
         <button type="button" onClick={() => void copyAdr()}>{copied ? "已复制" : "复制 ADR"}</button>
       </div>
       <div className="detail-card">
-        <h3>File name</h3>
+        <h3>文件名</h3>
         <p className="mono-output">{fileName}</p>
       </div>
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Title</span>
+            <span>标题</span>
             <input value={title} onChange={(event) => {
               setTitle(event.target.value);
               setCopied(false);
             }} />
           </label>
           <label className="tool-field">
-            <span>Owner</span>
+            <span>负责人</span>
             <input value={owner} onChange={(event) => setOwner(event.target.value)} />
           </label>
           <label className="tool-field">
-            <span>Context</span>
+            <span>背景</span>
             <textarea value={context} onChange={(event) => setContext(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Decision</span>
+            <span>决策</span>
             <textarea value={decision} onChange={(event) => setDecision(event.target.value)} spellCheck={false} />
           </label>
         </div>
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Alternatives</span>
+            <span>备选方案</span>
             <textarea value={alternatives} onChange={(event) => setAlternatives(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Consequences</span>
+            <span>影响</span>
             <textarea value={consequences} onChange={(event) => setConsequences(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">

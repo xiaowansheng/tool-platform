@@ -112,26 +112,26 @@ export default function ChangelogGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Release Utility</p>
+          <p className="eyebrow">发布工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Version</span>
+          <span>版本</span>
           <input value={version} onChange={(event) => setVersion(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Date</span>
+          <span>日期</span>
           <input value={date} onChange={(event) => setDate(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Previous version</span>
+          <span>上一版本</span>
           <input value={previousVersion} onChange={(event) => setPreviousVersion(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Repository URL</span>
+          <span>仓库 URL</span>
           <input value={repoUrl} onChange={(event) => setRepoUrl(event.target.value)} />
         </label>
       </div>
@@ -140,14 +140,14 @@ export default function ChangelogGeneratorTool({ manifest }: ToolClientProps) {
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Commit list</span>
+          <span>Commit 列表</span>
           <textarea value={commits} onChange={(event) => {
             setCommits(event.target.value);
             setCopied(false);
           }} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>CHANGELOG.md section</span>
+          <span>CHANGELOG.md 片段</span>
           <textarea value={changelog} readOnly spellCheck={false} />
         </label>
       </div>
