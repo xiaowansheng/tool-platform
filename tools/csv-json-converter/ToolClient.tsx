@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
@@ -36,6 +36,10 @@ function parseCsvRecords(input: string) {
     }
   }
 
+  if (inQuotes) {
+    throw new Error("CSV 引号未闭合");
+  }
+
   if (current !== "" || row.length > 0 || input.length > 0) {
     row.push(current);
     rows.push(row);
@@ -60,7 +64,7 @@ function csvToJson(input: string) {
 function escapeCsvCell(value: unknown) {
   const text = String(value ?? "");
 
-  return /[",\n]/.test(text) ? `"${text.replace(/"/g, "\"\"")}"` : text;
+  return /[",\n\r]/.test(text) ? "\"" + text.replace(/"/g, "\"\"") + "\"" : text;
 }
 
 function jsonToCsv(input: string) {
@@ -76,15 +80,33 @@ function jsonToCsv(input: string) {
   return [headers.join(","), ...rows].join("\n");
 }
 
+function getCsvStats(input: string) {
+  try {
+    const rows = parseCsvRecords(input).filter((row) => row.some((cell) => cell.trim() !== ""));
+    return {
+      rows: Math.max(0, rows.length - 1),
+      columns: rows[0]?.length ?? 0
+    };
+  } catch {
+    return {
+      rows: 0,
+      columns: 0
+    };
+  }
+}
+
 export default function CsvJsonConverterTool({ manifest }: ToolClientProps) {
   const [input, setInput] = useState("name,category,runtime\nJSON Formatter,developer,simple\nText Inspector,text,worker");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
+  const stats = useMemo(() => getCsvStats(input), [input]);
 
   function run(action: "csvToJson" | "jsonToCsv") {
     try {
       setOutput(action === "csvToJson" ? csvToJson(input) : jsonToCsv(input));
       setError("");
+      setCopied(false);
     } catch (convertError) {
       setError(convertError instanceof Error ? convertError.message : "转换失败");
     }
@@ -92,39 +114,55 @@ export default function CsvJsonConverterTool({ manifest }: ToolClientProps) {
 
   async function copyOutput() {
     await navigator.clipboard.writeText(output);
+    setCopied(true);
   }
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Data Utility</p>
+          <p className="eyebrow">数据转换</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar">
-        <button type="button" onClick={() => run("csvToJson")}>
-          CSV → JSON
+        <button type="button" className="button--primary" onClick={() => run("csvToJson")}>
+          CSV 转 JSON
         </button>
         <button type="button" onClick={() => run("jsonToCsv")}>
-          JSON → CSV
+          JSON 转 CSV
         </button>
-        <button type="button" onClick={() => void copyOutput()}>
-          复制输出
+        <button type="button" onClick={() => void copyOutput()} disabled={!output}>
+          {copied ? "已复制输出" : "复制输出"}
         </button>
+      </div>
+      <div className="detail-grid">
+        <article className="detail-card">
+          <h3>CSV 数据行</h3>
+          <p>{stats.rows}</p>
+        </article>
+        <article className="detail-card">
+          <h3>CSV 列</h3>
+          <p>{stats.columns}</p>
+        </article>
+        <article className="detail-card">
+          <h3>输出字符</h3>
+          <p>{output.length}</p>
+        </article>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
           <span>输入</span>
-          <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
+          <textarea value={input} onChange={(event) => { setInput(event.target.value); setCopied(false); }} spellCheck={false} />
         </label>
         <label className="tool-field">
           <span>输出</span>
-          <textarea value={output} onChange={(event) => setOutput(event.target.value)} spellCheck={false} />
+          <textarea value={output} readOnly spellCheck={false} />
         </label>
       </div>
       {error ? <p className="tool-error">{error}</p> : null}
+      <p className="tool-note">CSV 转 JSON 会把第一行作为字段名；JSON 转 CSV 需要输入对象数组，嵌套对象会按 JavaScript 字符串形式输出。</p>
     </section>
   );
 }

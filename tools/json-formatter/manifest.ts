@@ -9,7 +9,8 @@ const manifest: ToolManifest = {
   tags: ["json", "formatter", "validator"],
   icon: "braces",
   runtime: "simple",
-  featured: true
+  featured: true,
+  permissions: ["clipboard"]
 };
 
 export default manifest;

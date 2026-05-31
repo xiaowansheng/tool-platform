@@ -6,9 +6,9 @@ import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 const groups = ["owner", "group", "other"] as const;
 const permissions = [
-  { key: "r", label: "read", value: 4 },
-  { key: "w", label: "write", value: 2 },
-  { key: "x", label: "execute", value: 1 }
+  { key: "r", label: "读取", value: 4 },
+  { key: "w", label: "写入", value: 2 },
+  { key: "x", label: "执行", value: 1 }
 ] as const;
 
 type Group = (typeof groups)[number];
@@ -39,7 +39,7 @@ export default function ChmodCalculatorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Ops Utility</p>
+          <p className="eyebrow">运维工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -47,7 +47,7 @@ export default function ChmodCalculatorTool({ manifest }: ToolClientProps) {
       <div className="case-grid">
         {groups.map((group) => (
           <article key={group} className="detail-card">
-            <h3>{group}</h3>
+            <h3>{{ owner: "所有者", group: "用户组", other: "其他用户" }[group]}</h3>
             <div className="tool-option-list">
               {permissions.map((permission) => (
                 <label key={permission.key} className="tool-check">
@@ -71,11 +71,11 @@ export default function ChmodCalculatorTool({ manifest }: ToolClientProps) {
       </div>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Numeric</h3>
+          <h3>数字权限</h3>
           <p>{digits}</p>
         </article>
         <article className="detail-card">
-          <h3>Symbolic</h3>
+          <h3>符号权限</h3>
           <p>{symbolic}</p>
         </article>
       </div>

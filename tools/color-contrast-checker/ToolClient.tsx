@@ -55,7 +55,7 @@ function normalizeHexInput(value: string) {
 }
 
 function passLabel(pass: boolean) {
-  return pass ? "Pass" : "Fail";
+  return pass ? "通过" : "未通过";
 }
 
 export default function ColorContrastCheckerTool({ manifest }: ToolClientProps) {
@@ -105,7 +105,7 @@ export default function ColorContrastCheckerTool({ manifest }: ToolClientProps) 
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Accessibility</p>
+          <p className="eyebrow">无障碍检查</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -113,56 +113,56 @@ export default function ColorContrastCheckerTool({ manifest }: ToolClientProps) 
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Foreground</span>
+          <span>前景色</span>
           <input value={foreground} onChange={(event) => setForeground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Foreground picker</span>
+          <span>前景色选择器</span>
           <input type="color" value={normalizeHexInput(foreground)} onChange={(event) => setForeground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Background</span>
+          <span>背景色</span>
           <input value={background} onChange={(event) => setBackground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Background picker</span>
+          <span>背景色选择器</span>
           <input type="color" value={normalizeHexInput(background)} onChange={(event) => setBackground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Sample size px</span>
+          <span>示例字号 px</span>
           <input type="number" min="10" max="72" value={sampleSize} onChange={(event) => setSampleSize(Number(event.target.value))} />
         </label>
         <button type="button" onClick={() => void copyCss()}>{copied ? "已复制" : "复制 CSS"}</button>
       </div>
 
       <div className="contrast-preview" style={{ color: normalizeHexInput(foreground), backgroundColor: normalizeHexInput(background) }}>
-        <strong style={{ fontSize: sampleSize }}>Readable interface text</strong>
-        <p>Contrast ratio {result.ratioText}. WCAG large text starts at 18pt regular or 14pt bold.</p>
+        <strong style={{ fontSize: sampleSize }}>可读界面文本</strong>
+        <p>对比度 {result.ratioText}。WCAG 大字号通常从 18pt 常规字或 14pt 粗体字开始计算。</p>
       </div>
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Ratio</h3>
+          <h3>对比度</h3>
           <p>{result.ratioText}</p>
         </article>
         <article className="detail-card">
-          <h3>AA Text</h3>
+          <h3>AA 正文</h3>
           <p>{passLabel(result.aaNormal)}</p>
         </article>
         <article className="detail-card">
-          <h3>AAA Text</h3>
+          <h3>AAA 正文</h3>
           <p>{passLabel(result.aaaNormal)}</p>
         </article>
         <article className="detail-card">
-          <h3>AA Large</h3>
+          <h3>AA 大字号</h3>
           <p>{passLabel(result.aaLarge)}</p>
         </article>
         <article className="detail-card">
-          <h3>AAA Large</h3>
+          <h3>AAA 大字号</h3>
           <p>{passLabel(result.aaaLarge)}</p>
         </article>
         <article className="detail-card">
-          <h3>UI Graphics</h3>
+          <h3>UI 图形</h3>
           <p>{passLabel(result.ui)}</p>
         </article>
       </div>

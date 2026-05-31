@@ -6,48 +6,90 @@ import { ToolUsageTracker } from "@/components/common-tools";
 import { ToolClientLoader } from "@/components/tool-client-loader";
 import { Topbar } from "@/components/topbar";
 import { ToolRuntimeCard } from "@/components/tool-runtime-card";
-import { getCategoryMeta, getToolManifest } from "@tool-platform/tool-sdk";
+import {
+  getPermissionLabels,
+  getRuntimeLabel,
+  getToolPageGuide,
+  getToolPageManifest,
+  isZhLocale
+} from "@/lib/tool-page-copy";
+import { getToolManifest } from "@tool-platform/tool-sdk";
 
 export async function generateMetadata({
   params
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const manifest = getToolManifest(slug);
 
   if (!manifest) {
     return {
-      title: "Tool Not Found"
+      title: isZhLocale(locale) ? "工具未找到" : "Tool Not Found"
     };
   }
 
+  const pageManifest = getToolPageManifest(manifest, locale);
+
   return {
-    title: `${manifest.name} | Tool Platform`,
-    description: manifest.description
+    title: `${pageManifest.name} | Tool Platform`,
+    description: pageManifest.description
   };
 }
 
 export default async function ToolPage({
   params
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const manifest = getToolManifest(slug);
 
   if (!manifest) {
     notFound();
   }
 
-  const category = getCategoryMeta(manifest.category);
+  const pageManifest = getToolPageManifest(manifest, locale);
 
-  return <ToolPageContent manifest={manifest} categoryLabel={category?.label ?? manifest.category} />;
+  return <ToolPageContent manifest={pageManifest} locale={locale} />;
 }
 
-function ToolPageContent({ manifest, categoryLabel }: { manifest: NonNullable<ReturnType<typeof getToolManifest>>; categoryLabel: string }) {
+function ToolPageContent({ manifest, locale }: { manifest: NonNullable<ReturnType<typeof getToolManifest>>; locale: string }) {
   const t = useTranslations("toolPage");
   const ct = useTranslations("categories");
+  const guide = getToolPageGuide(manifest.id, locale);
+  const isZh = isZhLocale(locale);
+  const runtimeLabel = getRuntimeLabel(manifest.runtime, locale);
+  const permissionLabels = getPermissionLabels(manifest.permissions, locale);
+  const labels = isZh
+    ? {
+        runtime: "运行方式",
+        tags: "标签",
+        manifest: "工具标识",
+        worker: "Worker",
+        permissions: "权限",
+        workerOn: "已启用",
+        workerOff: "无需启用",
+        noPermissions: "无需额外权限",
+        guideEyebrow: "使用指南",
+        guideTitle: "开始使用",
+        stepsTitle: "使用步骤",
+        examplesTitle: "使用例子"
+      }
+    : {
+        runtime: "Runtime",
+        tags: "Tags",
+        manifest: "Manifest",
+        worker: "Worker",
+        permissions: "Permissions",
+        workerOn: "enabled",
+        workerOff: "not required",
+        noPermissions: "none",
+        guideEyebrow: "Guide",
+        guideTitle: "How to use",
+        stepsTitle: "Steps",
+        examplesTitle: "Examples"
+      };
 
   return (
     <>
@@ -62,39 +104,85 @@ function ToolPageContent({ manifest, categoryLabel }: { manifest: NonNullable<Re
               <p className="tool-page__desc">{manifest.description}</p>
             </div>
             <span className="pill pill--runtime" data-runtime={manifest.runtime}>
-              {manifest.runtime}
+              {runtimeLabel}
             </span>
           </div>
           <dl className="detail-grid detail-grid--meta">
             <div className="detail-card detail-card--meta">
-              <dt>Runtime</dt>
-              <dd>{manifest.runtime}</dd>
+              <dt>{labels.runtime}</dt>
+              <dd>{runtimeLabel}</dd>
             </div>
             <div className="detail-card detail-card--meta">
-              <dt>Tags</dt>
-              <dd>{manifest.tags.join(" / ")}</dd>
+              <dt>{labels.tags}</dt>
+              <dd className="detail-card__tags">
+                {manifest.tags.map((tag) => (
+                  <span className="detail-card__tag" key={tag}>
+                    {tag}
+                  </span>
+                ))}
+              </dd>
             </div>
             <div className="detail-card detail-card--meta">
-              <dt>Manifest</dt>
+              <dt>{labels.manifest}</dt>
               <dd className="detail-card__mono">{manifest.id}</dd>
             </div>
             <div className="detail-card detail-card--meta">
-              <dt>Worker</dt>
+              <dt>{labels.worker}</dt>
               <dd>
                 <span className={`status-label ${manifest.worker ? "status-label--on" : "status-label--off"}`}>
-                  {manifest.worker ? "enabled" : "not required"}
+                  {manifest.worker ? labels.workerOn : labels.workerOff}
                 </span>
               </dd>
             </div>
             <div className="detail-card detail-card--meta">
-              <dt>Permissions</dt>
-              <dd>{manifest.permissions?.join(" / ") ?? "none"}</dd>
+              <dt>{labels.permissions}</dt>
+              <dd className="detail-card__tags">
+                {permissionLabels.length > 0 ? (
+                  permissionLabels.map((permission) => (
+                    <span className="detail-card__tag detail-card__tag--perm" key={permission}>
+                      {permission}
+                    </span>
+                  ))
+                ) : (
+                  <span className="detail-card__tag detail-card__tag--none">{labels.noPermissions}</span>
+                )}
+              </dd>
             </div>
           </dl>
         </section>
 
+        {guide ? (
+          <section className="tool-panel tool-panel--guide">
+            <div className="tool-panel__header">
+              <div>
+                <p className="eyebrow">{labels.guideEyebrow}</p>
+                <h2>{labels.guideTitle}</h2>
+              </div>
+              <p>{guide.intro}</p>
+            </div>
+            <div className="tool-guide-grid">
+              <article className="detail-card detail-card--guide">
+                <h3>{labels.stepsTitle}</h3>
+                <ol className="compact-list">
+                  {guide.steps.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ol>
+              </article>
+              <article className="detail-card detail-card--guide">
+                <h3>{labels.examplesTitle}</h3>
+                <ul className="compact-list">
+                  {guide.examples.map((example) => (
+                    <li key={example}>{example}</li>
+                  ))}
+                </ul>
+              </article>
+            </div>
+          </section>
+        ) : null}
+
         <ToolClientLoader manifest={manifest} />
-        <ToolRuntimeCard manifest={manifest} />
+        <ToolRuntimeCard manifest={manifest} locale={locale} />
       </div>
     </>
   );

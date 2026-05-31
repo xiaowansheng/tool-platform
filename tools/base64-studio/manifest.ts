@@ -9,7 +9,8 @@ const manifest: ToolManifest = {
   tags: ["base64", "encoding", "text"],
   icon: "binary",
   runtime: "simple",
-  featured: false
+  featured: false,
+  permissions: ["clipboard"]
 };
 
 export default manifest;

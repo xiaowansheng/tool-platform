@@ -35,11 +35,12 @@ function buildUrl(base: string, rows: ParamRow[]) {
 export default function QueryParamBuilderTool({ manifest }: ToolClientProps) {
   const [base, setBase] = useState("https://example.com/search");
   const [rows, setRows] = useState<ParamRow[]>([
-    { id: 1, key: "q", value: "tool platform" },
+    { id: 1, key: "q", value: "工具平台" },
     { id: 2, key: "page", value: "1" }
   ]);
-  const [inputUrl, setInputUrl] = useState("https://example.com/search?q=tool%20platform&page=1");
+  const [inputUrl, setInputUrl] = useState("https://example.com/search?q=%E5%B7%A5%E5%85%B7%E5%B9%B3%E5%8F%B0&page=1");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   let output = "";
   let outputError = "";
@@ -52,6 +53,7 @@ export default function QueryParamBuilderTool({ manifest }: ToolClientProps) {
 
   function updateRow(id: number, field: "key" | "value", value: string) {
     setRows((current) => current.map((row) => row.id === id ? { ...row, [field]: value } : row));
+    setCopied(false);
   }
 
   function handleParse() {
@@ -60,59 +62,80 @@ export default function QueryParamBuilderTool({ manifest }: ToolClientProps) {
       setBase(parsed.base);
       setRows(parsed.rows.length > 0 ? parsed.rows : [{ id: 1, key: "", value: "" }]);
       setError("");
+      setCopied(false);
     } catch (parseError) {
-      setError(parseError instanceof Error ? parseError.message : "URL 解析失败");
+      setError(parseError instanceof Error ? parseError.message : "URL 解析失败，请输入包含协议的完整 URL");
     }
   }
 
   async function copyOutput() {
+    if (!output || outputError) {
+      return;
+    }
+
     await navigator.clipboard.writeText(output);
+    setCopied(true);
+  }
+
+  function addParam() {
+    setRows((current) => [...current, { id: Date.now(), key: "", value: "" }]);
+    setCopied(false);
   }
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network Utility</p>
+          <p className="eyebrow">链接参数</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar">
         <label className="tool-field tool-field--compact">
-          <span>Parse URL</span>
+          <span>待解析 URL</span>
           <input value={inputUrl} onChange={(event) => setInputUrl(event.target.value)} />
         </label>
-        <button type="button" onClick={handleParse}>解析</button>
-        <button type="button" onClick={() => void copyOutput()}>复制结果</button>
+        <button type="button" onClick={handleParse}>解析参数</button>
+        <button type="button" onClick={() => void copyOutput()} disabled={!output || Boolean(outputError)}>
+          {copied ? "已复制" : "复制结果"}
+        </button>
       </div>
       <label className="tool-field">
-        <span>Base URL</span>
-        <input value={base} onChange={(event) => setBase(event.target.value)} />
+        <span>基础 URL</span>
+        <input value={base} onChange={(event) => { setBase(event.target.value); setCopied(false); }} />
       </label>
       <div className="workspace workspace--stack">
         {rows.map((row) => (
           <div key={row.id} className="param-row">
-            <input value={row.key} onChange={(event) => updateRow(row.id, "key", event.target.value)} placeholder="key" />
-            <input value={row.value} onChange={(event) => updateRow(row.id, "value", event.target.value)} placeholder="value" />
-            <button type="button" onClick={() => setRows((current) => current.filter((item) => item.id !== row.id))}>
+            <input value={row.key} onChange={(event) => updateRow(row.id, "key", event.target.value)} placeholder="参数名" />
+            <input value={row.value} onChange={(event) => updateRow(row.id, "value", event.target.value)} placeholder="参数值" />
+            <button type="button" onClick={() => { setRows((current) => current.filter((item) => item.id !== row.id)); setCopied(false); }}>
               删除
             </button>
           </div>
         ))}
       </div>
       <div className="tool-toolbar">
-        <button
-          type="button"
-          onClick={() => setRows((current) => [...current, { id: Date.now(), key: "", value: "" }])}
-        >
+        <button type="button" onClick={addParam}>
           添加参数
         </button>
       </div>
+      <div className="detail-grid">
+        <article className="detail-card">
+          <h3>参数数量</h3>
+          <p>{rows.filter((row) => row.key.trim()).length}</p>
+        </article>
+        <article className="detail-card">
+          <h3>生成状态</h3>
+          <p>{outputError ? "待修正" : "可复制"}</p>
+        </article>
+      </div>
       <label className="tool-field">
-        <span>输出</span>
+        <span>生成 URL</span>
         <textarea value={output} readOnly spellCheck={false} />
       </label>
+      <p className="tool-note">适合编辑 UTM、分页、筛选条件和回调地址参数；参数值会按 URLSearchParams 规则自动编码。</p>
       {error || outputError ? <p className="tool-error">{error || outputError}</p> : null}
     </section>
   );

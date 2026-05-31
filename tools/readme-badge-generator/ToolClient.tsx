@@ -58,31 +58,31 @@ export default function ReadmeBadgeGeneratorTool({ manifest }: ToolClientProps) 
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">README Utility</p>
+          <p className="eyebrow">README 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Label</span>
+          <span>标签</span>
           <input value={label} onChange={(event) => {
             setLabel(event.target.value);
             setCopied(false);
           }} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Message</span>
+          <span>状态文本</span>
           <input value={message} onChange={(event) => setMessage(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Color</span>
+          <span>颜色</span>
           <select value={color} onChange={(event) => setColor(event.target.value)}>
             {colors.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Style</span>
+          <span>样式</span>
           <select value={style} onChange={(event) => setStyle(event.target.value)}>
             {styles.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
@@ -91,15 +91,15 @@ export default function ReadmeBadgeGeneratorTool({ manifest }: ToolClientProps) 
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Logo</span>
-            <input value={logo} onChange={(event) => setLogo(event.target.value)} placeholder="simple-icons slug" />
+            <span>图标</span>
+            <input value={logo} onChange={(event) => setLogo(event.target.value)} placeholder="simple-icons 名称" />
           </label>
           <label className="tool-field">
-            <span>Link</span>
-            <input value={link} onChange={(event) => setLink(event.target.value)} placeholder="optional target URL" />
+            <span>链接</span>
+            <input value={link} onChange={(event) => setLink(event.target.value)} placeholder="可选跳转链接" />
           </label>
           <div className="detail-card">
-            <h3>Preview</h3>
+            <h3>预览</h3>
             <p>
               <img src={badgeUrl} alt={`${label} badge`} />
             </p>

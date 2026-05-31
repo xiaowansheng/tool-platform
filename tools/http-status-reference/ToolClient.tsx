@@ -26,33 +26,43 @@ const statuses = [
 
 export default function HttpStatusReferenceTool({ manifest }: ToolClientProps) {
   const [query, setQuery] = useState("404");
+  const normalizedQuery = query.trim().toLowerCase();
   const filtered = statuses.filter((status) => {
-    const text = `${status.code} ${status.title} ${status.group} ${status.note}`.toLowerCase();
+    const text = (status.code + " " + status.title + " " + status.group + " " + status.note).toLowerCase();
 
-    return text.includes(query.trim().toLowerCase());
+    return text.includes(normalizedQuery);
   });
+  const groupCounts = statuses.reduce<Record<string, number>>((counts, status) => {
+    counts[status.group] = (counts[status.group] ?? 0) + 1;
+    return counts;
+  }, {});
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network Reference</p>
+          <p className="eyebrow">HTTP 速查</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
+      </div>
+      <div className="detail-grid">
+        <article className="detail-card"><h3>状态码</h3><p>{statuses.length}</p></article>
+        <article className="detail-card"><h3>匹配</h3><p>{filtered.length}</p></article>
+        <article className="detail-card"><h3>4xx 数量</h3><p>{groupCounts["4xx"] ?? 0}</p></article>
       </div>
       <label className="tool-field">
         <span>搜索状态码、标题或描述</span>
         <input value={query} onChange={(event) => setQuery(event.target.value)} />
       </label>
       <div className="case-grid">
-        {filtered.map((status) => (
+        {filtered.length > 0 ? filtered.map((status) => (
           <article key={status.code} className="detail-card">
             <p className="eyebrow">{status.group}</p>
             <h3>{status.code} {status.title}</h3>
             <p>{status.note}</p>
           </article>
-        ))}
+        )) : <article className="detail-card"><h3>没有匹配</h3><p>换一个状态码、分组或中文关键词。</p></article>}
       </div>
     </section>
   );

@@ -67,7 +67,7 @@ export default function SkuGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Catalog</p>
+          <p className="eyebrow">商品目录</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -87,10 +87,10 @@ export default function SkuGeneratorTool({ manifest }: ToolClientProps) {
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Variants</h3><p>{rows.length}</p></article>
-        <article className="detail-card"><h3>Colors</h3><p>{splitValues(colors).length}</p></article>
-        <article className="detail-card"><h3>Sizes</h3><p>{splitValues(sizes).length}</p></article>
-        <article className="detail-card"><h3>Example</h3><p>{rows[0]?.sku ?? "-"}</p></article>
+        <article className="detail-card"><h3>变体数</h3><p>{rows.length}</p></article>
+        <article className="detail-card"><h3>颜色数</h3><p>{splitValues(colors).length}</p></article>
+        <article className="detail-card"><h3>尺码数</h3><p>{splitValues(sizes).length}</p></article>
+        <article className="detail-card"><h3>示例</h3><p>{rows[0]?.sku ?? "-"}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

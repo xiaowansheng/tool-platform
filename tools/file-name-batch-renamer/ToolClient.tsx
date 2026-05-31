@@ -93,7 +93,7 @@ export default function FileNameBatchRenamerTool({ manifest }: ToolClientProps) 
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Batch</p>
+          <p className="eyebrow">批量重命名</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -115,10 +115,10 @@ export default function FileNameBatchRenamerTool({ manifest }: ToolClientProps) 
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Files</h3><p>{mappings.length}</p></article>
-        <article className="detail-card"><h3>Case</h3><p>{caseMode}</p></article>
-        <article className="detail-card"><h3>Extension</h3><p>{keepExtension ? "kept" : "removed"}</p></article>
-        <article className="detail-card"><h3>Example</h3><p>{mappings[0]?.renamed ?? "-"}</p></article>
+        <article className="detail-card"><h3>文件数</h3><p>{mappings.length}</p></article>
+        <article className="detail-card"><h3>命名风格</h3><p>{caseMode}</p></article>
+        <article className="detail-card"><h3>扩展名</h3><p>{keepExtension ? "保留" : "移除"}</p></article>
+        <article className="detail-card"><h3>示例</h3><p>{mappings[0]?.renamed ?? "-"}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">
@@ -131,7 +131,7 @@ export default function FileNameBatchRenamerTool({ manifest }: ToolClientProps) 
         </label>
         <label className="tool-field">
           <span>预览与 dry-run 命令</span>
-          <textarea value={`${preview}\n\n# Shell commands\n${script}`} readOnly spellCheck={false} />
+          <textarea value={`${preview}\n\n# Shell 命令\n${script}`} readOnly spellCheck={false} />
         </label>
       </div>
 

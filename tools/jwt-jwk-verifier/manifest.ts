@@ -9,7 +9,8 @@ const manifest: ToolManifest = {
   tags: ["jwt", "jwk", "verify", "signature"],
   icon: "shield-check",
   runtime: "simple",
-  featured: true
+  featured: true,
+  permissions: ["clipboard"]
 };
 
 export default manifest;

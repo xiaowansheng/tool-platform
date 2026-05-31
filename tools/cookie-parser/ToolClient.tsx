@@ -29,6 +29,13 @@ const sampleSetCookie = [
 ].join("\n");
 const sampleCookie = "Cookie: sid=abc123; prefs=theme%3Ddark; feature=beta";
 
+const severityLabels: Record<Severity, string> = {
+  info: "提示",
+  low: "低",
+  medium: "中",
+  high: "高"
+};
+
 function stripHeaderPrefix(line: string, mode: Mode) {
   const prefix = mode === "set-cookie" ? /^set-cookie:\s*/i : /^cookie:\s*/i;
 
@@ -174,7 +181,7 @@ function diagnose(cookies: ParsedSetCookie[]): Finding[] {
     }
 
     if (days > 400) {
-      findings.push({ cookie: cookie.name, severity: "low", message: `过期时间约 ${Math.round(days)} 天，建议确认是否需要长期有效。` });
+      findings.push({ cookie: cookie.name, severity: "low", message: "过期时间约 " + Math.round(days) + " 天，建议确认是否需要长期有效。" });
     }
 
     if (cookie.name.startsWith("__Host-")) {
@@ -199,6 +206,10 @@ function severityRank(severity: Severity) {
   return severity === "high" ? 4 : severity === "medium" ? 3 : severity === "low" ? 2 : 1;
 }
 
+function formatAttributes(cookie: ParsedSetCookie) {
+  return Object.entries(cookie.attributes).map(([key, value]) => key + (value === true ? "" : "=" + value)).join("; ") || "无属性";
+}
+
 export default function CookieParserTool({ manifest }: ToolClientProps) {
   const [mode, setMode] = useState<Mode>("set-cookie");
   const [input, setInput] = useState(sampleSetCookie);
@@ -206,6 +217,7 @@ export default function CookieParserTool({ manifest }: ToolClientProps) {
   const requestCookies = useMemo(() => parseCookieHeader(input), [input]);
   const findings = useMemo(() => diagnose(setCookies).sort((left, right) => severityRank(right.severity) - severityRank(left.severity)), [setCookies]);
   const cookies = mode === "set-cookie" ? setCookies : requestCookies;
+  const highCount = findings.filter((finding) => finding.severity === "high").length;
 
   function changeMode(nextMode: Mode) {
     setMode(nextMode);
@@ -216,7 +228,7 @@ export default function CookieParserTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">HTTP Utility</p>
+          <p className="eyebrow">HTTP Cookie</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -224,86 +236,87 @@ export default function CookieParserTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>模式</span>
+          <span>解析模式</span>
           <select value={mode} onChange={(event) => changeMode(event.target.value as Mode)}>
-            <option value="set-cookie">Set-Cookie</option>
-            <option value="cookie">Cookie</option>
+            <option value="set-cookie">响应 Set-Cookie</option>
+            <option value="cookie">请求 Cookie</option>
           </select>
         </label>
       </div>
 
       <label className="tool-field">
-        <span>{mode === "set-cookie" ? "Set-Cookie headers" : "Cookie header"}</span>
+        <span>{mode === "set-cookie" ? "Set-Cookie Headers" : "Cookie Header"}</span>
         <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
       </label>
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Cookies</h3>
+          <h3>Cookie 数</h3>
           <p>{cookies.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Findings</h3>
-          <p>{mode === "set-cookie" ? findings.length : "n/a"}</p>
+          <h3>诊断项</h3>
+          <p>{mode === "set-cookie" ? findings.length : "不适用"}</p>
         </article>
         <article className="detail-card">
-          <h3>High</h3>
-          <p>{mode === "set-cookie" ? findings.filter((finding) => finding.severity === "high").length : "n/a"}</p>
+          <h3>高风险</h3>
+          <p>{mode === "set-cookie" ? highCount : "不适用"}</p>
         </article>
       </div>
 
       {mode === "set-cookie" ? (
         <>
-          <div className="tool-table">
-            <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "9rem minmax(10rem, 1fr) minmax(12rem, 1.3fr)" }}>
-              <span>Name</span>
-              <span>Value</span>
-              <span>Attributes</span>
+          <div className="tool-table cookie-table">
+            <div className="tool-table__row tool-table__row--head cookie-table__row">
+              <span>名称</span>
+              <span>解码值</span>
+              <span>属性</span>
             </div>
             {setCookies.map((cookie) => (
-              <div key={cookie.raw} className="tool-table__row" style={{ gridTemplateColumns: "9rem minmax(10rem, 1fr) minmax(12rem, 1.3fr)" }}>
+              <div key={cookie.raw} className="tool-table__row cookie-table__row">
                 <span className="mono-output">{cookie.name}</span>
                 <span className="mono-output">{safeDecode(cookie.value)}</span>
-                <span className="mono-output">
-                  {Object.entries(cookie.attributes).map(([key, value]) => `${key}${value === true ? "" : `=${value}`}`).join("; ") || "none"}
-                </span>
+                <span className="mono-output">{formatAttributes(cookie)}</span>
               </div>
             ))}
           </div>
 
-          <div className="tool-table">
-            <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "8rem 7rem minmax(0, 1fr)" }}>
+          <div className="tool-table finding-table">
+            <div className="tool-table__row tool-table__row--head finding-table__row">
               <span>Cookie</span>
-              <span>Severity</span>
-              <span>Finding</span>
+              <span>级别</span>
+              <span>建议</span>
             </div>
             {findings.length > 0 ? findings.map((finding, index) => (
-              <div key={`${finding.cookie}-${finding.message}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "8rem 7rem minmax(0, 1fr)" }}>
+              <div key={finding.cookie + "-" + finding.message + "-" + index} className="tool-table__row finding-table__row">
                 <span className="mono-output">{finding.cookie}</span>
-                <span><span className="tag">{finding.severity}</span></span>
+                <span><span className="tag">{severityLabels[finding.severity]}</span></span>
                 <span>{finding.message}</span>
               </div>
             )) : (
-              <div className="tool-table__row" style={{ gridTemplateColumns: "1fr" }}>
+              <div className="tool-table__row finding-table__row">
+                <span>-</span>
+                <span>通过</span>
                 <span>未发现常见 Flags 问题。</span>
               </div>
             )}
           </div>
         </>
       ) : (
-        <div className="tool-table">
-          <div className="tool-table__row tool-table__row--head">
-            <span>Name</span>
-            <span>Decoded value</span>
+        <div className="tool-table request-cookie-table">
+          <div className="tool-table__row tool-table__row--head request-cookie-table__row">
+            <span>名称</span>
+            <span>解码值</span>
           </div>
           {requestCookies.map((cookie) => (
-            <div key={cookie.name} className="tool-table__row">
+            <div key={cookie.name} className="tool-table__row request-cookie-table__row">
               <span className="mono-output">{cookie.name}</span>
               <span className="mono-output">{safeDecode(cookie.value)}</span>
             </div>
           ))}
         </div>
       )}
+      <p className="tool-note">诊断结果覆盖常见 Cookie Flags，不替代完整会话安全审计；Set-Cookie 的真实行为还会受到域名、路径和浏览器策略影响。</p>
     </section>
   );
 }

@@ -11,22 +11,24 @@ interface MarkdownIssue {
   message: string;
 }
 
-const sampleMarkdown = `Tool Platform
-
-### Quick start
-Install dependencies and run the app.
-
-\`\`\`
-pnpm install
-pnpm dev
-\`\`\`
-
-- JSON Formatter
-- Regex Tester
-
-
-## Usage
-Paste input into a tool and copy the output.`;
+const sampleMarkdown = [
+  "Tool Platform",
+  "",
+  "### Quick start",
+  "Install dependencies and run the app.",
+  "",
+  "```",
+  "pnpm install",
+  "pnpm dev",
+  "```",
+  "",
+  "- JSON Formatter",
+  "- Regex Tester",
+  "",
+  "",
+  "## Usage",
+  "Paste input into a tool and copy the output."
+].join("\n");
 
 function lintMarkdown(markdown: string, lineWidth: number) {
   const lines = markdown.split(/\r?\n/);
@@ -72,7 +74,7 @@ function lintMarkdown(markdown: string, lineWidth: number) {
     }
 
     if (!inFence && line.length > lineWidth && !/^\s*\|/.test(line)) {
-      issues.push({ line: lineNumber, rule: "MD013", severity: "warning", message: `行宽超过 ${lineWidth} 个字符。` });
+      issues.push({ line: lineNumber, rule: "MD013", severity: "warning", message: "行宽超过 " + lineWidth + " 个字符。" });
     }
 
     const missingHeadingSpace = line.match(/^(#{1,6})(\S.*)$/);
@@ -165,7 +167,7 @@ function autoFixMarkdown(markdown: string) {
     fixedLines.push(line);
   }
 
-  return `${fixedLines.join("\n").trimEnd()}\n`;
+  return fixedLines.join("\n").trimEnd() + "\n";
 }
 
 export default function MarkdownLinterTool({ manifest }: ToolClientProps) {
@@ -175,6 +177,7 @@ export default function MarkdownLinterTool({ manifest }: ToolClientProps) {
   const issues = lintMarkdown(input, lineWidth);
   const fixed = autoFixMarkdown(input);
   const errorCount = issues.filter((issue) => issue.severity === "error").length;
+  const warningCount = issues.length - errorCount;
 
   async function copyFixed() {
     await navigator.clipboard.writeText(fixed);
@@ -185,40 +188,37 @@ export default function MarkdownLinterTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Markdown Utility</p>
+          <p className="eyebrow">文档质量</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
-      <div className="tool-toolbar">
+      <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
           <span>最大行宽</span>
           <input type="number" min="60" max="160" value={lineWidth} onChange={(event) => setLineWidth(Number(event.target.value))} />
         </label>
-        <button type="button" onClick={() => setInput(fixed)}>应用自动修复</button>
-        <button type="button" onClick={() => void copyFixed()}>{copied ? "已复制" : "复制修复结果"}</button>
+        <button type="button" className="button--primary" onClick={() => { setInput(fixed); setCopied(false); }}>应用自动修复</button>
+        <button type="button" onClick={() => void copyFixed()}>{copied ? "已复制修复结果" : "复制修复结果"}</button>
       </div>
-      <div className="tool-results">
+      <div className="detail-grid">
         <article className="detail-card">
-          <h3>Errors</h3>
+          <h3>错误</h3>
           <p>{errorCount}</p>
         </article>
         <article className="detail-card">
-          <h3>Warnings</h3>
-          <p>{issues.length - errorCount}</p>
+          <h3>警告</h3>
+          <p>{warningCount}</p>
         </article>
         <article className="detail-card">
-          <h3>Lines</h3>
+          <h3>行数</h3>
           <p>{input.split(/\r?\n/).length}</p>
         </article>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Markdown</span>
-          <textarea value={input} onChange={(event) => {
-            setInput(event.target.value);
-            setCopied(false);
-          }} spellCheck={false} />
+          <span>Markdown 输入</span>
+          <textarea value={input} onChange={(event) => { setInput(event.target.value); setCopied(false); }} spellCheck={false} />
         </label>
         <label className="tool-field">
           <span>自动修复预览</span>
@@ -227,13 +227,13 @@ export default function MarkdownLinterTool({ manifest }: ToolClientProps) {
       </div>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Rule</span>
-          <span>Issue</span>
+          <span>规则</span>
+          <span>问题</span>
         </div>
         {issues.length > 0 ? issues.map((issue) => (
-          <div className="tool-table__row" key={`${issue.line}-${issue.rule}-${issue.message}`}>
+          <div className="tool-table__row" key={issue.line + "-" + issue.rule + "-" + issue.message}>
             <span>{issue.rule} / L{issue.line}</span>
-            <span>{issue.severity}: {issue.message}</span>
+            <span>{issue.severity === "error" ? "错误" : "警告"}：{issue.message}</span>
           </div>
         )) : (
           <div className="tool-table__row">

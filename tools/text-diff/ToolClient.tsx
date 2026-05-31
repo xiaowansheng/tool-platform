@@ -86,12 +86,13 @@ export default function TextDiffTool({ manifest }: ToolClientProps) {
   }
 
   const summary = summarize(rows);
+  const changed = summary.added + summary.removed;
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Developer Utility</p>
+          <p className="eyebrow">文本对比</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -108,22 +109,26 @@ export default function TextDiffTool({ manifest }: ToolClientProps) {
       </div>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Added</h3>
+          <h3>新增行</h3>
           <p>{summary.added}</p>
         </article>
         <article className="detail-card">
-          <h3>Removed</h3>
+          <h3>删除行</h3>
           <p>{summary.removed}</p>
         </article>
         <article className="detail-card">
-          <h3>Unchanged</h3>
+          <h3>未变更</h3>
           <p>{summary.unchanged}</p>
         </article>
+        <article className="detail-card">
+          <h3>变更行</h3>
+          <p>{changed}</p>
+        </article>
       </div>
-      <article className="diff-view" aria-label="Text diff result">
+      <article className="diff-view" aria-label="文本差异结果">
         {rows.length > 0 ? (
           rows.map((row, index) => (
-            <div key={`${row.kind}-${index}-${row.value}`} className={`diff-line diff-line--${row.kind}`}>
+            <div key={row.kind + "-" + index + "-" + row.value} className={"diff-line diff-line--" + row.kind}>
               <span>{row.kind === "added" ? "+" : row.kind === "removed" ? "-" : " "}</span>
               <code>{row.value || " "}</code>
             </div>
@@ -133,6 +138,7 @@ export default function TextDiffTool({ manifest }: ToolClientProps) {
         )}
       </article>
       {error ? <p className="tool-error">{error}</p> : null}
+      <p className="tool-note">当前使用行级最长公共子序列对比，适合配置、日志和文档片段；超大文本建议先缩小范围。</p>
     </section>
   );
 }

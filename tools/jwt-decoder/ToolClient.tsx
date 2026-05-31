@@ -72,6 +72,7 @@ export default function JwtDecoderTool({ manifest }: ToolClientProps) {
   const payload = decoded ? formatJson(decoded.payload) : "";
   const expiresAt = decoded ? formatUnixClaim(decoded.payload.exp) : "未提供";
   const isExpired = typeof decoded?.payload.exp === "number" ? decoded.payload.exp * 1000 <= Date.now() : false;
+  const signatureStatus = decoded?.signature ? "存在，未验证" : "缺失";
 
   async function handleCopyPayload() {
     if (!payload) {
@@ -86,21 +87,21 @@ export default function JwtDecoderTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Security Utility</p>
+          <p className="eyebrow">令牌调试</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar">
-        <button type="button" onClick={() => setToken(sampleToken)}>
-          示例 Token
+        <button type="button" onClick={() => { setToken(sampleToken); setCopied(false); }}>
+          填入示例 Token
         </button>
-        <button type="button" onClick={() => void handleCopyPayload()}>
-          {copied ? "已复制 Payload" : "复制 Payload"}
+        <button type="button" onClick={() => void handleCopyPayload()} disabled={!payload}>
+          {copied ? "已复制载荷" : "复制载荷"}
         </button>
       </div>
       <label className="tool-field">
-        <span>JWT</span>
+        <span>JWT 输入</span>
         <textarea value={token} onChange={(event) => {
           setToken(event.target.value);
           setCopied(false);
@@ -108,33 +109,33 @@ export default function JwtDecoderTool({ manifest }: ToolClientProps) {
       </label>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Header</span>
+          <span>Header 头部</span>
           <textarea value={header} readOnly spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Payload</span>
+          <span>Payload 载荷</span>
           <textarea value={payload} readOnly spellCheck={false} />
         </label>
       </div>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Algorithm</h3>
-          <p>{decoded?.header.alg?.toString() ?? "unknown"}</p>
+          <h3>算法</h3>
+          <p>{decoded?.header.alg?.toString() ?? "未知"}</p>
         </article>
         <article className="detail-card">
-          <h3>Expires</h3>
+          <h3>过期时间</h3>
           <p>{expiresAt}</p>
         </article>
         <article className="detail-card">
-          <h3>Status</h3>
-          <p>{isExpired ? "expired" : "not expired / no exp"}</p>
+          <h3>状态</h3>
+          <p>{isExpired ? "已过期" : "未过期 / 无 exp"}</p>
         </article>
         <article className="detail-card">
-          <h3>Signature</h3>
-          <p>{decoded?.signature ? "present, not verified" : "missing"}</p>
+          <h3>签名</h3>
+          <p>{signatureStatus}</p>
         </article>
       </div>
-      <p className="tool-note">此工具只做本地解码，不验证签名，也不会上传 token。</p>
+      <p className="tool-note">此工具只做本地解码，不验证签名，也不会上传 Token。需要验签时请使用 JWT JWK Verifier。</p>
       {error ? <p className="tool-error">{error}</p> : null}
     </section>
   );

@@ -5,62 +5,65 @@ import { useState } from "react";
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 const bases = [
-  { label: "Binary", radix: 2, prefix: "0b" },
-  { label: "Octal", radix: 8, prefix: "0o" },
-  { label: "Decimal", radix: 10, prefix: "" },
-  { label: "Hex", radix: 16, prefix: "0x" }
+  { label: "二进制", short: "BIN", radix: 2, prefix: "0b", digitPattern: /^[01]+$/i },
+  { label: "八进制", short: "OCT", radix: 8, prefix: "0o", digitPattern: /^[0-7]+$/i },
+  { label: "十进制", short: "DEC", radix: 10, prefix: "", digitPattern: /^[0-9]+$/i },
+  { label: "十六进制", short: "HEX", radix: 16, prefix: "0x", digitPattern: /^[0-9a-f]+$/i }
 ] as const;
 
-type Radix = (typeof bases)[number]["radix"];
+type BaseInfo = (typeof bases)[number];
+type Radix = BaseInfo["radix"];
 
-function stripRadixPrefix(input: string, radix: Radix) {
-  const trimmed = input.trim();
-  const sign = trimmed.startsWith("-") || trimmed.startsWith("+") ? trimmed.slice(0, 1) : "";
-  const unsigned = sign ? trimmed.slice(1) : trimmed;
-  const prefixByRadix: Partial<Record<Radix, RegExp>> = {
-    2: /^0b/i,
-    8: /^0o/i,
-    16: /^0x/i
-  };
-  const matchingPrefix = prefixByRadix[radix];
+const prefixByRadix: Partial<Record<Radix, RegExp>> = {
+  2: /^0b/i,
+  8: /^0o/i,
+  16: /^0x/i
+};
 
-  if (matchingPrefix?.test(unsigned)) {
-    return `${sign}${unsigned.replace(matchingPrefix, "")}`;
-  }
-
-  if (/^0[bBoOxX]/.test(unsigned)) {
-    throw new Error("输入前缀与所选进制不匹配");
-  }
-
-  return trimmed;
+function getBase(radix: Radix) {
+  return bases.find((base) => base.radix === radix) ?? bases[2];
 }
 
 function parseInteger(input: string, radix: Radix) {
-  const normalized = stripRadixPrefix(input, radix);
+  const trimmed = input.trim().replace(/_/g, "");
+  const sign = trimmed.startsWith("-") || trimmed.startsWith("+") ? trimmed.slice(0, 1) : "";
+  const unsigned = sign ? trimmed.slice(1) : trimmed;
+  const matchingPrefix = prefixByRadix[radix];
+  const hasKnownPrefix = /^0[bBoOxX]/.test(unsigned);
 
-  if (!normalized) {
+  if (!unsigned) {
     throw new Error("请输入整数");
   }
 
-  const value = Number.parseInt(normalized, radix);
-
-  if (!Number.isSafeInteger(value)) {
-    throw new Error("输入超出安全整数范围");
+  if (!matchingPrefix?.test(unsigned) && hasKnownPrefix) {
+    throw new Error("输入前缀与所选进制不匹配");
   }
 
-  if (value.toString(radix).toLowerCase() !== normalized.toLowerCase().replace(/^0+/, "") && value !== 0) {
+  const digits = matchingPrefix?.test(unsigned) ? unsigned.replace(matchingPrefix, "") : unsigned;
+  const base = getBase(radix);
+
+  if (!digits || !base.digitPattern.test(digits)) {
     throw new Error("输入与所选进制不匹配");
   }
 
-  return value;
+  const unsignedValue = base.radix === 10 ? BigInt(digits) : BigInt(base.prefix + digits);
+
+  return sign === "-" ? -unsignedValue : unsignedValue;
+}
+
+function formatBigInt(value: bigint, base: BaseInfo) {
+  const isNegative = value < 0n;
+  const absoluteValue = isNegative ? -value : value;
+
+  return (isNegative ? "-" : "") + base.prefix + absoluteValue.toString(base.radix).toUpperCase();
 }
 
 export default function NumberBaseConverterTool({ manifest }: ToolClientProps) {
   const [input, setInput] = useState("255");
   const [radix, setRadix] = useState<Radix>(10);
-  const [copied, setCopied] = useState("");
+  const [copied, setCopied] = useState<Radix | null>(null);
 
-  let value = 0;
+  let value = 0n;
   let error = "";
 
   try {
@@ -69,31 +72,31 @@ export default function NumberBaseConverterTool({ manifest }: ToolClientProps) {
     error = parseError instanceof Error ? parseError.message : "转换失败";
   }
 
-  async function copy(label: string, output: string) {
+  async function copy(base: BaseInfo, output: string) {
     await navigator.clipboard.writeText(output);
-    setCopied(label);
+    setCopied(base.radix);
   }
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Developer Utility</p>
+          <p className="eyebrow">数值转换</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
-      <div className="tool-toolbar">
+      <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>输入</span>
-          <input value={input} onChange={(event) => setInput(event.target.value)} />
+          <span>输入整数</span>
+          <input value={input} onChange={(event) => { setInput(event.target.value); setCopied(null); }} spellCheck={false} />
         </label>
         <label className="tool-field tool-field--compact">
           <span>输入进制</span>
-          <select value={radix} onChange={(event) => setRadix(Number(event.target.value) as Radix)}>
+          <select value={radix} onChange={(event) => { setRadix(Number(event.target.value) as Radix); setCopied(null); }}>
             {bases.map((base) => (
               <option key={base.radix} value={base.radix}>
-                {base.label}
+                {base.label} ({base.short})
               </option>
             ))}
           </select>
@@ -101,22 +104,26 @@ export default function NumberBaseConverterTool({ manifest }: ToolClientProps) {
       </div>
       <div className="case-grid">
         {bases.map((base) => {
-          const output = error ? "" : `${base.prefix}${value.toString(base.radix).toUpperCase()}`;
+          const output = error ? "" : formatBigInt(value, base);
 
           return (
             <article key={base.radix} className="detail-card">
               <div className="tool-card__header">
-                <h3>{base.label}</h3>
-                <button type="button" onClick={() => void copy(base.label, output)} disabled={Boolean(error)}>
-                  {copied === base.label ? "已复制" : "复制"}
+                <div>
+                  <p className="eyebrow">{base.short}</p>
+                  <h3>{base.label}</h3>
+                </div>
+                <button type="button" onClick={() => void copy(base, output)} disabled={Boolean(error)}>
+                  {copied === base.radix ? "已复制" : "复制"}
                 </button>
               </div>
-              <p className="mono-output">{output || "invalid"}</p>
+              <p className="mono-output">{output || "待修正"}</p>
             </article>
           );
         })}
       </div>
       {error ? <p className="tool-error">{error}</p> : null}
+      <p className="tool-note">支持前缀 0b、0o、0x 和下划线分隔符；大整数使用 BigInt 转换，不会按 JavaScript Number 截断。</p>
     </section>
   );
 }

@@ -163,7 +163,7 @@ function MermaidPreview({ source }: { source: string }) {
   if (diagram.nodes.length === 0) {
     return (
       <div className="detail-card">
-        <h3>Preview</h3>
+        <h3>预览</h3>
         <p>当前轻量预览支持 flowchart / graph 的节点与箭头。</p>
       </div>
     );
@@ -184,7 +184,7 @@ function MermaidPreview({ source }: { source: string }) {
   );
 
   return (
-    <div className="detail-card" aria-label="Mermaid lightweight preview">
+    <div className="detail-card" aria-label="Mermaid 轻量预览">
       <svg viewBox={`0 0 ${width} ${height}`} role="img" style={{ width: "100%", minHeight: "18rem" }}>
         <defs>
           <marker id="mermaid-preview-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
@@ -267,7 +267,7 @@ export default function MermaidPreviewFormatterTool({ manifest }: ToolClientProp
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Documentation Utility</p>
+          <p className="eyebrow">文档工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -293,8 +293,8 @@ export default function MermaidPreviewFormatterTool({ manifest }: ToolClientProp
         <MermaidPreview source={output} />
         <div className="tool-table">
           <div className="tool-table__row tool-table__row--head">
-            <span>Line</span>
-            <span>Check</span>
+            <span>行号</span>
+            <span>检查项</span>
           </div>
           {issues.length > 0 ? issues.map((issue) => (
             <div className="tool-table__row" key={`${issue.line}-${issue.message}`}>
@@ -303,7 +303,7 @@ export default function MermaidPreviewFormatterTool({ manifest }: ToolClientProp
             </div>
           )) : (
             <div className="tool-table__row">
-              <span>OK</span>
+              <span>通过</span>
               <span>未发现基础语法问题</span>
             </div>
           )}

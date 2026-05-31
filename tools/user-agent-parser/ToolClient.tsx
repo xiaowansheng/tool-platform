@@ -9,11 +9,11 @@ function matchFirst(input: string, patterns: Array<[string, RegExp]>) {
     const match = input.match(pattern);
 
     if (match) {
-      return match[1] ? `${label} ${match[1]}` : label;
+      return match[1] ? label + " " + match[1].replace(/_/g, ".") : label;
     }
   }
 
-  return "Unknown";
+  return "未知";
 }
 
 function parseUserAgent(input: string) {
@@ -36,22 +36,38 @@ function parseUserAgent(input: string) {
       ["Gecko", /Gecko\/[\d.]+/],
       ["WebKit", /AppleWebKit\/([\d.]+)/]
     ]),
-    device: /Mobile|iPhone|Android/.test(input) ? "Mobile" : /Tablet|iPad/.test(input) ? "Tablet" : "Desktop / unknown"
+    device: /Tablet|iPad/.test(input) ? "平板或 iPad" : /Mobile|iPhone|Android/.test(input) ? "移动端" : "桌面端或未知"
   };
 }
 
 export default function UserAgentParserTool({ manifest }: ToolClientProps) {
   const [input, setInput] = useState("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
   const result = parseUserAgent(input);
+  const labels: Record<keyof typeof result, string> = {
+    browser: "浏览器",
+    os: "操作系统",
+    engine: "渲染引擎",
+    device: "设备类型"
+  };
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network Debugging</p>
+          <p className="eyebrow">访问日志排查</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
+      </div>
+      <div className="detail-grid">
+        <article className="detail-card">
+          <h3>UA 字符</h3>
+          <p>{input.length}</p>
+        </article>
+        <article className="detail-card">
+          <h3>是否移动端</h3>
+          <p>{/Mobile|iPhone|Android/.test(input) ? "是" : "否"}</p>
+        </article>
       </div>
       <label className="tool-field">
         <span>User-Agent</span>
@@ -60,11 +76,12 @@ export default function UserAgentParserTool({ manifest }: ToolClientProps) {
       <div className="detail-grid">
         {Object.entries(result).map(([key, value]) => (
           <article key={key} className="detail-card">
-            <h3>{key}</h3>
+            <h3>{labels[key as keyof typeof result]}</h3>
             <p>{value}</p>
           </article>
         ))}
       </div>
+      <p className="tool-note">User-Agent 可以被伪造，适合日志排查和粗略分群；关键能力判断仍应使用特性检测或服务端真实指标。</p>
     </section>
   );
 }

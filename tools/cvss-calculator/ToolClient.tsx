@@ -6,7 +6,7 @@ import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 const metricKeys = ["AV", "AC", "PR", "UI", "S", "C", "I", "A"] as const;
 
-type MetricKey = typeof metricKeys[number];
+type MetricKey = (typeof metricKeys)[number];
 type MetricValues = Record<MetricKey, string>;
 
 interface MetricOption {
@@ -15,54 +15,54 @@ interface MetricOption {
 }
 
 const metricLabels: Record<MetricKey, string> = {
-  AV: "Attack Vector",
-  AC: "Attack Complexity",
-  PR: "Privileges Required",
-  UI: "User Interaction",
-  S: "Scope",
-  C: "Confidentiality",
-  I: "Integrity",
-  A: "Availability"
+  AV: "攻击向量",
+  AC: "攻击复杂度",
+  PR: "所需权限",
+  UI: "用户交互",
+  S: "影响范围",
+  C: "机密性影响",
+  I: "完整性影响",
+  A: "可用性影响"
 };
 
 const metricOptions: Record<MetricKey, MetricOption[]> = {
   AV: [
-    { value: "N", label: "Network" },
-    { value: "A", label: "Adjacent" },
-    { value: "L", label: "Local" },
-    { value: "P", label: "Physical" }
+    { value: "N", label: "网络" },
+    { value: "A", label: "相邻网络" },
+    { value: "L", label: "本地" },
+    { value: "P", label: "物理" }
   ],
   AC: [
-    { value: "L", label: "Low" },
-    { value: "H", label: "High" }
+    { value: "L", label: "低" },
+    { value: "H", label: "高" }
   ],
   PR: [
-    { value: "N", label: "None" },
-    { value: "L", label: "Low" },
-    { value: "H", label: "High" }
+    { value: "N", label: "无" },
+    { value: "L", label: "低" },
+    { value: "H", label: "高" }
   ],
   UI: [
-    { value: "N", label: "None" },
-    { value: "R", label: "Required" }
+    { value: "N", label: "无需" },
+    { value: "R", label: "需要" }
   ],
   S: [
-    { value: "U", label: "Unchanged" },
-    { value: "C", label: "Changed" }
+    { value: "U", label: "不变" },
+    { value: "C", label: "改变" }
   ],
   C: [
-    { value: "H", label: "High" },
-    { value: "L", label: "Low" },
-    { value: "N", label: "None" }
+    { value: "H", label: "高" },
+    { value: "L", label: "低" },
+    { value: "N", label: "无" }
   ],
   I: [
-    { value: "H", label: "High" },
-    { value: "L", label: "Low" },
-    { value: "N", label: "None" }
+    { value: "H", label: "高" },
+    { value: "L", label: "低" },
+    { value: "N", label: "无" }
   ],
   A: [
-    { value: "H", label: "High" },
-    { value: "L", label: "Low" },
-    { value: "N", label: "None" }
+    { value: "H", label: "高" },
+    { value: "L", label: "低" },
+    { value: "N", label: "无" }
   ]
 };
 
@@ -122,11 +122,11 @@ function calculateCvss(metrics: MetricValues) {
 }
 
 function severityFor(score: number) {
-  if (score === 0) return "None";
-  if (score < 4) return "Low";
-  if (score < 7) return "Medium";
-  if (score < 9) return "High";
-  return "Critical";
+  if (score === 0) return "无";
+  if (score < 4) return "低危";
+  if (score < 7) return "中危";
+  if (score < 9) return "高危";
+  return "严重";
 }
 
 export default function CvssCalculatorTool({ manifest }: ToolClientProps) {
@@ -150,7 +150,7 @@ export default function CvssCalculatorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Vulnerability Scoring</p>
+          <p className="eyebrow">漏洞评分</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -158,19 +158,19 @@ export default function CvssCalculatorTool({ manifest }: ToolClientProps) {
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Base Score</h3>
+          <h3>基础分</h3>
           <p>{result.score.toFixed(1)}</p>
         </article>
         <article className="detail-card">
-          <h3>Severity</h3>
+          <h3>严重级别</h3>
           <p>{severity}</p>
         </article>
         <article className="detail-card">
-          <h3>Impact</h3>
+          <h3>影响分</h3>
           <p>{Math.max(result.impact, 0).toFixed(2)}</p>
         </article>
         <article className="detail-card">
-          <h3>Exploitability</h3>
+          <h3>可利用性</h3>
           <p>{result.exploitability.toFixed(2)}</p>
         </article>
       </div>
@@ -192,10 +192,10 @@ export default function CvssCalculatorTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar">
         <button type="button" onClick={() => void copyVector()}>
-          {copied ? "已复制" : "复制 Vector"}
+          {copied ? "已复制 Vector" : "复制 Vector"}
         </button>
-        <button type="button" onClick={() => setMetrics(initialMetrics)}>
-          重置
+        <button type="button" onClick={() => { setMetrics(initialMetrics); setCopied(false); }}>
+          重置默认高危示例
         </button>
       </div>
 
@@ -203,6 +203,7 @@ export default function CvssCalculatorTool({ manifest }: ToolClientProps) {
         <span>CVSS Vector</span>
         <textarea value={vector} readOnly spellCheck={false} />
       </label>
+      <p className="tool-note">当前按 CVSS v3.1 基础分 计算，适合漏洞初筛、报告记录和复核 Vector 是否一致。</p>
     </section>
   );
 }

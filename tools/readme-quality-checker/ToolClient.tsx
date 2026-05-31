@@ -69,23 +69,23 @@ function buildReport(readme: string) {
   const gaps = checks.filter((check) => !check.passed);
 
   return [
-    "# README Quality Report",
+    "# README 质量报告",
     "",
-    `Score: ${score}/100`,
+    `得分：${score}/100`,
     "",
-    "## Passed",
-    ...(passed.length > 0 ? passed.map((check) => `- ${check.label}`) : ["- None"]),
+    "## 已通过",
+    ...(passed.length > 0 ? passed.map((check) => `- ${check.label}`) : ["- 无"]),
     "",
-    "## Gaps",
-    ...(gaps.length > 0 ? gaps.map((check) => `- ${check.label}: ${check.hint}`) : ["- No major gaps detected"]),
+    "## 待补齐",
+    ...(gaps.length > 0 ? gaps.map((check) => `- ${check.label}: ${check.hint}`) : ["- 未发现明显缺口"]),
     "",
-    "## Metrics",
+    "## 指标",
     "",
-    `- Words: ${metrics.words}`,
-    `- Headings: ${metrics.headings}`,
-    `- Code blocks: ${metrics.codeBlocks}`,
-    `- Links: ${metrics.links}`,
-    `- Images: ${metrics.images}`
+    `- 字数： ${metrics.words}`,
+    `- 标题数： ${metrics.headings}`,
+    `- 代码块： ${metrics.codeBlocks}`,
+    `- 链接： ${metrics.links}`,
+    `- 图片： ${metrics.images}`
   ].join("\n");
 }
 
@@ -104,22 +104,22 @@ export default function ReadmeQualityCheckerTool({ manifest }: ToolClientProps) 
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">README Utility</p>
+          <p className="eyebrow">README 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-results">
         <article className="detail-card">
-          <h3>Score</h3>
+          <h3>得分</h3>
           <p>{analysis.score}/100</p>
         </article>
         <article className="detail-card">
-          <h3>Words</h3>
+          <h3>字数</h3>
           <p>{analysis.metrics.words}</p>
         </article>
         <article className="detail-card">
-          <h3>Gaps</h3>
+          <h3>缺口</h3>
           <p>{analysis.checks.filter((check) => !check.passed).length}</p>
         </article>
       </div>
@@ -135,14 +135,14 @@ export default function ReadmeQualityCheckerTool({ manifest }: ToolClientProps) 
           }} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Report</span>
+          <span>报告</span>
           <textarea value={report} readOnly spellCheck={false} />
         </label>
       </div>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Check</span>
-          <span>Status</span>
+          <span>检查项</span>
+          <span>状态</span>
         </div>
         {analysis.checks.map((check) => (
           <div className="tool-table__row" key={check.label}>

@@ -140,7 +140,7 @@ export default function DocumentationTocAnchorGeneratorTool({ manifest }: ToolCl
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Markdown Utility</p>
+          <p className="eyebrow">Markdown 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -171,28 +171,28 @@ export default function DocumentationTocAnchorGeneratorTool({ manifest }: ToolCl
           }} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Document with TOC markers</span>
+          <span>带 TOC 标记的文档</span>
           <textarea value={documentWithToc} readOnly spellCheck={false} />
         </label>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>TOC</span>
+          <span>目录</span>
           <textarea value={toc} readOnly spellCheck={false} />
         </label>
         <div className="tool-table">
           <div className="tool-table__row tool-table__row--head">
-            <span>Anchor</span>
-            <span>Heading</span>
+            <span>锚点</span>
+            <span>标题</span>
           </div>
           {headings.length > 0 ? headings.map((heading) => (
             <div className="tool-table__row" key={`${heading.line}-${heading.anchor}`}>
               <span>#{heading.anchor}</span>
-              <span>H{heading.depth} L{heading.line}: {heading.text}</span>
+              <span>H{heading.depth} 第 {heading.line} 行：{heading.text}</span>
             </div>
           )) : (
             <div className="tool-table__row">
-              <span>None</span>
+              <span>无</span>
               <span>未找到匹配层级的 Markdown 标题</span>
             </div>
           )}

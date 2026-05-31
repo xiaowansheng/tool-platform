@@ -6,6 +6,9 @@ import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 type Provider = "github" | "stripe" | "slack";
 
+const sampleBody = "{\"action\":\"opened\"}";
+const sampleSignature = "sha256=931f7549cb28864ede02887873140d15dc87d237f31caea0af7e915b292dff26";
+
 function hex(bytes: ArrayBuffer) {
   return Array.from(new Uint8Array(bytes), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
@@ -61,46 +64,75 @@ export default function WebhookSignatureVerifierTool({ manifest }: ToolClientPro
   const [provider, setProvider] = useState<Provider>("github");
   const [secret, setSecret] = useState("webhook-secret");
   const [timestamp, setTimestamp] = useState(Math.floor(Date.now() / 1000).toString());
-  const [body, setBody] = useState('{"action":"opened"}');
-  const [signature, setSignature] = useState("");
+  const [body, setBody] = useState(sampleBody);
+  const [signature, setSignature] = useState(sampleSignature);
   const [result, setResult] = useState("尚未验证");
+  const [expectedHeader, setExpectedHeader] = useState(sampleSignature);
+  const [copied, setCopied] = useState(false);
 
   async function verify() {
     const digest = await hmacSha256(secret, buildSignedPayload(provider, body, timestamp));
     const expected = `${prefix(provider)}${digest}`;
-    const expectedHeader = provider === "stripe" ? `t=${timestamp},v1=${digest}` : expected;
+    const nextExpectedHeader = provider === "stripe" ? `t=${timestamp},v1=${digest}` : expected;
     const valid = signatureCandidates(provider, signature).some((candidate) => timingSafeEqual(candidate, expected));
 
-    setResult(valid ? `Valid: ${expectedHeader}` : `Invalid. Expected: ${expectedHeader}`);
+    setExpectedHeader(nextExpectedHeader);
+    setResult(valid ? "签名有效" : "签名无效，请核对密钥、时间戳和原始 Body");
+    setCopied(false);
+  }
+
+  async function copyExpectedHeader() {
+    await navigator.clipboard.writeText(expectedHeader);
+    setCopied(true);
+  }
+
+  function loadGithubExample() {
+    setProvider("github");
+    setSecret("webhook-secret");
+    setTimestamp(Math.floor(Date.now() / 1000).toString());
+    setBody(sampleBody);
+    setSignature(sampleSignature);
+    setExpectedHeader(sampleSignature);
+    setResult("尚未验证");
+    setCopied(false);
   }
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Webhook Security</p>
+          <p className="eyebrow">Webhook 签名</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Provider</span>
-          <select value={provider} onChange={(event) => setProvider(event.target.value as Provider)}>
+          <span>平台</span>
+          <select value={provider} onChange={(event) => { setProvider(event.target.value as Provider); setCopied(false); }}>
             <option value="github">GitHub</option>
             <option value="stripe">Stripe</option>
             <option value="slack">Slack</option>
           </select>
         </label>
-        <label className="tool-field tool-field--compact"><span>Secret</span><input value={secret} onChange={(event) => setSecret(event.target.value)} /></label>
-        <label className="tool-field tool-field--compact"><span>Timestamp</span><input value={timestamp} onChange={(event) => setTimestamp(event.target.value)} /></label>
+        <label className="tool-field tool-field--compact"><span>签名密钥</span><input value={secret} onChange={(event) => { setSecret(event.target.value); setCopied(false); }} /></label>
+        <label className="tool-field tool-field--compact"><span>时间戳</span><input value={timestamp} onChange={(event) => { setTimestamp(event.target.value); setCopied(false); }} /></label>
       </div>
       <div className="workspace workspace--two-column">
-        <label className="tool-field"><span>Body</span><textarea value={body} onChange={(event) => setBody(event.target.value)} spellCheck={false} /></label>
-        <label className="tool-field"><span>Signature Header</span><textarea value={signature} onChange={(event) => setSignature(event.target.value)} spellCheck={false} /></label>
+        <label className="tool-field"><span>原始 Body</span><textarea value={body} onChange={(event) => { setBody(event.target.value); setCopied(false); }} spellCheck={false} /></label>
+        <label className="tool-field"><span>签名请求头</span><textarea value={signature} onChange={(event) => { setSignature(event.target.value); setCopied(false); }} spellCheck={false} /></label>
       </div>
-      <div className="tool-toolbar"><button type="button" onClick={() => void verify()}>验证</button></div>
-      <label className="tool-field"><span>Result</span><textarea value={result} readOnly spellCheck={false} /></label>
+      <div className="tool-toolbar">
+        <button type="button" onClick={() => void verify()}>验证签名</button>
+        <button type="button" onClick={loadGithubExample}>GitHub 示例</button>
+        <button type="button" onClick={() => void copyExpectedHeader()}>{copied ? "已复制期望值" : "复制期望请求头"}</button>
+      </div>
+      <div className="detail-grid">
+        <article className="detail-card"><h3>验证结果</h3><p>{result}</p></article>
+        <article className="detail-card"><h3>签名载荷</h3><p>{provider === "github" ? "Body" : provider === "stripe" ? "timestamp.body" : "v0:timestamp:body"}</p></article>
+      </div>
+      <label className="tool-field"><span>期望请求头 / 结果</span><textarea value={`${result}\n${expectedHeader}`} readOnly spellCheck={false} /></label>
+      <p className="tool-note">校验时必须使用平台实际收到的原始 Body，格式化 JSON 或改变换行都会导致 HMAC 不一致。</p>
     </section>
   );
 }

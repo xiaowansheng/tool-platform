@@ -9,7 +9,8 @@ const manifest: ToolManifest = {
   tags: ["webhook", "github", "stripe", "slack", "hmac"],
   icon: "webhook",
   runtime: "simple",
-  featured: true
+  featured: true,
+  permissions: ["clipboard"]
 };
 
 export default manifest;

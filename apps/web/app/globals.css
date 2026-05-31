@@ -1521,6 +1521,32 @@ a.category-card:hover .category-card__tooltip {
   line-height: 1.6;
 }
 
+.tool-panel--guide {
+  display: grid;
+  gap: 1rem;
+}
+
+.tool-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.detail-card--guide {
+  text-align: left;
+  padding: 1rem;
+}
+
+.detail-card--guide h3 {
+  margin: 0 0 0.65rem;
+  color: var(--text-primary);
+  font-size: 0.86rem;
+}
+
+.detail-card--guide .compact-list {
+  padding-left: 1.25rem;
+}
+
 .compact-list {
   display: grid;
   gap: 0.4rem;
@@ -1595,6 +1621,31 @@ a.category-card:hover .category-card__tooltip {
   color: var(--text-primary);
   font-weight: 600;
   background: var(--bg-muted);
+}
+
+.tool-table__row.unicode-table__row {
+  grid-template-columns: minmax(4rem, 0.45fr) minmax(7rem, 0.65fr) minmax(0, 1fr);
+}
+
+.tool-table__row.regex-match-table__row {
+  grid-template-columns: minmax(3.5rem, 0.28fr) minmax(4rem, 0.32fr) minmax(0, 1fr);
+}
+
+.tool-table__row.cookie-table__row {
+  grid-template-columns: minmax(8rem, 0.55fr) minmax(10rem, 0.9fr) minmax(12rem, 1.25fr);
+}
+
+.tool-table__row.finding-table__row {
+  grid-template-columns: minmax(7rem, 0.5fr) minmax(5rem, 0.28fr) minmax(0, 1.4fr);
+}
+
+.tool-table__row.request-cookie-table__row {
+  grid-template-columns: minmax(8rem, 0.7fr) minmax(0, 1.3fr);
+}
+
+.unicode-table .mono-output {
+  margin: 0;
+  padding: 0.35rem 0.55rem;
 }
 
 .visual-preview,
@@ -2635,6 +2686,10 @@ a.category-card:hover .category-card__tooltip {
 
   .detail-grid--meta {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tool-guide-grid {
+    grid-template-columns: 1fr;
   }
 
   .tool-panel--info {

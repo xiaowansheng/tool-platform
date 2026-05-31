@@ -62,14 +62,14 @@ function estimateStrength(length: number, enabledSets: CharacterSetKey[]) {
   const entropy = poolSize > 0 ? Math.round(length * Math.log2(poolSize)) : 0;
 
   if (entropy >= 100) {
-    return { label: "strong", entropy };
+    return { label: "强", entropy };
   }
 
   if (entropy >= 70) {
-    return { label: "medium", entropy };
+    return { label: "中等", entropy };
   }
 
-  return { label: "weak", entropy };
+  return { label: "较弱", entropy };
 }
 
 export default function PasswordGeneratorTool({ manifest }: ToolClientProps) {
@@ -109,7 +109,7 @@ export default function PasswordGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Security Utility</p>
+          <p className="eyebrow">安全工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -150,15 +150,15 @@ export default function PasswordGeneratorTool({ manifest }: ToolClientProps) {
       </label>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Strength</h3>
+          <h3>强度</h3>
           <p>{strength.label}</p>
         </article>
         <article className="detail-card">
-          <h3>Entropy</h3>
-          <p>{strength.entropy} bits</p>
+          <h3>熵估算</h3>
+          <p>{strength.entropy} 位</p>
         </article>
         <article className="detail-card">
-          <h3>Character Pool</h3>
+          <h3>字符池</h3>
           <p>{enabledSets.reduce((total, key) => total + characterSets[key].length, 0)}</p>
         </article>
       </div>

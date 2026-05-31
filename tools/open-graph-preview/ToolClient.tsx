@@ -35,12 +35,12 @@ function buildTags(title: string, description: string, url: string, image: strin
 }
 
 export default function OpenGraphPreviewTool({ manifest }: ToolClientProps) {
-  const [title, setTitle] = useState("Build faster internal tools");
-  const [description, setDescription] = useState("A focused platform for formatters, generators, validators, and design utilities.");
+  const [title, setTitle] = useState("高效构建内部工具");
+  const [description, setDescription] = useState("一个聚合格式化、生成、校验和设计调试工具的浏览器工作台。");
   const [url, setUrl] = useState("https://tool-platform.local/tools/open-graph-preview");
-  const [siteName, setSiteName] = useState("Tool Platform");
+  const [siteName, setSiteName] = useState("工具平台");
   const [imageUrl, setImageUrl] = useState("");
-  const [imageAlt, setImageAlt] = useState("Tool Platform preview image");
+  const [imageAlt, setImageAlt] = useState("工具平台预览图");
   const [accent, setAccent] = useState("#0f766e");
   const [copied, setCopied] = useState(false);
 
@@ -69,7 +69,7 @@ export default function OpenGraphPreviewTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Social Preview</p>
+          <p className="eyebrow">社交预览</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -77,11 +77,11 @@ export default function OpenGraphPreviewTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Title</span>
+          <span>标题</span>
           <input value={title} onChange={(event) => setTitle(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Site name</span>
+          <span>站点名称</span>
           <input value={siteName} onChange={(event) => setSiteName(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
@@ -89,26 +89,26 @@ export default function OpenGraphPreviewTool({ manifest }: ToolClientProps) {
           <input value={url} onChange={(event) => setUrl(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Image URL</span>
+          <span>图片 URL</span>
           <input value={imageUrl} placeholder="https://..." onChange={(event) => setImageUrl(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Image alt</span>
+          <span>图片替代文本</span>
           <input value={imageAlt} onChange={(event) => setImageAlt(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Fallback accent</span>
+          <span>兜底强调色</span>
           <input type="color" value={accent} onChange={(event) => setAccent(event.target.value)} />
         </label>
       </div>
 
       <label className="tool-field">
-        <span>Description</span>
+        <span>描述</span>
         <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
       </label>
 
       <div className="asset-preview-grid">
-        {["Facebook", "LinkedIn", "X Large Card"].map((platform) => (
+        {["Facebook", "LinkedIn", "X 大图卡片"].map((platform) => (
           <article key={platform} className="og-card">
             <div className="og-card__image" style={previewImageStyle}>
               {!imageUrl.trim() ? <strong>{siteName}</strong> : null}
@@ -124,11 +124,11 @@ export default function OpenGraphPreviewTool({ manifest }: ToolClientProps) {
       </div>
 
       <label className="tool-field">
-        <span>Open Graph / Twitter tags</span>
+        <span>Open Graph / Twitter 标签</span>
         <textarea value={tags} readOnly spellCheck={false} />
       </label>
 
-      <button type="button" onClick={() => void copyTags()}>{copied ? "已复制" : "复制 Tags"}</button>
+      <button type="button" onClick={() => void copyTags()}>{copied ? "已复制" : "复制标签"}</button>
     </section>
   );
 }

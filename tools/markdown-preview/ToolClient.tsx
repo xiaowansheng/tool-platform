@@ -11,22 +11,24 @@ type MarkdownBlock =
   | { kind: "code"; language: string; text: string }
   | { kind: "quote"; text: string };
 
-const sampleMarkdown = `# Tool Platform
-
-浏览器中的工具工作台，支持 **插件化**、Worker 和 WASM。
-
-- JSON / Regex / Base64
-- 文本分析与本地缓存
-- 未来扩展 AI 工具
-
-> 工具应该是独立模块，而不是普通页面。
-
-\`\`\`ts
-export interface ToolManifest {
-  id: string;
-  runtime: "simple" | "worker" | "wasm";
-}
-\`\`\``;
+const sampleMarkdown = [
+  "# Tool Platform",
+  "",
+  "浏览器中的工具工作台，支持 **插件化**、Worker 和 WASM。",
+  "",
+  "- JSON / Regex / Base64",
+  "- 文本分析与本地缓存",
+  "- 未来扩展 AI 工具",
+  "",
+  "> 工具应该是独立模块，而不是普通页面。",
+  "",
+  "```ts",
+  "export interface ToolManifest {",
+  "  id: string;",
+  "  runtime: \"simple\" | \"worker\" | \"wasm\";",
+  "}",
+  "```"
+].join("\n");
 
 function flushParagraph(blocks: MarkdownBlock[], paragraph: string[]) {
   if (paragraph.length > 0) {
@@ -137,7 +139,7 @@ function renderInline(text: string) {
 
 function renderBlock(block: MarkdownBlock, index: number) {
   if (block.kind === "heading") {
-    const Heading = `h${block.level}` as "h1" | "h2" | "h3";
+    const Heading = ("h" + block.level) as "h1" | "h2" | "h3";
 
     return <Heading key={index}>{renderInline(block.text)}</Heading>;
   }
@@ -145,8 +147,8 @@ function renderBlock(block: MarkdownBlock, index: number) {
   if (block.kind === "list") {
     return (
       <ul key={index}>
-        {block.items.map((item) => (
-          <li key={item}>{renderInline(item)}</li>
+        {block.items.map((item, itemIndex) => (
+          <li key={item + itemIndex}>{renderInline(item)}</li>
         ))}
       </ul>
     );
@@ -154,7 +156,7 @@ function renderBlock(block: MarkdownBlock, index: number) {
 
   if (block.kind === "code") {
     return (
-      <pre key={index}>
+      <pre key={index} data-language={block.language}>
         <code>{block.text}</code>
       </pre>
     );
@@ -170,25 +172,41 @@ function renderBlock(block: MarkdownBlock, index: number) {
 export default function MarkdownPreviewTool({ manifest }: ToolClientProps) {
   const [input, setInput] = useState(sampleMarkdown);
   const blocks = parseMarkdown(input);
+  const headingCount = blocks.filter((block) => block.kind === "heading").length;
 
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Text Workspace</p>
+          <p className="eyebrow">文档预览</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
+      <div className="detail-grid">
+        <article className="detail-card">
+          <h3>块数量</h3>
+          <p>{blocks.length}</p>
+        </article>
+        <article className="detail-card">
+          <h3>标题数</h3>
+          <p>{headingCount}</p>
+        </article>
+        <article className="detail-card">
+          <h3>行数</h3>
+          <p>{input.split(/\r?\n/).length}</p>
+        </article>
+      </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Markdown</span>
+          <span>Markdown 输入</span>
           <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
         </label>
-        <article className="detail-card markdown-preview" aria-label="Markdown preview">
+        <article className="detail-card markdown-preview" aria-label="Markdown 预览">
           {blocks.length > 0 ? blocks.map(renderBlock) : <p>暂无内容</p>}
         </article>
       </div>
+      <p className="tool-note">预览器只覆盖常见 Markdown 语法，并会把非 http(s) 链接替换为安全占位链接。</p>
     </section>
   );
 }
