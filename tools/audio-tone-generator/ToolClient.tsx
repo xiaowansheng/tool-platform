@@ -39,6 +39,13 @@ function createWavBlob(frequency: number, duration: number, volume: number, samp
   return new Blob([buffer], { type: "audio/wav" });
 }
 
+const statusLabels: Record<string, string> = {
+  idle: "空闲",
+  stopped: "已停止",
+  ended: "播放结束",
+  playing: "播放中"
+};
+
 export default function AudioToneGeneratorTool({ manifest }: ToolClientProps) {
   const audioContextRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
@@ -107,7 +114,7 @@ export default function AudioToneGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Audio</p>
+          <p className="eyebrow">音频工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -117,7 +124,7 @@ export default function AudioToneGeneratorTool({ manifest }: ToolClientProps) {
         <button type="button" className="button--primary" onClick={() => void play()}>播放</button>
         <button type="button" onClick={stop}>停止</button>
         <button type="button" onClick={downloadWav}>下载 WAV</button>
-        <div className="mono-output">Status: {status}</div>
+        <div className="mono-output">状态：{statusLabels[status] ?? status}</div>
       </div>
 
       <div className="tool-toolbar tool-toolbar--grid">
@@ -127,18 +134,18 @@ export default function AudioToneGeneratorTool({ manifest }: ToolClientProps) {
         <label className="tool-field tool-field--compact">
           <span>波形</span>
           <select value={wave} onChange={(event) => setWave(event.target.value as WaveType)}>
-            <option value="sine">sine</option>
-            <option value="square">square</option>
-            <option value="sawtooth">sawtooth</option>
-            <option value="triangle">triangle</option>
+            <option value="sine">正弦波</option>
+            <option value="square">方波</option>
+            <option value="sawtooth">锯齿波</option>
+            <option value="triangle">三角波</option>
           </select>
         </label>
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Period</h3><p>{(1000 / frequency).toFixed(2)} ms</p></article>
-        <article className="detail-card"><h3>Samples</h3><p>{Math.round(duration * 44100).toLocaleString()}</p></article>
-        <article className="detail-card"><h3>Wave</h3><p>{wave}</p></article>
+        <article className="detail-card"><h3>周期</h3><p>{(1000 / frequency).toFixed(2)} ms</p></article>
+        <article className="detail-card"><h3>采样数</h3><p>{Math.round(duration * 44100).toLocaleString()}</p></article>
+        <article className="detail-card"><h3>波形</h3><p>{wave}</p></article>
       </div>
 
       <audio className="media-audio-preview" controls src={wavUrl} />

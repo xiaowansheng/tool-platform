@@ -49,7 +49,7 @@ export default function DiscountStackCalculatorTool({ manifest }: ToolClientProp
   const [unitPrice, setUnitPrice] = useState(79);
   const [quantity, setQuantity] = useState(2);
   const [unitCost, setUnitCost] = useState(28);
-  const [discounts, setDiscounts] = useState("Launch | 15%\nCoupon | $8");
+  const [discounts, setDiscounts] = useState("首发优惠 | 15%\n优惠券 | $8");
   const [taxRate, setTaxRate] = useState(7.5);
   const [shipping, setShipping] = useState(6.99);
   const [copied, setCopied] = useState(false);
@@ -76,13 +76,13 @@ export default function DiscountStackCalculatorTool({ manifest }: ToolClientProp
     };
   }, [discounts, quantity, shipping, taxRate, unitCost, unitPrice]);
   const summary = [
-    `Gross: ${money(result.gross)}`,
+    `原价合计：${money(result.gross)}`,
     ...result.steps.map((step) => `${step.label}: -${money(step.amount)} -> ${money(step.subtotal)}`),
-    `Tax: ${money(result.tax)}`,
-    `Shipping: ${money(shipping)}`,
-    `Customer total: ${money(result.total)}`,
-    `Net profit before tax/shipping: ${money(result.profit)}`,
-    `Margin: ${result.margin.toFixed(1)}%`
+    `税费：${money(result.tax)}`,
+    `物流费：${money(shipping)}`,
+    `客户支付总额：${money(result.total)}`,
+    `税费和物流前净利润：${money(result.profit)}`,
+    `毛利率：${result.margin.toFixed(1)}%`
   ].join("\n");
 
   async function copySummary() {
@@ -99,7 +99,7 @@ export default function DiscountStackCalculatorTool({ manifest }: ToolClientProp
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Pricing</p>
+          <p className="eyebrow">价格工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -115,10 +115,10 @@ export default function DiscountStackCalculatorTool({ manifest }: ToolClientProp
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Gross</h3><p>{money(result.gross)}</p></article>
-        <article className="detail-card"><h3>Discount</h3><p>{money(result.discountAmount)} ({result.discountRate.toFixed(1)}%)</p></article>
-        <article className="detail-card"><h3>Total</h3><p>{money(result.total)}</p></article>
-        <article className="detail-card"><h3>Margin</h3><p>{result.margin.toFixed(1)}%</p></article>
+        <article className="detail-card"><h3>原价合计</h3><p>{money(result.gross)}</p></article>
+        <article className="detail-card"><h3>折扣</h3><p>{money(result.discountAmount)} ({result.discountRate.toFixed(1)}%)</p></article>
+        <article className="detail-card"><h3>支付总额</h3><p>{money(result.total)}</p></article>
+        <article className="detail-card"><h3>毛利率</h3><p>{result.margin.toFixed(1)}%</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

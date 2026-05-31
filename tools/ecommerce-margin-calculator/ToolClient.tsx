@@ -54,12 +54,12 @@ export default function EcommerceMarginCalculatorTool({ manifest }: ToolClientPr
   const [error, setError] = useState("");
   const result = useMemo(() => calculate({ price, unitCost, platformFeeRate, paymentFeeRate, adSpend, shipping, returnRate, targetMargin }), [adSpend, paymentFeeRate, platformFeeRate, price, returnRate, shipping, targetMargin, unitCost]);
   const report = [
-    `Price: ${money(price)}`,
-    `Total cost: ${money(result.totalCost)}`,
-    `Profit: ${money(result.profit)}`,
-    `Margin: ${result.margin.toFixed(1)}%`,
-    `Break-even ROAS: ${result.roasBreakEven.toFixed(2)}x`,
-    `Suggested price for ${targetMargin}% margin: ${money(result.suggestedPrice)}`
+    `售价：${money(price)}`,
+    `总成本：${money(result.totalCost)}`,
+    `利润：${money(result.profit)}`,
+    `毛利率：${result.margin.toFixed(1)}%`,
+    `盈亏平衡 ROAS：${result.roasBreakEven.toFixed(2)}x`,
+    `${targetMargin}% 目标毛利建议售价：${money(result.suggestedPrice)}`
   ].join("\n");
 
   async function copyReport() {
@@ -76,7 +76,7 @@ export default function EcommerceMarginCalculatorTool({ manifest }: ToolClientPr
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Ecommerce</p>
+          <p className="eyebrow">电商工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -98,19 +98,19 @@ export default function EcommerceMarginCalculatorTool({ manifest }: ToolClientPr
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Profit</h3><p>{money(result.profit)}</p></article>
-        <article className="detail-card"><h3>Margin</h3><p>{result.margin.toFixed(1)}%</p></article>
-        <article className="detail-card"><h3>Break-even ROAS</h3><p>{result.roasBreakEven.toFixed(2)}x</p></article>
-        <article className="detail-card"><h3>Suggested Price</h3><p>{money(result.suggestedPrice)}</p></article>
+        <article className="detail-card"><h3>利润</h3><p>{money(result.profit)}</p></article>
+        <article className="detail-card"><h3>毛利率</h3><p>{result.margin.toFixed(1)}%</p></article>
+        <article className="detail-card"><h3>盈亏平衡 ROAS</h3><p>{result.roasBreakEven.toFixed(2)}x</p></article>
+        <article className="detail-card"><h3>建议售价</h3><p>{money(result.suggestedPrice)}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">
         <div className="tool-table">
           {[
-            ["Platform fee", money(result.platformFee)],
-            ["Payment fee", money(result.paymentFee)],
-            ["Return allowance", money(result.expectedReturnCost)],
-            ["Total cost", money(result.totalCost)]
+            ["平台费", money(result.platformFee)],
+            ["支付费", money(result.paymentFee)],
+            ["退货预留", money(result.expectedReturnCost)],
+            ["总成本", money(result.totalCost)]
           ].map(([label, value]) => <div className="tool-table__row" key={label}><span>{label}</span><span>{value}</span></div>)}
         </div>
         <label className="tool-field">

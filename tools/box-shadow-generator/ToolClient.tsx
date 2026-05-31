@@ -60,12 +60,12 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolClientProps) {
   }> = [
     { label: "X", value: x, setValue: setX },
     { label: "Y", value: y, setValue: setY },
-    { label: "Blur", value: blur, setValue: setBlur },
-    { label: "Spread", value: spread, setValue: setSpread },
-    { label: "Radius", value: radius, setValue: setRadius },
-    { label: "Backdrop blur", value: backdropBlur, setValue: setBackdropBlur },
-    { label: "Saturation", value: saturation, setValue: setSaturation },
-    { label: "Text glow", value: textGlow, setValue: setTextGlow }
+    { label: "模糊", value: blur, setValue: setBlur },
+    { label: "扩散", value: spread, setValue: setSpread },
+    { label: "圆角", value: radius, setValue: setRadius },
+    { label: "背景模糊", value: backdropBlur, setValue: setBackdropBlur },
+    { label: "饱和度", value: saturation, setValue: setSaturation },
+    { label: "文字发光", value: textGlow, setValue: setTextGlow }
   ];
 
   async function copyCss() {
@@ -76,7 +76,7 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Design Utility</p>
+          <p className="eyebrow">设计工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -89,27 +89,27 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolClientProps) {
           </label>
         ))}
         <label className="tool-field tool-field--compact">
-          <span>Shadow color</span>
+          <span>阴影颜色</span>
           <input value={shadowColor} onChange={(event) => setShadowColor(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Shadow picker</span>
+          <span>阴影取色</span>
           <input type="color" value={normalizeHexColor(shadowColor, "#0f766e")} onChange={(event) => setShadowColor(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Surface</span>
+          <span>卡片背景</span>
           <input value={surface} onChange={(event) => setSurface(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Surface picker</span>
+          <span>背景取色</span>
           <input type="color" value={normalizeHexColor(surface, "#0d1824")} onChange={(event) => setSurface(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Shadow alpha</span>
+          <span>阴影透明度</span>
           <input type="number" min="0" max="1" step="0.05" value={shadowAlpha} onChange={(event) => setShadowAlpha(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Border alpha</span>
+          <span>边框透明度</span>
           <input type="number" min="0" max="1" step="0.05" value={borderAlpha} onChange={(event) => setBorderAlpha(Number(event.target.value))} />
         </label>
         <button type="button" onClick={() => void copyCss()}>复制 CSS</button>
@@ -118,11 +118,11 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolClientProps) {
       <div className="tool-option-list">
         <label className="tool-check">
           <input type="checkbox" checked={ambientLayer} onChange={(event) => setAmbientLayer(event.target.checked)} />
-          Ambient shadow layer
+          环境阴影层
         </label>
         <label className="tool-check">
           <input type="checkbox" checked={inset} onChange={(event) => setInset(event.target.checked)} />
-          Inset shadow
+          内阴影
         </label>
       </div>
 
@@ -138,7 +138,7 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolClientProps) {
             textShadow
           }}
         >
-          CSS Effects
+          CSS 效果
         </div>
       </div>
       <label className="tool-field">

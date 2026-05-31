@@ -64,7 +64,7 @@ export default function FlexboxGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Layout Utility</p>
+          <p className="eyebrow">布局工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -72,39 +72,39 @@ export default function FlexboxGeneratorTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Direction</span>
+          <span>方向</span>
           <select value={direction} onChange={(event) => setDirection(event.target.value as FlexDirection)}>
             {directions.map((option) => <option key={option}>{option}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Wrap</span>
+          <span>换行</span>
           <select value={wrap} onChange={(event) => setWrap(event.target.value as FlexWrap)}>
             {wraps.map((option) => <option key={option}>{option}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Justify</span>
+          <span>主轴对齐</span>
           <select value={justifyContent} onChange={(event) => setJustifyContent(event.target.value as JustifyContent)}>
             {justifyOptions.map((option) => <option key={option}>{option}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Align</span>
+          <span>交叉轴对齐</span>
           <select value={alignItems} onChange={(event) => setAlignItems(event.target.value as AlignItems)}>
             {alignOptions.map((option) => <option key={option}>{option}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Gap px</span>
+          <span>间距 px</span>
           <input type="number" min="0" value={gap} onChange={(event) => setGap(Math.max(0, Number(event.target.value)))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Items</span>
+          <span>项目数</span>
           <input type="number" min="1" max="16" value={itemCount} onChange={(event) => setItemCount(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Basis px</span>
+          <span>基础宽度 px</span>
           <input type="number" min="48" value={basis} onChange={(event) => setBasis(Math.max(48, Number(event.target.value)))} />
         </label>
         <button type="button" onClick={() => void copyCss()}>{copied ? "已复制" : "复制 CSS"}</button>

@@ -106,7 +106,7 @@ export default function FaviconAppIconGeneratorTool({ manifest }: ToolClientProp
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Icon Utility</p>
+          <p className="eyebrow">图标工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -114,35 +114,35 @@ export default function FaviconAppIconGeneratorTool({ manifest }: ToolClientProp
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Label</span>
+          <span>文字</span>
           <input value={label} maxLength={4} onChange={(event) => setLabel(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Shape</span>
+          <span>形状</span>
           <select value={shape} onChange={(event) => setShape(event.target.value as IconShape)}>
-            <option value="rounded">Rounded</option>
-            <option value="circle">Circle</option>
-            <option value="square">Square</option>
+            <option value="rounded">圆角</option>
+            <option value="circle">圆形</option>
+            <option value="square">方形</option>
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Background</span>
+          <span>背景色</span>
           <input value={background} onChange={(event) => setBackground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Background picker</span>
+          <span>背景取色</span>
           <input type="color" value={normalizeHexColor(background, "#0f766e")} onChange={(event) => setBackground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Foreground</span>
+          <span>前景色</span>
           <input value={foreground} onChange={(event) => setForeground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Foreground picker</span>
+          <span>前景取色</span>
           <input type="color" value={normalizeHexColor(foreground, "#e8eff7")} onChange={(event) => setForeground(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Preview size</span>
+          <span>预览尺寸</span>
           <select value={size} onChange={(event) => setSize(Number(event.target.value))}>
             {iconSizes.map((item) => (
               <option key={item} value={item}>{item} x {item}</option>
@@ -150,18 +150,18 @@ export default function FaviconAppIconGeneratorTool({ manifest }: ToolClientProp
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Public path</span>
+          <span>公共路径</span>
           <input value={pathPrefix} onChange={(event) => setPathPrefix(event.target.value)} />
         </label>
       </div>
 
       <div className="asset-preview-grid">
         <article className="detail-card favicon-stage">
-          <img src={svgDataUrl(svg)} alt="Generated app icon" />
-          <p>{size} x {size} SVG source, exportable to PNG.</p>
+          <img src={svgDataUrl(svg)} alt="生成的应用图标" />
+          <p>{size} x {size} SVG 源图，可导出为 PNG。</p>
         </article>
         <article className="detail-card">
-          <h3>Exports</h3>
+          <h3>导出</h3>
           <div className="tool-option-list">
             {iconSizes.map((item) => (
               <button key={item} type="button" onClick={() => downloadPng(item)}>{item}px PNG</button>
@@ -177,7 +177,7 @@ export default function FaviconAppIconGeneratorTool({ manifest }: ToolClientProp
           <textarea value={svg} readOnly spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>HTML tags</span>
+          <span>HTML 标签</span>
           <textarea value={htmlSnippet} readOnly spellCheck={false} />
         </label>
       </div>

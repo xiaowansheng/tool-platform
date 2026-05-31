@@ -7,10 +7,10 @@ import type { ToolClientProps } from "@tool-platform/tool-contracts";
 type Unit = "px" | "rem";
 
 const ratioPresets = [
-  { label: "Minor Third", value: 1.2 },
-  { label: "Major Third", value: 1.25 },
-  { label: "Perfect Fourth", value: 1.333 },
-  { label: "Golden Ratio", value: 1.618 }
+  { label: "小三度", value: 1.2 },
+  { label: "大三度", value: 1.25 },
+  { label: "纯四度", value: 1.333 },
+  { label: "黄金比例", value: 1.618 }
 ];
 
 function round(value: number) {
@@ -62,7 +62,7 @@ export default function FontScaleGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Typography Utility</p>
+          <p className="eyebrow">排版工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -70,11 +70,11 @@ export default function FontScaleGeneratorTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Base size px</span>
+          <span>基础字号 px</span>
           <input type="number" min="10" max="32" value={baseSize} onChange={(event) => setBaseSize(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Ratio</span>
+          <span>比例</span>
           <select value={ratio} onChange={(event) => setRatio(Number(event.target.value))}>
             {ratioPresets.map((preset) => (
               <option key={preset.label} value={preset.value}>{preset.label} ({preset.value})</option>
@@ -82,19 +82,19 @@ export default function FontScaleGeneratorTool({ manifest }: ToolClientProps) {
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Down steps</span>
+          <span>向下级数</span>
           <input type="number" min="0" max="5" value={downSteps} onChange={(event) => setDownSteps(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Up steps</span>
+          <span>向上级数</span>
           <input type="number" min="1" max="10" value={upSteps} onChange={(event) => setUpSteps(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Line height</span>
+          <span>行高</span>
           <input type="number" min="1" max="2" step="0.05" value={lineHeight} onChange={(event) => setLineHeight(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Unit</span>
+          <span>单位</span>
           <select value={unit} onChange={(event) => setUnit(event.target.value as Unit)}>
             <option value="rem">rem</option>
             <option value="px">px</option>
@@ -105,20 +105,20 @@ export default function FontScaleGeneratorTool({ manifest }: ToolClientProps) {
       <div className="font-scale-list">
         {scale.map((item) => (
           <article key={item.name} className="detail-card">
-            <p className="eyebrow">step {item.step}</p>
+            <p className="eyebrow">阶梯 {item.step}</p>
             <h3>{item.name}</h3>
-            <strong style={{ fontSize: item.size, lineHeight: formatSize(item.lineHeight, unit) }}>Typography</strong>
+            <strong style={{ fontSize: item.size, lineHeight: formatSize(item.lineHeight, unit) }}>排版预览</strong>
             <p>{item.size} / {formatSize(item.lineHeight, unit)}</p>
           </article>
         ))}
       </div>
 
       <label className="tool-field">
-        <span>CSS variables</span>
+        <span>CSS 变量</span>
         <textarea value={css} readOnly spellCheck={false} />
       </label>
 
-      <button type="button" onClick={() => void copyCss()}>{copied ? "已复制" : "复制 CSS Tokens"}</button>
+      <button type="button" onClick={() => void copyCss()}>{copied ? "已复制" : "复制 CSS 变量"}</button>
     </section>
   );
 }

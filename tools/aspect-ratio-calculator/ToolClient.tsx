@@ -21,7 +21,7 @@ export default function AspectRatioCalculatorTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Design Utility</p>
+          <p className="eyebrow">设计工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -42,11 +42,11 @@ export default function AspectRatioCalculatorTool({ manifest }: ToolClientProps)
       </div>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Ratio</h3>
+          <h3>比例</h3>
           <p>{ratio}</p>
         </article>
         <article className="detail-card">
-          <h3>Scaled Size</h3>
+          <h3>缩放尺寸</h3>
           <p>{targetWidth} x {targetHeight}</p>
         </article>
         <article className="detail-card">

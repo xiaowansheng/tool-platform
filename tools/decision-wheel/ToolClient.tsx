@@ -9,10 +9,10 @@ interface WheelOption {
   weight: number;
 }
 
-const sampleOptions = `Refactor parser | 2
-Write tests | 3
-Ship docs | 1
-Triage backlog | 1`;
+const sampleOptions = `重构解析器 | 2
+编写测试 | 3
+发布文档 | 1
+梳理待办 | 1`;
 
 function hashSeed(seed: string) {
   let value = 2166136261;
@@ -93,7 +93,7 @@ export default function DecisionWheelTool({ manifest }: ToolClientProps) {
     setCopied(false);
 
     if (picked) {
-      setHistory((items) => [`${nextSpin}. ${picked.label} (weight ${picked.weight})`, ...items].slice(0, 12));
+      setHistory((items) => [`${nextSpin}. ${picked.label}（权重 ${picked.weight}）`, ...items].slice(0, 12));
     }
   }
 
@@ -111,7 +111,7 @@ export default function DecisionWheelTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Random</p>
+          <p className="eyebrow">随机工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -119,22 +119,22 @@ export default function DecisionWheelTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Seed</span>
+          <span>种子</span>
           <input value={seed} onChange={(event) => {
             setSeed(event.target.value);
             setCopied(false);
           }} />
         </label>
-        <button type="button" onClick={() => setSeed(String(Date.now()))}>随机 seed</button>
+        <button type="button" onClick={() => setSeed(String(Date.now()))}>随机种子</button>
         <button type="button" onClick={choose}>抽取结果</button>
         <button type="button" onClick={() => void copyHistory()}>{copied ? "已复制" : "复制历史"}</button>
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Options</h3><p>{options.length}</p></article>
-        <article className="detail-card"><h3>Total weight</h3><p>{totalWeight}</p></article>
-        <article className="detail-card"><h3>Spin</h3><p>{spin}</p></article>
-        <article className="detail-card"><h3>Result</h3><p>{result?.label ?? "-"}</p></article>
+        <article className="detail-card"><h3>候选项</h3><p>{options.length}</p></article>
+        <article className="detail-card"><h3>总权重</h3><p>{totalWeight}</p></article>
+        <article className="detail-card"><h3>抽取次数</h3><p>{spin}</p></article>
+        <article className="detail-card"><h3>结果</h3><p>{result?.label ?? "-"}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

@@ -51,7 +51,7 @@ export default function RandomTeamGeneratorTool({ manifest }: ToolClientProps) {
   const [error, setError] = useState("");
   const names = useMemo(() => namesText.split(/\r?\n|,/).map((item) => item.trim()).filter(Boolean), [namesText]);
   const teams = useMemo(() => buildTeams(names, teamCount, seed), [names, seed, teamCount]);
-  const output = teams.map((team, index) => `Team ${index + 1}: ${team.join(", ")}`).join("\n");
+  const output = teams.map((team, index) => `第 ${index + 1} 组：${team.join(", ")}`).join("\n");
 
   async function copyTeams() {
     try {
@@ -67,7 +67,7 @@ export default function RandomTeamGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Random</p>
+          <p className="eyebrow">随机工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -75,16 +75,16 @@ export default function RandomTeamGeneratorTool({ manifest }: ToolClientProps) {
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact"><span>队伍数量</span><input type="number" min="1" max="20" value={teamCount} onChange={(event) => setTeamCount(Number(event.target.value))} /></label>
-        <label className="tool-field tool-field--compact"><span>Seed</span><input value={seed} onChange={(event) => setSeed(event.target.value)} /></label>
-        <button type="button" onClick={() => setSeed(String(Date.now()))}>随机 seed</button>
+        <label className="tool-field tool-field--compact"><span>种子</span><input value={seed} onChange={(event) => setSeed(event.target.value)} /></label>
+        <button type="button" onClick={() => setSeed(String(Date.now()))}>随机种子</button>
         <button type="button" onClick={() => void copyTeams()}>{copied ? "已复制" : "复制分组"}</button>
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Members</h3><p>{names.length}</p></article>
-        <article className="detail-card"><h3>Teams</h3><p>{teams.length}</p></article>
-        <article className="detail-card"><h3>Largest</h3><p>{Math.max(0, ...teams.map((team) => team.length))}</p></article>
-        <article className="detail-card"><h3>Smallest</h3><p>{Math.min(...teams.map((team) => team.length))}</p></article>
+        <article className="detail-card"><h3>成员数</h3><p>{names.length}</p></article>
+        <article className="detail-card"><h3>队伍数</h3><p>{teams.length}</p></article>
+        <article className="detail-card"><h3>最大组</h3><p>{Math.max(0, ...teams.map((team) => team.length))}</p></article>
+        <article className="detail-card"><h3>最小组</h3><p>{Math.min(...teams.map((team) => team.length))}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">
@@ -98,7 +98,7 @@ export default function RandomTeamGeneratorTool({ manifest }: ToolClientProps) {
         <div className="workspace workspace--stack">
           {teams.map((team, index) => (
             <article className="detail-card" key={`team-${index}`}>
-              <h3>Team {index + 1}</h3>
+              <h3>第 {index + 1} 组</h3>
               <p>{team.join(", ") || "-"}</p>
             </article>
           ))}

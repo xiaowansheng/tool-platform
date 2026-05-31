@@ -40,7 +40,7 @@ export default function LoremIpsumGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Design Utility</p>
+          <p className="eyebrow">设计工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

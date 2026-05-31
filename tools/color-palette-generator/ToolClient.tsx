@@ -75,7 +75,7 @@ export default function ColorPaletteGeneratorTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Design Utility</p>
+          <p className="eyebrow">设计工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -94,7 +94,7 @@ export default function ColorPaletteGeneratorTool({ manifest }: ToolClientProps)
             onClick={() => void copyColor(item.color)}
           >
             <span>{item.label}</span>
-            <strong>{copied === item.color ? "copied" : item.color}</strong>
+            <strong>{copied === item.color ? "已复制" : item.color}</strong>
           </button>
         ))}
       </div>

@@ -22,7 +22,7 @@ export default function PercentageCalculatorTool({ manifest }: ToolClientProps) 
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Productivity Utility</p>
+          <p className="eyebrow">效率工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -51,7 +51,7 @@ export default function PercentageCalculatorTool({ manifest }: ToolClientProps) 
           <p>{format(percentOf)}%</p>
         </article>
         <article className="detail-card">
-          <h3>A% of B</h3>
+          <h3>B 的 A%</h3>
           <p>{format(valueOfPercent)}</p>
         </article>
         <article className="detail-card">

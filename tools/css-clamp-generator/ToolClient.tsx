@@ -129,7 +129,7 @@ export default function CssClampGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Design Utility</p>
+          <p className="eyebrow">设计工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -177,15 +177,15 @@ export default function CssClampGeneratorTool({ manifest }: ToolClientProps) {
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Token</h3>
+          <h3>Token 数</h3>
           <p>{scale.length} 个字体尺寸</p>
         </article>
         <article className="detail-card">
-          <h3>Viewport</h3>
+          <h3>视口范围</h3>
           <p>{minViewport}px - {maxViewport}px</p>
         </article>
         <article className="detail-card">
-          <h3>Ratio</h3>
+          <h3>比例</h3>
           <p>{minRatio} - {maxRatio}</p>
         </article>
       </div>

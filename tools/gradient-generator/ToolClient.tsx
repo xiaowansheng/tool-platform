@@ -114,58 +114,58 @@ export default function GradientGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Design Utility</p>
+          <p className="eyebrow">设计工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>From</span>
+          <span>起始色</span>
           <input value={from} onChange={(event) => setFrom(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>From picker</span>
+          <span>起始取色</span>
           <input type="color" value={normalizeHexColor(from, "#0f766e")} onChange={(event) => setFrom(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>To</span>
+          <span>结束色</span>
           <input value={to} onChange={(event) => setTo(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>To picker</span>
+          <span>结束取色</span>
           <input type="color" value={normalizeHexColor(to, "#38bdf8")} onChange={(event) => setTo(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Accent</span>
+          <span>强调色</span>
           <input value={accent} onChange={(event) => setAccent(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Accent picker</span>
+          <span>强调取色</span>
           <input type="color" value={normalizeHexColor(accent, "#fbbf24")} onChange={(event) => setAccent(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Surface</span>
+          <span>表面色</span>
           <input value={surface} onChange={(event) => setSurface(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Text</span>
+          <span>文字色</span>
           <input value={text} onChange={(event) => setText(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Angle</span>
+          <span>角度</span>
           <input type="number" value={angle} onChange={(event) => setAngle(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Token prefix</span>
+          <span>Token 前缀</span>
           <input value={tokenPrefix} onChange={(event) => setTokenPrefix(event.target.value.replace(/[^a-z0-9-]/gi, "").toLowerCase())} />
         </label>
-        <button type="button" onClick={() => void copyCss()}>{copied ? "已复制" : "复制 Tokens"}</button>
+        <button type="button" onClick={() => void copyCss()}>{copied ? "已复制" : "复制 Token"}</button>
       </div>
 
       <div className="theme-preview" style={{ background: gradient, color: text }}>
-        <strong>Gradient theme</strong>
-        <p style={{ color: text }}>Primary, secondary, accent, surface and text tokens.</p>
+        <strong>渐变主题</strong>
+        <p style={{ color: text }}>主色、辅助色、强调色、表面色和文字色 Token。</p>
       </div>
 
       <div className="palette-grid">
@@ -178,7 +178,7 @@ export default function GradientGeneratorTool({ manifest }: ToolClientProps) {
       </div>
 
       <label className="tool-field">
-        <span>CSS theme tokens</span>
+        <span>CSS 主题 Token</span>
         <textarea value={tokenResult.css} readOnly spellCheck={false} />
       </label>
       {tokenResult.error ? <p className="tool-error">{tokenResult.error}</p> : null}

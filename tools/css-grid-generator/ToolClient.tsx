@@ -55,7 +55,7 @@ export default function CssGridGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Layout Utility</p>
+          <p className="eyebrow">布局工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -90,7 +90,7 @@ export default function CssGridGeneratorTool({ manifest }: ToolClientProps) {
           />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Gap px</span>
+          <span>间距 px</span>
           <input
             min="0"
             max="64"
