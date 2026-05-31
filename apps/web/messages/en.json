@@ -64,6 +64,7 @@
     "emptyTitle": "No results found",
     "emptyDescription": "Try searching by tag or category, e.g. `formatter`, `frontend`, `encoding`.",
     "clear": "Clear",
+    "results": "{count} results",
     "ariaLabel": "Search tools"
   },
   "searchPage": {

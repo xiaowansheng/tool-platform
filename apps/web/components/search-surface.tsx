@@ -1,9 +1,11 @@
 "use client";
 
-import { useDeferredValue, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useDeferredValue, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { searchTools, type ToolManifest } from "@tool-platform/tool-sdk";
+
+import { getToolPageManifest } from "@/lib/tool-page-copy";
 
 import { ToolCard } from "./tool-card";
 
@@ -25,9 +27,11 @@ export function SearchSurface({
   emptyDescription?: string;
 }) {
   const t = useTranslations("search");
+  const locale = useLocale();
   const [query, setQuery] = useState(initialQuery);
   const deferredQuery = useDeferredValue(query);
-  const filteredTools = searchTools(tools, deferredQuery);
+  const localizedTools = useMemo(() => tools.map((tool) => getToolPageManifest(tool, locale)), [tools, locale]);
+  const filteredTools = searchTools(localizedTools, deferredQuery);
 
   return (
     <section className="search-surface">
@@ -36,7 +40,7 @@ export function SearchSurface({
           <h2>{title ?? t("title")}</h2>
           <p>{subtitle ?? t("subtitle")}</p>
         </div>
-        <span className="pill">{filteredTools.length} results</span>
+        <span className="pill">{t("results", { count: filteredTools.length })}</span>
       </div>
       <div className="search-row">
         <input

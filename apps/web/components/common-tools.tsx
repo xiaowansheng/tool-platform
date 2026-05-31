@@ -2,7 +2,7 @@
 
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { Clock3, ExternalLink, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { getCategoryMeta, searchTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
@@ -16,6 +16,7 @@ import {
   type CommonToolRecord
 } from "@/lib/common-tools";
 import { Link } from "@/i18n/navigation";
+import { getRuntimeLabel, getToolPageManifest } from "@/lib/tool-page-copy";
 
 const TOOL_CARD_VISIBLE_TAGS = 4;
 
@@ -81,6 +82,7 @@ export function CommonToolsCategoryCard() {
 
 export function CommonToolsPage({ tools }: { tools: ToolManifest[] }) {
   const t = useTranslations("commonTools");
+  const locale = useLocale();
   const records = useCommonToolRecords();
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
@@ -97,7 +99,11 @@ export function CommonToolsPage({ tools }: { tools: ToolManifest[] }) {
       .filter((tool): tool is ToolManifest => Boolean(tool));
   }, [records, tools]);
 
-  const filteredTools = searchTools(commonTools, deferredQuery);
+  const localizedCommonTools = useMemo(() => {
+    return commonTools.map((tool) => getToolPageManifest(tool, locale));
+  }, [commonTools, locale]);
+
+  const filteredTools = searchTools(localizedCommonTools, deferredQuery);
   const hasTools = commonTools.length > 0;
 
   return (
@@ -169,6 +175,9 @@ function CommonToolCard({
   onRemove: () => void;
 }) {
   const t = useTranslations("commonTools");
+  const locale = useLocale();
+  const displayTool = getToolPageManifest(tool, locale);
+  const runtimeLabel = getRuntimeLabel(tool.runtime, locale);
   const toolCardT = useTranslations("toolCard");
   const ct = useTranslations("categories");
   const category = getCategoryMeta(tool.category);
@@ -182,14 +191,14 @@ function CommonToolCard({
       <div className="tool-card__header">
         <div className="tool-card__title-group">
           <p className="eyebrow">{categoryLabel}</p>
-          <h3 title={tool.name}>{tool.name}</h3>
+          <h3 title={displayTool.name}>{displayTool.name}</h3>
         </div>
         <span className="pill pill--runtime" data-runtime={tool.runtime}>
-          {tool.runtime}
+          {runtimeLabel}
         </span>
       </div>
-      <p className="tool-card__description" title={tool.description}>
-        {tool.description}
+      <p className="tool-card__description" title={displayTool.description}>
+        {displayTool.description}
       </p>
       <div className="tag-list" role="list" aria-label={toolCardT("tagsLabel", { tags: tagSummary })} title={tagSummary}>
         {visibleTags.map((tag) => (
@@ -209,7 +218,7 @@ function CommonToolCard({
           <ExternalLink aria-hidden="true" size={14} strokeWidth={2} />
           {toolCardT("enterTool")}
         </Link>
-        <button type="button" className="button--danger" onClick={onRemove} aria-label={t("removeAria", { name: tool.name })}>
+        <button type="button" className="button--danger" onClick={onRemove} aria-label={t("removeAria", { name: displayTool.name })}>
           <Trash2 aria-hidden="true" size={14} strokeWidth={2} />
           {t("remove")}
         </button>

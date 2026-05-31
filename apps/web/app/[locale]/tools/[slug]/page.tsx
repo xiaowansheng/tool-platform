@@ -57,7 +57,7 @@ export default async function ToolPage({
 function ToolPageContent({ manifest, locale }: { manifest: NonNullable<ReturnType<typeof getToolManifest>>; locale: string }) {
   const t = useTranslations("toolPage");
   const ct = useTranslations("categories");
-  const guide = getToolPageGuide(manifest.id, locale);
+  const guide = getToolPageGuide(manifest, locale);
   const isZh = isZhLocale(locale);
   const runtimeLabel = getRuntimeLabel(manifest.runtime, locale);
   const permissionLabels = getPermissionLabels(manifest.permissions, locale);

@@ -693,6 +693,120 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
   },
 };
 
+const zhToolNameOverrides: Record<string, string> = {
+  "adr-generator": "ADR 生成器",
+  "agent-behavior-log-viewer": "Agent 行为日志查看器",
+  "ai-chat": "AI 聊天工作台",
+  "ai-generated-code-risk-checker": "AI 生成代码风险检查器",
+  "ai-prompt-version-diff": "AI Prompt 版本差异对比",
+  "ai-sandbox-lab": "AI 沙箱实验室",
+  "api-docs-sdk-example-generator": "API 文档 SDK 示例生成器",
+  "api-error-code-doc-generator": "API 错误码文档生成器",
+  "api-rate-limit-calculator": "API 限流计算器",
+  "archive-structure-viewer": "归档结构查看器",
+  "aspect-ratio-calculator": "宽高比计算器",
+  "audio-tone-generator": "音频测试音生成器",
+  "batch-file-hash-calculator": "批量文件哈希计算器",
+  "box-shadow-generator": "CSS 效果工作台",
+  "browser-sandbox-console": "浏览器沙箱控制台",
+  "bug-report-repro-steps-generator": "Bug 复现步骤生成器",
+  "changelog-generator": "Changelog 生成器",
+  "code-snippet-security-review": "代码片段安全审查",
+  "color-palette-generator": "配色方案生成器",
+  "cron-helper": "Cron 表达式助手",
+  "css-clamp-generator": "响应式字号 Scale 生成器",
+  "css-grid-generator": "CSS Grid 生成器",
+  "css-specificity-calculator": "CSS 权重计算器",
+  "csv-cleaner": "CSV 清洗器",
+  "csv-json-ndjson-converter": "CSV / JSON / NDJSON 转换器",
+  "db-connection-string-workbench": "数据库连接串工作台",
+  "decision-wheel": "随机决策转盘",
+  "dependency-risk-explainer": "依赖风险解释器",
+  "discount-stack-calculator": "叠加优惠计算器",
+  "docker-compose-validator": "Docker Compose 校验器",
+  "docker-run-to-compose": "Docker Run 转 Compose",
+  "dockerfile-linter": "Dockerfile 检查器",
+  "easing-cubic-bezier-debugger": "Easing / Cubic Bezier 调试器",
+  "ecommerce-margin-calculator": "电商利润计算器",
+  "env-diff-merge-sanitizer": ".env 对比合并脱敏工具",
+  "error-log-troubleshooting-path-generator": "错误日志排查路径生成器",
+  "exif-metadata-tool": "EXIF 元数据工具",
+  "favicon-app-icon-generator": "Favicon / App Icon 生成器",
+  "ffmpeg-editor": "FFmpeg 命令编辑器",
+  "flashcard-cloze-builder": "闪卡填空题生成器",
+  "flexbox-generator": "Flexbox 生成器",
+  "font-scale-generator": "字号比例生成器",
+  "git-bisect-planner": "Git Bisect 规划器",
+  "git-patch-security-reviewer": "Git Patch 安全审查器",
+  "gitignore-generator": ".gitignore 生成器",
+  "grade-weight-calculator": "成绩权重计算器",
+  "gradient-generator": "渐变主题 Token 生成器",
+  "graphql-workbench": "GraphQL 工作台",
+  "helm-values-diff": "Helm Values 差异对比",
+  "html-css-js-playground": "HTML / CSS / JS Playground",
+  "image-compressor": "图片压缩器",
+  "image-ocr-preprocessor": "图片 OCR 预处理器",
+  "ipv4-cidr-calculator": "IPv4 CIDR 计算器",
+  "json-schema-studio": "JSON Schema 工作台",
+  "kubernetes-probe-builder": "Kubernetes Probe 生成器",
+  "kubernetes-yaml-validator": "Kubernetes YAML 校验器",
+  "large-text-tools": "大文本处理工具",
+  "license-compatibility-checker": "许可证兼容性检查器",
+  "link-collection-curator": "链接收藏整理器",
+  "llm-eval-case-generator": "LLM 评测用例生成器",
+  "llm-fact-check-checklist-generator": "LLM 事实核查清单生成器",
+  "lorem-ipsum-generator": "占位文本生成器",
+  "media-device-permission-lab": "媒体设备权限实验室",
+  "meta-tags-seo-preview": "Meta Tags SEO 预览器",
+  "mock-data-generator": "Mock 数据生成器",
+  "notification-payload-tester": "通知 Payload 测试器",
+  "oauth-oidc-debugger": "OAuth / OIDC 调试器",
+  "openapi-workbench": "OpenAPI 工作台",
+  "parquet-arrow-preview": "Parquet / Arrow 预览器",
+  "pdf-metadata-tool": "PDF 元数据工具",
+  "pdf-tools": "PDF 工具",
+  "pem-jwk-toolkit": "PEM / JWK / CSR 工具箱",
+  "percentage-calculator": "百分比计算器",
+  "pii-detector": "PII 检测器",
+  "pomodoro-focus-timer": "番茄专注计时器",
+  "pr-change-risk-summarizer": "PR 变更风险摘要器",
+  "privacy-cookie-copy-generator": "隐私 / Cookie 文案生成器",
+  "prompt-injection-detector": "Prompt Injection 检测器",
+  "qr-barcode-tool": "二维码 / 条形码工具",
+  "rag-chunk-token-estimator": "RAG 分块与 Token 估算器",
+  "random-team-generator": "随机分队生成器",
+  "release-notes-builder": "发布说明生成器",
+  "resource-unit-converter": "资源单位换算器",
+  "sbom-viewer": "SBOM 查看器",
+  "secrets-scanner": "密钥扫描器",
+  "semgrep-rule-playground": "Semgrep 规则 Playground",
+  "slo-error-budget-calculator": "SLO 错误预算计算器",
+  "social-caption-hashtag-formatter": "社媒文案与话题标签格式化器",
+  "social-post-scheduler": "社媒发布排期器",
+  "source-map-explorer": "Source Map 分析器",
+  "sql-explain-visualizer": "SQL 执行步骤可视化器",
+  "sql-index-advisor": "SQL 索引顾问",
+  "sql-playground": "SQL Playground",
+  "sri-hash-generator": "SRI 哈希生成器",
+  "stack-trace-explainer": "堆栈追踪解释器",
+  "study-plan-scheduler": "学习计划排期器",
+  "svg-optimizer-viewbox-editor": "SVG 优化与 ViewBox 编辑器",
+  "systemd-unit-analyzer": "systemd Unit 分析器",
+  "tailwind-class-lab": "Tailwind Class 实验室",
+  "task-priority-matrix": "任务优先级矩阵",
+  "terraform-plan-formatter": "Terraform Plan 格式化器",
+  "test-case-generator": "测试用例生成器",
+  "text-inspector": "文本检查器",
+  "threat-model-canvas": "威胁建模画布",
+  "token-cost-calculator": "Token 成本计算器",
+  "unit-converter": "单位换算器",
+  "url-safety-checker": "URL 安全检查器",
+  "wasm-binary-inspector": "WASM 二进制检查器",
+  "webgpu-capability-reporter": "WebGPU 能力报告器",
+  "websocket-client": "WebSocket 客户端",
+  "yaml-json-toml-converter": "YAML / JSON / TOML 转换器"
+};
+
 const zhRuntimeLabels: Record<ToolRuntime, string> = {
   simple: "本地简单运行",
   worker: "Worker 隔离运行",
@@ -733,12 +847,33 @@ export function isZhLocale(locale: string) {
   return locale.toLowerCase().startsWith("zh");
 }
 
-export function getToolPageGuide(toolId: string, locale: string) {
-  return isZhLocale(locale) ? zhToolPageGuides[toolId] ?? null : null;
+function buildZhFallbackGuide(manifest: ToolManifest): ToolPageGuide {
+  const name = zhToolNameOverrides[manifest.id] ?? manifest.name;
+  const description = manifest.description;
+
+  return {
+    name,
+    description,
+    intro: `${description.replace(/。$/, "")}。适合在浏览器里快速完成输入、预览、检查和复制结果。`,
+    steps: [
+      "按页面字段输入、粘贴或导入需要处理的内容。",
+      "根据场景调整参数，查看实时预览、统计、提示或生成结果。",
+      "复制、导出或记录结果，并在真实环境中复核关键配置。"
+    ],
+    examples: [`使用${name}处理一次日常工作流。`, "把生成结果复制到文档、工单、配置或测试数据中继续使用。"]
+  };
+}
+
+export function getToolPageGuide(manifest: ToolManifest, locale: string) {
+  if (!isZhLocale(locale)) {
+    return null;
+  }
+
+  return zhToolPageGuides[manifest.id] ?? buildZhFallbackGuide(manifest);
 }
 
 export function getToolPageManifest(manifest: ToolManifest, locale: string): ToolManifest {
-  const guide = getToolPageGuide(manifest.id, locale);
+  const guide = getToolPageGuide(manifest, locale);
 
   if (!guide) {
     return manifest;

@@ -64,6 +64,7 @@
     "emptyTitle": "没有命中当前查询",
     "emptyDescription": "尝试按标签或分类搜索，例如 `formatter`、`前端开发`、`encoding`。",
     "clear": "清空",
+    "results": "{count} 个结果",
     "ariaLabel": "搜索工具"
   },
   "searchPage": {

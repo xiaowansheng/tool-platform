@@ -5,11 +5,12 @@ import { Topbar } from "@/components/topbar";
 import { getAllTools } from "@tool-platform/tool-sdk";
 
 export default function SearchPage() {
+  const searchT = useTranslations("search");
   const t = useTranslations("searchPage");
 
   return (
     <>
-      <Topbar title="Search Workspace" subtitle={t("subtitle")} />
+      <Topbar title={searchT("title")} subtitle={t("subtitle")} />
       <div className="content-stack">
         <SearchSurface tools={getAllTools()} />
       </div>
