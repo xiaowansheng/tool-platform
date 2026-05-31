@@ -20,6 +20,12 @@ const rules: Array<{ name: string; severity: Finding["severity"]; pattern: RegEx
   { name: "Generic High Entropy", severity: "low", pattern: /\b[A-Za-z0-9+/=_-]{32,}\b/g }
 ];
 
+const severityLabels: Record<Finding["severity"], string> = {
+  high: "高",
+  medium: "中",
+  low: "低"
+};
+
 function scan(input: string): Finding[] {
   const findings: Finding[] = [];
   const lines = input.split(/\r?\n/);
@@ -48,28 +54,28 @@ export default function SecretsScannerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Security Scanner</p>
+          <p className="eyebrow">密钥扫描</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <label className="tool-field">
-        <span>Text / env / repo snippet</span>
+        <span>文本 / env / 仓库片段</span>
         <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
       </label>
       <div className="detail-grid">
-        <article className="detail-card"><h3>Findings</h3><p>{findings.length}</p></article>
-        <article className="detail-card"><h3>High</h3><p>{findings.filter((item) => item.severity === "high").length}</p></article>
-        <article className="detail-card"><h3>Medium</h3><p>{findings.filter((item) => item.severity === "medium").length}</p></article>
+        <article className="detail-card"><h3>发现项</h3><p>{findings.length}</p></article>
+        <article className="detail-card"><h3>高风险</h3><p>{findings.filter((item) => item.severity === "high").length}</p></article>
+        <article className="detail-card"><h3>中风险</h3><p>{findings.filter((item) => item.severity === "medium").length}</p></article>
       </div>
       <div className="tool-table">
-        <div className="tool-table__row tool-table__row--head"><span>Finding</span><span>Location / Match</span></div>
+        <div className="tool-table__row tool-table__row--head"><span>发现项</span><span>位置 / 匹配内容</span></div>
         {findings.length > 0 ? findings.map((finding, index) => (
           <div key={`${finding.rule}-${index}`} className="tool-table__row">
-            <span>{finding.severity.toUpperCase()} · {finding.rule}</span>
-            <span>line {finding.line}: {finding.match}</span>
+            <span>{severityLabels[finding.severity]} · {finding.rule}</span>
+            <span>第 {finding.line} 行：{finding.match}</span>
           </div>
-        )) : <div className="tool-table__row"><span>Clean</span><span>No obvious secret pattern found.</span></div>}
+        )) : <div className="tool-table__row"><span>通过</span><span>未发现明显密钥模式。</span></div>}
       </div>
       <p className="tool-note">扫描只在浏览器本地执行；规则偏保守，低风险高熵结果需要人工确认。</p>
     </section>
