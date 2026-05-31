@@ -28,6 +28,17 @@
     "searchTools": "Search Tools",
     "openExample": "Open Example"
   },
+  "workspaceTabs": {
+    "ariaLabel": "Open tools",
+    "empty": "No open tools",
+    "closeTab": "Close {name}",
+    "moreActions": "More tab actions",
+    "contextMenu": "{name} tab actions",
+    "close": "Close",
+    "closeOthers": "Close Other Tabs",
+    "closeRight": "Close Tabs to the Right",
+    "closeAll": "Close All Tabs"
+  },
   "theme": {
     "lightMode": "Light Mode",
     "darkMode": "Dark Mode"

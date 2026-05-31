@@ -9,6 +9,7 @@ import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigation } from "./mobile-navigation";
 import { SiteFooter } from "./site-footer";
 import { ThemeToggle } from "./theme-toggle";
+import { WorkspaceTabs } from "./workspace-tabs";
 
 
 function SidebarContent({ tools }: { tools: ToolManifest[] }) {
@@ -69,6 +70,7 @@ function SidebarContent({ tools }: { tools: ToolManifest[] }) {
 
 export function PlatformShell({ children }: { children: ReactNode }) {
   const tools = getAllTools();
+  const toolTabs = tools.map(({ id, name }) => ({ id, name }));
 
   return (
     <div className="app-shell">
@@ -81,7 +83,9 @@ export function PlatformShell({ children }: { children: ReactNode }) {
       </MobileNavigation>
 
       <main className="main">
-        <div className="main__content">{children}</div>
+        <div className="main__content">
+          <WorkspaceTabs tools={toolTabs}>{children}</WorkspaceTabs>
+        </div>
         <SiteFooter />
       </main>
     </div>
