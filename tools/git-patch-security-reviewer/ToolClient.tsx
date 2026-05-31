@@ -211,9 +211,9 @@ function reviewPatch(input: string) {
 }
 
 function severityLabel(severity: FindingSeverity) {
-  if (severity === "high") return "High";
-  if (severity === "medium") return "Medium";
-  return "Low";
+  if (severity === "high") return "高";
+  if (severity === "medium") return "中";
+  return "低";
 }
 
 export default function GitPatchSecurityReviewerTool({ manifest }: ToolClientProps) {
@@ -235,7 +235,7 @@ export default function GitPatchSecurityReviewerTool({ manifest }: ToolClientPro
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Secure Code Review</p>
+          <p className="eyebrow">安全代码审查</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -243,11 +243,11 @@ export default function GitPatchSecurityReviewerTool({ manifest }: ToolClientPro
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Minimum severity</span>
+          <span>最低严重级别</span>
           <select value={minimumSeverity} onChange={(event) => setMinimumSeverity(event.target.value as FindingSeverity)}>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+            <option value="low">低</option>
+            <option value="medium">中</option>
+            <option value="high">高</option>
           </select>
         </label>
       </div>
@@ -259,27 +259,27 @@ export default function GitPatchSecurityReviewerTool({ manifest }: ToolClientPro
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Added lines</h3>
+          <h3>新增行</h3>
           <p>{review.addedLines.length}</p>
         </article>
         <article className="detail-card">
-          <h3>High</h3>
+          <h3>高风险</h3>
           <p>{counts.high}</p>
         </article>
         <article className="detail-card">
-          <h3>Medium</h3>
+          <h3>中风险</h3>
           <p>{counts.medium}</p>
         </article>
         <article className="detail-card">
-          <h3>Low</h3>
+          <h3>低风险</h3>
           <p>{counts.low}</p>
         </article>
       </div>
 
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Location</span>
-          <span>Finding</span>
+          <span>位置</span>
+          <span>发现项</span>
         </div>
         {visibleFindings.length > 0 ? visibleFindings.map((finding) => (
           <div key={`${finding.rule.id}-${finding.file}-${finding.line}-${finding.content}`} className="tool-table__row">
@@ -295,7 +295,7 @@ export default function GitPatchSecurityReviewerTool({ manifest }: ToolClientPro
           </div>
         )) : (
           <div className="tool-table__row">
-            <span>No finding</span>
+            <span>未发现</span>
             <span>当前新增行未命中内置安全审查规则。</span>
           </div>
         )}

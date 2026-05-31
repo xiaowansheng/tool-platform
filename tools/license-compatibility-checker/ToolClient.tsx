@@ -39,10 +39,10 @@ const knownLicenses = [
 ];
 
 const distributionLabels: Record<Distribution, string> = {
-  internal: "Internal use",
-  saas: "SaaS / hosted service",
-  "distributed-closed": "Closed-source distribution",
-  "distributed-open": "Open-source distribution"
+  internal: "内部使用",
+  saas: "SaaS / 托管服务",
+  "distributed-closed": "闭源分发",
+  "distributed-open": "开源分发"
 };
 
 const sampleDependencies = "react MIT\nfastify MIT\nreporting-plugin GPL-3.0-only\nnetwork-agent AGPL-3.0-only\nlegacy-sdk NOASSERTION";
@@ -149,9 +149,9 @@ function assessDependency(projectLicense: string, distribution: Distribution, de
 }
 
 function toneLabel(tone: FindingTone) {
-  if (tone === "block") return "Block";
-  if (tone === "review") return "Review";
-  return "OK";
+  if (tone === "block") return "阻断";
+  if (tone === "review") return "待审";
+  return "通过";
 }
 
 export default function LicenseCompatibilityCheckerTool({ manifest }: ToolClientProps) {
@@ -175,7 +175,7 @@ export default function LicenseCompatibilityCheckerTool({ manifest }: ToolClient
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Open Source Compliance</p>
+          <p className="eyebrow">开源合规</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -183,13 +183,13 @@ export default function LicenseCompatibilityCheckerTool({ manifest }: ToolClient
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Project license</span>
+          <span>项目许可证</span>
           <select value={projectLicense} onChange={(event) => setProjectLicense(event.target.value)}>
             {knownLicenses.map((license) => <option key={license} value={license}>{license}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Distribution</span>
+          <span>分发方式</span>
           <select value={distribution} onChange={(event) => setDistribution(event.target.value as Distribution)}>
             {Object.entries(distributionLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
           </select>
@@ -197,29 +197,29 @@ export default function LicenseCompatibilityCheckerTool({ manifest }: ToolClient
       </div>
 
       <label className="tool-field">
-        <span>Dependencies</span>
+        <span>依赖项</span>
         <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
       </label>
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>OK</h3>
+          <h3>通过</h3>
           <p>{counts.ok}</p>
         </article>
         <article className="detail-card">
-          <h3>Review</h3>
+          <h3>待审</h3>
           <p>{counts.review}</p>
         </article>
         <article className="detail-card">
-          <h3>Block</h3>
+          <h3>阻断</h3>
           <p>{counts.block}</p>
         </article>
       </div>
 
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Dependency</span>
-          <span>Assessment</span>
+          <span>依赖</span>
+          <span>评估</span>
         </div>
         {findings.map((finding) => (
           <div key={`${finding.dependency.name}-${finding.dependency.license}`} className="tool-table__row">

@@ -124,7 +124,7 @@ export default function SemgrepRulePlaygroundTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Static Analysis</p>
+          <p className="eyebrow">静态分析</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -132,11 +132,11 @@ export default function SemgrepRulePlaygroundTool({ manifest }: ToolClientProps)
 
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Rule YAML</span>
+          <span>规则 YAML</span>
           <textarea value={ruleText} onChange={(event) => setRuleText(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Sample code</span>
+          <span>示例代码</span>
           <textarea value={code} onChange={(event) => setCode(event.target.value)} spellCheck={false} />
         </label>
       </div>
@@ -145,27 +145,27 @@ export default function SemgrepRulePlaygroundTool({ manifest }: ToolClientProps)
         <>
           <div className="detail-grid">
             <article className="detail-card">
-              <h3>Rule</h3>
+              <h3>规则</h3>
               <p>{result.rule.id}</p>
             </article>
             <article className="detail-card">
-              <h3>Severity</h3>
+              <h3>严重级别</h3>
               <p>{result.rule.severity}</p>
             </article>
             <article className="detail-card">
-              <h3>Languages</h3>
-              <p>{result.rule.languages.join(", ") || "not specified"}</p>
+              <h3>语言</h3>
+              <p>{result.rule.languages.join(", ") || "未指定"}</p>
             </article>
             <article className="detail-card">
-              <h3>Matches</h3>
+              <h3>匹配数</h3>
               <p>{result.matches.length}</p>
             </article>
           </div>
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Line</span>
-              <span>Match</span>
+              <span>行号</span>
+              <span>匹配</span>
             </div>
             {result.matches.length > 0 ? result.matches.map((match, index) => (
               <div key={`${match.pattern}-${match.line}-${index}`} className="tool-table__row">
@@ -177,7 +177,7 @@ export default function SemgrepRulePlaygroundTool({ manifest }: ToolClientProps)
               </div>
             )) : (
               <div className="tool-table__row">
-                <span>No match</span>
+                <span>无匹配</span>
                 <span>{result.rule.message}</span>
               </div>
             )}

@@ -157,9 +157,9 @@ function analyzeDependency(dependency: DependencyRecord): DependencyRisk {
 }
 
 function levelLabel(level: RiskLevel) {
-  if (level === "high") return "High";
-  if (level === "medium") return "Medium";
-  return "Low";
+  if (level === "high") return "高";
+  if (level === "medium") return "中";
+  return "低";
 }
 
 export default function DependencyRiskExplainerTool({ manifest }: ToolClientProps) {
@@ -189,7 +189,7 @@ export default function DependencyRiskExplainerTool({ manifest }: ToolClientProp
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Supply Chain Risk</p>
+          <p className="eyebrow">供应链风险</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -197,17 +197,17 @@ export default function DependencyRiskExplainerTool({ manifest }: ToolClientProp
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Minimum level</span>
+          <span>最低风险等级</span>
           <select value={minimumLevel} onChange={(event) => setMinimumLevel(event.target.value as RiskLevel)}>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+            <option value="low">低</option>
+            <option value="medium">中</option>
+            <option value="high">高</option>
           </select>
         </label>
       </div>
 
       <label className="tool-field">
-        <span>Dependency list or package.json</span>
+        <span>依赖列表或 package.json</span>
         <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
       </label>
 
@@ -215,23 +215,23 @@ export default function DependencyRiskExplainerTool({ manifest }: ToolClientProp
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>High</h3>
+          <h3>高风险</h3>
           <p>{counts.high}</p>
         </article>
         <article className="detail-card">
-          <h3>Medium</h3>
+          <h3>中风险</h3>
           <p>{counts.medium}</p>
         </article>
         <article className="detail-card">
-          <h3>Low</h3>
+          <h3>低风险</h3>
           <p>{counts.low}</p>
         </article>
       </div>
 
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Dependency</span>
-          <span>Explanation</span>
+          <span>依赖</span>
+          <span>解释</span>
         </div>
         {visibleRisks.map((risk) => (
           <div key={`${risk.dependency.group}-${risk.dependency.name}`} className="tool-table__row">

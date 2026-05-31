@@ -304,7 +304,7 @@ export default function SbomViewerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Software Supply Chain</p>
+          <p className="eyebrow">软件供应链</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -319,19 +319,19 @@ export default function SbomViewerTool({ manifest }: ToolClientProps) {
         <>
           <div className="detail-grid">
             <article className="detail-card">
-              <h3>Format</h3>
+              <h3>格式</h3>
               <p>{result.sbom.format}</p>
             </article>
             <article className="detail-card">
-              <h3>Document</h3>
+              <h3>文档</h3>
               <p>{result.sbom.name}{result.sbom.version ? ` ${result.sbom.version}` : ""}</p>
             </article>
             <article className="detail-card">
-              <h3>Components</h3>
+              <h3>组件</h3>
               <p>{components.length}</p>
             </article>
             <article className="detail-card">
-              <h3>Vulnerabilities</h3>
+              <h3>漏洞</h3>
               <p>{vulnerabilityTotal}</p>
             </article>
           </div>
@@ -339,12 +339,12 @@ export default function SbomViewerTool({ manifest }: ToolClientProps) {
           <div className="tool-toolbar tool-toolbar--grid">
             <label className="tool-field tool-field--compact">
               <span>搜索</span>
-              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="component / license / purl" />
+              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="组件 / 许可证 / purl" />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>License</span>
+              <span>许可证</span>
               <select value={licenseFilter} onChange={(event) => setLicenseFilter(event.target.value)}>
-                <option value="all">All licenses</option>
+                <option value="all">全部许可证</option>
                 {licenseStats.map(([license]) => (
                   <option key={license} value={license}>{license}</option>
                 ))}
@@ -360,8 +360,8 @@ export default function SbomViewerTool({ manifest }: ToolClientProps) {
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Component</span>
-              <span>Details</span>
+              <span>组件</span>
+              <span>详情</span>
             </div>
             {filteredComponents.map((component) => (
               <div key={component.id} className="tool-table__row">
@@ -370,7 +370,7 @@ export default function SbomViewerTool({ manifest }: ToolClientProps) {
                   <span className="mono-output">{component.version}</span>
                 </span>
                 <span>
-                  {component.type} / {component.license} / deps {component.dependencyCount} / vulns {component.vulnerabilityCount}
+                  {component.type} / {component.license} / 依赖 {component.dependencyCount} / 漏洞 {component.vulnerabilityCount}
                   {component.purl ? <><br /><span className="mono-output">{component.purl}</span></> : null}
                 </span>
               </div>

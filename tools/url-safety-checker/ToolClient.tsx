@@ -11,6 +11,12 @@ interface UrlIssue {
   message: string;
 }
 
+const severityLabels: Record<IssueSeverity, string> = {
+  high: "高",
+  medium: "中",
+  low: "低"
+};
+
 const shortenerHosts = new Set([
   "bit.ly",
   "tinyurl.com",
@@ -128,9 +134,9 @@ function analyzeUrl(input: string) {
 }
 
 function scoreLabel(score: number) {
-  if (score >= 85) return "Low observable risk";
-  if (score >= 55) return "Review recommended";
-  return "High risk signals";
+  if (score >= 85) return "可观察风险较低";
+  if (score >= 55) return "建议复核";
+  return "存在高风险信号";
 }
 
 export default function UrlSafetyCheckerTool({ manifest }: ToolClientProps) {
@@ -147,7 +153,7 @@ export default function UrlSafetyCheckerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network Security</p>
+          <p className="eyebrow">网络安全</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -162,33 +168,33 @@ export default function UrlSafetyCheckerTool({ manifest }: ToolClientProps) {
         <>
           <div className="detail-grid">
             <article className="detail-card">
-              <h3>Score</h3>
+              <h3>分数</h3>
               <p>{result.analysis.score}</p>
             </article>
             <article className="detail-card">
-              <h3>Status</h3>
+              <h3>状态</h3>
               <p>{scoreLabel(result.analysis.score)}</p>
             </article>
             <article className="detail-card">
-              <h3>Host</h3>
-              <p>{result.analysis.url.hostname || "none"}</p>
+              <h3>主机</h3>
+              <p>{result.analysis.url.hostname || "无"}</p>
             </article>
             <article className="detail-card">
-              <h3>Scheme</h3>
+              <h3>协议</h3>
               <p>{result.analysis.url.protocol}</p>
             </article>
           </div>
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Component</span>
-              <span>Value</span>
+              <span>组成部分</span>
+              <span>值</span>
             </div>
             {[
-              ["Origin", result.analysis.url.origin],
-              ["Path", result.analysis.url.pathname],
-              ["Query params", String(Array.from(result.analysis.url.searchParams.keys()).length)],
-              ["Hash", result.analysis.url.hash || "none"]
+              ["来源", result.analysis.url.origin],
+              ["路径", result.analysis.url.pathname],
+              ["查询参数", String(Array.from(result.analysis.url.searchParams.keys()).length)],
+              ["Hash", result.analysis.url.hash || "无"]
             ].map(([label, value]) => (
               <div key={label} className="tool-table__row">
                 <span>{label}</span>
@@ -199,17 +205,17 @@ export default function UrlSafetyCheckerTool({ manifest }: ToolClientProps) {
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Severity</span>
-              <span>Issue</span>
+              <span>严重级别</span>
+              <span>问题</span>
             </div>
             {result.analysis.issues.length > 0 ? result.analysis.issues.map((issue) => (
               <div key={issue.message} className="tool-table__row">
-                <span>{issue.severity}</span>
+                <span>{severityLabels[issue.severity]}</span>
                 <span>{issue.message}</span>
               </div>
             )) : (
               <div className="tool-table__row">
-                <span>none</span>
+                <span>无</span>
                 <span>未发现明显结构性风险信号。</span>
               </div>
             )}
