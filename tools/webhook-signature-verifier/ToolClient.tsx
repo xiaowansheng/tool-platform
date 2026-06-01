@@ -129,7 +129,7 @@ export default function WebhookSignatureVerifierTool({ manifest }: ToolClientPro
       </div>
       <div className="detail-grid">
         <article className="detail-card"><h3>验证结果</h3><p>{result}</p></article>
-        <article className="detail-card"><h3>签名载荷</h3><p>{provider === "github" ? "Body" : provider === "stripe" ? "timestamp.body" : "v0:timestamp:body"}</p></article>
+        <article className="detail-card"><h3>签名载荷</h3><p>{provider === "github" ? "请求体" : provider === "stripe" ? "时间戳.请求体" : "v0:时间戳:请求体"}</p></article>
       </div>
       <label className="tool-field"><span>期望请求头 / 结果</span><textarea value={`${result}\n${expectedHeader}`} readOnly spellCheck={false} /></label>
       <p className="tool-note">校验时必须使用平台实际收到的原始 Body，格式化 JSON 或改变换行都会导致 HMAC 不一致。</p>

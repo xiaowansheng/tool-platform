@@ -101,9 +101,9 @@ export default function HtmlCssJsPlaygroundTool({ manifest }: ToolClientProps) {
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>HTML</h3><p>{html.length} chars</p></article>
-        <article className="detail-card"><h3>CSS</h3><p>{css.length} chars</p></article>
-        <article className="detail-card"><h3>JS</h3><p>{js.length} chars</p></article>
+        <article className="detail-card"><h3>HTML</h3><p>{html.length} 字符</p></article>
+        <article className="detail-card"><h3>CSS</h3><p>{css.length} 字符</p></article>
+        <article className="detail-card"><h3>JS</h3><p>{js.length} 字符</p></article>
         <article className="detail-card"><h3>隔离</h3><p>iframe 沙箱</p></article>
       </div>
 

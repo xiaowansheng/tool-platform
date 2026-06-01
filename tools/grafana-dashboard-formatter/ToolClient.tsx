@@ -85,16 +85,16 @@ function panelInventory(dashboard: GrafanaDashboard) {
   const panels = flattenPanels(dashboard.panels);
 
   return panels.map((panel) => {
-    const targets = panel.targets?.map((target) => target.expr || target.query || target.refId || "empty").join(" | ") || "no targets";
+    const targets = panel.targets?.map((target) => target.expr || target.query || target.refId || "空").join(" | ") || "无目标";
 
-    return `${panel.id ?? "-"}\t${panel.type ?? "unknown"}\t${panel.title ?? "Untitled"}\t${targets}`;
+    return `${panel.id ?? "-"}\t${panel.type ?? "未知"}\t${panel.title ?? "未命名"}\t${targets}`;
   }).join("\n");
 }
 
 function buildOutput(source: string, mode: OutputMode) {
   const dashboard = parseDashboard(source);
   if (mode === "compact") return JSON.stringify(dashboard);
-  if (mode === "inventory") return `id\ttype\ttitle\ttargets\n${panelInventory(dashboard)}`;
+  if (mode === "inventory") return `ID\t类型\t标题\t目标\n${panelInventory(dashboard)}`;
 
   return JSON.stringify(dashboard, null, 2);
 }

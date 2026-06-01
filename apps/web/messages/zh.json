@@ -29,8 +29,8 @@
     "openExample": "打开示例"
   },
   "workspaceTabs": {
-    "ariaLabel": "已打开工具",
-    "empty": "暂无打开的工具",
+    "ariaLabel": "已打开页面",
+    "empty": "暂无打开的页面",
     "closeTab": "关闭 {name}",
     "moreActions": "更多标签操作",
     "contextMenu": "{name} 标签操作",

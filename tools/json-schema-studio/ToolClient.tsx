@@ -73,7 +73,7 @@ export default function JsonSchemaStudioTool({ manifest }: ToolClientProps) {
   function generate() {
     try {
       setSchema(JSON.stringify(inferSchema(JSON.parse(sample)), null, 2));
-      setReport("Schema generated.");
+      setReport("Schema 已生成。");
       setError("");
     } catch (generateError) {
       setError(generateError instanceof Error ? generateError.message : "Schema 生成失败");
@@ -83,7 +83,7 @@ export default function JsonSchemaStudioTool({ manifest }: ToolClientProps) {
   function validate() {
     try {
       const issues = validateValue(JSON.parse(sample), JSON.parse(schema) as JsonSchema);
-      setReport(issues.length > 0 ? issues.join("\n") : "Valid: JSON matches schema subset.");
+      setReport(issues.length > 0 ? issues.join("\n") : "有效：JSON 符合 Schema 子集。");
       setError("");
     } catch (validateError) {
       setError(validateError instanceof Error ? validateError.message : "校验失败");

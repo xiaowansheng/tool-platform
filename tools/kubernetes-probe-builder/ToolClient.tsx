@@ -120,7 +120,7 @@ export default function KubernetesProbeBuilderTool({ manifest }: ToolClientProps
           <select value={type} onChange={(event) => setType(event.target.value as ProbeType)}>
             <option value="httpGet">HTTP GET</option>
             <option value="tcpSocket">TCP Socket</option>
-            <option value="exec">Exec</option>
+            <option value="exec">执行命令</option>
           </select>
         </label>
         <label className="tool-field tool-field--compact"><span>端口</span><input type="number" min="1" max="65535" value={port} onChange={(event) => setPort(Number(event.target.value))} /></label>

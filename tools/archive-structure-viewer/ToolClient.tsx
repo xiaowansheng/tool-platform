@@ -206,7 +206,7 @@ export default function ArchiveStructureViewerTool({ manifest }: ToolClientProps
                 <span className="mono-output" style={{ paddingLeft: `${Math.max(0, depth(entry.path) - 1) * 0.75}rem` }}>{entry.path}</span>
                 <span>{entry.type}</span>
                 <span>{formatBytes(entry.size)}</span>
-                <span>{entry.method ?? "n/a"}</span>
+                <span>{entry.method ?? "无"}</span>
               </div>
             ))}
           </div>

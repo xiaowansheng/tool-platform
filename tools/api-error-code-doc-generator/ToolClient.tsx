@@ -37,39 +37,39 @@ function buildErrorDocs(serviceName: string, baseUrl: string, rows: ErrorCodeRow
   const statusGroups = Array.from(new Set(rows.map((row) => row.httpStatus).filter(Boolean))).sort();
 
   return [
-    `# ${serviceName.trim() || "API"} Error Codes`,
+    `# ${serviceName.trim() || "API"} 错误码文档`,
     "",
-    baseUrl.trim() ? `Base URL: \`${baseUrl.trim()}\`` : "",
+    baseUrl.trim() ? `基础 URL: \`${baseUrl.trim()}\`` : "",
     "",
-    "## Error Response Envelope",
+    "## 错误响应格式",
     "",
     "```json",
     JSON.stringify({
       error: {
         code: exampleCode,
-        message: rows[0]?.message || "Human readable error message",
+        message: rows[0]?.message || "人类可读的错误消息",
         requestId: "req_01HX...",
         details: {}
       }
     }, null, 2),
     "```",
     "",
-    "## Error Codes",
+    "## 错误码列表",
     "",
-    "| Code | HTTP | Message | Cause | Client action |",
+    "| 错误码 | HTTP 状态码 | 消息 | 原因 | 客户端处理建议 |",
     "| --- | --- | --- | --- | --- |",
-    ...(tableRows.length > 0 ? tableRows : ["| `ERROR_CODE` | 400 | Message | Cause | Action |"]),
+    ...(tableRows.length > 0 ? tableRows : ["| `ERROR_CODE` | 400 | 消息 | 原因 | 处理建议 |"]),
     "",
-    "## HTTP Status Groups",
+    "## HTTP 状态分组",
     "",
-    ...(statusGroups.length > 0 ? statusGroups.map((status) => `- \`${status}\`: ${rows.filter((row) => row.httpStatus === status).length} documented error code(s)`) : ["- Add error rows to generate status groups."]),
+    ...(statusGroups.length > 0 ? statusGroups.map((status) => `- \`${status}\`: ${rows.filter((row) => row.httpStatus === status).length} 个已记录的错误码`) : ["- 添加错误码行以生成状态分组。"]),
     "",
-    "## Client Handling Guidance",
+    "## 客户端处理指引",
     "",
-    "- Treat `401` as an authentication refresh or re-login signal.",
-    "- Treat `403` as an authorization or plan entitlement failure.",
-    "- Retry `429` and `5xx` responses only with backoff and idempotency protection.",
-    "- Log `requestId` with support tickets and incident reports."
+    "- `401`：触发身份认证刷新或重新登录。",
+    "- `403`：表示授权或套餐权限不足。",
+    "- `429` 及 `5xx`：仅在带有退避和幂等保护的情况下重试。",
+    "- 在支持工单和事故报告中附上 `requestId`。"
   ].filter((line) => line !== "").join("\n");
 }
 

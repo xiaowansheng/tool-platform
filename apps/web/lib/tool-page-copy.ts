@@ -691,6 +691,1227 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["确认 5432 通常用于 PostgreSQL。", "排查 8080 是否是备用 HTTP 或开发服务端口。"]
   },
+  "adr-generator": {
+    name: "ADR 生成器",
+    description: "生成 Architecture Decision Record，覆盖背景、决策、备选方案和后果。",
+    intro: "把架构决策的背景和理由记录下来，生成格式化的 ADR，适合团队做技术决策记录和知识沉淀。",
+    steps: [
+      "填写决策标题、背景、驱动因素和决策内容。",
+      "补充备选方案、决策后果和合规性标记。",
+      "复制生成的 ADR Markdown，提交到项目文档目录。"
+    ],
+    examples: ["记录微服务拆分决策的背景和备选方案。", "生成 API 网关选型 ADR，包含评估矩阵。"]
+  },
+  "agent-behavior-log-viewer": {
+    name: "Agent 行为日志查看器",
+    description: "查看 Agent 行为日志，汇总工具调用、审批边界、失败恢复和潜在破坏性动作。",
+    intro: "把 Agent 的 JSON 行为日志粘贴进来，快速查看调用汇总、边界越限和失败恢复记录。",
+    steps: [
+      "粘贴 Agent 行为日志 JSON。",
+      "查看工具调用次数、审批边界越限和失败恢复汇总。",
+      "定位破坏性动作或异常行为，评估安全边界配置。"
+    ],
+    examples: ["审查 AI Agent 是否越权调用了敏感工具。", "排查 Agent 在失败恢复时的重试行为。"]
+  },
+  "ai-chat": {
+    name: "AI 聊天工作台",
+    description: "浏览器内 AI Chat 工作台，支持 system prompt、流式输出、会话记录和本地 token 估算。",
+    intro: "在浏览器中与 AI 模型对话，可自定义系统提示词、查看流式输出并管理多轮会话。",
+    steps: [
+      "设置 system prompt 和对话参数。",
+      "输入问题并查看流式生成的回复。",
+      "回顾会话历史，复制对话记录或继续追问。"
+    ],
+    examples: ["调试复杂 prompt 的逐轮表现。", "对比不同 system prompt 下的回复风格。"]
+  },
+  "ai-generated-code-risk-checker": {
+    name: "AI 生成代码风险检查器",
+    description: "扫描 AI 生成代码里的占位符、注入面、鉴权绕过、密钥和静默失败风险。",
+    intro: "把 AI 助手生成的代码片段粘贴进来，快速扫描占位符、硬编码密钥和潜在安全风险。",
+    steps: [
+      "粘贴 AI 生成的代码片段。",
+      "查看风险等级、位置和具体描述。",
+      "按风险建议修复问题后重新检查。"
+    ],
+    examples: ["审查 ChatGPT 生成的 SQL 注入风险。", "检查 Copilot 建议代码中的硬编码密钥。"]
+  },
+  "ai-prompt-version-diff": {
+    name: "AI Prompt 版本差异对比",
+    description: "对比新旧 Prompt，识别约束删除、能力面变化、token 漂移和需要补 eval 的风险。",
+    intro: "把两版 Prompt 粘贴对比，查看约束变化和能力差异，确保升级不改行为。",
+    steps: [
+      "粘贴旧版本和新版本 Prompt。",
+      "查看约束、能力面、Token 数的变化差异。",
+      "根据识别到的风险补充 eval 测试用例。"
+    ],
+    examples: ["升级系统提示词后检查行为漂移。", "对比 A/B 测试中的 Prompt 差异。"]
+  },
+  "ai-sandbox-lab": {
+    name: "AI 沙箱实验室",
+    description: "流式生成 AI 响应，并在隔离 iframe 中预览结果。",
+    intro: "在沙箱环境中测试 AI 响应，隔离预览生成的 HTML 内容，适合安全测试和内容审查。",
+    steps: [
+      "输入 AI 请求参数或 prompt。",
+      "查看流式生成的响应内容。",
+      "在隔离 iframe 中预览渲染效果。"
+    ],
+    examples: ["测试 HTML 内容是否安全渲染。", "验证 AI 回复在沙箱中的展示效果。"]
+  },
+  "api-docs-sdk-example-generator": {
+    name: "API 文档 SDK 示例生成器",
+    description: "从 API 文档或 OpenAPI 片段提取 endpoint，并生成 TypeScript、Python 或 cURL SDK 示例。",
+    intro: "粘贴接口 URL 或 OpenAPI 片段，快速生成 TypeScript、Python 或 cURL 的 SDK 调用示例。",
+    steps: [
+      "填写 API endpoint URL 或粘贴 OpenAPI 片段。",
+      "选择目标语言和请求方法。",
+      "复制生成的 SDK 代码示例到项目中。"
+    ],
+    examples: ["为新 API 接口生成 TypeScript fetch 示例。", "把 OpenAPI 路径转成 Python requests 调用。"]
+  },
+  "api-error-code-doc-generator": {
+    name: "API 错误码文档生成器",
+    description: "把错误码清单转换为 Markdown 文档、响应结构和排查建议表。",
+    intro: "把 API 错误码表格粘贴进来，生成格式化的错误码文档和排查建议，适合 API 开发者文档。",
+    steps: [
+      "粘贴错误码清单（code、message、HTTP 状态）。",
+      "补充排查建议和示例响应。",
+      "复制生成的 Markdown 文档到 API 文档中。"
+    ],
+    examples: ["为 REST API 生成错误码参考文档。", "把错误码表格转成带排查建议的开发者指南。"]
+  },
+  "api-rate-limit-calculator": {
+    name: "API 限流计算器",
+    description: "按用户数、峰值倍数和时间窗口计算限流阈值、burst、Retry-After，并生成网关配置草稿。",
+    intro: "输入用户量和请求模式，计算合理的限流阈值和突发窗口，适合 API 网关配置和容量规划。",
+    steps: [
+      "填写预估用户数和请求峰值倍数。",
+      "设置时间窗口和基准请求量。",
+      "查看计算出的限流阈值和 Retry-After 时间。"
+    ],
+    examples: ["为 10 万用户的 API 计算限流参数。", "规划 burst 窗口防止突发流量打崩服务。"]
+  },
+  "archive-structure-viewer": {
+    name: "归档结构查看器",
+    description: "读取 ZIP 与 TAR 的目录结构、文件大小、压缩方式和层级摘要。",
+    intro: "上传或粘贴 ZIP/TAR 文件的 Base64，查看归档内的目录树、文件大小和压缩方式。",
+    steps: [
+      "上传 ZIP 或 TAR 文件，或粘贴 Base64。",
+      "查看目录层级、文件大小和压缩方式。",
+      "检查异常大文件或深层嵌套目录。"
+    ],
+    examples: ["查看第三方 ZIP 包内是否有可疑文件。", "分析归档文件的压缩效率和目录结构。"]
+  },
+  "aspect-ratio-calculator": {
+    name: "宽高比计算器",
+    description: "根据宽高计算比例，并按目标宽度或高度等比缩放。",
+    intro: "输入原始宽度和高度，计算宽高比，再按目标宽度或高度自动计算等比缩放后的尺寸。",
+    steps: [
+      "输入原始宽度和高度或宽高比。",
+      "输入目标宽度或高度。",
+      "查看等比缩放后的另一维度和缩放比例。"
+    ],
+    examples: ["将 1920x1080 的素材缩放到 800 宽度。", "计算视频在 16:9 比例下的标准尺寸。"]
+  },
+  "audio-tone-generator": {
+    name: "音频测试音生成器",
+    description: "用 Web Audio 生成测试音、扫频和节拍，支持频率、波形、音量、时长与 WAV 下载。",
+    intro: "在浏览器中生成测试音频信号，适合音响调试、音频开发测试和听力测试。",
+    steps: [
+      "选择波形类型（正弦、方波、锯齿、三角）。",
+      "设置频率、音量、持续时间和扫频范围。",
+      "播放测试音或下载为 WAV 文件。"
+    ],
+    examples: ["生成 440Hz 基准音用于音响校准。", "生成 20Hz-20kHz 扫频测试扬声器频响。"]
+  },
+  "batch-file-hash-calculator": {
+    name: "批量文件哈希计算器",
+    description: "批量计算文件 SHA 摘要，生成校验清单并导出 CSV。",
+    intro: "上传多个文件，批量计算 SHA-256 等哈希值，生成可导出的校验清单。",
+    steps: [
+      "上传一个或多个文件。",
+      "选择摘要算法，查看每个文件的哈希值。",
+      "复制摘要或导出 CSV 校验清单。"
+    ],
+    examples: ["校验下载的安装包完整性。", "为批量文件生成 SHA-256 校验清单。"]
+  },
+  "box-shadow-generator": {
+    name: "CSS 效果工作台",
+    description: "组合 box-shadow、边框、圆角、backdrop-filter 和 text-shadow，生成可复制的 CSS 效果。",
+    intro: "用可视化控件调整阴影、边框、圆角和模糊效果，实时预览并生成可直接使用的 CSS 代码。",
+    steps: [
+      "调整阴影偏移、模糊、扩散和颜色。",
+      "设置边框、圆角和背景滤镜。",
+      "复制生成的 CSS 代码到项目中。"
+    ],
+    examples: ["设计卡片悬浮阴影效果。", "生成毛玻璃背景的 backdrop-filter 代码。"]
+  },
+  "browser-sandbox-console": {
+    name: "浏览器沙箱控制台",
+    description: "在隔离 iframe 中运行 HTML/CSS/JS 片段，捕获 console 输出并生成可复制的 srcdoc。",
+    intro: "在隔离沙箱中运行前端代码片段，捕获控制台输出，适合安全测试和小型原型验证。",
+    steps: [
+      "在编辑区输入 HTML、CSS 和 JavaScript 代码。",
+      "点击运行，查看沙箱中的渲染结果和 console 输出。",
+      "复制 srcdoc 或调整代码后重新运行。"
+    ],
+    examples: ["测试第三方组件在沙箱中的行为。", "调试 JavaScript 代码片段的 console 输出。"]
+  },
+  "bug-report-repro-steps-generator": {
+    name: "Bug 复现步骤生成器",
+    description: "把 Bug Report 整理成可执行复现步骤、前置条件、期望结果、实际结果和证据清单。",
+    intro: "把 Bug 描述粘贴进来，工具会将其整理为结构化的复现步骤和测试用例。",
+    steps: [
+      "粘贴 Bug 描述的原始文本。",
+      "补充环境信息、实际结果和期望结果。",
+      "复制结构化的 Bug Report，提交到 Issue 跟踪系统。"
+    ],
+    examples: ["把用户反馈整理成可执行的 Bug Report。", "为 QA 团队生成标准格式的复现步骤。"]
+  },
+  "changelog-generator": {
+    name: "Changelog 生成器",
+    description: "从 Conventional Commit 文本生成 Keep a Changelog 风格的版本记录。",
+    intro: "把 Conventional Commit 消息粘贴进来，自动归类并生成规范的 Changelog。",
+    steps: [
+      "粘贴 Conventional Commit 消息列表。",
+      "选择版本号和发布日期。",
+      "复制生成的 Changelog Markdown。"
+    ],
+    examples: ["为发布版本生成 Features / Fixes 分类。", "把 Git log 整理成面向用户的变更日志。"]
+  },
+  "code-snippet-security-review": {
+    name: "代码片段安全审查",
+    description: "对代码片段生成安全审查报告，覆盖密钥、注入、弱加密、CORS、Cookie 和 TLS 配置。",
+    intro: "把代码片段粘贴进来，自动扫描密钥泄露、注入风险、弱加密和其他安全漏洞。",
+    steps: [
+      "粘贴需要审查的代码片段。",
+      "查看安全风险等级、位置和详细描述。",
+      "根据修复建议调整代码后重新审查。"
+    ],
+    examples: ["审查配置文件中的密钥泄露风险。", "检查 SQL 查询片段是否存在注入漏洞。"]
+  },
+  "color-palette-generator": {
+    name: "配色方案生成器",
+    description: "基于一个 HEX 颜色生成浅色、深色和强调色阶。",
+    intro: "输入一个品牌主色，自动生成完整的浅色和深色色阶，适合设计系统和主题开发。",
+    steps: [
+      "输入主色的 HEX 值或使用颜色选择器。",
+      "查看生成的浅色和深色色阶。",
+      "复制目标色值到设计 Token 或 CSS 变量。"
+    ],
+    examples: ["从品牌蓝色生成完整的色阶系统。", "为暗色模式生成对应的深色变体。"]
+  },
+  "cron-helper": {
+    name: "Cron 表达式助手",
+    description: "解析 5 段 Cron 表达式，解释字段并预估后续运行时间。",
+    intro: "输入 Cron 表达式，查看每个字段的解释和接下来 5 次执行时间，适合定时任务排障。",
+    steps: [
+      "输入标准的 5 段 Cron 表达式。",
+      "查看各字段的详细解释。",
+      "确认后续执行时间是否符合预期。"
+    ],
+    examples: ["检查每天凌晨 3 点备份任务的实际执行时间。", "验证 `0 9 * * 1-5` 是否在工作日 9 点执行。"]
+  },
+  "css-clamp-generator": {
+    name: "响应式字号 Scale 生成器",
+    description: "生成响应式 CSS clamp() 字体比例、设计 token 和标题/正文排版代码。",
+    intro: "设置最小和最大字号及视口范围，生成平滑缩放的 CSS clamp() 排版代码。",
+    steps: [
+      "设置基础字号、最小视口和最大视口。",
+      "调整字号缩放比例和步进值。",
+      "复制生成的 clamp() CSS 或设计 Token。"
+    ],
+    examples: ["生成标题从 32px 到 48px 的平滑缩放。", "为设计系统制作响应式排版比例尺。"]
+  },
+  "css-grid-generator": {
+    name: "CSS Grid 生成器",
+    description: "可视化调整列、行、间距和 auto-fit，生成可复制的 CSS Grid 布局代码。",
+    intro: "用可视化面板调整 CSS Grid 参数，实时预览布局并生成可直接使用的 CSS 代码。",
+    steps: [
+      "设置列数、行数、间距和轨道尺寸。",
+      "调整 auto-fit 或 auto-fill 行为。",
+      "复制生成的 CSS Grid 布局代码。"
+    ],
+    examples: ["设计三列自适应响应式网格。", "生成固定侧边栏加弹性主区域的布局。"]
+  },
+  "css-specificity-calculator": {
+    name: "CSS 权重计算器",
+    description: "计算 CSS 选择器权重，拆分 ID、class/属性/伪类和元素/伪元素分数。",
+    intro: "输入 CSS 选择器，立即计算权重分数和优先级比较，适合样式冲突排障。",
+    steps: [
+      "输入一个或多个 CSS 选择器。",
+      "查看 ID、Class、Element 三部分权重。",
+      "比较选择器优先级，定位样式覆盖问题。"
+    ],
+    examples: ["比较 `.nav .item` 和 `#header .item` 的优先级。", "检查复杂选择器的权重分布。"]
+  },
+  "csv-cleaner": {
+    name: "CSV 清洗器",
+    description: "清洗、去重、排序和筛选 CSV 表格，并输出可复制的标准 CSV。",
+    intro: "把 CSV 数据粘贴进来，清洗空白、去重、排序和筛选列，生成干净的 CSV 输出。",
+    steps: [
+      "粘贴 CSV 数据，确认表头和分隔符。",
+      "选择清洗操作：去重、排序、筛选和列裁剪。",
+      "复制清洗后的 CSV 或导出为文件。"
+    ],
+    examples: ["清洗用户导入数据中的重复行。", "过滤 CSV 中的空值和异常数据。"]
+  },
+  "csv-json-ndjson-converter": {
+    name: "CSV / JSON / NDJSON 转换器",
+    description: "在 CSV、JSON 数组和 NDJSON 流之间互转，保留列名和对象字段。",
+    intro: "在 CSV 表格、JSON 数组和 NDJSON 流格式之间互相转换，适合数据处理管线。",
+    steps: [
+      "粘贴 CSV、JSON 或 NDJSON 输入。",
+      "选择源格式和目标格式。",
+      "复制转换结果或检查错误提示。"
+    ],
+    examples: ["把 NDJSON 日志流转换成 CSV 表格。", "将 CSV 格式的数据字典转为 JSON 对象数组。"]
+  },
+  "db-connection-string-workbench": {
+    name: "数据库连接串工作台",
+    description: "解析和重建 PostgreSQL、MySQL、Redis 连接串，输出脱敏摘要、环境变量和客户端命令。",
+    intro: "粘贴数据库连接字符串，解析各组成部分，生成脱敏版本和环境变量配置。",
+    steps: [
+      "粘贴 PostgreSQL、MySQL 或 Redis 连接串。",
+      "查看解析出的协议、主机、端口、数据库和用户。",
+      "复制脱敏摘要、环境变量或客户端连接命令。"
+    ],
+    examples: ["分享连接串时生成脱敏版本。", "把连接串拆分为环境变量配置。"]
+  },
+  "decision-wheel": {
+    name: "随机决策转盘",
+    description: "输入候选项和可选权重，用可复现 seed 随机抽取结果并保留选择历史。",
+    intro: "输入选项和权重，点击旋转随机抽取结果，适合团队决策、抽奖和活动互动。",
+    steps: [
+      "输入候选项，每行一个，可选设置权重。",
+      "点击旋转按钮随机抽取。",
+      "查看抽取结果和选择历史。"
+    ],
+    examples: ["聚餐投票在几个餐厅中随机决定。", "团队活动抽奖分配奖品。"]
+  },
+  "dependency-risk-explainer": {
+    name: "依赖风险解释器",
+    description: "从依赖清单中提取维护、版本、安全和供应链风险信号。",
+    intro: "粘贴项目依赖清单，自动分析维护状态、版本健康度和已知安全风险。",
+    steps: [
+      "粘贴 package.json、requirements.txt 或 Cargo.toml 等依赖文件。",
+      "查看维护状态、版本滞后度和安全风险。",
+      "根据建议升级有风险的依赖包。"
+    ],
+    examples: ["检查 npm 依赖是否包含已废弃的包。", "分析 Python 依赖的已知 CVE 风险。"]
+  },
+  "discount-stack-calculator": {
+    name: "叠加优惠计算器",
+    description: "模拟百分比、满减、优惠码、税费和物流叠加后的订单价格、折扣率与利润影响。",
+    intro: "输入商品价格和多种优惠规则，模拟叠加计算后的最终价格和利润影响。",
+    steps: [
+      "输入商品原价和数量。",
+      "添加百分比折扣、满减、优惠码、税率和运费。",
+      "查看最终价格、折扣率和利润影响。"
+    ],
+    examples: ["模拟双十一满减叠加店铺优惠券。", "计算跨境订单含税含运费的最终价格。"]
+  },
+  "docker-compose-validator": {
+    name: "Docker Compose 校验器",
+    description: "快速检查 Compose services、镜像标签、端口、权限和健康检查。",
+    intro: "粘贴 docker-compose.yml 内容，检查服务配置、镜像版本和常见错误。",
+    steps: [
+      "粘贴 Compose 文件 YAML。",
+      "查看服务数量、镜像检查和配置问题。",
+      "按提示修复镜像标签、端口映射或健康检查。"
+    ],
+    examples: ["上线前检查 Compose 文件配置完整性。", "检查镜像是否使用了 latest 标签。"]
+  },
+  "docker-run-to-compose": {
+    name: "Docker Run 转 Compose",
+    description: "把常见 docker run 命令转换为 compose.yaml 服务草稿，保留端口、环境变量、挂载和重启策略。",
+    intro: "粘贴 docker run 命令，自动解析参数并生成对应的 docker-compose 服务配置。",
+    steps: [
+      "粘贴完整的 docker run 命令。",
+      "查看解析出的端口、环境变量、挂载和重启策略。",
+      "复制生成的 compose.yaml 服务定义。"
+    ],
+    examples: ["把开发用 docker run 命令转成 Compose 配置。", "从 docker run 参数生成可复用的服务编排。"]
+  },
+  "dockerfile-linter": {
+    name: "Dockerfile 检查器",
+    description: "检查 Dockerfile 的基础镜像、缓存、安全和运行时风险。",
+    intro: "粘贴 Dockerfile 内容，检查镜像层级、缓存利用、安全最佳实践和运行时风险。",
+    steps: [
+      "粘贴 Dockerfile 内容。",
+      "查看基础镜像、层级总数和缓存使用情况。",
+      "按安全建议修复 root 运行或敏感信息泄露。"
+    ],
+    examples: ["审查 Dockerfile 是否使用了固定版本镜像。", "检查多阶段构建是否合理利用缓存。"]
+  },
+  "easing-cubic-bezier-debugger": {
+    name: "Easing / Cubic Bezier 调试器",
+    description: "调试 cubic-bezier 曲线、预览动画节奏，并复制 CSS easing token。",
+    intro: "用可视化控件调整 cubic-bezier 曲线参数，预览动画效果并复制生成的 CSS。",
+    steps: [
+      "拖动控制点调整贝塞尔曲线。",
+      "选择预设缓动函数或手动微调。",
+      "复制 CSS cubic-bezier 值到动画代码中。"
+    ],
+    examples: ["设计弹性的入场动画缓动曲线。", "微调页面过渡动画的节奏感。"]
+  },
+  "ecommerce-margin-calculator": {
+    name: "电商利润计算器",
+    description: "按售价、成本、平台费、广告费、物流和退货率计算电商毛利、净利、保本 ROAS 和建议售价。",
+    intro: "输入商品售价、成本和各项费用，一键计算利润、毛利率和保本 ROAS。",
+    steps: [
+      "填写售价、成本、平台佣金和广告费用。",
+      "设置物流费用和预期退货率。",
+      "查看毛利、净利、ROAS 和建议售价。"
+    ],
+    examples: ["计算单品在扣除广告费后的净利。", "根据目标利润率反推建议售价。"]
+  },
+  "env-diff-merge-sanitizer": {
+    name: ".env 对比合并脱敏工具",
+    description: "对比、合并并脱敏 .env 文件，生成安全的示例配置。",
+    intro: "对比两个 .env 文件差异，合并配置项，并自动脱敏敏感值生成 .env.example。",
+    steps: [
+      "粘贴旧版和新版 .env 文件。",
+      "查看新增、删除和变更的配置项。",
+      "导出合并后的内容或脱敏的 .env.example。"
+    ],
+    examples: ["部署前合并多个环境配置。", "从生产 .env 生成不含值的示例配置。"]
+  },
+  "error-log-troubleshooting-path-generator": {
+    name: "错误日志排查路径生成器",
+    description: "从错误日志中提取 5xx、超时、数据库、权限和资源耗尽信号，并生成排查路径。",
+    intro: "粘贴错误日志，自动识别错误类型并生成逐步排查指南。",
+    steps: [
+      "粘贴错误日志片段。",
+      "查看识别的错误类型和严重程度。",
+      "按生成的排查路径逐步检查。"
+    ],
+    examples: ["从 5xx 错误日志生成排查步骤。", "分析数据库连接超时的可能原因和解决路径。"]
+  },
+  "exif-metadata-tool": {
+    name: "EXIF 元数据工具",
+    description: "查看 JPEG EXIF 和 PNG 文本元数据，并生成移除元数据后的图片文件。",
+    intro: "上传图片查看 EXIF 元数据，包括相机、GPS、日期等信息，并生成清理后的版本。",
+    steps: [
+      "上传 JPEG 或 PNG 图片。",
+      "查看 EXIF 和元数据信息。",
+      "下载移除元数据后的图片文件。"
+    ],
+    examples: ["上传前检查图片是否包含 GPS 位置。", "批量清理图片中的拍摄信息。"]
+  },
+  "favicon-app-icon-generator": {
+    name: "Favicon / App Icon 生成器",
+    description: "用文字、颜色和形状生成 favicon、Apple Touch Icon 与 PWA 图标素材。",
+    intro: "用文字和颜色快速生成 favicon、Apple Touch Icon 和 PWA 图标。",
+    steps: [
+      "输入图标文字和背景颜色。",
+      "选择形状、字体大小和圆角。",
+      "下载各平台的 favicon 和图标文件。"
+    ],
+    examples: ["为开发环境生成临时 favicon。", "快速生成 PWA 应用的各尺寸图标。"]
+  },
+  "ffmpeg-editor": {
+    name: "FFmpeg 命令编辑器",
+    description: "生成常见转码、裁剪、缩放和抽帧 FFmpeg 命令，并预览本地媒体文件信息。",
+    intro: "用表单配置转码参数，生成可执行的 FFmpeg 命令，适合不熟悉命令行的用户。",
+    steps: [
+      "选择操作类型（转码、裁剪、缩放等）。",
+      "填写输入文件、输出格式和参数。",
+      "复制生成的 FFmpeg 命令到终端执行。"
+    ],
+    examples: ["生成视频转 GIF 的命令。", "生成批量缩放图片的 FFmpeg 命令。"]
+  },
+  "flashcard-cloze-builder": {
+    name: "闪卡填空题生成器",
+    description: "从学习笔记生成问答卡、填空卡和 Anki TSV，支持关键词标记、难度和复习提示。",
+    intro: "把学习笔记粘贴进来，标记关键词，自动生成问答卡和填空卡用于复习。",
+    steps: [
+      "粘贴学习笔记内容。",
+      "标记需要考查的关键词或概念。",
+      "导出 Anki TSV 或复制生成的闪卡。"
+    ],
+    examples: ["从课程笔记生成复习闪卡。", "为外语学习制作填空式单词卡。"]
+  },
+  "flexbox-generator": {
+    name: "Flexbox 生成器",
+    description: "可视化调试方向、换行、主轴和交叉轴对齐，生成 Flexbox CSS。",
+    intro: "用可视化面板调整 Flexbox 属性，实时查看子元素排列效果并生成 CSS 代码。",
+    steps: [
+      "设置 flex-direction、flex-wrap 和 justify-content。",
+      "调整 align-items 和 align-content。",
+      "复制生成的 Flexbox CSS 代码。"
+    ],
+    examples: ["设计水平垂直居中的 Flexbox 布局。", "调试响应式导航栏的子元素排列。"]
+  },
+  "font-scale-generator": {
+    name: "字号比例生成器",
+    description: "基于基础字号和比例生成排版 scale、CSS token 和预览样张。",
+    intro: "输入基础字号和缩放比例，生成一致的字号系统，适合设计系统和 CSS 变量定义。",
+    steps: [
+      "设置基础字号和缩放比例（如 1.25、1.333）。",
+      "查看生成的标题到正文的字号梯级。",
+      "复制生成的 CSS token 或预览排版效果。"
+    ],
+    examples: ["为设计系统生成 1.25 比例的 Major Third 字号系统。", "对比不同缩放比例下的排版效果。"]
+  },
+  "git-bisect-planner": {
+    name: "Git Bisect 规划器",
+    description: "根据 good/bad ref、测试命令和路径范围生成 git bisect 脚本、检查清单和复盘模板。",
+    intro: "输入 good/bad 提交、测试命令和路径范围，生成完整的 git bisect 操作脚本。",
+    steps: [
+      "填写 good 和 bad 提交的 ref。",
+      "输入测试命令和相关文件路径。",
+      "复制生成的 git bisect 脚本到终端执行。"
+    ],
+    examples: ["用 git bisect 定位引入回归的提交。", "生成限定路径范围的二分查找脚本。"]
+  },
+  "git-patch-security-reviewer": {
+    name: "Git Patch 安全审查器",
+    description: "扫描 Git diff 中新增的密钥、危险 API、弱加密、认证绕过和注入风险。",
+    intro: "粘贴 Git diff 或 patch 内容，自动扫描新增代码中的安全风险。",
+    steps: [
+      "粘贴 git diff 或 patch 内容。",
+      "查看识别的安全风险类型和位置。",
+      "按修复建议调整代码。"
+    ],
+    examples: ["Code Review 时自动扫描密钥泄露。", "检查 PR diff 中引入的新安全风险。"]
+  },
+  "gitignore-generator": {
+    name: ".gitignore 生成器",
+    description: "组合常见技术栈模板，快速生成 .gitignore。",
+    intro: "选择项目使用的技术栈和工具，自动组合生成完整的 .gitignore 文件。",
+    steps: [
+      "从列表中选择项目使用的语言、框架和工具。",
+      "按需添加自定义忽略规则。",
+      "复制生成的 .gitignore 到项目根目录。"
+    ],
+    examples: ["为 Node.js + Python 混合项目生成 .gitignore。", "为 Vue + Rust 项目组合忽略规则。"]
+  },
+  "grade-weight-calculator": {
+    name: "成绩权重计算器",
+    description: "按作业、测验、期中和期末权重计算当前成绩，并估算达到目标分数所需的剩余成绩。",
+    intro: "输入各考核项的得分和权重，计算当前总成绩，并估算期末需要考多少分才能达成目标。",
+    steps: [
+      "添加考核项（作业、测验、期中、期末），填写得分和权重。",
+      "设置目标总成绩。",
+      "查看当前成绩和达到目标所需的期末分数。"
+    ],
+    examples: ["计算学期中已考科目的加权平均分。", "估算期末考试需要考多少分才能及格。"]
+  },
+  "gradient-generator": {
+    name: "渐变主题 Token 生成器",
+    description: "从渐变和品牌色生成 palette、语义色与 CSS theme tokens。",
+    intro: "输入渐变颜色和品牌色，自动生成完整的色彩方案和 CSS 变量。",
+    steps: [
+      "设置渐变起始色和结束色。",
+      "选择渐变方向和类型。",
+      "复制生成的 CSS theme tokens 到项目中。"
+    ],
+    examples: ["为品牌生成渐变主题色板。", "生成带深色模式变量的 CSS tokens。"]
+  },
+  "graphql-workbench": {
+    name: "GraphQL 工作台",
+    description: "查看 GraphQL SDL 类型，并根据字段快速构造查询草稿。",
+    intro: "粘贴 GraphQL Schema，查看所有类型和字段，勾选需要的字段生成查询。",
+    steps: [
+      "粘贴 GraphQL SDL Schema。",
+      "浏览类型定义和字段列表。",
+      "选择字段生成 Query 或 Mutation 草稿。"
+    ],
+    examples: ["从 Schema 快速生成接口查询语句。", "查看 GraphQL 类型间的关联关系。"]
+  },
+  "helm-values-diff": {
+    name: "Helm Values 差异对比",
+    description: "对比 Helm values 文件，列出新增、删除、变更和高风险配置项。",
+    intro: "粘贴两个版本的 Helm values.yaml，快速对比差异并标记高风险变更。",
+    steps: [
+      "粘贴旧版和新版 values.yaml。",
+      "查看新增、删除和变更的配置项。",
+      "关注标记为高风险的变更项。"
+    ],
+    examples: ["升级 Helm Chart 前检查 values 变更。", "对比不同环境的 values 配置差异。"]
+  },
+  "html-css-js-playground": {
+    name: "HTML / CSS / JS Playground",
+    description: "在 iframe sandbox 中预览 HTML、CSS 和 JavaScript 片段，并导出完整单文件示例。",
+    intro: "编写 HTML/CSS/JS 代码，在隔离沙箱中实时预览效果，适合前端原型验证。",
+    steps: [
+      "在编辑区编写 HTML 结构和 CSS 样式。",
+      "添加 JavaScript 交互逻辑。",
+      "查看实时预览，导出完整 HTML 文件。"
+    ],
+    examples: ["快速验证组件布局和样式效果。", "测试 JavaScript 交互逻辑的运行时行为。"]
+  },
+  "image-compressor": {
+    name: "图片压缩器",
+    description: "在浏览器本地压缩图片，支持尺寸限制、JPEG/WebP/PNG 输出和压缩率预览。",
+    intro: "上传图片，在浏览器中本地压缩，选择输出格式和质量，实时查看压缩效果。",
+    steps: [
+      "上传需要压缩的图片。",
+      "调整质量参数和输出格式（JPEG/WebP/PNG）。",
+      "对比压缩前后大小，下载压缩后的图片。"
+    ],
+    examples: ["为网页优化 JPEG 图片大小。", "将图片转为 WebP 格式提升加载速度。"]
+  },
+  "image-ocr-preprocessor": {
+    name: "图片 OCR 预处理器",
+    description: "在本地用 canvas 对图片做灰度、阈值、对比度、反色和缩放预处理，导出更适合 OCR 的 PNG。",
+    intro: "对图片进行灰度化、二值化、对比度增强等预处理，生成更适合 OCR 识别的图像。",
+    steps: [
+      "上传需要处理的图片。",
+      "调整灰度、阈值、对比度和反色参数。",
+      "导出预处理后的 PNG，用于 OCR 识别。"
+    ],
+    examples: ["增强扫描文档的对比度提高 OCR 准确率。", "将彩色文档转为黑白二值图。"]
+  },
+  "ipv4-cidr-calculator": {
+    name: "IPv4 CIDR 计算器",
+    description: "计算 IPv4 CIDR 网段、掩码、广播地址和可用主机数。",
+    intro: "输入 IP 和 CIDR 前缀，查看网络地址、广播地址、掩码和可用主机范围。",
+    steps: [
+      "输入 IP 地址和 CIDR 前缀。",
+      "查看网络地址、广播地址和子网掩码。",
+      "确认可用主机数量和地址范围。"
+    ],
+    examples: ["计算 /24 网段的可用主机数。", "规划子网划分时的地址范围。"]
+  },
+  "json-schema-studio": {
+    name: "JSON Schema 工作台",
+    description: "从 JSON 示例生成 Schema，并在本地校验 JSON 数据。",
+    intro: "粘贴 JSON 示例，自动生成对应的 JSON Schema，再验证其他 JSON 是否符合该 Schema。",
+    steps: [
+      "粘贴 JSON 示例数据。",
+      "查看自动生成的 JSON Schema。",
+      "粘贴其他 JSON 数据验证是否符合 Schema。"
+    ],
+    examples: ["从 API 响应生成数据校验 Schema。", "验证配置文件是否符合预定义格式。"]
+  },
+  "kubernetes-probe-builder": {
+    name: "Kubernetes Probe 生成器",
+    description: "生成 liveness、readiness、startup probes，并计算失败窗口、启动预算和常见误配置风险。",
+    intro: "用表单配置 Kubernetes 探针参数，生成 YAML 配置并检查失败窗口和启动风险。",
+    steps: [
+      "选择探针类型（liveness/readiness/startup）。",
+      "填写探测路径、端口、延迟和超时参数。",
+      "复制生成的 YAML 并检查失败窗口风险提示。"
+    ],
+    examples: ["为 Web 服务生成 readiness probe。", "为启动慢的应用配置 startup probe 参数。"]
+  },
+  "kubernetes-yaml-validator": {
+    name: "Kubernetes YAML 校验器",
+    description: "检查 Kubernetes manifest 的必填字段、镜像标签、资源限制和探针配置。",
+    intro: "粘贴 Kubernetes YAML 配置，检查必填字段、镜像标签和资源限制等常见问题。",
+    steps: [
+      "粘贴 Kubernetes YAML manifest。",
+      "查看必填字段缺失、镜像标签问题和资源限制检查。",
+      "按建议修复配置问题后重新验证。"
+    ],
+    examples: ["上线前检查 Deployment YAML 的配置完整性。", "检查 Pod 是否缺少资源 requests 和 limits。"]
+  },
+  "large-text-tools": {
+    name: "大文本处理工具",
+    description: "对大文本执行分割、合并、按行去重和块级去重，适合日志与批量文本整理。",
+    intro: "对大文本进行分割、合并、去重和行操作，适合处理日志文件和批量文本。",
+    steps: [
+      "粘贴大文本内容到输入区。",
+      "选择分割、合并、去重等操作。",
+      "复制处理后的结果或检查行数变化。"
+    ],
+    examples: ["按行数分割大型日志文件。", "去重合并多份配置文件的重复行。"]
+  },
+  "license-compatibility-checker": {
+    name: "许可证兼容性检查器",
+    description: "按项目分发方式检查常见开源许可证组合的兼容性风险。",
+    intro: "选择项目许可证和依赖许可证，检查组合使用的兼容性风险。",
+    steps: [
+      "选择项目的许可证类型。",
+      "添加项目使用的主要依赖许可证。",
+      "查看兼容性结果和潜在法律风险。"
+    ],
+    examples: ["检查 MIT 项目能否使用 GPL 库。", "评估商业产品使用 Apache 2.0 依赖的影响。"]
+  },
+  "link-collection-curator": {
+    name: "链接收藏整理器",
+    description: "整理 URL 清单，自动校验链接、按标签分组，并导出 Markdown 或 JSON 资源目录。",
+    intro: "粘贴 URL 清单，自动检测链接有效性，按标签分组整理并导出资源目录。",
+    steps: [
+      "粘贴 URL 列表，每行一个。",
+      "规划链接分组标签。",
+      "导出结构化的 Markdown 或 JSON 资源目录。"
+    ],
+    examples: ["整理研究资料链接收藏。", "为团队导出带分类的文档链接清单。"]
+  },
+  "llm-eval-case-generator": {
+    name: "LLM 评测用例生成器",
+    description: "根据模型行为规格生成指令遵循、RAG、事实性、安全和工具使用 eval 用例。",
+    intro: "输入模型行为规格，自动生成覆盖多维度测试的评测用例。",
+    steps: [
+      "填写模型行为规格或使用场景。",
+      "选择评测维度（指令遵循、RAG、安全性等）。",
+      "复制生成的 eval 用例列表。"
+    ],
+    examples: ["为 RAG 应用生成事实性测试用例。", "生成指令遵循的安全边界测试。"]
+  },
+  "llm-fact-check-checklist-generator": {
+    name: "LLM 事实核查清单生成器",
+    description: "从 LLM 输出中抽取可核查断言，并生成来源、日期、范围和置信度检查清单。",
+    intro: "粘贴 LLM 生成的文本，提取其中的可核查断言并生成事实核查清单。",
+    steps: [
+      "粘贴 LLM 输出的文本。",
+      "查看抽取的可核查断言列表。",
+      "按清单逐项核查来源和准确性。"
+    ],
+    examples: ["核查 AI 生成的报告中的数据准确性。", "评估 LLM 回答中的事实性陈述。"]
+  },
+  "lorem-ipsum-generator": {
+    name: "占位文本生成器",
+    description: "生成占位标题、句子和段落，用于原型和视觉稿。",
+    intro: "按需生成 Lorem Ipsum 占位文本，支持单词、句子、段落和 HTML 格式输出。",
+    steps: [
+      "选择生成类型（单词、句子、段落）。",
+      "设置生成数量和可选长度范围。",
+      "复制生成的占位文本到原型或设计稿。"
+    ],
+    examples: ["为页面设计稿生成占位段落。", "生成列表测试数据。"]
+  },
+  "media-device-permission-lab": {
+    name: "媒体设备权限实验室",
+    description: "检测 camera/microphone 权限、枚举媒体设备、预览摄像头并显示麦克风实时音量。",
+    intro: "检测浏览器媒体设备权限状态，预览摄像头画面和麦克风音量，适合设备调试。",
+    steps: [
+      "点击检测权限，查看摄像头和麦克风授权状态。",
+      "查看已连接的媒体设备和详细信息。",
+      "测试摄像头预览和麦克风音量。"
+    ],
+    examples: ["调试 WebRTC 应用前的设备检测。", "排查浏览器媒体权限配置问题。"]
+  },
+  "meta-tags-seo-preview": {
+    name: "Meta Tags SEO 预览器",
+    description: "检查 title、description、canonical、robots 和社交 meta 标签的搜索结果预览。",
+    intro: "填写网页的 meta 标签，预览在搜索引擎结果中的展示效果。",
+    steps: [
+      "填写 title、description 和 canonical URL。",
+      "设置 robots 指令和社交分享标签。",
+      "查看 Google 搜索结果片段预览。"
+    ],
+    examples: ["优化博客文章的搜索引擎展示标题。", "检查 meta description 长度是否合适。"]
+  },
+  "mock-data-generator": {
+    name: "Mock 数据生成器",
+    description: "按字段 schema 生成可复现的 mock 数据，并导出 JSON、NDJSON 或 CSV。",
+    intro: "定义字段名和类型，一键生成可复现的模拟数据，适合前端开发和测试。",
+    steps: [
+      "添加字段定义（字段名、类型、格式）。",
+      "设置生成条数和随机种子。",
+      "导出 JSON、NDJSON 或 CSV 格式的 mock 数据。"
+    ],
+    examples: ["生成 100 条用户列表 mock 数据。", "为前端表格生成带各种字段类型的测试数据。"]
+  },
+  "notification-payload-tester": {
+    name: "通知 Payload 测试器",
+    description: "配置、预览和复制浏览器 Notification API payload，记录授权状态与发送历史。",
+    intro: "配置浏览器通知的标题、正文和图标，测试通知展示效果。",
+    steps: [
+      "输入通知标题、正文和图标 URL。",
+      "点击发送测试通知。",
+      "查看通知历史和浏览器授权状态。"
+    ],
+    examples: ["测试 PWA 推送通知的展示效果。", "调试通知的图标和操作按钮。"]
+  },
+  "oauth-oidc-debugger": {
+    name: "OAuth / OIDC 调试器",
+    description: "解析授权 URL、OIDC ID Token，并生成 PKCE challenge。",
+    intro: "解析 OAuth 授权 URL 和 OIDC ID Token，生成 PKCE code verifier 和 challenge，适合 SSO 调试。",
+    steps: [
+      "粘贴授权 URL 或 ID Token。",
+      "查看解析出的参数、claims 和签名信息。",
+      "按需生成 PKCE challenge。"
+    ],
+    examples: ["调试 OIDC 登录流程中的 ID Token 解析。", "生成 OAuth 授权码流程所需的 PKCE 参数。"]
+  },
+  "openapi-workbench": {
+    name: "OpenAPI 工作台",
+    description: "查看、格式化、Diff OpenAPI/Swagger JSON，并生成基础 Mock 响应。",
+    intro: "粘贴 OpenAPI/Swagger JSON，格式化查看结构、对比差异并生成 Mock 响应。",
+    steps: [
+      "粘贴 OpenAPI JSON 或 YAML。",
+      "查看路径、方法和 Schema 概览。",
+      "格式化输出或生成 Mock 响应。"
+    ],
+    examples: ["格式化新的 OpenAPI 规范文件。", "对比两个版本 API 规范差异。"]
+  },
+  "parquet-arrow-preview": {
+    name: "Parquet / Arrow 预览器",
+    description: "预览 Parquet、Arrow IPC 与 Feather 文件的格式标记、页脚和字节结构。",
+    intro: "上传或粘贴 Parquet/Arrow 文件的十六进制，查看格式标记和元数据结构。",
+    steps: [
+      "上传 Parquet 或 Arrow 文件。",
+      "查看文件格式标记、 Schema 和页脚信息。",
+      "分析列式存储的元数据。"
+    ],
+    examples: ["检查 Parquet 文件的 Schema 定义。", "查看 Arrow IPC 文件的格式标记。"]
+  },
+  "pdf-metadata-tool": {
+    name: "PDF 元数据工具",
+    description: "查看 PDF Info 字典和 XMP 元数据，并生成保留字节偏移的清理版本。",
+    intro: "上传 PDF 文件，查看文档元数据包括标题、作者、创建工具和 XMP 信息。",
+    steps: [
+      "上传 PDF 文件。",
+      "查看 Info 字典和 XMP 元数据。",
+      "导出元数据报告或清理元数据后的版本。"
+    ],
+    examples: ["检查 PDF 文档的作者和创建工具信息。", "分享前清除 PDF 中的敏感元数据。"]
+  },
+  "pdf-tools": {
+    name: "PDF 工具",
+    description: "本地合并、拆分和无损整理压缩 PDF，适合快速处理常见未加密 PDF。",
+    intro: "在浏览器本地合并、拆分和压缩 PDF 文件，所有操作在本地完成，不上传服务器。",
+    steps: [
+      "上传需要处理的 PDF 文件。",
+      "选择操作类型（合并、拆分、压缩）。",
+      "下载处理后的 PDF 文件。"
+    ],
+    examples: ["合并多个 PDF 章节为一个文档。", "拆分 PDF 中的指定页面范围。"]
+  },
+  "pem-jwk-toolkit": {
+    name: "PEM / JWK / CSR 工具箱",
+    description: "在 RSA 公钥 PEM 和 JWK 之间转换，并解析 CSR/PEM 基础信息。",
+    intro: "在 PEM 和 JWK 格式之间转换 RSA 公钥，解析 CSR 证书签名请求。",
+    steps: [
+      "粘贴 PEM 公钥或 JWK 文本。",
+      "选择转换方向查看结果。",
+      "按需解析 CSR 获取证书基础信息。"
+    ],
+    examples: ["将 PEM 格式公钥转换为 JWK 用于验证 JWT。", "查看 CSR 中的 Subject 和 SAN 信息。"]
+  },
+  "percentage-calculator": {
+    name: "百分比计算器",
+    description: "计算百分比、增减幅和 A 相对 B 的占比。",
+    intro: "快速计算百分比相关的各种场景：占比、增减比例和相对比例。",
+    steps: [
+      "输入 A 值和 B 值。",
+      "选择计算类型（占比、增减幅）。",
+      "查看百分比和计算结果。"
+    ],
+    examples: ["计算 A 占 B 的百分比。", "计算数值从 A 到 B 的增长幅度。"]
+  },
+  "pii-detector": {
+    name: "PII 检测器",
+    description: "本地检测文本中的邮箱、电话、身份证明、银行卡、地址和网络标识符。",
+    intro: "粘贴文本，在浏览器本地检测电子邮件、电话号码、身份证号等个人敏感信息。",
+    steps: [
+      "粘贴待检测的文本。",
+      "查看检测到的 PII 类型、位置和数量。",
+      "根据检测结果脱敏或处理敏感信息。"
+    ],
+    examples: ["扫描日志中是否泄露用户邮箱。", "检查配置文件中是否包含内网 IP 地址。"]
+  },
+  "pomodoro-focus-timer": {
+    name: "番茄专注计时器",
+    description: "配置番茄钟、短休息和长休息节奏，记录完成轮次并生成可复制的专注计划。",
+    intro: "使用番茄工作法管理时间，设置专注和休息时长，记录完成的轮次。",
+    steps: [
+      "设置番茄钟时长、短休息时长和长休息间隔。",
+      "点击开始专注计时。",
+      "完成轮次后查看统计和休息提醒。"
+    ],
+    examples: ["使用 25 分钟番茄钟进入深度工作。", "设置 4 轮番茄钟后的长休息节奏。"]
+  },
+  "pr-change-risk-summarizer": {
+    name: "PR 变更风险摘要器",
+    description: "解析 PR 描述或 diff，按鉴权、迁移、依赖、部署和大变更面生成风险摘要。",
+    intro: "粘贴 PR 描述或 diff 内容，自动评估变更风险等级和影响面。",
+    steps: [
+      "粘贴 PR 描述或代码 diff。",
+      "查看变更风险等级和影响分析。",
+      "根据风险摘要优化 Code Review 重点。"
+    ],
+    examples: ["评估包含依赖升级的 PR 影响。", "检查涉及鉴权模块改动的迁移风险。"]
+  },
+  "privacy-cookie-copy-generator": {
+    name: "隐私 / Cookie 文案生成器",
+    description: "根据数据类型、用途和 Cookie 分类生成隐私政策与 Cookie 文案草稿。",
+    intro: "填写网站收集的数据类型和用途，生成隐私政策和 Cookie 声明草稿。",
+    steps: [
+      "选择网站收集的数据类型（邮箱、位置、行为等）。",
+      "填写 Cookie 用途和第三方服务。",
+      "复制生成的隐私政策或 Cookie 文案。"
+    ],
+    examples: ["为 SaaS 产品生成隐私政策初稿。", "生成 Cookie 同意弹窗的文案内容。"]
+  },
+  "prompt-injection-detector": {
+    name: "Prompt Injection 检测器",
+    description: "检测覆盖系统指令、泄露隐藏提示词、工具滥用和编码载荷等 Prompt Injection 信号。",
+    intro: "输入用户提示词，检测是否包含 Prompt 注入攻击特征。",
+    steps: [
+      "粘贴需要检测的用户输入或提示词。",
+      "查看注入攻击类型和风险等级。",
+      "根据检测结果加固提示词安全策略。"
+    ],
+    examples: ["检测用户输入中的系统指令覆盖攻击。", "扫描对话历史中的 Prompt 泄露风险。"]
+  },
+  "qr-barcode-tool": {
+    name: "二维码 / 条形码工具",
+    description: "生成本地 QR Code 与 Code 128 条形码，并通过浏览器 BarcodeDetector 解析图片。",
+    intro: "生成二维码或条形码，或上传图片解析其中的条码内容。",
+    steps: [
+      "输入需要编码的文本内容。",
+      "选择生成 QR Code 或 Code 128 条码。",
+      "下载码图或上传图片进行解码。"
+    ],
+    examples: ["为 URL 生成二维码方便扫码访问。", "解析图片中的条形码内容。"]
+  },
+  "rag-chunk-token-estimator": {
+    name: "RAG 分块与 Token 估算器",
+    description: "预览 RAG 文档 chunk，估算 token、重叠比例和超大段落风险。",
+    intro: "粘贴文档内容，预览分块效果，估算 token 消耗和重叠比例。",
+    steps: [
+      "粘贴文档内容。",
+      "设置分块大小和重叠比例。",
+      "查看分块预览和 token 估算结果。"
+    ],
+    examples: ["优化 RAG 文档的分块策略减少截断。", "估算长文档的 token 消耗。"]
+  },
+  "random-team-generator": {
+    name: "随机分队生成器",
+    description: "把名单随机分队，支持种子、队伍数量、每队人数和避开同组约束。",
+    intro: "输入成员名单，按队伍数量或每队人数随机分队，支持约束条件。",
+    steps: [
+      "粘贴成员名单（每行一个）。",
+      "设置队伍数量或每队人数。",
+      "设置随机种子确保结果可复现。"
+    ],
+    examples: ["为团队建设活动随机分组。", "课堂活动把学生随机分配到小组。"]
+  },
+  "release-notes-builder": {
+    name: "发布说明生成器",
+    description: "把亮点、修复、破坏性变更和升级步骤整理成面向用户的发布说明。",
+    intro: "输入发布亮点、修复的问题和升级步骤，生成结构化的发布说明。",
+    steps: [
+      "填写版本号和发布日期。",
+      "添加亮点功能、Bug 修复和破坏性变更。",
+      "补充升级指南和兼容性说明。"
+    ],
+    examples: ["为版本发布整理面向用户的 Release Notes。", "生成包含升级步骤的发布公告。"]
+  },
+  "resource-unit-converter": {
+    name: "资源单位换算器",
+    description: "换算 Kubernetes CPU、内存和存储单位，生成 requests/limits 参考值。",
+    intro: "在 Kubernetes 资源单位之间换算，帮助设置正确的 requests 和 limits 值。",
+    steps: [
+      "输入资源值和当前单位。",
+      "选择目标单位进行换算。",
+      "复制换算结果用于 Pod 配置。"
+    ],
+    examples: ["把 512Mi 换算为字节数。", "将 0.5 CPU 换算为 millicores。"]
+  },
+  "sbom-viewer": {
+    name: "SBOM 查看器",
+    description: "解析 CycloneDX / SPDX SBOM，查看组件、许可证、依赖和漏洞摘要。",
+    intro: "上传或粘贴 SBOM JSON，查看组件清单、许可证分布和漏洞信息。",
+    steps: [
+      "上传或粘贴 CycloneDX/SPDX SBOM。",
+      "查看组件列表、许可证和依赖关系。",
+      "检查已知漏洞和风险项。"
+    ],
+    examples: ["分析项目的开源组件和许可证合规性。", "检查 SBOM 中的已知安全漏洞。"]
+  },
+  "secrets-scanner": {
+    name: "密钥扫描器",
+    description: "本地扫描文本、env 或 repo 片段中的常见密钥和高熵 Token。",
+    intro: "粘贴配置文件、代码或环境变量，检测硬编码密钥和令牌。",
+    steps: [
+      "粘贴需要扫描的文本内容。",
+      "查看检测到的高熵字符串和密钥模式。",
+      "按位置和类型处理发现的密钥。"
+    ],
+    examples: ["扫描 .env 文件中是否包含 API 密钥。", "检查代码仓库片段中的密钥泄露。"]
+  },
+  "semgrep-rule-playground": {
+    name: "Semgrep 规则 Playground",
+    description: "用轻量本地匹配预览 Semgrep YAML 规则、样例代码命中和规则元数据。",
+    intro: "编写 Semgrep 规则和测试代码，在浏览器中预览匹配结果。",
+    steps: [
+      "在左侧编辑 Semgrep YAML 规则。",
+      "在右侧粘贴待匹配的代码。",
+      "查看匹配结果和规则元数据。"
+    ],
+    examples: ["编写检测硬编码密钥的 Semgrep 规则。", "测试 SQL 注入检测规则的效果。"]
+  },
+  "slo-error-budget-calculator": {
+    name: "SLO 错误预算计算器",
+    description: "按 SLO、周期、请求量和事故分钟数计算错误预算、消耗率、剩余预算和发布风险。",
+    intro: "根据 SLO 目标和请求量计算错误预算，监控消耗速率和部署风险。",
+    steps: [
+      "设置 SLO 百分比（如 99.9%）。",
+      "输入周期总请求量和事故时长。",
+      "查看错误预算消耗、剩余和发布风险评估。"
+    ],
+    examples: ["计算 99.9% SLO 下的月度错误预算。", "评估当前事故消耗是否允许发布。"]
+  },
+  "social-caption-hashtag-formatter": {
+    name: "社媒文案与话题标签格式化器",
+    description: "为社媒文案整理平台长度、换行、CTA、话题标签和 UTM 链接，生成多平台发布版本。",
+    intro: "输入文案内容，自动适配各平台的字符限制和格式要求。",
+    steps: [
+      "编写文案正文和 CTA。",
+      "添加话题标签和 UTM 链接。",
+      "查看各平台适配结果并复制发布。"
+    ],
+    examples: ["为 Twitter 生成 280 字符限制的文案。", "生成 LinkedIn 和 Instagram 适配版本。"]
+  },
+  "social-post-scheduler": {
+    name: "社媒发布排期器",
+    description: "为多平台社媒文案生成发布排期、字符数检查、标签建议和 CSV 日历草稿。",
+    intro: "安排多平台社媒内容的发布时间，生成发布日历 CSV。",
+    steps: [
+      "填写文案内容和目标平台。",
+      "设置发布日期和时间。",
+      "导出 CSV 发布日历。"
+    ],
+    examples: ["规划一周的社媒内容排期。", "为多平台协调发布时间。"]
+  },
+  "source-map-explorer": {
+    name: "Source Map 分析器",
+    description: "解析 Source Map，按源码查看映射分布，并把生成代码位置反查到原始源码。",
+    intro: "上传 Source Map 文件，查看源码映射关系，从压缩代码定位到原始源码。",
+    steps: [
+      "粘贴或上传 Source Map JSON。",
+      "查看源码文件列表和映射分布。",
+      "输入生成代码的行列号反查原始位置。"
+    ],
+    examples: ["从生产环境错误堆栈定位到源码。", "分析打包后的源码文件大小分布。"]
+  },
+  "sql-explain-visualizer": {
+    name: "SQL 执行步骤可视化器",
+    description: "把 SQL 查询拆成扫描、过滤、聚合、排序等执行步骤。",
+    intro: "输入 SQL 查询语句，可视化展示其执行计划步骤和操作流程。",
+    steps: [
+      "输入 SQL 查询语句。",
+      "查看拆解后的执行步骤序列。",
+      "分析扫描、过滤和排序等操作顺序。"
+    ],
+    examples: ["分析复杂 JOIN 查询的执行流程。", "检查 SQL 是否使用了全表扫描。"]
+  },
+  "sql-index-advisor": {
+    name: "SQL 索引顾问",
+    description: "从 SQL 查询中提取 WHERE、JOIN、ORDER BY 字段，生成索引候选、风险提示和可复制 DDL。",
+    intro: "输入 SQL 查询，自动分析 WHERE 和 JOIN 条件，生成索引建议和 DDL。",
+    steps: [
+      "粘贴 SQL 查询语句。",
+      "查看提取的索引候选字段。",
+      "复制生成的 CREATE INDEX DDL 语句。"
+    ],
+    examples: ["为慢查询分析推荐合适的索引。", "检查查询中缺少索引的 JOIN 字段。"]
+  },
+  "sql-playground": {
+    name: "SQL Playground",
+    description: "浏览器内执行轻量 SQL 子集，保留后续 SQLite/WASM 运行时接入边界。",
+    intro: "在浏览器中编写和执行 SQL 语句，测试查询逻辑和数据操作。",
+    steps: [
+      "在编辑区编写 SQL 语句。",
+      "点击执行查看结果。",
+      "调整 SQL 后重新执行。"
+    ],
+    examples: ["测试复杂 SQL 查询逻辑。", "快速验证 SQL 语法和结果集。"]
+  },
+  "sri-hash-generator": {
+    name: "SRI 哈希生成器",
+    description: "为脚本或样式内容生成 Subresource Integrity sha256/384/512。",
+    intro: "输入脚本或样式内容，生成 SRI 哈希值用于完整性校验。",
+    steps: [
+      "粘贴 JavaScript 或 CSS 内容。",
+      "选择哈希算法。",
+      "复制生成的 SRI 完整属性值。"
+    ],
+    examples: ["为 CDN 加载的 JS 生成 integrity 属性。", "为第三方样式生成 SRI 哈希。"]
+  },
+  "stack-trace-explainer": {
+    name: "堆栈追踪解释器",
+    description: "解释 JS、Python、Java 等堆栈，定位异常类型、应用代码帧和下一步调试动作。",
+    intro: "粘贴错误堆栈，自动识别异常类型和应用代码帧，给出调试建议。",
+    steps: [
+      "粘贴错误堆栈信息。",
+      "查看异常类型和应用代码位置。",
+      "按调试建议定位和修复问题。"
+    ],
+    examples: ["解析 Node.js 生产环境的异常堆栈。", "定位 Python Flask 应用崩溃的代码行。"]
+  },
+  "study-plan-scheduler": {
+    name: "学习计划排期器",
+    description: "根据主题、预计时长、优先级和每日可用时间生成学习排期与复习清单。",
+    intro: "输入学习主题和时间安排，自动生成合理的学习计划和复习周期。",
+    steps: [
+      "添加学习主题和预计时长。",
+      "设置每日可用时间和优先级。",
+      "查看生成的学习排期和复习计划。"
+    ],
+    examples: ["为考试制定 30 天冲刺学习计划。", "规划每周 10 小时的技能学习安排。"]
+  },
+  "svg-optimizer-viewbox-editor": {
+    name: "SVG 优化与 ViewBox 编辑器",
+    description: "清理 SVG 标记、重写 viewBox，并即时预览优化后的矢量资产。",
+    intro: "粘贴 SVG 代码，清理冗余标记、调整 viewBox 并实时预览效果。",
+    steps: [
+      "粘贴 SVG 代码。",
+      "查看优化建议和 viewBox 参数。",
+      "应用优化并复制清理后的 SVG。"
+    ],
+    examples: ["压缩从设计工具导出的 SVG 文件。", "调整 SVG 的 viewBox 适配不同容器。"]
+  },
+  "systemd-unit-analyzer": {
+    name: "systemd Unit 分析器",
+    description: "解析 systemd service/unit 文件，检查重启策略、运行用户、依赖关系和常见安全加固项。",
+    intro: "粘贴 systemd unit 文件，分析服务配置、重启策略和安全加固项。",
+    steps: [
+      "粘贴 systemd service 或 unit 文件。",
+      "查看重启策略、运行用户和依赖关系。",
+      "检查安全加固建议和风险项。"
+    ],
+    examples: ["检查服务是否以 root 用户运行。", "审计服务配置中的安全加固缺失。"]
+  },
+  "tailwind-class-lab": {
+    name: "Tailwind Class 实验室",
+    description: "整理 Tailwind class 顺序，预览常见 utility 的视觉结果并标记重复分组。",
+    intro: "输入 Tailwind CSS 类名，查看排序后的结果和视觉效果预览。",
+    steps: [
+      "输入 Tailwind 类名字符串。",
+      "查看按类别排序后的 class 列表。",
+      "预览常见 utility 的视觉效果。"
+    ],
+    examples: ["整理杂乱的 Tailwind 类名顺序。", "检查是否存在冲突或重复的 utility 类。"]
+  },
+  "task-priority-matrix": {
+    name: "任务优先级矩阵",
+    description: "用影响、紧急度、信心和工作量给任务打分，生成排序、象限和可复制执行清单。",
+    intro: "输入任务清单，从多个维度打分并生成优先级排序和执行清单。",
+    steps: [
+      "添加任务名称和描述。",
+      "对每个任务评估影响、紧急度、信心和工作量。",
+      "查看优先级排序和象限分布。"
+    ],
+    examples: ["为 Sprint 计划进行任务优先级排序。", "评估项目任务的影响 vs 紧急度四象限。"]
+  },
+  "terraform-plan-formatter": {
+    name: "Terraform Plan 格式化器",
+    description: "整理 Terraform plan 输出，汇总 create/update/delete/replace 操作。",
+    intro: "粘贴 terraform plan 输出，格式化展示资源变更汇总和详情。",
+    steps: [
+      "粘贴 terraform plan 输出内容。",
+      "查看 create/update/delete/replace 汇总。",
+      "检查具体资源变更详情。"
+    ],
+    examples: ["Code Review 时格式化 Terraform plan 输出。", "统计基础设施变更的影响面。"]
+  },
+  "test-case-generator": {
+    name: "测试用例生成器",
+    description: "根据需求、验收标准或代码说明生成 happy path、边界、负向、权限和回归测试用例。",
+    intro: "输入需求描述或验收标准，自动生成覆盖多场景的测试用例。",
+    steps: [
+      "粘贴功能需求或验收标准。",
+      "选择测试类型（Happy Path、边界值、负向等）。",
+      "复制生成的测试用例表格。"
+    ],
+    examples: ["为登录功能生成完整的测试用例。", "为表单校验生成边界值和异常场景测试。"]
+  },
+  "text-inspector": {
+    name: "文本检查器",
+    description: "在 Worker 中分析大文本，并把报告缓存到 OPFS。",
+    intro: "粘贴文本内容，快速查看字符数、单词数、行数、段落数等统计信息。",
+    steps: [
+      "粘贴需要分析的文本。",
+      "查看字数、行数、段落数和词频统计。",
+      "分析文本的可读性指标。"
+    ],
+    examples: ["分析文章的字数和可读性。", "统计文本中的高频词汇。"]
+  },
+  "threat-model-canvas": {
+    name: "威胁建模画布",
+    description: "整理资产、入口、信任边界、STRIDE 威胁和缓解措施。",
+    intro: "按 STRIDE 框架建模系统威胁，识别资产、入口点和缓解措施。",
+    steps: [
+      "填写系统资产和入口点。",
+      "定义信任边界并分析 STRIDE 威胁。",
+      "记录缓解措施和状态。"
+    ],
+    examples: ["为 Web 应用进行 STRIDE 威胁建模。", "评估微服务架构的信任边界风险。"]
+  },
+  "token-cost-calculator": {
+    name: "Token 成本计算器",
+    description: "按输入/输出 token、运行次数和可编辑单价估算 LLM 调用成本。",
+    intro: "输入 Token 使用量和模型单价，快速估算 LLM 调用的总成本。",
+    steps: [
+      "输入输入和输出的 token 数量。",
+      "选择模型和单价。",
+      "查看估算的总成本和运行次数对比。"
+    ],
+    examples: ["估算每月 LLM API 调用的总成本。", "比较不同模型的价格差异。"]
+  },
+  "unit-converter": {
+    name: "单位换算器",
+    description: "换算长度、重量、数据大小和温度等常用单位。",
+    intro: "在长度、重量、体积、温度和数据存储等常用单位之间快速换算。",
+    steps: [
+      "选择单位类别（长度、重量、温度等）。",
+      "输入数值并选择源单位和目标单位。",
+      "查看换算结果。"
+    ],
+    examples: ["把 5 英里换算为公里。", "将 32GB 换算为 MB。"]
+  },
+  "url-safety-checker": {
+    name: "URL 安全检查器",
+    description: "解析 URL 并标记不安全协议、混淆、凭据、私网地址和可疑结构。",
+    intro: "输入 URL，自动分析安全风险，包括协议、主机、路径和凭据。",
+    steps: [
+      "粘贴需要检查的 URL。",
+      "查看安全风险类型和等级。",
+      "根据检查结果决定是否信任该链接。"
+    ],
+    examples: ["检查收到的链接是否包含可疑域名。", "分析 URL 中的混淆和重定向风险。"]
+  },
+  "wasm-binary-inspector": {
+    name: "WASM 二进制检查器",
+    description: "解析 WebAssembly 二进制模块的 section、import/export、大小结构，并用 WASM runtime 编译校验。",
+    intro: "上传 .wasm 文件，解析模块结构，查看 section、导入导出和大小信息。",
+    steps: [
+      "上传 .wasm 文件或粘贴 hex 内容。",
+      "查看模块的 section 列表和类型。",
+      "分析导入导出函数和内存布局。"
+    ],
+    examples: ["检查 WASM 模块的导入函数和依赖。", "分析 WASM 文件的大小和各 section 占比。"]
+  },
+  "webgpu-capability-reporter": {
+    name: "WebGPU 能力报告器",
+    description: "查询浏览器 WebGPU adapter、features、limits 和 device 创建结果，便于定位图形/计算能力差异。",
+    intro: "检测当前浏览器的 WebGPU 支持和硬件能力，查看 adapter 特性和限制。",
+    steps: [
+      "点击检测 WebGPU 支持。",
+      "查看 Adapter 信息和功能支持列表。",
+      "分析限制参数是否满足应用需求。"
+    ],
+    examples: ["诊断浏览器是否支持 WebGPU。", "对比不同设备的 WebGPU 能力差异。"]
+  },
+  "websocket-client": {
+    name: "WebSocket 客户端",
+    description: "连接 ws/wss 端点、发送消息并查看事件日志的 WebSocket 调试客户端。",
+    intro: "连接 WebSocket 服务端，发送和接收消息，查看完整的通信日志。",
+    steps: [
+      "输入 WebSocket 服务端 URL。",
+      "点击连接，发送测试消息。",
+      "查看消息日志和连接状态变化。"
+    ],
+    examples: ["调试 WebSocket 实时通信服务。", "测试 WebSocket 重连和心跳机制。"]
+  },
+  "yaml-json-toml-converter": {
+    name: "YAML / JSON / TOML 转换器",
+    description: "在 JSON、轻量 YAML 和轻量 TOML 配置片段之间互转。",
+    intro: "在 JSON、YAML 和 TOML 配置格式之间相互转换，适合配置迁移和格式适配。",
+    steps: [
+      "粘贴源格式的配置内容。",
+      "选择源格式和目标格式。",
+      "复制转换后的配置内容。"
+    ],
+    examples: ["把 YAML 配置转换为 JSON 格式。", "将 JSON 格式的应用配置转为 TOML。"]
+  },
 };
 
 const zhToolNameOverrides: Record<string, string> = {

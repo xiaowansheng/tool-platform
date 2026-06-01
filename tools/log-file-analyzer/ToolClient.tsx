@@ -122,8 +122,15 @@ export default function LogFileAnalyzerTool({ manifest }: ToolClientProps) {
     }
   }
 
+  const [copied, setCopied] = useState(false);
+
   async function copyReport() {
-    await navigator.clipboard.writeText(JSON.stringify(report, null, 2));
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(report, null, 2));
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
   }
 
   return (
@@ -141,7 +148,7 @@ export default function LogFileAnalyzerTool({ manifest }: ToolClientProps) {
           <input type="file" accept=".log,.txt" onChange={(event) => void loadFile(event)} />
         </label>
         <button type="button" onClick={() => void copyReport()}>
-          复制报告 JSON
+          {copied ? "已复制" : "复制报告 JSON"}
         </button>
       </div>
       <label className="tool-field">

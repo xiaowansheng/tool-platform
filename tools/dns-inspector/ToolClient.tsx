@@ -171,7 +171,7 @@ export default function DnsInspectorTool({ manifest }: ToolClientProps) {
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
           <span>域名</span>
-          <input value={domain} onChange={(event) => setDomain(event.target.value)} placeholder="example.com" />
+          <input value={domain} onChange={(event) => setDomain(event.target.value)} placeholder="域名，如 example.com" />
         </label>
         <label className="tool-field tool-field--compact">
           <span>记录类型</span>

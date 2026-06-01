@@ -283,7 +283,7 @@ export default function CookieParserTool({ manifest }: ToolClientProps) {
 
           <div className="tool-table finding-table">
             <div className="tool-table__row tool-table__row--head finding-table__row">
-              <span>Cookie</span>
+              <span>Cookie 名称</span>
               <span>级别</span>
               <span>建议</span>
             </div>

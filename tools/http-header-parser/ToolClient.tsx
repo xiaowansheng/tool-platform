@@ -61,13 +61,13 @@ export default function HttpHeaderParserTool({ manifest }: ToolClientProps) {
         <article className="detail-card"><h3>安全提示</h3><p>{hints.length}</p></article>
       </div>
       <label className="tool-field">
-        <span>原始 Headers</span>
+        <span>原始请求头</span>
         <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
       </label>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Header</span>
-          <span>Value</span>
+          <span>请求头</span>
+          <span>值</span>
         </div>
         {parsed.headers.length > 0 ? parsed.headers.map((header, index) => (
           <div key={header.key + "-" + index} className="tool-table__row">

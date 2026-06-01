@@ -38,8 +38,8 @@ function listOperations(spec: OpenApiDocument) {
     Object.entries(methods).map(([method, operation]) => ({
       method: method.toUpperCase(),
       path,
-      summary: operation.summary ?? "No summary",
-      responses: Object.keys(operation.responses ?? {}).join(", ") || "none"
+      summary: operation.summary ?? "无摘要",
+      responses: Object.keys(operation.responses ?? {}).join(", ") || "无"
     }))
   );
 }

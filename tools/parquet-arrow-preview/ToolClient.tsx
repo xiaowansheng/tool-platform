@@ -59,8 +59,8 @@ function inspectBinaryFile(file: File, buffer: ArrayBuffer): BinaryReport {
     details.push(
       { key: "Magic", value: "PAR1" },
       { key: "Footer length", value: formatBytes(footerLength) },
-      { key: "Footer offset", value: footerStart >= 0 ? `0x${footerStart.toString(16)}` : "invalid" },
-      { key: "Data region", value: footerStart >= 4 ? formatBytes(footerStart - 4) : "invalid" }
+      { key: "Footer offset", value: footerStart >= 0 ? `0x${footerStart.toString(16)}` : "无效" },
+      { key: "Data region", value: footerStart >= 4 ? formatBytes(footerStart - 4) : "无效" }
     );
   } else if (bytes.length >= 14 && ascii(bytes, 0, 6) === "ARROW1" && ascii(bytes, bytes.length - 6, 6) === "ARROW1") {
     const footerLength = view.getInt32(bytes.length - 10, true);
@@ -70,7 +70,7 @@ function inspectBinaryFile(file: File, buffer: ArrayBuffer): BinaryReport {
     details.push(
       { key: "Magic", value: "ARROW1" },
       { key: "Footer length", value: formatBytes(Math.max(0, footerLength)) },
-      { key: "Footer offset", value: footerStart >= 0 ? `0x${footerStart.toString(16)}` : "invalid" }
+      { key: "Footer offset", value: footerStart >= 0 ? `0x${footerStart.toString(16)}` : "无效" }
     );
   } else if (bytes.length >= 4 && ascii(bytes, 0, 4) === "FEA1") {
     format = "Feather V1";

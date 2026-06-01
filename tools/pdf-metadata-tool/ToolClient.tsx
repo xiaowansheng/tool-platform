@@ -169,7 +169,7 @@ export default function PdfMetadataTool({ manifest }: ToolClientProps) {
             {report.fields.length > 0 ? report.fields.map((field) => (
               <div key={field.key} className="tool-table__row">
                 <span>{field.key}</span>
-                <span>{field.value || "empty"}</span>
+                <span>{field.value || "空"}</span>
               </div>
             )) : (
               <div className="tool-table__row" style={{ gridTemplateColumns: "1fr" }}>

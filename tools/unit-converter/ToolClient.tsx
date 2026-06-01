@@ -77,7 +77,8 @@ export default function UnitConverterTool({ manifest }: ToolClientProps) {
     ? convertTemperature(value, fromUnit)
     : Object.fromEntries(
       Object.entries(unitGroups[group].units).map(([unit, factor]) => {
-        const baseValue = value * (unitGroups[group].units[fromUnit as UnitKey<typeof group>] ?? 1);
+        const groupUnits = unitGroups[group].units as Record<string, number>;
+        const baseValue = value * (groupUnits[fromUnit] ?? 1);
 
         return [unit, baseValue / factor];
       })

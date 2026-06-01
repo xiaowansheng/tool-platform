@@ -4,12 +4,13 @@ import { useTranslations } from "next-intl";
 import { categories, getAllTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
 import { Link } from "@/i18n/navigation";
+import { COMMON_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
 import { CommonToolsSidebarLink } from "./common-tools";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigation } from "./mobile-navigation";
 import { SiteFooter } from "./site-footer";
 import { ThemeToggle } from "./theme-toggle";
-import { WorkspaceTabs } from "./workspace-tabs";
+import { WorkspaceTabs, type WorkspaceTabDefinition } from "./workspace-tabs";
 
 
 function SidebarContent({ tools }: { tools: ToolManifest[] }) {
@@ -69,8 +70,29 @@ function SidebarContent({ tools }: { tools: ToolManifest[] }) {
 }
 
 export function PlatformShell({ children }: { children: ReactNode }) {
+  const t = useTranslations("layout");
+  const ct = useTranslations("categories");
+  const commonToolsT = useTranslations("commonTools");
   const tools = getAllTools();
-  const toolTabs = tools.map(({ id, name }) => ({ id, name }));
+  const workspaceTabs: WorkspaceTabDefinition[] = [
+    { id: "/", name: t("home"), kind: "home" },
+    { id: "/search", name: t("search"), kind: "search" },
+    {
+      id: `/categories/${COMMON_TOOLS_CATEGORY_ID}`,
+      name: commonToolsT("title"),
+      kind: "category"
+    },
+    ...categories.map((category) => ({
+      id: `/categories/${category.id}`,
+      name: ct(`${category.id}.label`),
+      kind: "category" as const
+    })),
+    ...tools.map(({ id, name }) => ({
+      id: `/tools/${id}`,
+      name,
+      kind: "tool" as const
+    }))
+  ];
 
   return (
     <div className="app-shell">
@@ -84,7 +106,7 @@ export function PlatformShell({ children }: { children: ReactNode }) {
 
       <main className="main">
         <div className="main__content">
-          <WorkspaceTabs tools={toolTabs}>{children}</WorkspaceTabs>
+          <WorkspaceTabs availableTabs={workspaceTabs}>{children}</WorkspaceTabs>
         </div>
         <SiteFooter />
       </main>

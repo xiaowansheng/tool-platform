@@ -29,8 +29,8 @@
     "openExample": "Open Example"
   },
   "workspaceTabs": {
-    "ariaLabel": "Open tools",
-    "empty": "No open tools",
+    "ariaLabel": "Open pages",
+    "empty": "No open pages",
     "closeTab": "Close {name}",
     "moreActions": "More tab actions",
     "contextMenu": "{name} tab actions",

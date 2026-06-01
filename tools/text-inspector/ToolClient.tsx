@@ -197,7 +197,7 @@ function textInspectorWorkerScope() {
         id: message.id,
         kind: "response",
         success: false,
-        error: error instanceof Error ? error.message : "Worker action failed"
+        error: error instanceof Error ? error.message : "Worker 操作失败"
       });
     }
   };

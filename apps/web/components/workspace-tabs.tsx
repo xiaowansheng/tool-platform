@@ -2,15 +2,16 @@
 
 import type { KeyboardEvent, MouseEvent, ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MoreHorizontal, PanelsTopLeft, Wrench, X } from "lucide-react";
+import { Folder, Home, MoreHorizontal, PanelsTopLeft, Search, Wrench, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { createPortal } from "react-dom";
 
 import { usePathname, useRouter } from "@/i18n/navigation";
 
-interface ToolTabDefinition {
+export interface WorkspaceTabDefinition {
   id: string;
   name: string;
+  kind: "home" | "search" | "category" | "tool";
 }
 
 interface ContextMenuState {
@@ -19,14 +20,13 @@ interface ContextMenuState {
   y: number;
 }
 
-const WORKSPACE_TABS_STORAGE_KEY = "tool-platform:workspace-tabs:v1";
+const WORKSPACE_TABS_STORAGE_KEY = "tool-platform:workspace-tabs:v2";
 const CONTEXT_MENU_WIDTH = 192;
 const CONTEXT_MENU_HEIGHT = 176;
 const CONTEXT_MENU_EDGE_GAP = 8;
 
-function getToolId(pathname: string) {
-  const match = pathname.match(/^\/tools\/([^/]+)\/?$/);
-  return match ? decodeURIComponent(match[1]) : null;
+function normalizePathname(pathname: string) {
+  return pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
 }
 
 function readStoredTabIds() {
@@ -40,7 +40,7 @@ function readStoredTabIds() {
   }
 }
 
-function writeStoredTabs(tabs: ToolTabDefinition[]) {
+function writeStoredTabs(tabs: WorkspaceTabDefinition[]) {
   try {
     window.sessionStorage.setItem(
       WORKSPACE_TABS_STORAGE_KEY,
@@ -51,9 +51,9 @@ function writeStoredTabs(tabs: ToolTabDefinition[]) {
   }
 }
 
-function mergeTabs(...tabGroups: ToolTabDefinition[][]) {
+function mergeTabs(...tabGroups: WorkspaceTabDefinition[][]) {
   const seen = new Set<string>();
-  const tabs: ToolTabDefinition[] = [];
+  const tabs: WorkspaceTabDefinition[] = [];
 
   for (const tab of tabGroups.flat()) {
     if (!seen.has(tab.id)) {
@@ -66,11 +66,11 @@ function mergeTabs(...tabGroups: ToolTabDefinition[][]) {
 }
 
 export function WorkspaceTabs({
-  children,
-  tools
+  availableTabs,
+  children
 }: {
+  availableTabs: WorkspaceTabDefinition[];
   children: ReactNode;
-  tools: ToolTabDefinition[];
 }) {
   const t = useTranslations("workspaceTabs");
   const pathname = usePathname();
@@ -78,41 +78,48 @@ export function WorkspaceTabs({
   const pageCacheRef = useRef(new Map<string, ReactNode>());
   const menuRef = useRef<HTMLDivElement>(null);
   const tabButtonRefs = useRef(new Map<string, HTMLButtonElement>());
-  const [tabs, setTabs] = useState<ToolTabDefinition[]>([]);
+  const [tabs, setTabs] = useState<WorkspaceTabDefinition[]>([]);
   const [storageReady, setStorageReady] = useState(false);
-  const [suppressedToolId, setSuppressedToolId] = useState<string | null>(null);
+  const [suppressedTabId, setSuppressedTabId] = useState<string | null>(null);
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
 
-  const toolById = useMemo(() => new Map(tools.map((tool) => [tool.id, tool])), [tools]);
-  const activeToolId = getToolId(pathname);
-  const currentTool = activeToolId ? toolById.get(activeToolId) : undefined;
-  const currentToolForCache = currentTool && currentTool.id !== suppressedToolId ? currentTool : null;
+  const tabById = useMemo(() => new Map(availableTabs.map((tab) => [tab.id, tab])), [availableTabs]);
+  const activeTabId = normalizePathname(pathname);
+  const currentTab = tabById.get(activeTabId);
+  const currentTabForCache = currentTab && currentTab.id !== suppressedTabId ? currentTab : null;
 
-  if (currentToolForCache && !pageCacheRef.current.has(currentToolForCache.id)) {
-    pageCacheRef.current.set(currentToolForCache.id, children);
+  if (currentTabForCache && !pageCacheRef.current.has(currentTabForCache.id)) {
+    pageCacheRef.current.set(currentTabForCache.id, children);
   }
 
-  const visibleTabs = currentToolForCache ? mergeTabs(tabs, [currentToolForCache]) : tabs;
+  const visibleTabs = currentTabForCache ? mergeTabs(tabs, [currentTabForCache]) : tabs;
   const panelTabs =
-    currentTool && currentTool.id === suppressedToolId
-      ? mergeTabs(visibleTabs, [currentTool])
+    currentTab && currentTab.id === suppressedTabId
+      ? mergeTabs(visibleTabs, [currentTab])
       : visibleTabs;
-  const hasCachedCurrentPage = currentTool ? pageCacheRef.current.has(currentTool.id) : false;
+  const hasCachedCurrentPage = currentTab ? pageCacheRef.current.has(currentTab.id) : false;
 
   useEffect(() => {
     const restoredTabs = readStoredTabIds()
-      .map((id) => toolById.get(id))
-      .filter((tab): tab is ToolTabDefinition => Boolean(tab));
+      .map((id) => tabById.get(id))
+      .filter((tab): tab is WorkspaceTabDefinition => Boolean(tab));
 
-    setTabs((currentTabs) => mergeTabs(restoredTabs, currentTabs));
+    setTabs((currentTabs) =>
+      mergeTabs(
+        restoredTabs,
+        currentTabs
+          .map((tab) => tabById.get(tab.id))
+          .filter((tab): tab is WorkspaceTabDefinition => Boolean(tab))
+      )
+    );
     setStorageReady(true);
-  }, [toolById]);
+  }, [tabById]);
 
   useEffect(() => {
-    if (currentToolForCache) {
-      setTabs((currentTabs) => mergeTabs(currentTabs, [currentToolForCache]));
+    if (currentTabForCache) {
+      setTabs((currentTabs) => mergeTabs(currentTabs, [currentTabForCache]));
     }
-  }, [currentToolForCache]);
+  }, [currentTabForCache]);
 
   useEffect(() => {
     if (storageReady) {
@@ -121,26 +128,26 @@ export function WorkspaceTabs({
   }, [storageReady, tabs]);
 
   useEffect(() => {
-    for (const toolId of pageCacheRef.current.keys()) {
-      if (!tabs.some((tab) => tab.id === toolId) && toolId !== activeToolId) {
-        pageCacheRef.current.delete(toolId);
+    for (const tabId of pageCacheRef.current.keys()) {
+      if (!tabs.some((tab) => tab.id === tabId) && tabId !== activeTabId) {
+        pageCacheRef.current.delete(tabId);
       }
     }
 
-    if (suppressedToolId && activeToolId !== suppressedToolId) {
-      setSuppressedToolId(null);
+    if (suppressedTabId && activeTabId !== suppressedTabId) {
+      setSuppressedTabId(null);
     }
-  }, [activeToolId, suppressedToolId, tabs]);
+  }, [activeTabId, suppressedTabId, tabs]);
 
   useEffect(() => {
-    if (activeToolId) {
-      tabButtonRefs.current.get(activeToolId)?.scrollIntoView({
+    if (currentTab) {
+      tabButtonRefs.current.get(currentTab.id)?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
         inline: "nearest"
       });
     }
-  }, [activeToolId, visibleTabs.length]);
+  }, [currentTab, visibleTabs.length]);
 
   useEffect(() => {
     if (!contextMenu) {
@@ -181,30 +188,30 @@ export function WorkspaceTabs({
   function selectTab(tabId: string) {
     closeContextMenu();
 
-    if (activeToolId !== tabId) {
-      router.push(`/tools/${tabId}`);
+    if (activeTabId !== tabId) {
+      router.push(tabId);
     }
   }
 
-  function removeTabs(tabIds: string[], preferredToolId?: string) {
+  function removeTabs(tabIds: string[], preferredTabId?: string) {
     const idsToRemove = new Set(tabIds);
     const nextTabs = tabs.filter((tab) => !idsToRemove.has(tab.id));
 
-    if (activeToolId && idsToRemove.has(activeToolId)) {
-      const activeIndex = tabs.findIndex((tab) => tab.id === activeToolId);
-      const preferredTab = preferredToolId
-        ? nextTabs.find((tab) => tab.id === preferredToolId)
+    if (idsToRemove.has(activeTabId)) {
+      const activeIndex = tabs.findIndex((tab) => tab.id === activeTabId);
+      const preferredTab = preferredTabId
+        ? nextTabs.find((tab) => tab.id === preferredTabId)
         : undefined;
       const fallbackTab =
         preferredTab ??
         nextTabs[Math.min(Math.max(activeIndex, 0), Math.max(nextTabs.length - 1, 0))];
 
-      setSuppressedToolId(activeToolId);
-      router.replace(fallbackTab ? `/tools/${fallbackTab.id}` : "/");
+      setSuppressedTabId(activeTabId);
+      router.replace(fallbackTab?.id ?? "/");
     }
 
     for (const tabId of idsToRemove) {
-      if (tabId !== activeToolId) {
+      if (tabId !== activeTabId) {
         pageCacheRef.current.delete(tabId);
       }
     }
@@ -255,7 +262,7 @@ export function WorkspaceTabs({
         <div className="workspace-tabs__list" role="tablist" aria-label={t("ariaLabel")}>
           {visibleTabs.length > 0 ? (
             visibleTabs.map((tab) => {
-              const active = tab.id === activeToolId;
+              const active = tab.id === activeTabId;
 
               return (
                 <div
@@ -279,7 +286,7 @@ export function WorkspaceTabs({
                     onClick={() => selectTab(tab.id)}
                     onKeyDown={(event) => openKeyboardContextMenu(event, tab.id)}
                   >
-                    <Wrench aria-hidden="true" size={14} strokeWidth={2} />
+                    <TabIcon kind={tab.kind} />
                     <span>{tab.name}</span>
                   </button>
                   <button
@@ -309,7 +316,7 @@ export function WorkspaceTabs({
             aria-label={t("moreActions")}
             title={t("moreActions")}
             onClick={(event) => {
-              const tabId = activeToolId && toolById.has(activeToolId) ? activeToolId : visibleTabs.at(-1)?.id;
+              const tabId = currentTab ? currentTab.id : visibleTabs.at(-1)?.id;
 
               if (tabId) {
                 const rect = event.currentTarget.getBoundingClientRect();
@@ -322,13 +329,13 @@ export function WorkspaceTabs({
         ) : null}
       </section>
 
-      {!currentTool || !hasCachedCurrentPage ? children : null}
+      {!currentTab || !hasCachedCurrentPage ? children : null}
 
       {panelTabs.map((tab) => {
         const cachedPage = pageCacheRef.current.get(tab.id);
 
         return cachedPage ? (
-          <div key={tab.id} className="workspace-tabs__page" hidden={tab.id !== activeToolId}>
+          <div key={tab.id} className="workspace-tabs__page" hidden={tab.id !== activeTabId}>
             {cachedPage}
           </div>
         ) : null;
@@ -386,4 +393,17 @@ export function WorkspaceTabs({
         : null}
     </>
   );
+}
+
+function TabIcon({ kind }: { kind: WorkspaceTabDefinition["kind"] }) {
+  switch (kind) {
+    case "home":
+      return <Home aria-hidden="true" size={14} strokeWidth={2} />;
+    case "search":
+      return <Search aria-hidden="true" size={14} strokeWidth={2} />;
+    case "category":
+      return <Folder aria-hidden="true" size={14} strokeWidth={2} />;
+    case "tool":
+      return <Wrench aria-hidden="true" size={14} strokeWidth={2} />;
+  }
 }

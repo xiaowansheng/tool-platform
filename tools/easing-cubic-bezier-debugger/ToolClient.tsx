@@ -103,7 +103,7 @@ export default function EasingCubicBezierDebuggerTool({ manifest }: ToolClientPr
           <span>时长 ms</span>
           <input type="number" min="80" max="3000" step="20" value={duration} onChange={(event) => setDuration(Number(event.target.value))} />
         </label>
-        <button type="button" onClick={() => setRunKey((value) => value + 1)}>Replay</button>
+        <button type="button" onClick={() => setRunKey((value) => value + 1)}>重放</button>
       </div>
 
       <div className="asset-preview-grid">

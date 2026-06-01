@@ -73,7 +73,7 @@ export default function SocialCaptionHashtagFormatterTool({ manifest }: ToolClie
           </select>
         </label>
         <button type="button" onClick={() => void copyCaption()}>{copied ? "已复制" : "复制当前版本"}</button>
-        <div className="mono-output">{caption.length} / {limits[platform]} chars</div>
+        <div className="mono-output">{caption.length} / {limits[platform]} 字符</div>
       </div>
 
       <div className="workspace workspace--two-column">

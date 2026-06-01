@@ -261,7 +261,7 @@ export default function SvgOptimizerViewBoxEditorTool({ manifest }: ToolClientPr
         </article>
         <article className="detail-card">
           <h3>检测到的 viewBox</h3>
-          <p className="mono-output">{result.detectedViewBox || "none"}</p>
+          <p className="mono-output">{result.detectedViewBox || "无"}</p>
         </article>
       </div>
 

@@ -274,10 +274,10 @@ export default function SourceMapExplorerTool({ manifest }: ToolClientProps) {
     }
   }
 
-  const sourceName = report.segment?.sourceIndex !== undefined ? report.raw.sources?.[report.segment.sourceIndex] ?? "unknown" : "n/a";
-  const originalLine = report.segment?.originalLine !== undefined ? report.segment.originalLine + 1 : "n/a";
-  const originalColumn = report.segment?.originalColumn ?? "n/a";
-  const originalName = report.segment?.nameIndex !== undefined ? report.raw.names?.[report.segment.nameIndex] ?? "n/a" : "n/a";
+  const sourceName = report.segment?.sourceIndex !== undefined ? report.raw.sources?.[report.segment.sourceIndex] ?? "未知" : "无";
+  const originalLine = report.segment?.originalLine !== undefined ? report.segment.originalLine + 1 : "无";
+  const originalColumn = report.segment?.originalColumn ?? "无";
+  const originalName = report.segment?.nameIndex !== undefined ? report.raw.names?.[report.segment.nameIndex] ?? "无" : "无";
 
   return (
     <section className="tool-panel">

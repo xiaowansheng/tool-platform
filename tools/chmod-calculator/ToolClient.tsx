@@ -31,8 +31,15 @@ export default function ChmodCalculatorTool({ manifest }: ToolClientProps) {
     permissions.map((permission) => state[group][permission.key] ? permission.key : "-").join("")
   ).join("");
 
+  const [copied, setCopied] = useState(false);
+
   async function copyCommand() {
-    await navigator.clipboard.writeText(`chmod ${digits} file`);
+    try {
+      await navigator.clipboard.writeText(`chmod ${digits} file`);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
   }
 
   return (
@@ -80,7 +87,7 @@ export default function ChmodCalculatorTool({ manifest }: ToolClientProps) {
         </article>
       </div>
       <div className="tool-toolbar">
-        <button type="button" onClick={() => void copyCommand()}>复制 chmod 命令</button>
+        <button type="button" onClick={() => void copyCommand()}>{copied ? "已复制" : "复制 chmod 命令"}</button>
       </div>
     </section>
   );

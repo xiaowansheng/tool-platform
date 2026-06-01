@@ -405,8 +405,11 @@ export default function QrBarcodeTool({ manifest }: ToolClientProps) {
     }
   }, [mode, value]);
 
+  const [copiedSvg, setCopiedSvg] = useState(false);
+
   async function copySvg() {
     await navigator.clipboard.writeText(generated.svg);
+    setCopiedSvg(true);
   }
 
   async function detectImage(event: React.ChangeEvent<HTMLInputElement>) {
@@ -452,7 +455,7 @@ export default function QrBarcodeTool({ manifest }: ToolClientProps) {
           </select>
         </label>
         <button type="button" disabled={!generated.svg} onClick={() => void copySvg()}>
-          复制 SVG
+          {copiedSvg ? "已复制" : "复制 SVG"}
         </button>
         <label className="tool-field tool-field--compact">
           <span>解析图片</span>

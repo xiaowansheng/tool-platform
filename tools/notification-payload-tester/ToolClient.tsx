@@ -239,7 +239,7 @@ if (permission === "granted") {
           </label>
           <div className="tool-toolbar tool-toolbar--grid">
             <label className="tool-field tool-field--compact">
-              <span>Tag</span>
+              <span>标签</span>
               <input value={tag} onChange={(event) => setTag(event.target.value)} />
             </label>
             <label className="tool-field tool-field--compact">
@@ -258,7 +258,7 @@ if (permission === "granted") {
           <div className="tool-option-list">
             <label className="tool-check">
               <input type="checkbox" checked={silent} onChange={(event) => setSilent(event.target.checked)} />
-              Silent
+              静默
             </label>
             <label className="tool-check">
               <input type="checkbox" checked={requireInteraction} onChange={(event) => setRequireInteraction(event.target.checked)} />

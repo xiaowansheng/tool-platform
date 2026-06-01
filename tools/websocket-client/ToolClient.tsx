@@ -16,11 +16,11 @@ interface SocketLog {
 
 function stateLabel(state: SocketState) {
   const labels: Record<SocketState, string> = {
-    idle: "Idle",
-    connecting: "Connecting",
-    open: "Open",
-    closed: "Closed",
-    error: "Error"
+    idle: "空闲",
+    connecting: "连接中",
+    open: "已连接",
+    closed: "已关闭",
+    error: "错误"
   };
 
   return labels[state];
@@ -170,7 +170,7 @@ export default function WebsocketClientTool({ manifest }: ToolClientProps) {
         </article>
         <article className="detail-card">
           <h3>协议</h3>
-          <p>{socketRef.current?.protocol || "n/a"}</p>
+          <p>{socketRef.current?.protocol || "无"}</p>
         </article>
         <article className="detail-card">
           <h3>日志</h3>

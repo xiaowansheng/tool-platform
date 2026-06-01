@@ -342,8 +342,8 @@ export default function BrowserSandboxConsoleTool({ manifest }: ToolClientProps)
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Level</span>
-              <span>Message</span>
+              <span>级别</span>
+              <span>消息</span>
             </div>
             {logs.map((item, index) => (
               <div className="tool-table__row" key={`${item.at}-${index}`}>

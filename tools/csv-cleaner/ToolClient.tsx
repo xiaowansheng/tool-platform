@@ -197,8 +197,11 @@ export default function CsvCleanerTool({ manifest }: ToolClientProps) {
     filterValue
   }), [dedupeRows, delimiterKey, filterColumn, filterValue, hasHeader, input, removeEmptyRows, sortColumn, sortDirection, trimCells]);
 
+  const [copied, setCopied] = useState(false);
+
   async function copyOutput() {
     await navigator.clipboard.writeText(result.output);
+    setCopied(true);
   }
 
   return (
@@ -239,7 +242,7 @@ export default function CsvCleanerTool({ manifest }: ToolClientProps) {
           <input value={filterValue} onChange={(event) => setFilterValue(event.target.value)} placeholder="包含" />
         </label>
         <button type="button" onClick={() => void copyOutput()}>
-          复制 CSV
+          {copied ? "已复制" : "复制 CSV"}
         </button>
       </div>
       <div className="tool-option-list">
@@ -296,7 +299,7 @@ export default function CsvCleanerTool({ manifest }: ToolClientProps) {
             style={{ gridTemplateColumns: `repeat(${Math.max(1, result.columns.length)}, minmax(7rem, 1fr))` }}
           >
             {row.map((cell, cellIndex) => (
-              <span key={`${cellIndex}-${cell}`}>{cell || "empty"}</span>
+              <span key={`${cellIndex}-${cell}`}>{cell || "空"}</span>
             ))}
           </div>
         ))}

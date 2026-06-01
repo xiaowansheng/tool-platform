@@ -438,7 +438,7 @@ export default function WasmBinaryInspectorTool({ manifest }: ToolClientProps) {
           <div className="tool-results">
             <div>
               <p className="eyebrow">魔数</p>
-              <strong>{report.validMagic ? "valid" : "invalid"}</strong>
+              <strong>{report.validMagic ? "有效" : "无效"}</strong>
             </div>
             <div>
               <p className="eyebrow">编译</p>
@@ -448,7 +448,7 @@ export default function WasmBinaryInspectorTool({ manifest }: ToolClientProps) {
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Section</span>
+              <span>段</span>
               <span>Offset / size / count</span>
             </div>
             {report.sections.map((section) => (
@@ -464,23 +464,23 @@ export default function WasmBinaryInspectorTool({ manifest }: ToolClientProps) {
 
           <div className="tool-toolbar tool-toolbar--grid">
             <label className="tool-field tool-field--compact">
-              <span>Demo A</span>
+              <span>演示 A</span>
               <input type="number" value={left} onChange={(event) => setLeft(Number(event.target.value))} />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Demo B</span>
+              <span>演示 B</span>
               <input type="number" value={right} onChange={(event) => setRight(Number(event.target.value))} />
             </label>
             <button type="button" onClick={() => void runDemoAdd()}>运行 add()</button>
-            <div className="mono-output">Result: {demoResult ?? "-"}</div>
+            <div className="mono-output">结果：{demoResult ?? "-"}</div>
           </div>
         </div>
 
         <div className="workspace workspace--stack">
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Symbol</span>
-              <span>Kind</span>
+              <span>符号</span>
+              <span>种类</span>
             </div>
             {[...report.imports, ...report.exports].map((symbol, index) => (
               <div className="tool-table__row" key={`${symbol.name}-${index}`}>

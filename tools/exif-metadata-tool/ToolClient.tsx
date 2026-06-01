@@ -343,7 +343,7 @@ export default function ExifMetadataTool({ manifest }: ToolClientProps) {
               <div key={`${item.group}-${item.tag}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "7rem 12rem minmax(12rem, 1fr)" }}>
                 <span>{item.group}</span>
                 <span>{item.tag}</span>
-                <span>{item.value || "empty"}</span>
+                <span>{item.value || "空"}</span>
               </div>
             )) : (
               <div className="tool-table__row" style={{ gridTemplateColumns: "1fr" }}>

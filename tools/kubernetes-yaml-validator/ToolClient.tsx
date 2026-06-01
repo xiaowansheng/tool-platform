@@ -130,7 +130,7 @@ function validateKubernetes(source: string) {
   }
 
   resources.forEach((resource) => {
-    const label = `${resource.kind || "Unknown"}/${resource.name || `document-${resource.index}`}`;
+    const label = `${resource.kind || "未知"}/${resource.name || `document-${resource.index}`}`;
 
     if (!resource.apiVersion) {
       findings.push({ resource: label, level: "error", message: "缺少 apiVersion。" });

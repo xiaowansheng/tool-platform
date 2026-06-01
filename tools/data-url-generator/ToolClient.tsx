@@ -23,8 +23,12 @@ export default function DataUrlGeneratorTool({ manifest }: ToolClientProps) {
   const modeLabel = base64 ? "Base64" : "URL 编码";
 
   async function copyOutput() {
-    await navigator.clipboard.writeText(dataUrl);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(dataUrl);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
   }
 
   return (
