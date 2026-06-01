@@ -757,6 +757,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["测试 HTML 内容是否安全渲染。", "验证 AI 回复在沙箱中的展示效果。"]
   },
+  "animation-keyframes-generator": {
+    name: "动画关键帧生成器",
+    description: "可视化编辑 CSS @keyframes 动画，设置关键帧与动画属性，生成可复制代码。",
+    intro: "通过可视化方式创建 CSS @keyframes 动画，添加关键帧并设置平移、旋转、缩放和透明度变化。",
+    steps: [
+      "添加或删除关键帧，设置每个帧的变换属性和位置百分比。",
+      "调整动画名称、时长、缓动函数、延迟、次数和方向等全局参数。",
+      "点击「预览动画」查看效果，确认后复制生成的 CSS 代码。"
+    ],
+    examples: ["创建一个带旋转和位移的淡入动画。", "制作一个无限循环的呼吸缩放效果。"]
+  },
   "api-docs-sdk-example-generator": {
     name: "API 文档 SDK 示例生成器",
     description: "从 API 文档或 OpenAPI 片段提取 endpoint，并生成 TypeScript、Python 或 cURL SDK 示例。",
@@ -833,6 +844,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "复制摘要或导出 CSV 校验清单。"
     ],
     examples: ["校验下载的安装包完整性。", "为批量文件生成 SHA-256 校验清单。"]
+  },
+  "border-radius-generator": {
+    name: "圆角生成器",
+    description: "可视化编辑 border-radius，支持统一圆角与各角独立控制，生成 CSS。",
+    intro: "通过滑块和输入框调整元素的圆角大小，支持统一设置和四个角独立控制两种模式。",
+    steps: [
+      "选择「统一圆角」或「各角独立」模式。",
+      "拖动滑块或输入数值调整每个角的圆角半径。",
+      "调整元素尺寸和背景颜色，确认后复制生成的 CSS 代码。"
+    ],
+    examples: ["为一个按钮卡片设置 12px 统一圆角。", "创建只有左上和右下圆角的不对称形状。"]
   },
   "box-shadow-generator": {
     name: "CSS 效果工作台",
@@ -1780,6 +1802,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["整理杂乱的 Tailwind 类名顺序。", "检查是否存在冲突或重复的 utility 类。"]
   },
+  "transform-generator": {
+    name: "CSS Transform 生成器",
+    description: "可视化编辑 translate、rotate、scale、skew 变换，生成 CSS transform 代码。",
+    intro: "通过参数控件调整元素的平移、旋转、缩放和倾斜变换，实时预览变换效果。",
+    steps: [
+      "调整平移 X/Y、旋转角度、缩放比例和倾斜角度等参数。",
+      "在预览区域实时查看变换后的效果。",
+      "确认效果后复制生成的 CSS transform 代码。"
+    ],
+    examples: ["创建一个水平平移并旋转 45 度的效果。", "制作一个鼠标悬浮放大效果所需的 transform 代码。"]
+  },
   "task-priority-matrix": {
     name: "任务优先级矩阵",
     description: "用影响、紧急度、信心和工作量给任务打分，生成排序、象限和可复制执行清单。",
@@ -1921,6 +1954,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "ai-generated-code-risk-checker": "AI 生成代码风险检查器",
   "ai-prompt-version-diff": "AI Prompt 版本差异对比",
   "ai-sandbox-lab": "AI 沙箱实验室",
+  "animation-keyframes-generator": "动画关键帧生成器",
   "api-docs-sdk-example-generator": "API 文档 SDK 示例生成器",
   "api-error-code-doc-generator": "API 错误码文档生成器",
   "api-rate-limit-calculator": "API 限流计算器",
@@ -1928,6 +1962,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "aspect-ratio-calculator": "宽高比计算器",
   "audio-tone-generator": "音频测试音生成器",
   "batch-file-hash-calculator": "批量文件哈希计算器",
+  "border-radius-generator": "圆角生成器",
   "box-shadow-generator": "CSS 效果工作台",
   "browser-sandbox-console": "浏览器沙箱控制台",
   "bug-report-repro-steps-generator": "Bug 复现步骤生成器",
@@ -2014,6 +2049,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "svg-optimizer-viewbox-editor": "SVG 优化与 ViewBox 编辑器",
   "systemd-unit-analyzer": "systemd Unit 分析器",
   "tailwind-class-lab": "Tailwind Class 实验室",
+  "transform-generator": "CSS Transform 生成器",
   "task-priority-matrix": "任务优先级矩阵",
   "terraform-plan-formatter": "Terraform Plan 格式化器",
   "test-case-generator": "测试用例生成器",

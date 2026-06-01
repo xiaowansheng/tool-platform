@@ -5,6 +5,7 @@ import AiChatManifest from "@tool-platform/ai-chat/manifest";
 import AiGeneratedCodeRiskCheckerManifest from "@tool-platform/ai-generated-code-risk-checker/manifest";
 import AiPromptVersionDiffManifest from "@tool-platform/ai-prompt-version-diff/manifest";
 import AiSandboxLabManifest from "@tool-platform/ai-sandbox-lab/manifest";
+import AnimationKeyframesGeneratorManifest from "@tool-platform/animation-keyframes-generator/manifest";
 import ApiDocsSdkExampleGeneratorManifest from "@tool-platform/api-docs-sdk-example-generator/manifest";
 import ApiErrorCodeDocGeneratorManifest from "@tool-platform/api-error-code-doc-generator/manifest";
 import ApiRateLimitCalculatorManifest from "@tool-platform/api-rate-limit-calculator/manifest";
@@ -14,6 +15,7 @@ import AudioToneGeneratorManifest from "@tool-platform/audio-tone-generator/mani
 import Base64StudioManifest from "@tool-platform/base64-studio/manifest";
 import BasicAuthGeneratorManifest from "@tool-platform/basic-auth-generator/manifest";
 import BatchFileHashCalculatorManifest from "@tool-platform/batch-file-hash-calculator/manifest";
+import BorderRadiusGeneratorManifest from "@tool-platform/border-radius-generator/manifest";
 import BoxShadowGeneratorManifest from "@tool-platform/box-shadow-generator/manifest";
 import BrowserSandboxConsoleManifest from "@tool-platform/browser-sandbox-console/manifest";
 import BugReportReproStepsGeneratorManifest from "@tool-platform/bug-report-repro-steps-generator/manifest";
@@ -159,6 +161,7 @@ import ThreatModelCanvasManifest from "@tool-platform/threat-model-canvas/manife
 import TimestampConverterManifest from "@tool-platform/timestamp-converter/manifest";
 import TlsCertificateParserManifest from "@tool-platform/tls-certificate-parser/manifest";
 import TokenCostCalculatorManifest from "@tool-platform/token-cost-calculator/manifest";
+import TransformGeneratorManifest from "@tool-platform/transform-generator/manifest";
 import UnicodeInspectorManifest from "@tool-platform/unicode-inspector/manifest";
 import UnitConverterManifest from "@tool-platform/unit-converter/manifest";
 import UrlCodecManifest from "@tool-platform/url-codec/manifest";
@@ -182,6 +185,7 @@ export const toolManifests: ToolManifest[] = [
   AiGeneratedCodeRiskCheckerManifest,
   AiPromptVersionDiffManifest,
   AiSandboxLabManifest,
+  AnimationKeyframesGeneratorManifest,
   ApiDocsSdkExampleGeneratorManifest,
   ApiErrorCodeDocGeneratorManifest,
   ApiRateLimitCalculatorManifest,
@@ -191,6 +195,7 @@ export const toolManifests: ToolManifest[] = [
   Base64StudioManifest,
   BasicAuthGeneratorManifest,
   BatchFileHashCalculatorManifest,
+  BorderRadiusGeneratorManifest,
   BoxShadowGeneratorManifest,
   BrowserSandboxConsoleManifest,
   BugReportReproStepsGeneratorManifest,
@@ -336,6 +341,7 @@ export const toolManifests: ToolManifest[] = [
   TimestampConverterManifest,
   TlsCertificateParserManifest,
   TokenCostCalculatorManifest,
+  TransformGeneratorManifest,
   UnicodeInspectorManifest,
   UnitConverterManifest,
   UrlCodecManifest,
