@@ -228,7 +228,7 @@ export default function CookieParserTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">HTTP Cookie</p>
+          <p className="eyebrow">HTTP Cookie 分析</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

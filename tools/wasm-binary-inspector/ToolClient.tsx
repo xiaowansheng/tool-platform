@@ -389,7 +389,7 @@ export default function WasmBinaryInspectorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">WASM Runtime</p>
+          <p className="eyebrow">WASM 运行时</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -420,15 +420,15 @@ export default function WasmBinaryInspectorTool({ manifest }: ToolClientProps) {
           <p>{report.validMagic ? report.version : "-"}</p>
         </article>
         <article className="detail-card">
-          <h3>Sections</h3>
+          <h3>段</h3>
           <p>{report.sections.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Imports</h3>
+          <h3>导入</h3>
           <p>{report.imports.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Exports</h3>
+          <h3>导出</h3>
           <p>{report.exports.length}</p>
         </article>
       </div>
@@ -437,11 +437,11 @@ export default function WasmBinaryInspectorTool({ manifest }: ToolClientProps) {
         <div className="workspace workspace--stack">
           <div className="tool-results">
             <div>
-              <p className="eyebrow">Magic</p>
+              <p className="eyebrow">魔数</p>
               <strong>{report.validMagic ? "valid" : "invalid"}</strong>
             </div>
             <div>
-              <p className="eyebrow">Compile</p>
+              <p className="eyebrow">编译</p>
               <strong>{compileStatus}</strong>
             </div>
           </div>

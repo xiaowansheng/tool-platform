@@ -144,7 +144,7 @@ export default function ThreatModelCanvasTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Security Architecture</p>
+          <p className="eyebrow">安全架构</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -174,13 +174,13 @@ export default function ThreatModelCanvasTool({ manifest }: ToolClientProps) {
 
       <div className="workspace workspace--two-column">
         <div className="detail-card">
-          <h3>Review prompts</h3>
+          <h3>复查提示</h3>
           <ul className="compact-list">
             {suggestions.map((suggestion) => <li key={suggestion}>{suggestion}</li>)}
           </ul>
         </div>
         <label className="tool-field">
-          <span>Markdown report</span>
+          <span>Markdown 报告</span>
           <textarea value={report} readOnly spellCheck={false} />
         </label>
       </div>

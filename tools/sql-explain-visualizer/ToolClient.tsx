@@ -29,7 +29,7 @@ export default function SqlExplainVisualizerTool({ manifest }: ToolClientProps) 
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Database Utility</p>
+          <p className="eyebrow">数据库工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -41,7 +41,7 @@ export default function SqlExplainVisualizerTool({ manifest }: ToolClientProps) 
       <div className="case-grid">
         {steps.map((step, index) => (
           <article key={`${step.title}-${index}`} className="detail-card">
-            <p className="eyebrow">Step {index + 1}</p>
+            <p className="eyebrow">步骤 {index + 1}</p>
             <h3>{step.title}</h3>
             <p>{step.detail}</p>
           </article>

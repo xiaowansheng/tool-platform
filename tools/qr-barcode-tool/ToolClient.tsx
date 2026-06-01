@@ -438,7 +438,7 @@ export default function QrBarcodeTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Codes</p>
+          <p className="eyebrow">码制工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -468,8 +468,8 @@ export default function QrBarcodeTool({ manifest }: ToolClientProps) {
       </div>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Format</span>
-          <span>Value</span>
+          <span>格式</span>
+          <span>值</span>
         </div>
         {detected.length > 0 ? detected.map((item, index) => (
           <div key={`${item.format}-${index}`} className="tool-table__row">

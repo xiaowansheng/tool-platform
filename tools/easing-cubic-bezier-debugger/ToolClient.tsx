@@ -70,7 +70,7 @@ export default function EasingCubicBezierDebuggerTool({ manifest }: ToolClientPr
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Motion Utility</p>
+          <p className="eyebrow">动效工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -100,7 +100,7 @@ export default function EasingCubicBezierDebuggerTool({ manifest }: ToolClientPr
           <input type="number" min="-2" max="2" step="0.01" value={y2} onChange={(event) => setY2(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Duration ms</span>
+          <span>时长 ms</span>
           <input type="number" min="80" max="3000" step="20" value={duration} onChange={(event) => setDuration(Number(event.target.value))} />
         </label>
         <button type="button" onClick={() => setRunKey((value) => value + 1)}>Replay</button>
@@ -108,7 +108,7 @@ export default function EasingCubicBezierDebuggerTool({ manifest }: ToolClientPr
 
       <div className="asset-preview-grid">
         <article className="detail-card easing-plot">
-          <svg viewBox="0 0 100 100" role="img" aria-label="Cubic bezier curve">
+          <svg viewBox="0 0 100 100" role="img" aria-label="三次贝塞尔曲线">
             <line x1="0" y1="79" x2="100" y2="21" />
             <polyline points={points} />
             <circle cx={x1 * 100} cy={100 - clamp(y1, -0.35, 1.35) * 58 - 21} r="3" />

@@ -205,7 +205,7 @@ export default function CsvCleanerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Data Cleaning</p>
+          <p className="eyebrow">数据清洗</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -214,9 +214,9 @@ export default function CsvCleanerTool({ manifest }: ToolClientProps) {
         <label className="tool-field tool-field--compact">
           <span>分隔符</span>
           <select value={delimiterKey} onChange={(event) => setDelimiterKey(event.target.value as DelimiterKey)}>
-            <option value="comma">Comma</option>
-            <option value="semicolon">Semicolon</option>
-            <option value="tab">Tab</option>
+            <option value="comma">逗号</option>
+            <option value="semicolon">分号</option>
+            <option value="tab">制表符</option>
           </select>
         </label>
         <label className="tool-field tool-field--compact">
@@ -236,7 +236,7 @@ export default function CsvCleanerTool({ manifest }: ToolClientProps) {
         </label>
         <label className="tool-field tool-field--compact">
           <span>筛选值</span>
-          <input value={filterValue} onChange={(event) => setFilterValue(event.target.value)} placeholder="contains" />
+          <input value={filterValue} onChange={(event) => setFilterValue(event.target.value)} placeholder="包含" />
         </label>
         <button type="button" onClick={() => void copyOutput()}>
           复制 CSV

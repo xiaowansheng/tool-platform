@@ -184,7 +184,7 @@ export default function HelmValuesDiffTool({ manifest }: ToolClientProps) {
           <p>{risks.length}</p>
         </article>
       </div>
-      <article className="diff-view" aria-label="Helm values diff">
+      <article className="diff-view" aria-label="Helm values 差异">
         {rows.filter((row) => row.kind !== "equal").map((row) => (
           <div key={row.path} className={`diff-line diff-line--${rowClass(row.kind)}`}>
             <span>{row.kind === "removed" ? "-" : row.kind === "added" ? "+" : "~"}</span>

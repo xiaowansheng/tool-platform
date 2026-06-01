@@ -192,7 +192,7 @@ if (permission === "granted") {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Notification API</p>
+          <p className="eyebrow">通知 API</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -210,19 +210,19 @@ if (permission === "granted") {
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Permission</h3>
+          <h3>权限</h3>
           <p>{permission}</p>
         </article>
         <article className="detail-card">
-          <h3>History</h3>
+          <h3>历史</h3>
           <p>{history.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Silent</h3>
+          <h3>静默</h3>
           <p>{silent ? "yes" : "no"}</p>
         </article>
         <article className="detail-card">
-          <h3>Require</h3>
+          <h3>交互要求</h3>
           <p>{requireInteraction ? "yes" : "no"}</p>
         </article>
       </div>
@@ -230,11 +230,11 @@ if (permission === "granted") {
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Title</span>
+            <span>标题</span>
             <input value={title} onChange={(event) => setTitle(event.target.value)} />
           </label>
           <label className="tool-field">
-            <span>Body</span>
+            <span>正文</span>
             <textarea value={body} onChange={(event) => setBody(event.target.value)} />
           </label>
           <div className="tool-toolbar tool-toolbar--grid">
@@ -243,15 +243,15 @@ if (permission === "granted") {
               <input value={tag} onChange={(event) => setTag(event.target.value)} />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Delay seconds</span>
+              <span>延迟秒数</span>
               <input type="number" min="0" max="120" value={delaySeconds} onChange={(event) => setDelaySeconds(Number(event.target.value))} />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Icon URL</span>
+              <span>图标 URL</span>
               <input value={icon} onChange={(event) => setIcon(event.target.value)} placeholder="https://..." />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Badge URL</span>
+              <span>徽章 URL</span>
               <input value={badge} onChange={(event) => setBadge(event.target.value)} placeholder="https://..." />
             </label>
           </div>
@@ -269,14 +269,14 @@ if (permission === "granted") {
 
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Payload JSON</span>
+            <span>载荷 JSON</span>
             <textarea value={payloadJson} readOnly spellCheck={false} />
           </label>
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Sent at</span>
-              <span>Notification</span>
+              <span>发送时间</span>
+              <span>通知</span>
             </div>
             {history.map((item) => (
               <div className="tool-table__row" key={`${item.at}-${item.title}`}>

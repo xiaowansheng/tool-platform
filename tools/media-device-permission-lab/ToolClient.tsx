@@ -213,7 +213,7 @@ export default function MediaDevicePermissionLabTool({ manifest }: ToolClientPro
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Camera + Microphone</p>
+          <p className="eyebrow">摄像头 + 麦克风</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -242,19 +242,19 @@ export default function MediaDevicePermissionLabTool({ manifest }: ToolClientPro
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Camera</h3>
+          <h3>摄像头</h3>
           <p>{permissions.camera}</p>
         </article>
         <article className="detail-card">
-          <h3>Microphone</h3>
+          <h3>麦克风</h3>
           <p>{permissions.microphone}</p>
         </article>
         <article className="detail-card">
-          <h3>Devices</h3>
+          <h3>设备</h3>
           <p>{devices.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Tracks</h3>
+          <h3>轨道</h3>
           <p>{tracks.length}</p>
         </article>
       </div>
@@ -264,7 +264,7 @@ export default function MediaDevicePermissionLabTool({ manifest }: ToolClientPro
           <video ref={videoRef} className="media-preview" muted playsInline autoPlay />
 
           <div className="detail-card">
-            <h3>Microphone level</h3>
+            <h3>麦克风音量</h3>
             <div className="visual-preview" style={{ minHeight: "1.6rem", padding: "0.35rem" }}>
               <div
                 style={{
@@ -281,8 +281,8 @@ export default function MediaDevicePermissionLabTool({ manifest }: ToolClientPro
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Device</span>
-              <span>Label</span>
+              <span>设备</span>
+              <span>标签</span>
             </div>
             {devices.map((device, index) => (
               <div className="tool-table__row" key={`${device.kind}-${device.deviceId}-${index}`}>
@@ -300,7 +300,7 @@ export default function MediaDevicePermissionLabTool({ manifest }: ToolClientPro
         </div>
 
         <label className="tool-field">
-          <span>Track settings</span>
+          <span>轨道设置</span>
           <textarea value={settingsJson} readOnly spellCheck={false} />
         </label>
       </div>

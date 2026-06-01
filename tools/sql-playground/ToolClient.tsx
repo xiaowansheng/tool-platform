@@ -49,7 +49,7 @@ export default function SqlPlaygroundTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Database Utility</p>
+          <p className="eyebrow">数据库工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

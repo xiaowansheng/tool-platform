@@ -150,7 +150,7 @@ export default function CsvJsonNdjsonConverterTool({ manifest }: ToolClientProps
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Data Conversion</p>
+          <p className="eyebrow">数据转换</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

@@ -62,7 +62,7 @@ export default function FlashcardClozeBuilderTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Learning</p>
+          <p className="eyebrow">学习工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

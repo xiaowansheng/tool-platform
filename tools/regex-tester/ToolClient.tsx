@@ -46,11 +46,11 @@ export default function RegexTesterTool({ manifest }: ToolClientProps) {
       <div className="workspace workspace--stack">
         <div className="tool-toolbar tool-toolbar--grid">
           <label className="tool-field tool-field--compact">
-            <span>Pattern</span>
+            <span>模式</span>
             <input value={pattern} onChange={(event) => setPattern(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field tool-field--compact">
-            <span>Flags</span>
+            <span>标志</span>
             <input value={flags} onChange={(event) => setFlags(event.target.value)} spellCheck={false} />
           </label>
         </div>

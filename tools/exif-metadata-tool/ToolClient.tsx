@@ -303,7 +303,7 @@ export default function ExifMetadataTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Image Privacy</p>
+          <p className="eyebrow">图像隐私</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -335,9 +335,9 @@ export default function ExifMetadataTool({ manifest }: ToolClientProps) {
           </div>
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "7rem 12rem minmax(12rem, 1fr)" }}>
-              <span>Group</span>
-              <span>Tag</span>
-              <span>Value</span>
+              <span>分组</span>
+              <span>标签</span>
+              <span>值</span>
             </div>
             {report.metadata.length > 0 ? report.metadata.map((item, index) => (
               <div key={`${item.group}-${item.tag}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "7rem 12rem minmax(12rem, 1fr)" }}>

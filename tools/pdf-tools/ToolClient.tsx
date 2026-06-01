@@ -442,7 +442,7 @@ export default function PdfToolsTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Document Utility</p>
+          <p className="eyebrow">文档工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

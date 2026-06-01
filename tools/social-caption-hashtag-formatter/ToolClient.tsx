@@ -56,7 +56,7 @@ export default function SocialCaptionHashtagFormatterTool({ manifest }: ToolClie
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Social Publishing</p>
+          <p className="eyebrow">社交发布</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -80,7 +80,7 @@ export default function SocialCaptionHashtagFormatterTool({ manifest }: ToolClie
         <div className="workspace workspace--stack">
           <label className="tool-field"><span>正文</span><textarea value={body} onChange={(event) => setBody(event.target.value)} /></label>
           <label className="tool-field"><span>CTA</span><input value={cta} onChange={(event) => setCta(event.target.value)} /></label>
-          <label className="tool-field"><span>Hashtags</span><input value={hashtagsText} onChange={(event) => setHashtagsText(event.target.value)} /></label>
+          <label className="tool-field"><span>话题标签</span><input value={hashtagsText} onChange={(event) => setHashtagsText(event.target.value)} /></label>
           <label className="tool-field"><span>URL</span><input value={url} onChange={(event) => setUrl(event.target.value)} /></label>
         </div>
 

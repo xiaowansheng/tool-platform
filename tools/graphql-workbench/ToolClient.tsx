@@ -108,14 +108,14 @@ export default function GraphqlWorkbenchTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">API Utility</p>
+          <p className="eyebrow">API 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar">
         <label className="tool-field tool-field--compact">
-          <span>Type</span>
+          <span>类型</span>
           <select value={selected} onChange={(event) => setSelected(event.target.value)}>
             {types.map((item) => <option key={item.name} value={item.name}>{item.name}</option>)}
           </select>
@@ -128,7 +128,7 @@ export default function GraphqlWorkbenchTool({ manifest }: ToolClientProps) {
           <textarea value={schema} onChange={(event) => setSchema(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Query Draft</span>
+          <span>查询草稿</span>
           <textarea value={query} readOnly spellCheck={false} />
         </label>
       </div>

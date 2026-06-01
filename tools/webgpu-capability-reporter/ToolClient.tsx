@@ -162,11 +162,11 @@ export default function WebgpuCapabilityReporterTool({ manifest }: ToolClientPro
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Power preference</span>
+          <span>电源偏好</span>
           <select value={powerPreference} onChange={(event) => setPowerPreference(event.target.value as PowerPreference)}>
-            <option value="default">default</option>
-            <option value="low-power">low-power</option>
-            <option value="high-performance">high-performance</option>
+            <option value="default">默认</option>
+            <option value="low-power">低功耗</option>
+            <option value="high-performance">高性能</option>
           </select>
         </label>
         <label className="tool-check">
@@ -183,23 +183,23 @@ export default function WebgpuCapabilityReporterTool({ manifest }: ToolClientPro
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Supported</h3>
+          <h3>支持状态</h3>
           <p>{report.supported ? "yes" : "no"}</p>
         </article>
         <article className="detail-card">
-          <h3>Adapter</h3>
+          <h3>适配器</h3>
           <p>{report.adapterName}</p>
         </article>
         <article className="detail-card">
-          <h3>Format</h3>
+          <h3>格式</h3>
           <p>{report.preferredCanvasFormat}</p>
         </article>
         <article className="detail-card">
-          <h3>Features</h3>
+          <h3>特性</h3>
           <p>{report.features.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Device</h3>
+          <h3>设备</h3>
           <p>{report.deviceCreated ? "created" : "-"}</p>
         </article>
       </div>
@@ -208,8 +208,8 @@ export default function WebgpuCapabilityReporterTool({ manifest }: ToolClientPro
         <div className="workspace workspace--stack">
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Limit</span>
-              <span>Value</span>
+              <span>限制</span>
+              <span>值</span>
             </div>
             {report.limits.map((limit) => (
               <div className="tool-table__row" key={limit.name}>
@@ -221,13 +221,13 @@ export default function WebgpuCapabilityReporterTool({ manifest }: ToolClientPro
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>Feature</span>
-              <span>Status</span>
+              <span>特性</span>
+              <span>状态</span>
             </div>
             {report.features.map((feature) => (
               <div className="tool-table__row" key={feature}>
                 <span>{feature}</span>
-                <span>enabled</span>
+                <span>已启用</span>
               </div>
             ))}
             {report.features.length === 0 ? (
@@ -240,7 +240,7 @@ export default function WebgpuCapabilityReporterTool({ manifest }: ToolClientPro
         </div>
 
         <label className="tool-field">
-          <span>Report JSON</span>
+          <span>报告 JSON</span>
           <textarea value={reportJson} readOnly spellCheck={false} />
         </label>
       </div>

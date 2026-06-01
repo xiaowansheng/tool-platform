@@ -34,7 +34,7 @@ export default function MimeTypeLookupTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Developer Reference</p>
+          <p className="eyebrow">开发参考</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

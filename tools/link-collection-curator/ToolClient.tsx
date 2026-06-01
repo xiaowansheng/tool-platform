@@ -87,7 +87,7 @@ export default function LinkCollectionCuratorTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Directory</p>
+          <p className="eyebrow">目录</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -99,10 +99,10 @@ export default function LinkCollectionCuratorTool({ manifest }: ToolClientProps)
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Links</h3><p>{links.length}</p></article>
-        <article className="detail-card"><h3>Valid</h3><p>{validLinks.length}</p></article>
-        <article className="detail-card"><h3>Invalid</h3><p>{invalidLinks.length}</p></article>
-        <article className="detail-card"><h3>Tags</h3><p>{tags.join(", ") || "-"}</p></article>
+        <article className="detail-card"><h3>链接</h3><p>{links.length}</p></article>
+        <article className="detail-card"><h3>有效</h3><p>{validLinks.length}</p></article>
+        <article className="detail-card"><h3>无效</h3><p>{invalidLinks.length}</p></article>
+        <article className="detail-card"><h3>标签</h3><p>{tags.join(", ") || "-"}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

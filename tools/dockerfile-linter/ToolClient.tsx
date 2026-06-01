@@ -145,7 +145,7 @@ export default function DockerfileLinterTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Container Utility</p>
+          <p className="eyebrow">容器工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -156,19 +156,19 @@ export default function DockerfileLinterTool({ manifest }: ToolClientProps) {
       </label>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Errors</h3>
+          <h3>错误</h3>
           <p>{summary.errors}</p>
         </article>
         <article className="detail-card">
-          <h3>Warnings</h3>
+          <h3>警告</h3>
           <p>{summary.warnings}</p>
         </article>
         <article className="detail-card">
-          <h3>Info</h3>
+          <h3>信息</h3>
           <p>{summary.info}</p>
         </article>
       </div>
-      <article className="diff-view" aria-label="Dockerfile lint findings">
+      <article className="diff-view" aria-label="Dockerfile lint 结果">
         {findings.map((finding, index) => (
           <div
             key={`${finding.line}-${finding.message}-${index}`}

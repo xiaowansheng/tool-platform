@@ -174,7 +174,7 @@ export default function AiSandboxLabTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">AI Runtime + iframe Sandbox</p>
+          <p className="eyebrow">AI 运行时 + iframe 沙箱</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -198,24 +198,24 @@ export default function AiSandboxLabTool({ manifest }: ToolClientProps) {
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>System</span>
+            <span>系统</span>
             <textarea value={systemPrompt} onChange={(event) => setSystemPrompt(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Prompt</span>
+            <span>提示词</span>
             <textarea value={prompt} onChange={(event) => setPrompt(event.target.value)} spellCheck={false} />
           </label>
           <div className="tool-results">
             <div>
-              <p className="eyebrow">Runtime</p>
+              <p className="eyebrow">运行时</p>
               <strong>{runtime.status}</strong>
             </div>
             <div>
-              <p className="eyebrow">Model</p>
+              <p className="eyebrow">模型</p>
               <strong>{status}</strong>
             </div>
             <div>
-              <p className="eyebrow">Sandbox</p>
+              <p className="eyebrow">沙箱</p>
               <strong>{sandboxClientRef.current ? "ready" : "loading"}</strong>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function AiSandboxLabTool({ manifest }: ToolClientProps) {
 
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Stream</span>
+            <span>流式响应</span>
             <textarea value={response} onChange={(event) => setResponse(event.target.value)} spellCheck={false} />
           </label>
           <iframe

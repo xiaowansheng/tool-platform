@@ -117,7 +117,7 @@ export default function ResourceUnitConverterTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Kubernetes Utility</p>
+          <p className="eyebrow">Kubernetes 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

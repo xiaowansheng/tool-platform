@@ -55,7 +55,7 @@ export default function UtmBuilderTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Marketing Utility</p>
+          <p className="eyebrow">营销工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -63,34 +63,34 @@ export default function UtmBuilderTool({ manifest }: ToolClientProps) {
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Base URL</span>
+            <span>基础 URL</span>
             <input value={baseUrl} onChange={(event) => setBaseUrl(event.target.value)} />
           </label>
           <div className="tool-toolbar tool-toolbar--grid">
             <label className="tool-field tool-field--compact">
-              <span>Source</span>
+              <span>来源</span>
               <input value={source} onChange={(event) => setSource(event.target.value)} />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Medium</span>
+              <span>媒介</span>
               <input value={medium} onChange={(event) => setMedium(event.target.value)} />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Campaign</span>
+              <span>活动</span>
               <input value={campaign} onChange={(event) => setCampaign(event.target.value)} />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Term</span>
+              <span>关键词</span>
               <input value={term} onChange={(event) => setTerm(event.target.value)} />
             </label>
             <label className="tool-field tool-field--compact">
-              <span>Content</span>
+              <span>内容</span>
               <input value={content} onChange={(event) => setContent(event.target.value)} />
             </label>
           </div>
         </div>
         <label className="tool-field">
-          <span>Campaign URL</span>
+          <span>活动 URL</span>
           <textarea value={output} readOnly spellCheck={false} />
         </label>
       </div>

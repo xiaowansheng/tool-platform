@@ -168,7 +168,7 @@ export default function CssSpecificityCalculatorTool({ manifest }: ToolClientPro
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">CSS Utility</p>
+          <p className="eyebrow">CSS 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -189,22 +189,22 @@ export default function CssSpecificityCalculatorTool({ manifest }: ToolClientPro
           <p>{top?.ids ?? 0}</p>
         </article>
         <article className="detail-card">
-          <h3>Class / Attr / Pseudo-class</h3>
+          <h3>类 / 属性 / 伪类</h3>
           <p>{top?.classes ?? 0}</p>
         </article>
         <article className="detail-card">
-          <h3>Type / Pseudo-element</h3>
+          <h3>类型 / 伪元素</h3>
           <p>{top?.types ?? 0}</p>
         </article>
       </div>
 
       <div className="specificity-table">
         <div className="specificity-table__row specificity-table__row--head">
-          <span>Selector</span>
+          <span>选择器</span>
           <span>ID</span>
-          <span>Class</span>
-          <span>Type</span>
-          <span>Score</span>
+          <span>类</span>
+          <span>类型</span>
+          <span>分数</span>
         </div>
         {results.map((result) => (
           <div key={result.selector} className="specificity-table__row">

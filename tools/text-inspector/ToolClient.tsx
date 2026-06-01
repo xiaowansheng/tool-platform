@@ -368,7 +368,7 @@ export default function TextInspectorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Worker Runtime + OPFS</p>
+          <p className="eyebrow">Worker 运行时 + OPFS</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -400,7 +400,7 @@ export default function TextInspectorTool({ manifest }: ToolClientProps) {
         <div className="workspace workspace--stack">
           <div className="tool-results">
             <div>
-              <p className="eyebrow">Runtime</p>
+              <p className="eyebrow">运行时</p>
               <strong>{runtime.status}</strong>
             </div>
             <div>
@@ -408,13 +408,13 @@ export default function TextInspectorTool({ manifest }: ToolClientProps) {
               <strong>{sdk.isOpfsSupported() ? "supported" : "unsupported"}</strong>
             </div>
             <div>
-              <p className="eyebrow">Progress</p>
+              <p className="eyebrow">进度</p>
               <strong>{progress?.progress ?? 0}%</strong>
             </div>
           </div>
 
           <div className="detail-card">
-            <h3>Worker Progress</h3>
+            <h3>Worker 进度</h3>
             <p>{progress?.message ?? "等待任务开始"}</p>
           </div>
 
@@ -422,7 +422,7 @@ export default function TextInspectorTool({ manifest }: ToolClientProps) {
             <div className="detail-card">
               <div className="tool-page__headline">
                 <div>
-                  <p className="eyebrow">Analysis Report</p>
+                  <p className="eyebrow">分析报告</p>
                   <h3>文本指标</h3>
                 </div>
                 <div className="tool-toolbar">
@@ -436,19 +436,19 @@ export default function TextInspectorTool({ manifest }: ToolClientProps) {
               </div>
               <div className="detail-grid">
                 <article className="detail-card">
-                  <h3>Characters</h3>
+                  <h3>字符数</h3>
                   <p>{report.characters}</p>
                 </article>
                 <article className="detail-card">
-                  <h3>Words</h3>
+                  <h3>词数</h3>
                   <p>{report.words}</p>
                 </article>
                 <article className="detail-card">
-                  <h3>Lines</h3>
+                  <h3>行数</h3>
                   <p>{report.lines}</p>
                 </article>
                 <article className="detail-card">
-                  <h3>Unique</h3>
+                  <h3>唯一项</h3>
                   <p>{report.uniqueWords}</p>
                 </article>
               </div>
@@ -463,7 +463,7 @@ export default function TextInspectorTool({ manifest }: ToolClientProps) {
           ) : null}
 
           <div className="detail-card">
-            <h3>OPFS Cache</h3>
+            <h3>OPFS 缓存</h3>
             <p>{cachedFiles.length > 0 ? cachedFiles.join(", ") : "当前还没有缓存文件"}</p>
           </div>
         </div>

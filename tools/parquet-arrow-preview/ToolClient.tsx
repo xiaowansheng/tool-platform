@@ -114,7 +114,7 @@ export default function ParquetArrowPreviewTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Columnar Files</p>
+          <p className="eyebrow">列式文件</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -155,8 +155,8 @@ export default function ParquetArrowPreviewTool({ manifest }: ToolClientProps) {
           </div>
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "7rem minmax(18rem, 1fr) minmax(8rem, 0.7fr)" }}>
-              <span>Offset</span>
-              <span>Hex</span>
+              <span>偏移</span>
+              <span>十六进制</span>
               <span>ASCII</span>
             </div>
             {report.hexRows.map((row) => (

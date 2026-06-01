@@ -151,7 +151,7 @@ export default function TerraformPlanFormatterTool({ manifest }: ToolClientProps
           <p>{summary.replace}</p>
         </article>
       </div>
-      <article className="diff-view" aria-label="Formatted Terraform plan">
+      <article className="diff-view" aria-label="格式化后的 Terraform plan">
         {(output || "没有匹配的资源变更").split(/\r?\n/).map((line, index) => (
           <div key={`${line}-${index}`} className={`diff-line diff-line--${lineClass(line)}`}>
             <span>{/^\s*-/.test(line) ? "-" : /^\s*\+/.test(line) ? "+" : /^\s*~/.test(line) ? "~" : " "}</span>

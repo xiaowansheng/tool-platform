@@ -66,7 +66,7 @@ export default function BasicAuthGeneratorTool({ manifest }: ToolClientProps) {
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Authorization Header</span>
+          <span>Authorization 头</span>
           <textarea value={header} readOnly spellCheck={false} />
         </label>
         <label className="tool-field">

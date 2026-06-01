@@ -307,7 +307,7 @@ export default function TailwindClassLabTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">CSS Utility</p>
+          <p className="eyebrow">CSS 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -315,7 +315,7 @@ export default function TailwindClassLabTool({ manifest }: ToolClientProps) {
 
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Tailwind classes</span>
+          <span>Tailwind 类名</span>
           <textarea
             value={classes}
             onChange={(event) => {
@@ -337,7 +337,7 @@ export default function TailwindClassLabTool({ manifest }: ToolClientProps) {
 
       <div className="workspace workspace--two-column">
         <article className="detail-card">
-          <p className="eyebrow">Preview</p>
+          <p className="eyebrow">预览</p>
           <div className="tailwind-preview-surface">
             <div style={previewStyle}>
               <strong>Preview card</strong>

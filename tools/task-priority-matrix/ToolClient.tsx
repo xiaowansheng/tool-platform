@@ -60,7 +60,7 @@ export default function TaskPriorityMatrixTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Productivity</p>
+          <p className="eyebrow">效率</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

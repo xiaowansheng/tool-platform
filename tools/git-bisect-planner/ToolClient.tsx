@@ -68,29 +68,29 @@ export default function GitBisectPlannerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Git</p>
+          <p className="eyebrow">Git 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
 
       <div className="tool-toolbar tool-toolbar--grid">
-        <label className="tool-field tool-field--compact"><span>Bad ref</span><input value={badRef} onChange={(event) => setBadRef(event.target.value)} /></label>
-        <label className="tool-field tool-field--compact"><span>Good ref</span><input value={goodRef} onChange={(event) => setGoodRef(event.target.value)} /></label>
+        <label className="tool-field tool-field--compact"><span>坏引用</span><input value={badRef} onChange={(event) => setBadRef(event.target.value)} /></label>
+        <label className="tool-field tool-field--compact"><span>好引用</span><input value={goodRef} onChange={(event) => setGoodRef(event.target.value)} /></label>
         <label className="tool-field tool-field--compact"><span>估计 commits</span><input type="number" min="1" value={commitCount} onChange={(event) => setCommitCount(Number(event.target.value))} /></label>
         <button type="button" onClick={() => void copyScript()}>{copied ? "已复制" : "复制脚本"}</button>
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Steps</h3><p>{estimate.steps}</p></article>
-        <article className="detail-card"><h3>Range cmd</h3><p>{estimate.command}</p></article>
+        <article className="detail-card"><h3>步骤</h3><p>{estimate.steps}</p></article>
+        <article className="detail-card"><h3>范围命令</h3><p>{estimate.command}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field"><span>测试命令</span><input value={testCommand} onChange={(event) => setTestCommand(event.target.value)} /></label>
-          <label className="tool-field"><span>Pathspec</span><input value={pathspec} onChange={(event) => setPathspec(event.target.value)} /></label>
-          <label className="tool-field"><span>Skip ref/pattern</span><input value={skipPattern} onChange={(event) => setSkipPattern(event.target.value)} placeholder="optional" /></label>
+          <label className="tool-field"><span>路径范围</span><input value={pathspec} onChange={(event) => setPathspec(event.target.value)} /></label>
+          <label className="tool-field"><span>跳过引用/模式</span><input value={skipPattern} onChange={(event) => setSkipPattern(event.target.value)} placeholder="可选" /></label>
           <div className="tool-table">
             {checklist.map((item, index) => (
               <div className="tool-table__row" key={item}><span>{index + 1}</span><span>{item}</span></div>
@@ -98,7 +98,7 @@ export default function GitBisectPlannerTool({ manifest }: ToolClientProps) {
           </div>
         </div>
         <label className="tool-field">
-          <span>Bisect script</span>
+          <span>Bisect 脚本</span>
           <textarea value={script} readOnly spellCheck={false} />
         </label>
       </div>

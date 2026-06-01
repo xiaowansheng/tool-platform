@@ -118,41 +118,41 @@ export default function KubernetesProbeBuilderTool({ manifest }: ToolClientProps
         <label className="tool-field tool-field--compact">
           <span>类型</span>
           <select value={type} onChange={(event) => setType(event.target.value as ProbeType)}>
-            <option value="httpGet">httpGet</option>
-            <option value="tcpSocket">tcpSocket</option>
-            <option value="exec">exec</option>
+            <option value="httpGet">HTTP GET</option>
+            <option value="tcpSocket">TCP Socket</option>
+            <option value="exec">Exec</option>
           </select>
         </label>
-        <label className="tool-field tool-field--compact"><span>Port</span><input type="number" min="1" max="65535" value={port} onChange={(event) => setPort(Number(event.target.value))} /></label>
-        <label className="tool-field tool-field--compact"><span>HTTP path</span><input value={path} onChange={(event) => setPath(event.target.value)} disabled={type !== "httpGet"} /></label>
+        <label className="tool-field tool-field--compact"><span>端口</span><input type="number" min="1" max="65535" value={port} onChange={(event) => setPort(Number(event.target.value))} /></label>
+        <label className="tool-field tool-field--compact"><span>HTTP 路径</span><input value={path} onChange={(event) => setPath(event.target.value)} disabled={type !== "httpGet"} /></label>
         <button type="button" onClick={() => void copyYaml()}>{copied ? "已复制" : "复制 YAML"}</button>
       </div>
 
       <div className="tool-toolbar tool-toolbar--grid">
-        <label className="tool-field tool-field--compact"><span>initialDelay</span><input type="number" min="0" value={initialDelaySeconds} onChange={(event) => setInitialDelaySeconds(Number(event.target.value))} /></label>
-        <label className="tool-field tool-field--compact"><span>period</span><input type="number" min="1" value={periodSeconds} onChange={(event) => setPeriodSeconds(Number(event.target.value))} /></label>
-        <label className="tool-field tool-field--compact"><span>timeout</span><input type="number" min="1" value={timeoutSeconds} onChange={(event) => setTimeoutSeconds(Number(event.target.value))} /></label>
-        <label className="tool-field tool-field--compact"><span>failureThreshold</span><input type="number" min="1" value={failureThreshold} onChange={(event) => setFailureThreshold(Number(event.target.value))} /></label>
-        <label className="tool-field tool-field--compact"><span>successThreshold</span><input type="number" min="1" value={successThreshold} onChange={(event) => setSuccessThreshold(Number(event.target.value))} /></label>
+        <label className="tool-field tool-field--compact"><span>初始延迟</span><input type="number" min="0" value={initialDelaySeconds} onChange={(event) => setInitialDelaySeconds(Number(event.target.value))} /></label>
+        <label className="tool-field tool-field--compact"><span>周期</span><input type="number" min="1" value={periodSeconds} onChange={(event) => setPeriodSeconds(Number(event.target.value))} /></label>
+        <label className="tool-field tool-field--compact"><span>超时</span><input type="number" min="1" value={timeoutSeconds} onChange={(event) => setTimeoutSeconds(Number(event.target.value))} /></label>
+        <label className="tool-field tool-field--compact"><span>失败阈值</span><input type="number" min="1" value={failureThreshold} onChange={(event) => setFailureThreshold(Number(event.target.value))} /></label>
+        <label className="tool-field tool-field--compact"><span>成功阈值</span><input type="number" min="1" value={successThreshold} onChange={(event) => setSuccessThreshold(Number(event.target.value))} /></label>
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Fail window</h3><p>{windows.failureWindow}s</p></article>
-        <article className="detail-card"><h3>Detect after start</h3><p>{windows.detectionAfterStarted}s</p></article>
-        <article className="detail-card"><h3>Worst restarts/h</h3><p>{windows.restartsPerHourWorstCase}</p></article>
+        <article className="detail-card"><h3>失败窗口</h3><p>{windows.failureWindow}s</p></article>
+        <article className="detail-card"><h3>启动后检测</h3><p>{windows.detectionAfterStarted}s</p></article>
+        <article className="detail-card"><h3>最差重启/小时</h3><p>{windows.restartsPerHourWorstCase}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>Exec command</span>
+            <span>Exec 命令</span>
             <input value={command} onChange={(event) => setCommand(event.target.value)} disabled={type !== "exec"} />
           </label>
           {risks.map((risk) => <p className="tool-error" key={risk}>{risk}</p>)}
           <p className="tool-note">startupProbe 通过后才会启用 liveness/readiness；慢启动应用建议先放宽 startupProbe，而不是放宽 livenessProbe。</p>
         </div>
         <label className="tool-field">
-          <span>Probe YAML</span>
+          <span>探针 YAML</span>
           <textarea value={yaml} readOnly spellCheck={false} />
         </label>
       </div>

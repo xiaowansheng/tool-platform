@@ -173,7 +173,7 @@ export default function SqlIndexAdvisorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Database Performance</p>
+          <p className="eyebrow">数据库性能</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -187,9 +187,9 @@ export default function SqlIndexAdvisorTool({ manifest }: ToolClientProps) {
         <label className="tool-field tool-field--compact">
           <span>字段基数</span>
           <select value={cardinality} onChange={(event) => setCardinality(event.target.value as "low" | "mixed" | "high")}>
-            <option value="mixed">mixed</option>
-            <option value="high">high</option>
-            <option value="low">low</option>
+            <option value="mixed">混合</option>
+            <option value="high">高</option>
+            <option value="low">低</option>
           </select>
         </label>
         <label className="tool-field tool-field--compact">
@@ -211,19 +211,19 @@ export default function SqlIndexAdvisorTool({ manifest }: ToolClientProps) {
         <div className="workspace workspace--stack">
           <div className="detail-grid">
             <article className="detail-card">
-              <h3>Filters</h3>
+              <h3>过滤</h3>
               <p>{analysis.filters.length}</p>
             </article>
             <article className="detail-card">
-              <h3>Joins</h3>
+              <h3>连接</h3>
               <p>{analysis.joins.length}</p>
             </article>
             <article className="detail-card">
-              <h3>Sorts</h3>
+              <h3>排序</h3>
               <p>{analysis.sorts.length}</p>
             </article>
             <article className="detail-card">
-              <h3>Candidates</h3>
+              <h3>候选</h3>
               <p>{analysis.candidates.length}</p>
             </article>
           </div>

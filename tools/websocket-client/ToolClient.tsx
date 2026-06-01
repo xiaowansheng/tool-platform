@@ -144,7 +144,7 @@ export default function WebsocketClientTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Realtime Debugging</p>
+          <p className="eyebrow">实时调试</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -156,7 +156,7 @@ export default function WebsocketClientTool({ manifest }: ToolClientProps) {
           <input value={url} onChange={(event) => setUrl(event.target.value)} placeholder="wss://example.com/socket" />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Protocols</span>
+          <span>协议</span>
           <input value={protocols} onChange={(event) => setProtocols(event.target.value)} placeholder="graphql-transport-ws, chat" />
         </label>
         <button type="button" onClick={connect} disabled={state === "connecting" || state === "open"}>连接</button>
@@ -180,7 +180,7 @@ export default function WebsocketClientTool({ manifest }: ToolClientProps) {
 
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Message</span>
+          <span>消息</span>
           <textarea value={message} onChange={(event) => setMessage(event.target.value)} spellCheck={false} />
         </label>
         <div className="workspace workspace--stack">

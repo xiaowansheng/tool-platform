@@ -113,18 +113,18 @@ export default function PemJwkToolkitTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Key Utility</p>
+          <p className="eyebrow">密钥工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar">
         <label className="tool-field tool-field--compact">
-          <span>Mode</span>
+          <span>模式</span>
           <select value={mode} onChange={(event) => changeMode(event.target.value as Mode)}>
-            <option value="inspectCsr">Inspect CSR / PEM</option>
-            <option value="jwkToPem">RSA JWK → PEM public key</option>
-            <option value="pemToJwk">RSA PEM public key → JWK</option>
+            <option value="inspectCsr">检查 CSR / PEM</option>
+            <option value="jwkToPem">RSA JWK → PEM 公钥</option>
+            <option value="pemToJwk">RSA PEM 公钥 → JWK</option>
           </select>
         </label>
         <button type="button" onClick={() => void run()}>运行</button>

@@ -209,7 +209,7 @@ export default function KubernetesYamlValidatorTool({ manifest }: ToolClientProp
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Kubernetes Utility</p>
+          <p className="eyebrow">Kubernetes 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -220,23 +220,23 @@ export default function KubernetesYamlValidatorTool({ manifest }: ToolClientProp
       </label>
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Resources</h3>
+          <h3>资源</h3>
           <p>{result.resources.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Kinds</h3>
+          <h3>类型</h3>
           <p>{kinds}</p>
         </article>
         <article className="detail-card">
-          <h3>Errors</h3>
+          <h3>错误</h3>
           <p>{countLevel(result.findings, "error")}</p>
         </article>
         <article className="detail-card">
-          <h3>Warnings</h3>
+          <h3>警告</h3>
           <p>{countLevel(result.findings, "warning")}</p>
         </article>
       </div>
-      <article className="diff-view" aria-label="Kubernetes validation findings">
+      <article className="diff-view" aria-label="Kubernetes 校验结果">
         {result.findings.map((finding, index) => (
           <div
             key={`${finding.resource}-${finding.message}-${index}`}

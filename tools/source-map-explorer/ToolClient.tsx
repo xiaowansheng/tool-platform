@@ -283,7 +283,7 @@ export default function SourceMapExplorerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Bundle Analysis</p>
+          <p className="eyebrow">包分析</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -299,11 +299,11 @@ export default function SourceMapExplorerTool({ manifest }: ToolClientProps) {
           <input type="file" accept=".js,.mjs,text/javascript" onChange={(event) => void loadBundle(event)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Generated line</span>
+          <span>生成行</span>
           <input type="number" min="1" value={lookupLine} onChange={(event) => setLookupLine(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Generated column</span>
+          <span>生成列</span>
           <input type="number" min="0" value={lookupColumn} onChange={(event) => setLookupColumn(Number(event.target.value))} />
         </label>
       </div>
@@ -321,35 +321,35 @@ export default function SourceMapExplorerTool({ manifest }: ToolClientProps) {
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Sources</h3>
+          <h3>源文件</h3>
           <p>{report.raw.sources?.length ?? 0}</p>
         </article>
         <article className="detail-card">
-          <h3>Mapped</h3>
+          <h3>已映射</h3>
           <p>{report.analysis.mappedSources}</p>
         </article>
         <article className="detail-card">
-          <h3>Segments</h3>
+          <h3>分段</h3>
           <p>{report.analysis.segments.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Mapped bytes</h3>
+          <h3>已映射字节</h3>
           <p>{formatBytes(report.analysis.totalMapped)}</p>
         </article>
       </div>
 
       <div className="detail-card">
-        <p className="eyebrow">Position lookup</p>
+        <p className="eyebrow">位置查询</p>
         <p className="mono-output">{sourceName}:{originalLine}:{originalColumn} {originalName !== "n/a" ? `(${originalName})` : ""}</p>
         {report.snippet ? <p className="mono-output">{report.snippet}</p> : <p>未找到该生成位置之前的映射片段。</p>}
       </div>
 
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "minmax(14rem, 1fr) 7rem 7rem 7rem 6rem" }}>
-          <span>Source</span>
-          <span>Mapped</span>
-          <span>Content</span>
-          <span>Segments</span>
+          <span>源</span>
+          <span>已映射</span>
+          <span>内容</span>
+          <span>分段</span>
           <span>%</span>
         </div>
         {report.analysis.rows.slice(0, 120).map((row) => (

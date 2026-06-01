@@ -70,7 +70,7 @@ export default function ApiRateLimitCalculatorTool({ manifest }: ToolClientProps
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Backend</p>
+          <p className="eyebrow">后端</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -109,10 +109,10 @@ export default function ApiRateLimitCalculatorTool({ manifest }: ToolClientProps
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Steady RPS</h3><p>{rate.steadyPerSecond.toFixed(2)}</p></article>
-        <article className="detail-card"><h3>Peak RPS</h3><p>{rate.peakPerSecond.toFixed(2)}</p></article>
-        <article className="detail-card"><h3>Limit</h3><p>{rate.recommended} r/s</p></article>
-        <article className="detail-card"><h3>Burst</h3><p>{rate.burst}</p></article>
+        <article className="detail-card"><h3>稳态 RPS</h3><p>{rate.steadyPerSecond.toFixed(2)}</p></article>
+        <article className="detail-card"><h3>峰值 RPS</h3><p>{rate.peakPerSecond.toFixed(2)}</p></article>
+        <article className="detail-card"><h3>限制</h3><p>{rate.recommended} r/s</p></article>
+        <article className="detail-card"><h3>突发</h3><p>{rate.burst}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

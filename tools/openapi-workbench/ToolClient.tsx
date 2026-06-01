@@ -102,7 +102,7 @@ export default function OpenApiWorkbenchTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">API Utility</p>
+          <p className="eyebrow">API 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -110,17 +110,17 @@ export default function OpenApiWorkbenchTool({ manifest }: ToolClientProps) {
       <div className="tool-toolbar">
         <button type="button" onClick={() => run("format")}>格式化</button>
         <button type="button" onClick={() => run("summary")}>查看摘要</button>
-        <button type="button" onClick={() => run("diff")}>Diff</button>
-        <button type="button" onClick={() => run("mock")}>Mock</button>
+        <button type="button" onClick={() => run("diff")}>差异</button>
+        <button type="button" onClick={() => run("mock")}>生成 Mock</button>
         <button type="button" onClick={() => void copyOutput()} disabled={!output}>{copied ? "已复制" : "复制输出"}</button>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Spec A JSON</span>
+          <span>规格 A JSON</span>
           <textarea value={left} onChange={(event) => setLeft(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Spec B JSON for Diff</span>
+          <span>用于差异的规格 B JSON</span>
           <textarea value={right} onChange={(event) => setRight(event.target.value)} spellCheck={false} />
         </label>
       </div>

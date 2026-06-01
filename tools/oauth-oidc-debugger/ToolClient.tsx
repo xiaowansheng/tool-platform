@@ -56,7 +56,7 @@ export default function OAuthOidcDebuggerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Identity Utility</p>
+          <p className="eyebrow">身份工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -67,7 +67,7 @@ export default function OAuthOidcDebuggerTool({ manifest }: ToolClientProps) {
       </label>
       {urlError ? <p className="tool-error">{urlError}</p> : null}
       <div className="tool-table">
-        <div className="tool-table__row tool-table__row--head"><span>Param</span><span>Value</span></div>
+        <div className="tool-table__row tool-table__row--head"><span>参数</span><span>值</span></div>
         {params.map(([key, value]) => <div key={`${key}-${value}`} className="tool-table__row"><span>{key}</span><span>{value}</span></div>)}
       </div>
       <div className="workspace workspace--two-column">
@@ -80,11 +80,11 @@ export default function OAuthOidcDebuggerTool({ manifest }: ToolClientProps) {
           <textarea value={idToken ? decodeJwtPayload(idToken) : "粘贴 ID Token 以解码 payload"} readOnly spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>PKCE Verifier</span>
+          <span>PKCE Verifier 校验串</span>
           <textarea value={verifier} onChange={(event) => setVerifier(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>PKCE S256 Challenge</span>
+          <span>PKCE S256 Challenge 挑战值</span>
           <textarea value={challenge || "点击生成 S256 Challenge"} readOnly spellCheck={false} />
         </label>
       </div>

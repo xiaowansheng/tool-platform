@@ -151,7 +151,7 @@ export default function FfmpegEditorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Media Utility</p>
+          <p className="eyebrow">媒体工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -229,7 +229,7 @@ export default function FfmpegEditorTool({ manifest }: ToolClientProps) {
 
       <div className="workspace workspace--two-column">
         <article className="detail-card">
-          <p className="eyebrow">Preview</p>
+          <p className="eyebrow">预览</p>
           {fileUrl && isVideo ? (
             <video
               className="media-preview"

@@ -146,9 +146,9 @@ export default function EnvDiffMergeSanitizerTool({ manifest }: ToolClientProps)
         <label className="tool-field tool-field--compact">
           <span>模式</span>
           <select value={mode} onChange={(event) => setMode(event.target.value as Mode)}>
-            <option value="diff">Diff</option>
-            <option value="merge">Merge</option>
-            <option value="sanitize">Sanitize</option>
+            <option value="diff">差异</option>
+            <option value="merge">合并</option>
+            <option value="sanitize">脱敏</option>
             <option value="example">.env.example</option>
           </select>
         </label>
@@ -182,7 +182,7 @@ export default function EnvDiffMergeSanitizerTool({ manifest }: ToolClientProps)
           <p>{summary.sensitive}</p>
         </article>
       </div>
-      <article className="diff-view" aria-label="ENV diff">
+      <article className="diff-view" aria-label="ENV 差异">
         {rows.filter((row) => row.kind !== "equal").map((row) => (
           <div key={row.key} className={`diff-line diff-line--${rowClass(row.kind)}`}>
             <span>{row.kind === "removed" ? "-" : row.kind === "added" ? "+" : "~"}</span>

@@ -139,7 +139,7 @@ export default function MockDataGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Synthetic Data</p>
+          <p className="eyebrow">合成数据</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -150,7 +150,7 @@ export default function MockDataGeneratorTool({ manifest }: ToolClientProps) {
           <input type="number" min="1" max="500" value={count} onChange={(event) => setCount(Number(event.target.value))} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Seed</span>
+          <span>种子</span>
           <input value={seed} onChange={(event) => setSeed(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">

@@ -270,19 +270,19 @@ export default function DockerRunToComposeTool({ manifest }: ToolClientProps) {
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Service</h3>
+          <h3>服务</h3>
           <p>{parsed.service.name}</p>
         </article>
         <article className="detail-card">
-          <h3>Ports</h3>
+          <h3>端口</h3>
           <p>{parsed.service.ports.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Env</h3>
+          <h3>环境变量</h3>
           <p>{parsed.service.environment.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Volumes</h3>
+          <h3>卷</h3>
           <p>{parsed.service.volumes.length}</p>
         </article>
       </div>

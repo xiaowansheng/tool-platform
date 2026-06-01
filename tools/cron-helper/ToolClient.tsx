@@ -322,7 +322,7 @@ export default function CronHelperTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Ops Utility</p>
+          <p className="eyebrow">运维工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

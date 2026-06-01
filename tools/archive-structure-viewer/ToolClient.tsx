@@ -163,7 +163,7 @@ export default function ArchiveStructureViewerTool({ manifest }: ToolClientProps
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Archive Index</p>
+          <p className="eyebrow">归档索引</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

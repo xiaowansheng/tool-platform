@@ -61,7 +61,7 @@ export default function Ipv4CidrCalculatorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Network Utility</p>
+          <p className="eyebrow">网络工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

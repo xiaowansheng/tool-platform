@@ -121,7 +121,7 @@ export default function StudyPlanSchedulerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Learning</p>
+          <p className="eyebrow">学习计划</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -136,10 +136,10 @@ export default function StudyPlanSchedulerTool({ manifest }: ToolClientProps) {
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Topics</h3><p>{topics.length}</p></article>
-        <article className="detail-card"><h3>Required</h3><p>{totalHours.toFixed(1)}h</p></article>
-        <article className="detail-card"><h3>Scheduled</h3><p>{scheduledHours.toFixed(1)}h</p></article>
-        <article className="detail-card"><h3>Capacity</h3><p>{(days * dailyHours).toFixed(1)}h</p></article>
+        <article className="detail-card"><h3>主题</h3><p>{topics.length}</p></article>
+        <article className="detail-card"><h3>所需</h3><p>{totalHours.toFixed(1)}h</p></article>
+        <article className="detail-card"><h3>已排期</h3><p>{scheduledHours.toFixed(1)}h</p></article>
+        <article className="detail-card"><h3>容量</h3><p>{(days * dailyHours).toFixed(1)}h</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

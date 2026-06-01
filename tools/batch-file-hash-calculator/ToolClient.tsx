@@ -94,7 +94,7 @@ export default function BatchFileHashCalculatorTool({ manifest }: ToolClientProp
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Checksums</p>
+          <p className="eyebrow">校验和</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

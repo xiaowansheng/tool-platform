@@ -90,39 +90,39 @@ export default function ApiErrorCodeDocGeneratorTool({ manifest }: ToolClientPro
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">API Utility</p>
+          <p className="eyebrow">API 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>Service name</span>
+          <span>服务名称</span>
           <input value={serviceName} onChange={(event) => setServiceName(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Base URL</span>
+          <span>基础 URL</span>
           <input value={baseUrl} onChange={(event) => setBaseUrl(event.target.value)} />
         </label>
         <button type="button" onClick={() => void copyDocs()}>{copied ? "已复制" : "复制文档"}</button>
       </div>
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>Error rows</span>
+          <span>错误行</span>
           <textarea value={input} onChange={(event) => {
             setInput(event.target.value);
             setCopied(false);
           }} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Markdown docs</span>
+          <span>Markdown 文档</span>
           <textarea value={docs} readOnly spellCheck={false} />
         </label>
       </div>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">
-          <span>Parsed</span>
-          <span>Message</span>
+          <span>已解析</span>
+          <span>消息</span>
         </div>
         {rows.map((row) => (
           <div className="tool-table__row" key={row.code}>

@@ -29,14 +29,14 @@ export default function SriHashGeneratorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Security Utility</p>
+          <p className="eyebrow">安全工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
       </div>
       <div className="tool-toolbar">
         <label className="tool-field tool-field--compact">
-          <span>Algorithm</span>
+          <span>算法</span>
           <select value={algorithm} onChange={(event) => setAlgorithm(event.target.value as SriAlgorithm)}>
             <option value="SHA-256">SHA-256</option>
             <option value="SHA-384">SHA-384</option>

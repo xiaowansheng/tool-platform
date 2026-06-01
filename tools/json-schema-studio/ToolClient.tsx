@@ -94,7 +94,7 @@ export default function JsonSchemaStudioTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Schema Utility</p>
+          <p className="eyebrow">Schema 工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

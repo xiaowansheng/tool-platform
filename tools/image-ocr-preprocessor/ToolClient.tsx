@@ -233,22 +233,22 @@ export default function ImageOcrPreprocessorTool({ manifest }: ToolClientProps) 
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Source</h3>
+          <h3>来源</h3>
           <p>{formatPixels(dimensions.width, dimensions.height)}</p>
         </article>
         <article className="detail-card">
-          <h3>Output</h3>
+          <h3>输出</h3>
           <p>{formatPixels(targetDimensions.width, targetDimensions.height)}</p>
         </article>
         <article className="detail-card">
-          <h3>File</h3>
+          <h3>文件</h3>
           <p>{fileName}</p>
         </article>
       </div>
 
       <div className="workspace workspace--two-column">
         <div className="visual-preview code-preview">
-          {sourceUrl ? <img src={sourceUrl} alt="source preview" style={{ maxWidth: "100%", maxHeight: "22rem" }} /> : null}
+          {sourceUrl ? <img src={sourceUrl} alt="来源预览" style={{ maxWidth: "100%", maxHeight: "22rem" }} /> : null}
         </div>
         <div className="visual-preview code-preview">
           <canvas ref={canvasRef} style={{ maxWidth: "100%", maxHeight: "22rem" }} />

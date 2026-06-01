@@ -191,7 +191,7 @@ export default function SvgOptimizerViewBoxEditorTool({ manifest }: ToolClientPr
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Vector Utility</p>
+          <p className="eyebrow">矢量工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -199,11 +199,11 @@ export default function SvgOptimizerViewBoxEditorTool({ manifest }: ToolClientPr
 
       <div className="workspace workspace--two-column">
         <label className="tool-field">
-          <span>SVG Source</span>
+          <span>SVG 源码</span>
           <textarea value={source} onChange={(event) => setSource(event.target.value)} spellCheck={false} />
         </label>
         <label className="tool-field">
-          <span>Optimized SVG</span>
+          <span>优化后 SVG</span>
           <textarea value={result.svg} readOnly spellCheck={false} />
         </label>
       </div>
@@ -214,15 +214,15 @@ export default function SvgOptimizerViewBoxEditorTool({ manifest }: ToolClientPr
           <input value={viewBox} onChange={(event) => setViewBox(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Width</span>
+          <span>宽度</span>
           <input value={width} onChange={(event) => setWidth(event.target.value)} disabled={removeDimensions} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Height</span>
+          <span>高度</span>
           <input value={height} onChange={(event) => setHeight(event.target.value)} disabled={removeDimensions} />
         </label>
         <label className="tool-field tool-field--compact">
-          <span>Decimal precision</span>
+          <span>小数精度</span>
           <input
             type="number"
             min="0"
@@ -242,31 +242,31 @@ export default function SvgOptimizerViewBoxEditorTool({ manifest }: ToolClientPr
           <input type="checkbox" checked={removeTitleDesc} onChange={(event) => setRemoveTitleDesc(event.target.checked)} />
           Remove metadata / title / desc
         </label>
-        <button type="button" onClick={useDetectedViewBox}>Use detected box</button>
+        <button type="button" onClick={useDetectedViewBox}>使用检测到的框</button>
         <button type="button" onClick={() => void copyOutput()}>{copied ? "已复制" : "复制 SVG"}</button>
       </div>
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Original</h3>
+          <h3>原始</h3>
           <p>{result.before} bytes</p>
         </article>
         <article className="detail-card">
-          <h3>Optimized</h3>
+          <h3>优化后</h3>
           <p>{result.after} bytes</p>
         </article>
         <article className="detail-card">
-          <h3>Saved</h3>
+          <h3>节省</h3>
           <p>{result.saved}%</p>
         </article>
         <article className="detail-card">
-          <h3>Detected viewBox</h3>
+          <h3>检测到的 viewBox</h3>
           <p className="mono-output">{result.detectedViewBox || "none"}</p>
         </article>
       </div>
 
       <div className="visual-preview svg-preview">
-        {result.svg ? <img src={svgDataUrl(result.svg)} alt="Optimized SVG preview" /> : <span>Invalid SVG</span>}
+        {result.svg ? <img src={svgDataUrl(result.svg)} alt="优化后 SVG 预览" /> : <span>无效 SVG</span>}
       </div>
 
       {result.warnings.map((warning) => (

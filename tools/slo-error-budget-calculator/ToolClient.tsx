@@ -112,7 +112,7 @@ export default function SloErrorBudgetCalculatorTool({ manifest }: ToolClientPro
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Reliability</p>
+          <p className="eyebrow">可靠性</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -136,19 +136,19 @@ export default function SloErrorBudgetCalculatorTool({ manifest }: ToolClientPro
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Time budget</h3>
+          <h3>时间预算</h3>
           <p>{formatMinutes(result.budgetMinutes)}</p>
         </article>
         <article className="detail-card">
-          <h3>Used</h3>
+          <h3>已使用</h3>
           <p>{(result.burn * 100).toFixed(1)}%</p>
         </article>
         <article className="detail-card">
-          <h3>Remaining</h3>
+          <h3>剩余</h3>
           <p>{formatMinutes(result.remainingMinutes)}</p>
         </article>
         <article className="detail-card">
-          <h3>Risk</h3>
+          <h3>风险</h3>
           <p>{result.releaseRisk}</p>
         </article>
       </div>
@@ -171,7 +171,7 @@ export default function SloErrorBudgetCalculatorTool({ manifest }: ToolClientPro
                 <input type="number" min="0" value={incident.minutes} onChange={(event) => updateIncident(incident.id, { minutes: Number(event.target.value) })} />
               </label>
               <label className="tool-field tool-field--compact">
-                <span>Bad requests</span>
+                <span>失败请求</span>
                 <input type="number" min="0" value={incident.badRequests} onChange={(event) => updateIncident(incident.id, { badRequests: Number(event.target.value) })} />
               </label>
               <button type="button" className="button--danger" onClick={() => setIncidents((items) => items.filter((item) => item.id !== incident.id))}>删除</button>

@@ -70,7 +70,7 @@ export default function GradeWeightCalculatorTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Education</p>
+          <p className="eyebrow">教育</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -87,10 +87,10 @@ export default function GradeWeightCalculatorTool({ manifest }: ToolClientProps)
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Current</h3><p>{result.currentAverage.toFixed(2)}%</p></article>
-        <article className="detail-card"><h3>Scored</h3><p>{result.scoredWeight.toFixed(1)}%</p></article>
-        <article className="detail-card"><h3>Remaining</h3><p>{result.remainingWeight.toFixed(1)}%</p></article>
-        <article className="detail-card"><h3>Need</h3><p>{result.neededAverage === null ? "-" : `${result.neededAverage.toFixed(2)}%`}</p></article>
+        <article className="detail-card"><h3>当前</h3><p>{result.currentAverage.toFixed(2)}%</p></article>
+        <article className="detail-card"><h3>已计分</h3><p>{result.scoredWeight.toFixed(1)}%</p></article>
+        <article className="detail-card"><h3>剩余</h3><p>{result.remainingWeight.toFixed(1)}%</p></article>
+        <article className="detail-card"><h3>还需</h3><p>{result.neededAverage === null ? "-" : `${result.neededAverage.toFixed(2)}%`}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

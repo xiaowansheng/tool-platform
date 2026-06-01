@@ -45,7 +45,7 @@ export default function AiChatTool({ manifest }: ToolClientProps) {
   }
 
   const aiRuntime = useMemo(() => sdkRef.current!.createAiRuntime(), []);
-  const [systemPrompt, setSystemPrompt] = useState("You are a concise product engineering assistant for a browser tool platform.");
+  const [systemPrompt, setSystemPrompt] = useState("你是浏览器工具平台中一位简洁的产品工程助手。");
   const [input, setInput] = useState("帮我把一个新开发者工具拆成核心功能、输入输出和测试点。");
   const [messages, setMessages] = useState<ChatMessage[]>(sampleMessages);
   const [status, setStatus] = useState("idle");
@@ -137,7 +137,7 @@ export default function AiChatTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">AI Runtime</p>
+          <p className="eyebrow">AI 运行时</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -160,15 +160,15 @@ export default function AiChatTool({ manifest }: ToolClientProps) {
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>Status</h3>
+          <h3>状态</h3>
           <p>{status}</p>
         </article>
         <article className="detail-card">
-          <h3>Messages</h3>
+          <h3>消息数</h3>
           <p>{messages.length}</p>
         </article>
         <article className="detail-card">
-          <h3>Token Estimate</h3>
+          <h3>Token 估算</h3>
           <p>{tokenCount}</p>
         </article>
       </div>
@@ -176,11 +176,11 @@ export default function AiChatTool({ manifest }: ToolClientProps) {
       <div className="workspace workspace--two-column">
         <div className="workspace workspace--stack">
           <label className="tool-field">
-            <span>System Prompt</span>
+            <span>系统提示词</span>
             <textarea value={systemPrompt} onChange={(event) => setSystemPrompt(event.target.value)} spellCheck={false} />
           </label>
           <label className="tool-field">
-            <span>Message</span>
+            <span>消息</span>
             <textarea
               value={input}
               onChange={(event) => setInput(event.target.value)}
@@ -195,7 +195,7 @@ export default function AiChatTool({ manifest }: ToolClientProps) {
           </label>
         </div>
 
-        <div className="chat-transcript" aria-label="AI chat transcript">
+        <div className="chat-transcript" aria-label="AI 聊天记录">
           {messages.map((message) => (
             <article key={message.id} className={`chat-message chat-message--${message.role}`}>
               <p className="eyebrow">{message.role}</p>

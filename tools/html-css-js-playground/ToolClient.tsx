@@ -5,9 +5,9 @@ import { useMemo, useState } from "react";
 import type { ToolClientProps } from "@tool-platform/tool-contracts";
 
 const initialHtml = `<main>
-  <h1>Sandbox Preview</h1>
-  <button id="action">Click me</button>
-  <p id="message">HTML, CSS and JS are isolated in the iframe.</p>
+  <h1>沙箱预览</h1>
+  <button id="action">点击我</button>
+  <p id="message">HTML、CSS 和 JS 会隔离在 iframe 中。</p>
 </main>`;
 
 const initialCss = `body {
@@ -84,7 +84,7 @@ export default function HtmlCssJsPlaygroundTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Sandbox</p>
+          <p className="eyebrow">沙箱</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -104,7 +104,7 @@ export default function HtmlCssJsPlaygroundTool({ manifest }: ToolClientProps) {
         <article className="detail-card"><h3>HTML</h3><p>{html.length} chars</p></article>
         <article className="detail-card"><h3>CSS</h3><p>{css.length} chars</p></article>
         <article className="detail-card"><h3>JS</h3><p>{js.length} chars</p></article>
-        <article className="detail-card"><h3>Isolation</h3><p>iframe sandbox</p></article>
+        <article className="detail-card"><h3>隔离</h3><p>iframe 沙箱</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

@@ -107,7 +107,7 @@ export default function DbConnectionStringWorkbenchTool({ manifest }: ToolClient
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Database</p>
+          <p className="eyebrow">数据库</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -145,19 +145,19 @@ export default function DbConnectionStringWorkbenchTool({ manifest }: ToolClient
 
           <div className="detail-grid">
             <article className="detail-card">
-              <h3>Protocol</h3>
+              <h3>协议</h3>
               <p>{parsed?.protocol ?? "-"}</p>
             </article>
             <article className="detail-card">
-              <h3>Host</h3>
+              <h3>主机</h3>
               <p>{parsed?.host ?? "-"}</p>
             </article>
             <article className="detail-card">
-              <h3>Port</h3>
+              <h3>端口</h3>
               <p>{parsed?.port || "-"}</p>
             </article>
             <article className="detail-card">
-              <h3>Params</h3>
+              <h3>参数</h3>
               <p>{parsed?.params.length ?? 0}</p>
             </article>
           </div>
@@ -173,7 +173,7 @@ export default function DbConnectionStringWorkbenchTool({ manifest }: ToolClient
           </label>
           <div className="mono-output">{command}</div>
           <label className="tool-field">
-            <span>Env</span>
+            <span>环境变量</span>
             <textarea value={env} readOnly spellCheck={false} />
           </label>
         </div>

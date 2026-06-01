@@ -132,7 +132,7 @@ export default function LargeTextToolsTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Bulk Text</p>
+          <p className="eyebrow">大文本</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

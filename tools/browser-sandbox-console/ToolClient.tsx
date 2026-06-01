@@ -23,9 +23,9 @@ interface SandboxRunResult {
 }
 
 const initialHtml = `<main class="demo">
-  <h1>Sandbox preview</h1>
+  <h1>沙箱预览</h1>
   <p>这段内容会在隔离 iframe 中渲染。</p>
-  <button id="run">Run action</button>
+  <button id="run">运行动作</button>
 </main>`;
 
 const initialCss = `.demo {
@@ -282,7 +282,7 @@ export default function BrowserSandboxConsoleTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Iframe Sandbox</p>
+          <p className="eyebrow">iframe 沙箱</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -327,7 +327,7 @@ export default function BrowserSandboxConsoleTool({ manifest }: ToolClientProps)
 
           <div className="detail-grid">
             <article className="detail-card">
-              <h3>Logs</h3>
+              <h3>日志</h3>
               <p>{logs.length}</p>
             </article>
             <article className="detail-card">
@@ -335,7 +335,7 @@ export default function BrowserSandboxConsoleTool({ manifest }: ToolClientProps)
               <p>{result?.htmlLength ?? 0}</p>
             </article>
             <article className="detail-card">
-              <h3>Text</h3>
+              <h3>文本</h3>
               <p>{result?.bodyText.length ?? 0}</p>
             </article>
           </div>

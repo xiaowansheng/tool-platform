@@ -78,7 +78,7 @@ export default function SocialPostSchedulerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Social</p>
+          <p className="eyebrow">社交发布</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -93,10 +93,10 @@ export default function SocialPostSchedulerTool({ manifest }: ToolClientProps) {
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Characters</h3><p>{fullCaption.length}</p></article>
-        <article className="detail-card"><h3>Platforms</h3><p>{platformList.length}</p></article>
-        <article className="detail-card"><h3>Posts</h3><p>{rows.length}</p></article>
-        <article className="detail-card"><h3>Warnings</h3><p>{rows.filter((row) => row.status !== "ready").length}</p></article>
+        <article className="detail-card"><h3>字符数</h3><p>{fullCaption.length}</p></article>
+        <article className="detail-card"><h3>平台数</h3><p>{platformList.length}</p></article>
+        <article className="detail-card"><h3>帖子数</h3><p>{rows.length}</p></article>
+        <article className="detail-card"><h3>警告</h3><p>{rows.filter((row) => row.status !== "ready").length}</p></article>
       </div>
 
       <div className="workspace workspace--two-column">

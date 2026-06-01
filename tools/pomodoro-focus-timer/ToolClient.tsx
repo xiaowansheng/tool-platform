@@ -126,7 +126,7 @@ export default function PomodoroFocusTimerTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Realtime</p>
+          <p className="eyebrow">实时</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -145,10 +145,10 @@ export default function PomodoroFocusTimerTool({ manifest }: ToolClientProps) {
       </div>
 
       <div className="detail-grid">
-        <article className="detail-card"><h3>Timer</h3><p>{formatSeconds(seconds)}</p></article>
-        <article className="detail-card"><h3>Mode</h3><p>{modeLabels[mode]}</p></article>
-        <article className="detail-card"><h3>Progress</h3><p>{progress}%</p></article>
-        <article className="detail-card"><h3>Done</h3><p>{completed}</p></article>
+        <article className="detail-card"><h3>计时器</h3><p>{formatSeconds(seconds)}</p></article>
+        <article className="detail-card"><h3>模式</h3><p>{modeLabels[mode]}</p></article>
+        <article className="detail-card"><h3>进度</h3><p>{progress}%</p></article>
+        <article className="detail-card"><h3>完成数</h3><p>{completed}</p></article>
       </div>
 
       <div className="tool-toolbar tool-toolbar--grid">
@@ -166,9 +166,9 @@ export default function PomodoroFocusTimerTool({ manifest }: ToolClientProps) {
           <textarea value={plan} readOnly spellCheck={false} />
         </label>
         <div className="workspace workspace--stack">
-          {log.length === 0 ? <article className="detail-card"><h3>Session log</h3><p>完成一个阶段后会显示记录。</p></article> : null}
+          {log.length === 0 ? <article className="detail-card"><h3>阶段记录</h3><p>完成一个阶段后会显示记录。</p></article> : null}
           {log.map((item) => (
-            <article className="detail-card" key={item}><h3>Log</h3><p>{item}</p></article>
+            <article className="detail-card" key={item}><h3>记录</h3><p>{item}</p></article>
           ))}
         </div>
       </div>

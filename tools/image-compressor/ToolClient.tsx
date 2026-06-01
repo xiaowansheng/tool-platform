@@ -154,7 +154,7 @@ export default function ImageCompressorTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Image Utility</p>
+          <p className="eyebrow">图像工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
@@ -218,14 +218,14 @@ export default function ImageCompressorTool({ manifest }: ToolClientProps) {
 
       <div className="workspace workspace--two-column">
         <article className="detail-card">
-          <p className="eyebrow">Original</p>
-          {sourceUrl ? <img className="media-preview" src={sourceUrl} alt="Original preview" /> : <p>等待图片</p>}
+          <p className="eyebrow">原图</p>
+          {sourceUrl ? <img className="media-preview" src={sourceUrl} alt="原图预览" /> : <p>等待图片</p>}
         </article>
         <article className="detail-card">
-          <p className="eyebrow">Compressed</p>
+          <p className="eyebrow">压缩图</p>
           {result ? (
             <>
-              <img className="media-preview" src={result.url} alt="Compressed preview" />
+              <img className="media-preview" src={result.url} alt="压缩图预览" />
               <a className="button-link button-link--accent" href={result.url} download={file ? outputName(file.name, format) : `compressed.${formatExtensions[format]}`}>
                 下载图片
               </a>

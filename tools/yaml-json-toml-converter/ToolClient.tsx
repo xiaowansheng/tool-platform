@@ -152,7 +152,7 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolClientProps)
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Config Utility</p>
+          <p className="eyebrow">配置工具</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>

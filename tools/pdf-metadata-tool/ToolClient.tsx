@@ -127,7 +127,7 @@ export default function PdfMetadataTool({ manifest }: ToolClientProps) {
     <section className="tool-panel">
       <div className="tool-panel__header">
         <div>
-          <p className="eyebrow">Document Privacy</p>
+          <p className="eyebrow">文档隐私</p>
           <h2>{manifest.name}</h2>
         </div>
         <p>{manifest.description}</p>
