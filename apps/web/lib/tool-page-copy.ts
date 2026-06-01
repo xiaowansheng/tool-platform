@@ -1945,6 +1945,39 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["把 YAML 配置转换为 JSON 格式。", "将 JSON 格式的应用配置转为 TOML。"]
   },
+  "color-harmonies-generator": {
+    name: "配色方案生成器",
+    description: "基于一种颜色自动生成互补、邻近、三角、四方等配色方案。",
+    intro: "输入一个主色调，自动计算并展示多种经典的配色方案，帮助设计师快速建立色彩体系。",
+    steps: [
+      "输入或选择主色调的 HEX 颜色值。",
+      "浏览下方生成的多种配色方案。",
+      "点击任意色块即可复制对应的 HEX 值。"
+    ],
+    examples: ["为品牌色 #6366f1 生成整套配色方案。", "从主色 #0ea5e9 提取邻近色和三角配色。"]
+  },
+  "css-named-colors": {
+    name: "CSS 命名颜色查询",
+    description: "搜索、浏览并复制所有 148 个 CSS 命名颜色。",
+    intro: "完整收录所有 CSS 命名颜色，支持按名称和 HEX 搜索，点击即可复制。",
+    steps: [
+      "在搜索框中输入颜色名称或 HEX 值进行过滤。",
+      "在颜色网格中浏览匹配的颜色。",
+      "点击任意色块复制其 HEX 值到剪贴板。"
+    ],
+    examples: ["搜索 \"sky\" 查找所有跟天空相关的颜色。", "搜索 \"#ff\" 过滤出红色系命名颜色。"]
+  },
+  "color-blindness-simulator": {
+    name: "色盲模拟器",
+    description: "模拟不同色盲类型下的颜色显示效果，确保色彩无障碍设计。",
+    intro: "输入一种颜色，查看它在红色盲、绿色盲、蓝色盲和全色盲下的视觉效果，检测色彩无障碍性。",
+    steps: [
+      "输入或选择要测试的 HEX 颜色值。",
+      "查看各色盲类型下的模拟效果颜色。",
+      "点击模拟结果右侧的「复制」按钮获取模拟后的 HEX 值。"
+    ],
+    examples: ["测试品牌色 #6366f1 在红色盲下的表现。", "检查 #22c55e 是否在各类色盲下都能辨识。"]
+  },
 };
 
 const zhToolNameOverrides: Record<string, string> = {
@@ -2061,7 +2094,10 @@ const zhToolNameOverrides: Record<string, string> = {
   "wasm-binary-inspector": "WASM 二进制检查器",
   "webgpu-capability-reporter": "WebGPU 能力报告器",
   "websocket-client": "WebSocket 客户端",
-  "yaml-json-toml-converter": "YAML / JSON / TOML 转换器"
+  "yaml-json-toml-converter": "YAML / JSON / TOML 转换器",
+  "color-harmonies-generator": "配色方案生成器",
+  "css-named-colors": "CSS 命名颜色查询",
+  "color-blindness-simulator": "色盲模拟器"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {

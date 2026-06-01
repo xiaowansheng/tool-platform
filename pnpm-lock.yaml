@@ -200,12 +200,18 @@ importers:
       '@tool-platform/code-snippet-security-review':
         specifier: workspace:*
         version: link:../../tools/code-snippet-security-review
+      '@tool-platform/color-blindness-simulator':
+        specifier: workspace:*
+        version: link:../../tools/color-blindness-simulator
       '@tool-platform/color-contrast-checker':
         specifier: workspace:*
         version: link:../../tools/color-contrast-checker
       '@tool-platform/color-converter':
         specifier: workspace:*
         version: link:../../tools/color-converter
+      '@tool-platform/color-harmonies-generator':
+        specifier: workspace:*
+        version: link:../../tools/color-harmonies-generator
       '@tool-platform/color-palette-generator':
         specifier: workspace:*
         version: link:../../tools/color-palette-generator
@@ -230,6 +236,9 @@ importers:
       '@tool-platform/css-grid-generator':
         specifier: workspace:*
         version: link:../../tools/css-grid-generator
+      '@tool-platform/css-named-colors':
+        specifier: workspace:*
+        version: link:../../tools/css-named-colors
       '@tool-platform/css-specificity-calculator':
         specifier: workspace:*
         version: link:../../tools/css-specificity-calculator
@@ -920,6 +929,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/color-blindness-simulator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/color-contrast-checker:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -930,6 +948,15 @@ importers:
         version: 19.2.6
 
   tools/color-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/color-harmonies-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1002,6 +1029,15 @@ importers:
         version: 19.2.6
 
   tools/css-grid-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/css-named-colors:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

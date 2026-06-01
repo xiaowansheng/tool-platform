@@ -23,8 +23,10 @@ import CaseConverterManifest from "@tool-platform/case-converter/manifest";
 import ChangelogGeneratorManifest from "@tool-platform/changelog-generator/manifest";
 import ChmodCalculatorManifest from "@tool-platform/chmod-calculator/manifest";
 import CodeSnippetSecurityReviewManifest from "@tool-platform/code-snippet-security-review/manifest";
+import ColorBlindnessSimulatorManifest from "@tool-platform/color-blindness-simulator/manifest";
 import ColorContrastCheckerManifest from "@tool-platform/color-contrast-checker/manifest";
 import ColorConverterManifest from "@tool-platform/color-converter/manifest";
+import ColorHarmoniesGeneratorManifest from "@tool-platform/color-harmonies-generator/manifest";
 import ColorPaletteGeneratorManifest from "@tool-platform/color-palette-generator/manifest";
 import ConventionalCommitHelperManifest from "@tool-platform/conventional-commit-helper/manifest";
 import CookieParserManifest from "@tool-platform/cookie-parser/manifest";
@@ -33,6 +35,7 @@ import CronHelperManifest from "@tool-platform/cron-helper/manifest";
 import CspGeneratorManifest from "@tool-platform/csp-generator/manifest";
 import CssClampGeneratorManifest from "@tool-platform/css-clamp-generator/manifest";
 import CssGridGeneratorManifest from "@tool-platform/css-grid-generator/manifest";
+import CssNamedColorsManifest from "@tool-platform/css-named-colors/manifest";
 import CssSpecificityCalculatorManifest from "@tool-platform/css-specificity-calculator/manifest";
 import CsvCleanerManifest from "@tool-platform/csv-cleaner/manifest";
 import CsvJsonConverterManifest from "@tool-platform/csv-json-converter/manifest";
@@ -203,8 +206,10 @@ export const toolManifests: ToolManifest[] = [
   ChangelogGeneratorManifest,
   ChmodCalculatorManifest,
   CodeSnippetSecurityReviewManifest,
+  ColorBlindnessSimulatorManifest,
   ColorContrastCheckerManifest,
   ColorConverterManifest,
+  ColorHarmoniesGeneratorManifest,
   ColorPaletteGeneratorManifest,
   ConventionalCommitHelperManifest,
   CookieParserManifest,
@@ -213,6 +218,7 @@ export const toolManifests: ToolManifest[] = [
   CspGeneratorManifest,
   CssClampGeneratorManifest,
   CssGridGeneratorManifest,
+  CssNamedColorsManifest,
   CssSpecificityCalculatorManifest,
   CsvCleanerManifest,
   CsvJsonConverterManifest,
