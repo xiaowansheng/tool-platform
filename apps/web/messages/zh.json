@@ -98,6 +98,27 @@
     "remove": "移除",
     "removeAria": "从常用工具中移除 {name}"
   },
+  "favoriteTools": {
+    "title": "收藏工具",
+    "description": "手动收藏的工具会保存在本地，适合作为固定入口。",
+    "categoryDescription": "把需要长期保留的工具手动加入收藏，数据只保存在本地。",
+    "filterTitle": "筛选收藏工具",
+    "filterDescription": "按名称、分类、标签或运行时过滤本地收藏工具。",
+    "searchPlaceholder": "在收藏工具中搜索名称、标签或运行时",
+    "searchAriaLabel": "搜索收藏工具",
+    "results": "{count} 个结果",
+    "clear": "清空收藏",
+    "clearSearch": "清空",
+    "emptyTitle": "还没有收藏工具",
+    "emptyDescription": "点击任意工具卡片或详情页上的星标后，它会出现在这里。",
+    "emptyFiltered": "没有命中当前筛选",
+    "emptyFilteredDescription": "换一个关键词，或先收藏更多工具。",
+    "add": "收藏",
+    "favorited": "已收藏",
+    "remove": "取消收藏",
+    "addAria": "收藏 {name}",
+    "removeAria": "取消收藏 {name}"
+  },
   "toolPage": {
     "subtitle": "动态工具路由来自自动生成的 Tool Registry。"
   },

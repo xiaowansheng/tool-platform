@@ -666,6 +666,60 @@ textarea {
   flex-shrink: 0;
 }
 
+.tool-card__badges,
+.tool-page__headline-actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.tool-card__badges {
+  max-width: 8.5rem;
+}
+
+.favorite-button {
+  width: 2rem;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-color: var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-subtle) 84%, transparent);
+  color: var(--text-tertiary);
+}
+
+.favorite-button svg {
+  flex-shrink: 0;
+}
+
+.favorite-button:hover,
+.favorite-button:focus-visible {
+  border-color: rgba(250, 204, 21, 0.45);
+  background: rgba(250, 204, 21, 0.12);
+  color: #facc15;
+  transform: none;
+}
+
+.favorite-button--active {
+  border-color: rgba(250, 204, 21, 0.45);
+  background: rgba(250, 204, 21, 0.14);
+  color: #f59e0b;
+}
+
+.favorite-button--label {
+  width: auto;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+}
+
+.favorite-button--label span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .tool-card h3 {
   display: -webkit-box;
   overflow: hidden;
@@ -730,6 +784,10 @@ textarea {
 .tool-card__actions button {
   min-width: 0;
   overflow: hidden;
+}
+
+.tool-card__actions--pinned {
+  margin-top: auto;
 }
 
 .category-card__icon svg {

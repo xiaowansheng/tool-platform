@@ -98,6 +98,27 @@
     "remove": "Remove",
     "removeAria": "Remove {name} from common tools"
   },
+  "favoriteTools": {
+    "title": "Favorite Tools",
+    "description": "Manually favorited tools are saved locally for fixed quick access.",
+    "categoryDescription": "Pin long-term tools to favorites. The list stays local to this device.",
+    "filterTitle": "Filter Favorite Tools",
+    "filterDescription": "Filter locally favorited tools by name, category, tags, or runtime.",
+    "searchPlaceholder": "Search favorite tools by name, tag, or runtime",
+    "searchAriaLabel": "Search favorite tools",
+    "results": "{count} results",
+    "clear": "Clear Favorites",
+    "clearSearch": "Clear",
+    "emptyTitle": "No favorite tools yet",
+    "emptyDescription": "Click the star on any tool card or tool page and it will appear here.",
+    "emptyFiltered": "No matches for current filter",
+    "emptyFilteredDescription": "Try another keyword, or favorite more tools first.",
+    "add": "Favorite",
+    "favorited": "Favorited",
+    "remove": "Unfavorite",
+    "addAria": "Favorite {name}",
+    "removeAria": "Unfavorite {name}"
+  },
   "toolPage": {
     "subtitle": "Dynamic tool routing from the auto-generated Tool Registry."
   },

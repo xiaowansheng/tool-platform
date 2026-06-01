@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 import { categories, getAllTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
 import { Link } from "@/i18n/navigation";
-import { COMMON_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
-import { CommonToolsSidebarLink } from "./common-tools";
+import { COMMON_TOOLS_CATEGORY_ID, FAVORITE_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
+import { CommonToolsSidebarLink, FavoriteToolsSidebarLink } from "./common-tools";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigation } from "./mobile-navigation";
 import { SiteFooter } from "./site-footer";
@@ -46,6 +46,7 @@ function SidebarContent({ tools }: { tools: ToolManifest[] }) {
 
       <div className="sidebar__section">
         <CommonToolsSidebarLink />
+        <FavoriteToolsSidebarLink />
         {categories.map((category) => {
           const count = tools.filter((tool) => tool.category === category.id).length;
           return (
@@ -73,6 +74,7 @@ export function PlatformShell({ children }: { children: ReactNode }) {
   const t = useTranslations("layout");
   const ct = useTranslations("categories");
   const commonToolsT = useTranslations("commonTools");
+  const favoriteToolsT = useTranslations("favoriteTools");
   const tools = getAllTools();
   const workspaceTabs: WorkspaceTabDefinition[] = [
     { id: "/", name: t("home"), kind: "home" },
@@ -80,6 +82,11 @@ export function PlatformShell({ children }: { children: ReactNode }) {
     {
       id: `/categories/${COMMON_TOOLS_CATEGORY_ID}`,
       name: commonToolsT("title"),
+      kind: "category"
+    },
+    {
+      id: `/categories/${FAVORITE_TOOLS_CATEGORY_ID}`,
+      name: favoriteToolsT("title"),
       kind: "category"
     },
     ...categories.map((category) => ({

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { ToolUsageTracker } from "@/components/common-tools";
+import { FavoriteToolButton, ToolUsageTracker } from "@/components/common-tools";
 import { ToolClientLoader } from "@/components/tool-client-loader";
 import { Topbar } from "@/components/topbar";
 import { ToolRuntimeCard } from "@/components/tool-runtime-card";
@@ -103,9 +103,12 @@ function ToolPageContent({ manifest, locale }: { manifest: NonNullable<ReturnTyp
               <h2>{manifest.name}</h2>
               <p className="tool-page__desc">{manifest.description}</p>
             </div>
-            <span className="pill pill--runtime" data-runtime={manifest.runtime}>
-              {runtimeLabel}
-            </span>
+            <div className="tool-page__headline-actions">
+              <FavoriteToolButton toolId={manifest.id} toolName={manifest.name} showLabel />
+              <span className="pill pill--runtime" data-runtime={manifest.runtime}>
+                {runtimeLabel}
+              </span>
+            </div>
           </div>
           <dl className="detail-grid detail-grid--meta">
             <div className="detail-card detail-card--meta">

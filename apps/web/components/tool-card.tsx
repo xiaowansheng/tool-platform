@@ -4,6 +4,7 @@ import { getCategoryMeta, type ToolManifest } from "@tool-platform/tool-sdk";
 
 import { Link } from "@/i18n/navigation";
 import { getRuntimeLabel, getToolPageManifest } from "@/lib/tool-page-copy";
+import { FavoriteToolButton } from "./common-tools";
 
 const TOOL_CARD_VISIBLE_TAGS = 4;
 
@@ -26,9 +27,12 @@ export function ToolCard({ tool }: { tool: ToolManifest }) {
           <p className="eyebrow">{categoryLabel}</p>
           <h3 title={displayTool.name}>{displayTool.name}</h3>
         </div>
-        <span className="pill pill--runtime" data-runtime={tool.runtime}>
-          {runtimeLabel}
-        </span>
+        <div className="tool-card__badges">
+          <FavoriteToolButton toolId={tool.id} toolName={displayTool.name} />
+          <span className="pill pill--runtime" data-runtime={tool.runtime}>
+            {runtimeLabel}
+          </span>
+        </div>
       </div>
       <p className="tool-card__description" title={displayTool.description}>
         {displayTool.description}

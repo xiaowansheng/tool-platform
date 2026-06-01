@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { categories, getAllTools } from "@tool-platform/tool-sdk";
 
 import { Link } from "@/i18n/navigation";
-import { CommonToolsCategoryCard } from "./common-tools";
+import { CommonToolsCategoryCard, FavoriteToolsCategoryCard } from "./common-tools";
 
 
 export function CategoryPanel() {
@@ -21,6 +21,7 @@ export function CategoryPanel() {
       </div>
       <div className="category-grid">
         <CommonToolsCategoryCard />
+        <FavoriteToolsCategoryCard />
         {categories.map((category) => {
           const count = tools.filter((tool) => tool.category === category.id).length;
 

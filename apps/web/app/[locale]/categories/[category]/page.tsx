@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { CommonToolsPage } from "@/components/common-tools";
+import { CommonToolsPage, FavoriteToolsPage } from "@/components/common-tools";
 import { SearchSurface } from "@/components/search-surface";
 import { Topbar } from "@/components/topbar";
-import { COMMON_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
+import { COMMON_TOOLS_CATEGORY_ID, FAVORITE_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
 import { categories, getToolsByCategory, getAllTools, type ToolCategory, type ToolManifest } from "@tool-platform/tool-sdk";
 
 export default async function CategoryPage({
@@ -17,6 +17,10 @@ export default async function CategoryPage({
 
   if (category === COMMON_TOOLS_CATEGORY_ID) {
     return <CommonToolsCategoryPage tools={allTools} />;
+  }
+
+  if (category === FAVORITE_TOOLS_CATEGORY_ID) {
+    return <FavoriteToolsCategoryPage tools={allTools} />;
   }
 
   const meta = categories.find((item) => item.id === category);
@@ -62,6 +66,18 @@ function CommonToolsCategoryPage({ tools }: { tools: ToolManifest[] }) {
     <>
       <Topbar title={t("title")} subtitle={t("description")} />
       <CommonToolsPage tools={tools} />
+    </>
+  );
+}
+
+
+function FavoriteToolsCategoryPage({ tools }: { tools: ToolManifest[] }) {
+  const t = useTranslations("favoriteTools");
+
+  return (
+    <>
+      <Topbar title={t("title")} subtitle={t("description")} />
+      <FavoriteToolsPage tools={tools} />
     </>
   );
 }
