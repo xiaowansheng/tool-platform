@@ -23,17 +23,13 @@ export function ToolCard({ tool }: { tool: ToolManifest }) {
   return (
     <article className="tool-card">
       <div className="tool-card__header">
-        <div className="tool-card__title-group">
-          <p className="eyebrow">{categoryLabel}</p>
-          <h3 title={displayTool.name}>{displayTool.name}</h3>
-        </div>
-        <div className="tool-card__badges">
-          <FavoriteToolButton toolId={tool.id} toolName={displayTool.name} />
-          <span className="pill pill--runtime" data-runtime={tool.runtime}>
-            {runtimeLabel}
-          </span>
-        </div>
+        <p className="eyebrow">{categoryLabel}</p>
+        <FavoriteToolButton toolId={tool.id} toolName={displayTool.name} />
       </div>
+      <h3 title={displayTool.name}>{displayTool.name}</h3>
+      <span className="pill pill--runtime tool-card__runtime" data-runtime={tool.runtime}>
+        {runtimeLabel}
+      </span>
       <p className="tool-card__description" title={displayTool.description}>
         {displayTool.description}
       </p>

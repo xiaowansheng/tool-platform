@@ -316,7 +316,7 @@ export function FavoriteToolsPage({ tools }: { tools: ToolManifest[] }) {
         {filteredTools.length > 0 ? (
           <div className="card-grid">
             {filteredTools.map((tool) => (
-              <FavoriteToolCard key={tool.id} tool={tool} onRemove={() => removeFavoriteTool(tool.id)} />
+              <FavoriteToolCard key={tool.id} tool={tool} />
             ))}
           </div>
         ) : (
@@ -354,17 +354,13 @@ function CommonToolCard({
   return (
     <article className="tool-card tool-card--common">
       <div className="tool-card__header">
-        <div className="tool-card__title-group">
-          <p className="eyebrow">{categoryLabel}</p>
-          <h3 title={displayTool.name}>{displayTool.name}</h3>
-        </div>
-        <div className="tool-card__badges">
-          <FavoriteToolButton toolId={tool.id} toolName={displayTool.name} />
-          <span className="pill pill--runtime" data-runtime={tool.runtime}>
-            {runtimeLabel}
-          </span>
-        </div>
+        <p className="eyebrow">{categoryLabel}</p>
+        <FavoriteToolButton toolId={tool.id} toolName={displayTool.name} />
       </div>
+      <h3 title={displayTool.name}>{displayTool.name}</h3>
+      <span className="pill pill--runtime tool-card__runtime" data-runtime={tool.runtime}>
+        {runtimeLabel}
+      </span>
       <p className="tool-card__description" title={displayTool.description}>
         {displayTool.description}
       </p>
@@ -395,14 +391,7 @@ function CommonToolCard({
   );
 }
 
-function FavoriteToolCard({
-  tool,
-  onRemove
-}: {
-  tool: ToolManifest;
-  onRemove: () => void;
-}) {
-  const t = useTranslations("favoriteTools");
+function FavoriteToolCard({ tool }: { tool: ToolManifest }) {
   const locale = useLocale();
   const displayTool = getToolPageManifest(tool, locale);
   const runtimeLabel = getRuntimeLabel(tool.runtime, locale);
@@ -417,17 +406,13 @@ function FavoriteToolCard({
   return (
     <article className="tool-card tool-card--favorite">
       <div className="tool-card__header">
-        <div className="tool-card__title-group">
-          <p className="eyebrow">{categoryLabel}</p>
-          <h3 title={displayTool.name}>{displayTool.name}</h3>
-        </div>
-        <div className="tool-card__badges">
-          <FavoriteToolButton toolId={tool.id} toolName={displayTool.name} />
-          <span className="pill pill--runtime" data-runtime={tool.runtime}>
-            {runtimeLabel}
-          </span>
-        </div>
+        <p className="eyebrow">{categoryLabel}</p>
+        <FavoriteToolButton toolId={tool.id} toolName={displayTool.name} />
       </div>
+      <h3 title={displayTool.name}>{displayTool.name}</h3>
+      <span className="pill pill--runtime tool-card__runtime" data-runtime={tool.runtime}>
+        {runtimeLabel}
+      </span>
       <p className="tool-card__description" title={displayTool.description}>
         {displayTool.description}
       </p>
@@ -448,10 +433,6 @@ function FavoriteToolCard({
           <ExternalLink aria-hidden="true" size={14} strokeWidth={2} />
           {toolCardT("enterTool")}
         </Link>
-        <button type="button" className="button--danger" onClick={onRemove} aria-label={t("removeAria", { name: displayTool.name })}>
-          <Trash2 aria-hidden="true" size={14} strokeWidth={2} />
-          {t("remove")}
-        </button>
       </div>
     </article>
   );
