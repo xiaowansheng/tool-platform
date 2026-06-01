@@ -215,6 +215,9 @@ importers:
       '@tool-platform/color-palette-generator':
         specifier: workspace:*
         version: link:../../tools/color-palette-generator
+      '@tool-platform/color-picker':
+        specifier: workspace:*
+        version: link:../../tools/color-picker
       '@tool-platform/conventional-commit-helper':
         specifier: workspace:*
         version: link:../../tools/conventional-commit-helper
@@ -966,6 +969,15 @@ importers:
         version: 19.2.6
 
   tools/color-palette-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/color-picker:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

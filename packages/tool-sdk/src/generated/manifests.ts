@@ -28,6 +28,7 @@ import ColorContrastCheckerManifest from "@tool-platform/color-contrast-checker/
 import ColorConverterManifest from "@tool-platform/color-converter/manifest";
 import ColorHarmoniesGeneratorManifest from "@tool-platform/color-harmonies-generator/manifest";
 import ColorPaletteGeneratorManifest from "@tool-platform/color-palette-generator/manifest";
+import ColorPickerManifest from "@tool-platform/color-picker/manifest";
 import ConventionalCommitHelperManifest from "@tool-platform/conventional-commit-helper/manifest";
 import CookieParserManifest from "@tool-platform/cookie-parser/manifest";
 import CorsDiagnosticsManifest from "@tool-platform/cors-diagnostics/manifest";
@@ -211,6 +212,7 @@ export const toolManifests: ToolManifest[] = [
   ColorConverterManifest,
   ColorHarmoniesGeneratorManifest,
   ColorPaletteGeneratorManifest,
+  ColorPickerManifest,
   ConventionalCommitHelperManifest,
   CookieParserManifest,
   CorsDiagnosticsManifest,

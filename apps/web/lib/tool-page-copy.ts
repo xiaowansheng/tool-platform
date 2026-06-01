@@ -1978,6 +1978,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["测试品牌色 #6366f1 在红色盲下的表现。", "检查 #22c55e 是否在各类色盲下都能辨识。"]
   },
+  "color-picker": {
+    name: "颜色选择器",
+    description: "通过色相、饱和度、明度面板选取并微调颜色，一键复制多格式值。",
+    intro: "可视化颜色选取工具，支持饱和度/明度面板、色相滑块和 HSL 精确微调，实时预览并复制多种格式。",
+    steps: [
+      "在色相滑块上拖动选取色相。",
+      "在色板中点击或拖动调整饱和度（横向）和明度（纵向）。",
+      "使用 HSL 滑块进行微调，或直接输入 HEX 值。",
+      "点击复制按钮获取 HEX、RGB 或 HSL 格式的值。"
+    ],
+    examples: ["从色板中选取品牌主色。", "微调 HSL 滑块找到理想的颜色明度。"]
+  },
 };
 
 const zhToolNameOverrides: Record<string, string> = {
@@ -2097,7 +2109,8 @@ const zhToolNameOverrides: Record<string, string> = {
   "yaml-json-toml-converter": "YAML / JSON / TOML 转换器",
   "color-harmonies-generator": "配色方案生成器",
   "css-named-colors": "CSS 命名颜色查询",
-  "color-blindness-simulator": "色盲模拟器"
+  "color-blindness-simulator": "色盲模拟器",
+  "color-picker": "颜色选择器"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {

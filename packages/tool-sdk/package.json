@@ -42,6 +42,7 @@
     "@tool-platform/color-converter": "workspace:*",
     "@tool-platform/color-harmonies-generator": "workspace:*",
     "@tool-platform/color-palette-generator": "workspace:*",
+    "@tool-platform/color-picker": "workspace:*",
     "@tool-platform/conventional-commit-helper": "workspace:*",
     "@tool-platform/cookie-parser": "workspace:*",
     "@tool-platform/cors-diagnostics": "workspace:*",

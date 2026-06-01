@@ -2301,6 +2301,89 @@ a.category-card:hover .category-card__tooltip {
   overflow-wrap: anywhere;
 }
 
+.picker-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.picker-canvas-area {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.picker-sv-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.picker-sv-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.picker-hue-slider {
+  position: relative;
+  width: 100%;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.picker-hue-thumb {
+  position: absolute;
+  top: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.picker-controls {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.picker-preview {
+  min-height: 5rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: end;
+  padding: 0.85rem;
+  border: 1px solid var(--card-border);
+}
+
+.picker-preview__hex {
+  font-family: var(--font-mono), monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.picker-sliders {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.picker-sliders input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent-primary);
+}
+
+.picker-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
 /* ==========================================================================
    Tool Panel
    ========================================================================== */

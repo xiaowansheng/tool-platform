@@ -39,6 +39,7 @@ export const toolComponentLoaders = {
   "color-converter": () => import("@tool-platform/color-converter/tool"),
   "color-harmonies-generator": () => import("@tool-platform/color-harmonies-generator/tool"),
   "color-palette-generator": () => import("@tool-platform/color-palette-generator/tool"),
+  "color-picker": () => import("@tool-platform/color-picker/tool"),
   "conventional-commit-helper": () => import("@tool-platform/conventional-commit-helper/tool"),
   "cookie-parser": () => import("@tool-platform/cookie-parser/tool"),
   "cors-diagnostics": () => import("@tool-platform/cors-diagnostics/tool"),
