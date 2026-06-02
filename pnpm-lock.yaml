@@ -2005,6 +2005,9 @@ importers:
       '@tool-platform/worker-runtime':
         specifier: workspace:*
         version: link:../../packages/worker-runtime
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
 
   tools/sbom-viewer:
     dependencies:
@@ -2116,6 +2119,9 @@ importers:
 
   tools/sql-playground:
     dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2287,6 +2293,9 @@ importers:
       '@tool-platform/worker-runtime':
         specifier: workspace:*
         version: link:../../packages/worker-runtime
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
 
   tools/unicode-inspector:
     dependencies:

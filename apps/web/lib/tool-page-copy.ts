@@ -1727,14 +1727,14 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
   },
   "sql-playground": {
     name: "SQL Playground",
-    description: "浏览器内执行轻量 SQL 子集，保留后续 SQLite/WASM 运行时接入边界。",
-    intro: "在浏览器中编写和执行 SQL 语句，测试查询逻辑和数据操作。",
+    description: "在浏览器 Worker 中运行真实 SQLite/WASM，支持分开初始化表结构、初始化数据、清除数据和执行查询。",
+    intro: "最上方输入表结构脚本，中间输入初始化数据，最下方输入查询；结果区统一展示当前数据库的结果、Schema、样例数据和关系图。",
     steps: [
-      "在编辑区编写 SQL 语句。",
-      "点击执行查看结果。",
-      "调整 SQL 后重新执行。"
+      "在最上方输入框中编写 CREATE TABLE / ALTER TABLE 脚本并初始化数据库表。",
+      "在中间输入框中编写 INSERT INTO / UPDATE 初始化数据，并按需单独清除数据。",
+      "在最下方输入框执行查询或变更语句，并在结果区查看当前数据库状态。"
     ],
-    examples: ["测试复杂 SQL 查询逻辑。", "快速验证 SQL 语法和结果集。"]
+    examples: ["先建表，再多次初始化和清除测试数据，最后连续执行查询。", "验证外键关系、样例数据和 UPDATE 后的数据库状态。"]
   },
   "sri-hash-generator": {
     name: "SRI 哈希生成器",
