@@ -20,7 +20,12 @@ function SidebarContent({ tools }: { tools: ToolManifest[] }) {
   return (
     <>
       <div className="sidebar__brand">
-        <span className="pill">Tool OS</span>
+        <div className="sidebar__brand-header">
+          <span className="sidebar__brand-icon">
+            <img src="/icon.svg" alt="Tool Platform" width="20" height="20" />
+          </span>
+          <span className="pill pill--brand">Tool OS</span>
+        </div>
         <strong>Tool Platform</strong>
         <p>{t("sidebarDescription")}</p>
       </div>

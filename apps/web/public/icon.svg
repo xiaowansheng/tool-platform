@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Cel-shading gradients -->
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9FD0FF"/>
+      <stop offset="100%" stop-color="#5BAAFF"/>
+    </linearGradient>
+    <linearGradient id="handleGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFC04D"/>
+      <stop offset="100%" stop-color="#FF6B00"/>
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD166"/>
+      <stop offset="100%" stop-color="#FF8800"/>
+    </linearGradient>
+    <linearGradient id="wrenchGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F0FF"/>
+      <stop offset="100%" stop-color="#B0C8F0"/>
+    </linearGradient>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F1A30" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- ✨ Sparkles -->
+  <g fill="#FFD700" opacity="0.85">
+    <path d="M65,85 l6,16 l16,6 l-16,6 l-6,16 l-6,-16 l-16,-6 l16,-6Z"/>
+    <path d="M448,72 l5,13 l13,5 l-13,5 l-5,13 l-5,-13 l-13,-5 l13,-5Z" transform="scale(0.8) translate(125,25)"/>
+    <path d="M50,400 l4,10 l10,4 l-10,4 l-4,10 l-4,-10 l-10,-4 l10,-4Z" transform="scale(0.6) translate(30,200)"/>
+  </g>
+
+  <!-- Toolbox handle (outer thick outline) -->
+  <path d="M180,140 C180,82 332,82 332,140" fill="none" stroke="#1A2744" stroke-width="32" stroke-linecap="round"/>
+  <!-- Toolbox handle (inner orange) -->
+  <path d="M180,140 C180,88 332,88 332,140" fill="none" stroke="url(#handleGrad)" stroke-width="18" stroke-linecap="round"/>
+  <!-- Handle highlight -->
+  <path d="M195,125 C210,100 302,100 317,125" fill="none" stroke="#FFE066" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Side connectors -->
+  <rect x="158" y="128" width="44" height="28" rx="10" fill="url(#handleGrad)" stroke="#1A2744" stroke-width="10"/>
+  <rect x="310" y="128" width="44" height="28" rx="10" fill="url(#handleGrad)" stroke="#1A2744" stroke-width="10"/>
+  <rect x="164" y="134" width="32" height="8" rx="4" fill="#FFE066" opacity="0.4"/>
+  <rect x="316" y="134" width="32" height="8" rx="4" fill="#FFE066" opacity="0.4"/>
+
+  <!-- Main toolbox body -->
+  <g filter="url(#shadow)">
+    <rect x="72" y="148" width="368" height="284" rx="42" fill="url(#bodyGrad)" stroke="#1A2744" stroke-width="16"/>
+  </g>
+
+  <!-- Glossy highlight on box top -->
+  <path d="M100,178 Q170,155 256,155 Q342,155 412,178 L402,192 Q340,172 256,172 Q172,172 110,192Z" fill="white" opacity="0.18"/>
+
+  <!-- Divider line -->
+  <line x1="95" y1="248" x2="417" y2="248" stroke="#1A2744" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Left button -->
+  <rect x="118" y="212" width="32" height="52" rx="12" fill="url(#wrenchGrad)" stroke="#1A2744" stroke-width="8"/>
+  <circle cx="134" cy="238" r="5" fill="#1A2744"/>
+  <rect x="124" y="218" width="20" height="10" rx="5" fill="white" opacity="0.3"/>
+
+  <!-- Right button -->
+  <rect x="362" y="212" width="32" height="52" rx="12" fill="url(#wrenchGrad)" stroke="#1A2744" stroke-width="8"/>
+  <circle cx="378" cy="238" r="5" fill="#1A2744"/>
+  <rect x="368" y="218" width="20" height="10" rx="5" fill="white" opacity="0.3"/>
+
+  <!-- Center panel -->
+  <rect x="214" y="200" width="84" height="72" rx="18" fill="url(#panelGrad)" stroke="#1A2744" stroke-width="14"/>
+  <rect x="214" y="200" width="84" height="36" rx="18" fill="#FFE066" opacity="0.3" clip-path="inset(0 0 18px 0)"/>
+  <rect x="234" y="226" width="44" height="20" rx="8" fill="#FFF4E6" stroke="#1A2744" stroke-width="8"/>
+  <rect x="240" y="231" width="32" height="10" rx="4" fill="#1A2744" opacity="0.15"/>
+
+  <!-- ========== KAWAII FACE ========== -->
+
+  <!-- Left eye -->
+  <g transform="translate(162, 298)">
+    <ellipse cx="0" cy="0" rx="22" ry="24" fill="#1A2744"/>
+    <ellipse cx="4" cy="-4" rx="9" ry="10" fill="white"/>
+    <circle cx="-6" cy="-6" r="4.5" fill="white" opacity="0.7"/>
+  </g>
+
+  <!-- Right eye -->
+  <g transform="translate(350, 298)">
+    <ellipse cx="0" cy="0" rx="22" ry="24" fill="#1A2744"/>
+    <ellipse cx="4" cy="-4" rx="9" ry="10" fill="white"/>
+    <circle cx="-6" cy="-6" r="4.5" fill="white" opacity="0.7"/>
+  </g>
+
+  <!-- Cute mouth -->
+  <path d="M246,335 Q256,352 266,335" fill="none" stroke="#1A2744" stroke-width="6" stroke-linecap="round"/>
+  <!-- Tongue -->
+  <path d="M250,340 Q256,348 262,340" fill="#FF7EB3" stroke="none"/>
+
+  <!-- Blush -->
+  <ellipse cx="130" cy="318" rx="18" ry="10" fill="#FF7EB3" opacity="0.45"/>
+  <ellipse cx="382" cy="318" rx="18" ry="10" fill="#FF7EB3" opacity="0.45"/>
+
+  <!-- ========== WRENCH ========== -->
+  <g transform="translate(225, 320)" stroke="#1A2744" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="20" y="38" width="12" height="42" rx="5" fill="url(#wrenchGrad)"/>
+    <path d="M26,12 C42,12 47,38 26,38 C5,38 10,12 26,12 Z" fill="url(#wrenchGrad)"/>
+    <path d="M17,18 L26,27 L35,18" fill="url(#handleGrad)" stroke="#1A2744" stroke-width="6"/>
+    <rect x="24" y="43" width="4" height="14" rx="2" fill="white" opacity="0.3"/>
+  </g>
+</svg>
