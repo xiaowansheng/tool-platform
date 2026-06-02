@@ -1637,6 +1637,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["分析项目的开源组件和许可证合规性。", "检查 SBOM 中的已知安全漏洞。"]
   },
+  "scientific-calculator": {
+    name: "科学计算器",
+    description: "支持代数、三角函数、指数对数、内存寄存器及历史记录的科学计算器。",
+    intro: "专业的科学计算器，支持算式实时求值、内存寄存和物理键盘映射。",
+    steps: [
+      "在键盘区或使用物理键盘输入算式。",
+      "实时预览或按等号查看最终求值结果。",
+      "使用 DEG/RAD 切换角度模式，或使用内存寄存器存取临时结果。"
+    ],
+    examples: ["计算三角函数如 sin(π / 6) 的值。", "利用历史记录和寄存器完成复杂的链式代数计算。"]
+  },
   "secrets-scanner": {
     name: "密钥扫描器",
     description: "本地扫描文本、env 或 repo 片段中的常见密钥和高熵 Token。",
@@ -2079,6 +2090,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "release-notes-builder": "发布说明生成器",
   "resource-unit-converter": "资源单位换算器",
   "sbom-viewer": "SBOM 查看器",
+  "scientific-calculator": "科学计算器",
   "secrets-scanner": "密钥扫描器",
   "semgrep-rule-playground": "Semgrep 规则 Playground",
   "slo-error-budget-calculator": "SLO 错误预算计算器",

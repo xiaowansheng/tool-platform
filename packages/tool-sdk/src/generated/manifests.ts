@@ -1,6 +1,7 @@
 import AccessLogParserManifest from "@tool-platform/access-log-parser/manifest";
 import AdrGeneratorManifest from "@tool-platform/adr-generator/manifest";
 import AgentBehaviorLogViewerManifest from "@tool-platform/agent-behavior-log-viewer/manifest";
+import AiBriefSynthesizerManifest from "@tool-platform/ai-brief-synthesizer/manifest";
 import AiChatManifest from "@tool-platform/ai-chat/manifest";
 import AiGeneratedCodeRiskCheckerManifest from "@tool-platform/ai-generated-code-risk-checker/manifest";
 import AiPromptVersionDiffManifest from "@tool-platform/ai-prompt-version-diff/manifest";
@@ -41,6 +42,7 @@ import CssSpecificityCalculatorManifest from "@tool-platform/css-specificity-cal
 import CsvCleanerManifest from "@tool-platform/csv-cleaner/manifest";
 import CsvJsonConverterManifest from "@tool-platform/csv-json-converter/manifest";
 import CsvJsonNdjsonConverterManifest from "@tool-platform/csv-json-ndjson-converter/manifest";
+import CsvProfileWorkerManifest from "@tool-platform/csv-profile-worker/manifest";
 import CurlBuilderManifest from "@tool-platform/curl-builder/manifest";
 import CvssCalculatorManifest from "@tool-platform/cvss-calculator/manifest";
 import DataUrlGeneratorManifest from "@tool-platform/data-url-generator/manifest";
@@ -55,12 +57,14 @@ import DockerfileLinterManifest from "@tool-platform/dockerfile-linter/manifest"
 import DocumentationTocAnchorGeneratorManifest from "@tool-platform/documentation-toc-anchor-generator/manifest";
 import EasingCubicBezierDebuggerManifest from "@tool-platform/easing-cubic-bezier-debugger/manifest";
 import EcommerceMarginCalculatorManifest from "@tool-platform/ecommerce-margin-calculator/manifest";
+import EmailTemplateSandboxPreviewManifest from "@tool-platform/email-template-sandbox-preview/manifest";
 import EnvDiffMergeSanitizerManifest from "@tool-platform/env-diff-merge-sanitizer/manifest";
 import EnvParserManifest from "@tool-platform/env-parser/manifest";
 import ErrorLogTroubleshootingPathGeneratorManifest from "@tool-platform/error-log-troubleshooting-path-generator/manifest";
 import ExifMetadataToolManifest from "@tool-platform/exif-metadata-tool/manifest";
 import FaviconAppIconGeneratorManifest from "@tool-platform/favicon-app-icon-generator/manifest";
 import FfmpegEditorManifest from "@tool-platform/ffmpeg-editor/manifest";
+import FileManifestGeneratorManifest from "@tool-platform/file-manifest-generator/manifest";
 import FileNameBatchRenamerManifest from "@tool-platform/file-name-batch-renamer/manifest";
 import FlashcardClozeBuilderManifest from "@tool-platform/flashcard-cloze-builder/manifest";
 import FlexboxGeneratorManifest from "@tool-platform/flexbox-generator/manifest";
@@ -95,6 +99,7 @@ import LargeTextToolsManifest from "@tool-platform/large-text-tools/manifest";
 import LicenseCompatibilityCheckerManifest from "@tool-platform/license-compatibility-checker/manifest";
 import LineToolsManifest from "@tool-platform/line-tools/manifest";
 import LinkCollectionCuratorManifest from "@tool-platform/link-collection-curator/manifest";
+import LiveEventCountdownManifest from "@tool-platform/live-event-countdown/manifest";
 import LlmEvalCaseGeneratorManifest from "@tool-platform/llm-eval-case-generator/manifest";
 import LlmFactCheckChecklistGeneratorManifest from "@tool-platform/llm-fact-check-checklist-generator/manifest";
 import LogFileAnalyzerManifest from "@tool-platform/log-file-analyzer/manifest";
@@ -133,6 +138,7 @@ import RagChunkTokenEstimatorManifest from "@tool-platform/rag-chunk-token-estim
 import RandomTeamGeneratorManifest from "@tool-platform/random-team-generator/manifest";
 import ReadmeBadgeGeneratorManifest from "@tool-platform/readme-badge-generator/manifest";
 import ReadmeQualityCheckerManifest from "@tool-platform/readme-quality-checker/manifest";
+import RegexBatchExtractorManifest from "@tool-platform/regex-batch-extractor/manifest";
 import RegexTesterManifest from "@tool-platform/regex-tester/manifest";
 import ReleaseNotesBuilderManifest from "@tool-platform/release-notes-builder/manifest";
 import ResourceUnitConverterManifest from "@tool-platform/resource-unit-converter/manifest";
@@ -140,14 +146,17 @@ import ReverseProxyHeaderAnalyzerManifest from "@tool-platform/reverse-proxy-hea
 import RobotsTxtGeneratorManifest from "@tool-platform/robots-txt-generator/manifest";
 import RubyPlaygroundManifest from "@tool-platform/ruby-playground/manifest";
 import SbomViewerManifest from "@tool-platform/sbom-viewer/manifest";
+import ScientificCalculatorManifest from "@tool-platform/scientific-calculator/manifest";
 import SecretsScannerManifest from "@tool-platform/secrets-scanner/manifest";
 import SemgrepRulePlaygroundManifest from "@tool-platform/semgrep-rule-playground/manifest";
+import SitemapXmlGeneratorManifest from "@tool-platform/sitemap-xml-generator/manifest";
 import SkuGeneratorManifest from "@tool-platform/sku-generator/manifest";
 import SloErrorBudgetCalculatorManifest from "@tool-platform/slo-error-budget-calculator/manifest";
 import SlugGeneratorManifest from "@tool-platform/slug-generator/manifest";
 import SocialCaptionHashtagFormatterManifest from "@tool-platform/social-caption-hashtag-formatter/manifest";
 import SocialPostSchedulerManifest from "@tool-platform/social-post-scheduler/manifest";
 import SourceMapExplorerManifest from "@tool-platform/source-map-explorer/manifest";
+import SpacedRepetitionPlannerManifest from "@tool-platform/spaced-repetition-planner/manifest";
 import SqlExplainVisualizerManifest from "@tool-platform/sql-explain-visualizer/manifest";
 import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
 import SqlIndexAdvisorManifest from "@tool-platform/sql-index-advisor/manifest";
@@ -177,6 +186,8 @@ import UserAgentParserManifest from "@tool-platform/user-agent-parser/manifest";
 import UtmBuilderManifest from "@tool-platform/utm-builder/manifest";
 import UuidGeneratorManifest from "@tool-platform/uuid-generator/manifest";
 import WasmBinaryInspectorManifest from "@tool-platform/wasm-binary-inspector/manifest";
+import WasmIntegerMathLabManifest from "@tool-platform/wasm-integer-math-lab/manifest";
+import WavAudioInspectorManifest from "@tool-platform/wav-audio-inspector/manifest";
 import WebgpuCapabilityReporterManifest from "@tool-platform/webgpu-capability-reporter/manifest";
 import WebhookSignatureVerifierManifest from "@tool-platform/webhook-signature-verifier/manifest";
 import WebsocketClientManifest from "@tool-platform/websocket-client/manifest";
@@ -188,6 +199,7 @@ export const toolManifests: ToolManifest[] = [
   AccessLogParserManifest,
   AdrGeneratorManifest,
   AgentBehaviorLogViewerManifest,
+  AiBriefSynthesizerManifest,
   AiChatManifest,
   AiGeneratedCodeRiskCheckerManifest,
   AiPromptVersionDiffManifest,
@@ -228,6 +240,7 @@ export const toolManifests: ToolManifest[] = [
   CsvCleanerManifest,
   CsvJsonConverterManifest,
   CsvJsonNdjsonConverterManifest,
+  CsvProfileWorkerManifest,
   CurlBuilderManifest,
   CvssCalculatorManifest,
   DataUrlGeneratorManifest,
@@ -242,12 +255,14 @@ export const toolManifests: ToolManifest[] = [
   DocumentationTocAnchorGeneratorManifest,
   EasingCubicBezierDebuggerManifest,
   EcommerceMarginCalculatorManifest,
+  EmailTemplateSandboxPreviewManifest,
   EnvDiffMergeSanitizerManifest,
   EnvParserManifest,
   ErrorLogTroubleshootingPathGeneratorManifest,
   ExifMetadataToolManifest,
   FaviconAppIconGeneratorManifest,
   FfmpegEditorManifest,
+  FileManifestGeneratorManifest,
   FileNameBatchRenamerManifest,
   FlashcardClozeBuilderManifest,
   FlexboxGeneratorManifest,
@@ -282,6 +297,7 @@ export const toolManifests: ToolManifest[] = [
   LicenseCompatibilityCheckerManifest,
   LineToolsManifest,
   LinkCollectionCuratorManifest,
+  LiveEventCountdownManifest,
   LlmEvalCaseGeneratorManifest,
   LlmFactCheckChecklistGeneratorManifest,
   LogFileAnalyzerManifest,
@@ -320,6 +336,7 @@ export const toolManifests: ToolManifest[] = [
   RandomTeamGeneratorManifest,
   ReadmeBadgeGeneratorManifest,
   ReadmeQualityCheckerManifest,
+  RegexBatchExtractorManifest,
   RegexTesterManifest,
   ReleaseNotesBuilderManifest,
   ResourceUnitConverterManifest,
@@ -327,14 +344,17 @@ export const toolManifests: ToolManifest[] = [
   RobotsTxtGeneratorManifest,
   RubyPlaygroundManifest,
   SbomViewerManifest,
+  ScientificCalculatorManifest,
   SecretsScannerManifest,
   SemgrepRulePlaygroundManifest,
+  SitemapXmlGeneratorManifest,
   SkuGeneratorManifest,
   SloErrorBudgetCalculatorManifest,
   SlugGeneratorManifest,
   SocialCaptionHashtagFormatterManifest,
   SocialPostSchedulerManifest,
   SourceMapExplorerManifest,
+  SpacedRepetitionPlannerManifest,
   SqlExplainVisualizerManifest,
   SqlFormatterManifest,
   SqlIndexAdvisorManifest,
@@ -364,6 +384,8 @@ export const toolManifests: ToolManifest[] = [
   UtmBuilderManifest,
   UuidGeneratorManifest,
   WasmBinaryInspectorManifest,
+  WasmIntegerMathLabManifest,
+  WavAudioInspectorManifest,
   WebgpuCapabilityReporterManifest,
   WebhookSignatureVerifierManifest,
   WebsocketClientManifest,

@@ -134,6 +134,9 @@ importers:
       '@tool-platform/agent-behavior-log-viewer':
         specifier: workspace:*
         version: link:../../tools/agent-behavior-log-viewer
+      '@tool-platform/ai-brief-synthesizer':
+        specifier: workspace:*
+        version: link:../../tools/ai-brief-synthesizer
       '@tool-platform/ai-chat':
         specifier: workspace:*
         version: link:../../tools/ai-chat
@@ -254,6 +257,9 @@ importers:
       '@tool-platform/csv-json-ndjson-converter':
         specifier: workspace:*
         version: link:../../tools/csv-json-ndjson-converter
+      '@tool-platform/csv-profile-worker':
+        specifier: workspace:*
+        version: link:../../tools/csv-profile-worker
       '@tool-platform/curl-builder':
         specifier: workspace:*
         version: link:../../tools/curl-builder
@@ -296,6 +302,9 @@ importers:
       '@tool-platform/ecommerce-margin-calculator':
         specifier: workspace:*
         version: link:../../tools/ecommerce-margin-calculator
+      '@tool-platform/email-template-sandbox-preview':
+        specifier: workspace:*
+        version: link:../../tools/email-template-sandbox-preview
       '@tool-platform/env-diff-merge-sanitizer':
         specifier: workspace:*
         version: link:../../tools/env-diff-merge-sanitizer
@@ -314,6 +323,9 @@ importers:
       '@tool-platform/ffmpeg-editor':
         specifier: workspace:*
         version: link:../../tools/ffmpeg-editor
+      '@tool-platform/file-manifest-generator':
+        specifier: workspace:*
+        version: link:../../tools/file-manifest-generator
       '@tool-platform/file-name-batch-renamer':
         specifier: workspace:*
         version: link:../../tools/file-name-batch-renamer
@@ -416,6 +428,9 @@ importers:
       '@tool-platform/link-collection-curator':
         specifier: workspace:*
         version: link:../../tools/link-collection-curator
+      '@tool-platform/live-event-countdown':
+        specifier: workspace:*
+        version: link:../../tools/live-event-countdown
       '@tool-platform/llm-eval-case-generator':
         specifier: workspace:*
         version: link:../../tools/llm-eval-case-generator
@@ -530,6 +545,9 @@ importers:
       '@tool-platform/readme-quality-checker':
         specifier: workspace:*
         version: link:../../tools/readme-quality-checker
+      '@tool-platform/regex-batch-extractor':
+        specifier: workspace:*
+        version: link:../../tools/regex-batch-extractor
       '@tool-platform/regex-tester':
         specifier: workspace:*
         version: link:../../tools/regex-tester
@@ -551,12 +569,18 @@ importers:
       '@tool-platform/sbom-viewer':
         specifier: workspace:*
         version: link:../../tools/sbom-viewer
+      '@tool-platform/scientific-calculator':
+        specifier: workspace:*
+        version: link:../../tools/scientific-calculator
       '@tool-platform/secrets-scanner':
         specifier: workspace:*
         version: link:../../tools/secrets-scanner
       '@tool-platform/semgrep-rule-playground':
         specifier: workspace:*
         version: link:../../tools/semgrep-rule-playground
+      '@tool-platform/sitemap-xml-generator':
+        specifier: workspace:*
+        version: link:../../tools/sitemap-xml-generator
       '@tool-platform/sku-generator':
         specifier: workspace:*
         version: link:../../tools/sku-generator
@@ -575,6 +599,9 @@ importers:
       '@tool-platform/source-map-explorer':
         specifier: workspace:*
         version: link:../../tools/source-map-explorer
+      '@tool-platform/spaced-repetition-planner':
+        specifier: workspace:*
+        version: link:../../tools/spaced-repetition-planner
       '@tool-platform/sql-explain-visualizer':
         specifier: workspace:*
         version: link:../../tools/sql-explain-visualizer
@@ -665,6 +692,12 @@ importers:
       '@tool-platform/wasm-binary-inspector':
         specifier: workspace:*
         version: link:../../tools/wasm-binary-inspector
+      '@tool-platform/wasm-integer-math-lab':
+        specifier: workspace:*
+        version: link:../../tools/wasm-integer-math-lab
+      '@tool-platform/wav-audio-inspector':
+        specifier: workspace:*
+        version: link:../../tools/wav-audio-inspector
       '@tool-platform/webgpu-capability-reporter':
         specifier: workspace:*
         version: link:../../tools/webgpu-capability-reporter
@@ -712,6 +745,15 @@ importers:
       '@tool-platform/ai-trust-tools':
         specifier: workspace:*
         version: link:../../packages/ai-trust-tools
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/ai-brief-synthesizer:
+    dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -1103,6 +1145,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/csv-profile-worker:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/curl-builder:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1229,6 +1280,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/email-template-sandbox-preview:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/env-diff-merge-sanitizer:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1278,6 +1338,15 @@ importers:
         version: 19.2.6
 
   tools/ffmpeg-editor:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/file-manifest-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1584,6 +1653,15 @@ importers:
         version: 19.2.6
 
   tools/link-collection-curator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/live-event-countdown:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1952,6 +2030,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/regex-batch-extractor:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/regex-tester:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2018,6 +2105,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/scientific-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/secrets-scanner:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2028,6 +2124,15 @@ importers:
         version: 19.2.6
 
   tools/semgrep-rule-playground:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/sitemap-xml-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2082,6 +2187,15 @@ importers:
         version: 19.2.6
 
   tools/source-map-explorer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/spaced-repetition-planner:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2365,6 +2479,24 @@ importers:
       '@tool-platform/tool-browser-sdk':
         specifier: workspace:*
         version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/wasm-integer-math-lab:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/wav-audio-inspector:
+    dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
