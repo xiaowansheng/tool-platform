@@ -41,6 +41,22 @@ http://localhost:3000
 
 `pnpm dev` runs `pnpm generate:tools` first, then starts workspace development tasks through Turborepo.
 
+## Docker Compose
+
+Production-style container run:
+
+```bash
+docker compose up --build
+```
+
+Development container with hot reload:
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+Both configurations publish container port `3000` to `${TOOL_PLATFORM_PORT:-3000}` on the host.
+
 ## Common Commands
 
 | Command | Description |

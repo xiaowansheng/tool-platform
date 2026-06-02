@@ -1,0 +1,11 @@
+.git
+.github
+.next
+.turbo
+coverage
+dist
+node_modules
+pnpm-debug.log*
+**/.next
+**/dist
+**/node_modules

@@ -41,6 +41,22 @@ http://localhost:3000
 
 `pnpm dev` 会先执行 `pnpm generate:tools`，再通过 Turborepo 并行启动各 workspace 的开发任务。
 
+## Docker Compose
+
+生产风格运行：
+
+```bash
+docker compose up --build
+```
+
+开发模式热更新运行：
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+两套配置都会把容器 `3000` 端口发布到宿主机 `${TOOL_PLATFORM_PORT:-3000}`。
+
 ## 常用命令
 
 | 命令 | 说明 |
