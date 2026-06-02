@@ -6,7 +6,7 @@ const manifest: ToolManifest = {
   description: "格式化、压缩并校验 JSON 文本，面向开发工作流。",
   category: "data-tools",
   subCategory: "data",
-  tags: ["json", "formatter", "validator"],
+  tags: ["json", "formatter", "validator", "minify", "tree", "sort", "pretty-print"],
   icon: "braces",
   runtime: "simple",
   featured: true,
