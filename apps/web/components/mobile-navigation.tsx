@@ -106,6 +106,14 @@ export function MobileNavigation({ children }: { children: ReactNode }) {
     };
   }, [drawerOpen]);
 
+  useEffect(() => {
+    const shell = document.querySelector(".app-shell");
+
+    if (shell) {
+      shell.classList.toggle("topbar-hidden", topbarHidden);
+    }
+  }, [topbarHidden]);
+
   function closeAfterNavigation(event: MouseEvent<HTMLElement>) {
     if (event.target instanceof Element && event.target.closest("a")) {
       close();

@@ -2847,6 +2847,11 @@ a.category-card:hover .category-card__tooltip {
 
   .main {
     padding-top: calc(var(--mobile-topbar-height) + 1.5rem);
+    transition: padding-top var(--duration-normal) var(--ease-out);
+  }
+
+  .topbar-hidden .main {
+    padding-top: 1.5rem;
   }
 
   .topbar {
@@ -2862,6 +2867,11 @@ a.category-card:hover .category-card__tooltip {
 @media (max-width: 720px) {
   .main {
     padding: calc(var(--mobile-topbar-height) + 0.85rem) 0.85rem 0.85rem;
+    transition: padding var(--duration-normal) var(--ease-out);
+  }
+
+  .topbar-hidden .main {
+    padding: 1.5rem 0.85rem 0.85rem;
   }
 
   .topbar,
@@ -3000,6 +3010,11 @@ a.category-card:hover .category-card__tooltip {
 @media (max-width: 480px) {
   .main {
     padding: calc(var(--mobile-topbar-height) + 0.6rem) 0.6rem 0.6rem;
+    transition: padding var(--duration-normal) var(--ease-out);
+  }
+
+  .topbar-hidden .main {
+    padding: 1.2rem 0.6rem 0.6rem;
   }
 
   .hero__stats {
