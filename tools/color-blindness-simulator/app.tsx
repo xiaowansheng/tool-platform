@@ -87,8 +87,14 @@ export default function ColorBlindnessSimulatorTool({ manifest }: ToolAppProps) 
   }
 
   async function handleCopy(val: string, label: string) {
-    await navigator.clipboard.writeText(val);
-    setCopied(label);
+    try {
+      await navigator.clipboard.writeText(val);
+      setCopied(label);
+    } catch {
+      setCopied("");
+    } finally {
+      setTimeout(() => setCopied(""), 2000);
+    }
   }
 
   return (

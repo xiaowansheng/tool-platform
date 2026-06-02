@@ -275,6 +275,8 @@ export default function BrowserSandboxConsoleTool({ manifest }: ToolAppProps) {
       setCopied(true);
     } catch (copyError) {
       setError(copyError instanceof Error ? copyError.message : "复制失败");
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
     }
   }
 

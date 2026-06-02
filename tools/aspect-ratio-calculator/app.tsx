@@ -54,6 +54,7 @@ export default function AspectRatioCalculatorTool({ manifest }: ToolAppProps) {
           <p>aspect-ratio: {cssRatio};</p>
         </article>
       </div>
+      <p className="tool-note">根据宽高计算最简比例，并按比例缩放目标宽度对应的高度。</p>
     </section>
   );
 }

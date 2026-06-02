@@ -61,6 +61,7 @@ export default function ApiRateLimitCalculatorTool({ manifest }: ToolAppProps) {
       await navigator.clipboard.writeText(value);
       setCopied(label);
       setError("");
+      setTimeout(() => setCopied(""), 2000);
     } catch (copyError) {
       setError(copyError instanceof Error ? copyError.message : "复制失败");
     }

@@ -67,8 +67,14 @@ export default function ColorPaletteGeneratorTool({ manifest }: ToolAppProps) {
   }
 
   async function copyColor(color: string) {
-    await navigator.clipboard.writeText(color);
-    setCopied(color);
+    try {
+      await navigator.clipboard.writeText(color);
+      setCopied(color);
+    } catch {
+      setCopied("");
+    } finally {
+      setTimeout(() => setCopied(""), 2000);
+    }
   }
 
   return (
@@ -99,6 +105,7 @@ export default function ColorPaletteGeneratorTool({ manifest }: ToolAppProps) {
         ))}
       </div>
       {error ? <p className="tool-error">{error}</p> : null}
+      <p className="tool-note">输入基础颜色，自动生成从 50 到 900 的色阶，点击色块可复制 HEX 值。</p>
     </section>
   );
 }

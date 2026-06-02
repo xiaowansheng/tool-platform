@@ -38,6 +38,7 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolAppProps) {
   const [backdropBlur, setBackdropBlur] = useState(0);
   const [saturation, setSaturation] = useState(100);
   const [textGlow, setTextGlow] = useState(0);
+  const [copied, setCopied] = useState(false);
   const shadow = `${inset ? "inset " : ""}${x}px ${y}px ${blur}px ${spread}px ${hexToRgba(shadowColor, shadowAlpha)}`;
   const ambientShadow = `0 ${Math.round(y / 2)}px ${Math.round(blur * 1.5)}px ${Math.round(spread / 2)} ${hexToRgba("#020617", 0.34)}`;
   const boxShadow = ambientLayer ? `${shadow}, ${ambientShadow}` : shadow;
@@ -69,7 +70,14 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolAppProps) {
   ];
 
   async function copyCss() {
-    await navigator.clipboard.writeText(css);
+    try {
+      await navigator.clipboard.writeText(css);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   return (
@@ -112,7 +120,7 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolAppProps) {
           <span>边框透明度</span>
           <input type="number" min="0" max="1" step="0.05" value={borderAlpha} onChange={(event) => setBorderAlpha(Number(event.target.value))} />
         </label>
-        <button type="button" onClick={() => void copyCss()}>复制 CSS</button>
+        <button type="button" onClick={() => void copyCss()}>{copied ? "已复制" : "复制 CSS"}</button>
       </div>
 
       <div className="tool-option-list">
@@ -145,6 +153,7 @@ export default function BoxShadowGeneratorTool({ manifest }: ToolAppProps) {
         <span>CSS</span>
         <textarea value={css} readOnly spellCheck={false} />
       </label>
+      <p className="tool-note">支持多层阴影、内阴影、背景模糊和文字发光效果，实时预览并生成 CSS 代码。</p>
     </section>
   );
 }

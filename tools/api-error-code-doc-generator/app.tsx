@@ -78,12 +78,19 @@ export default function ApiErrorCodeDocGeneratorTool({ manifest }: ToolAppProps)
   const [baseUrl, setBaseUrl] = useState("https://api.example.com/v1");
   const [input, setInput] = useState(sampleErrorCodes);
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState("");
   const rows = parseErrorRows(input);
   const docs = buildErrorDocs(serviceName, baseUrl, rows);
 
   async function copyDocs() {
-    await navigator.clipboard.writeText(docs);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(docs);
+      setCopied(true);
+      setCopyError("");
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      setCopyError("复制失败，请检查权限");
+    }
   }
 
   return (
@@ -131,6 +138,8 @@ export default function ApiErrorCodeDocGeneratorTool({ manifest }: ToolAppProps)
           </div>
         ))}
       </div>
+      {copyError ? <p className="tool-error">{copyError}</p> : null}
+      <p className="tool-note">使用逗号、竖线或制表符分隔错误码数据，自动生成 Markdown 格式的错误码文档。</p>
     </section>
   );
 }

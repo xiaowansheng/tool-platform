@@ -218,6 +218,7 @@ export default function ArchiveStructureViewerTool({ manifest }: ToolAppProps) {
         </div>
       )}
       {error ? <p className="tool-error">{error}</p> : null}
+      <p className="tool-note">支持 ZIP 和 TAR 格式，解析归档文件的目录结构和文件大小信息。</p>
     </section>
   );
 }

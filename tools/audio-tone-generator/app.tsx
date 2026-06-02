@@ -148,7 +148,7 @@ export default function AudioToneGeneratorTool({ manifest }: ToolAppProps) {
         <article className="detail-card"><h3>波形</h3><p>{wave}</p></article>
       </div>
 
-      <audio className="media-audio-preview" controls src={wavUrl} />
+      <audio className="media-audio-preview" controls src={wavUrl || undefined} />
       {error ? <p className="tool-error">{error}</p> : null}
       <p className="tool-note">长时间高音量测试音可能损伤听力或设备，建议从低音量开始并避免佩戴耳机长时间播放。</p>
     </section>

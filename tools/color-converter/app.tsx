@@ -97,8 +97,14 @@ export default function ColorConverterTool({ manifest }: ToolAppProps) {
   const previewTextColor = getLuminance(rgb) > 0.58 ? "#081018" : "#f8fafc";
 
   async function copyValue(label: string, value: string) {
-    await navigator.clipboard.writeText(value);
-    setCopied(label);
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(label);
+    } catch {
+      setCopied("");
+    } finally {
+      setTimeout(() => setCopied(""), 2000);
+    }
   }
 
   return (

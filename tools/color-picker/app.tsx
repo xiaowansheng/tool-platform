@@ -55,7 +55,7 @@ function getLuminance(hex: string) {
 
 export default function ColorPickerTool({ manifest }: ToolAppProps) {
   const [hsl, setHsl] = useState<Hsl>({ h: 220, s: 100, l: 50 });
-  const [hexInput, setHexInput] = useState("#3366ff");
+  const [hexInput, setHexInput] = useState("");
   const [copied, setCopied] = useState("");
   const svRef = useRef<SVGSVGElement>(null);
   const hueRef = useRef<HTMLDivElement>(null);
@@ -195,7 +195,7 @@ export default function ColorPickerTool({ manifest }: ToolAppProps) {
           </div>
           <label className="tool-field">
             <span>HEX</span>
-            <input value={hexInput ?? hex} onChange={(e) => handleHexChange(e.target.value)} spellCheck={false} placeholder="#000000" />
+            <input value={hexInput || hex} onChange={(e) => handleHexChange(e.target.value)} spellCheck={false} placeholder="#000000" />
           </label>
           <div className="picker-actions">
             <button type="button" onClick={() => void copy(hex, "hex")}>

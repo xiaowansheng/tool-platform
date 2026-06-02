@@ -50,6 +50,7 @@ export default function AnimationKeyframesGeneratorTool({ manifest }: ToolAppPro
   const [fillMode, setFillMode] = useState("none");
   const [bgColor, setBgColor] = useState("#f59e0b");
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState("");
   const [run, setRun] = useState(0);
 
   const keyframesCss = buildKeyframesCss(name, stops);
@@ -109,8 +110,10 @@ export default function AnimationKeyframesGeneratorTool({ manifest }: ToolAppPro
     try {
       await navigator.clipboard.writeText(fullCss);
       setCopied(true);
-    } catch {
-      setCopied(false);
+      setCopyError("");
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      setCopyError("复制失败，请检查权限");
     }
   }
 
@@ -227,6 +230,8 @@ export default function AnimationKeyframesGeneratorTool({ manifest }: ToolAppPro
         <span>CSS</span>
         <textarea value={fullCss} readOnly spellCheck={false} style={{ minHeight: "12rem" }} />
       </label>
+      {copyError ? <p className="tool-error">{copyError}</p> : null}
+      <p className="tool-note">通过设置关键帧的位移、旋转、缩放和透明度，生成 CSS @keyframes 动画代码。</p>
     </section>
   );
 }

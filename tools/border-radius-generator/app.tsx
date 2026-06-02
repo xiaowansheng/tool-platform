@@ -33,6 +33,8 @@ export default function BorderRadiusGeneratorTool({ manifest }: ToolAppProps) {
       setCopied(true);
     } catch {
       setCopied(false);
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
     }
   }
 
@@ -126,6 +128,7 @@ export default function BorderRadiusGeneratorTool({ manifest }: ToolAppProps) {
         <span>CSS</span>
         <textarea value={css} readOnly spellCheck={false} />
       </label>
+      <p className="tool-note">支持统一圆角和各角独立模式，实时预览并生成 CSS 代码。</p>
     </section>
   );
 }

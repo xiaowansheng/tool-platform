@@ -39,8 +39,14 @@ export default function CorsDiagnosticsTool({ manifest }: ToolAppProps) {
   ].filter(Boolean);
 
   async function copyHeaders() {
-    await navigator.clipboard.writeText(generated);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(generated);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   function resetCopied() {

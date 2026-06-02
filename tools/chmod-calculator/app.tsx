@@ -39,6 +39,8 @@ export default function ChmodCalculatorTool({ manifest }: ToolAppProps) {
       setCopied(true);
     } catch {
       setCopied(false);
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
     }
   }
 
@@ -89,6 +91,7 @@ export default function ChmodCalculatorTool({ manifest }: ToolAppProps) {
       <div className="tool-toolbar">
         <button type="button" onClick={() => void copyCommand()}>{copied ? "已复制" : "复制 chmod 命令"}</button>
       </div>
+      <p className="tool-note">勾选对应权限后自动生成数字和符号两种格式的 chmod 命令。</p>
     </section>
   );
 }

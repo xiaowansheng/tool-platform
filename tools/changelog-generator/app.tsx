@@ -104,8 +104,14 @@ export default function ChangelogGeneratorTool({ manifest }: ToolAppProps) {
   const changelog = generateChangelog(commits, version, date, previousVersion, repoUrl);
 
   async function copyChangelog() {
-    await navigator.clipboard.writeText(changelog);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(changelog);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   return (
@@ -151,6 +157,7 @@ export default function ChangelogGeneratorTool({ manifest }: ToolAppProps) {
           <textarea value={changelog} readOnly spellCheck={false} />
         </label>
       </div>
+      <p className="tool-note">根据 Conventional Commits 规范自动生成 CHANGELOG，支持 Breaking Changes 和版本对比链接。</p>
     </section>
   );
 }

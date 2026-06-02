@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
@@ -153,6 +153,16 @@ function matchesSchedule(date: Date, schedule: CronSchedule) {
   );
 }
 
+function formatRunDate(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
 function findNextRuns(schedule: CronSchedule, count: number) {
   const runs: string[] = [];
   const cursor = new Date();
@@ -163,7 +173,7 @@ function findNextRuns(schedule: CronSchedule, count: number) {
 
   for (let scanned = 0; scanned < maxScanMinutes && runs.length < count; scanned += 1) {
     if (matchesSchedule(cursor, schedule)) {
-      runs.push(cursor.toLocaleString());
+      runs.push(formatRunDate(cursor));
     }
 
     cursor.setMinutes(cursor.getMinutes() + 1);
@@ -286,8 +296,19 @@ function systemdToCron(expression: string) {
 export default function CronHelperTool({ manifest }: ToolAppProps) {
   const [expression, setExpression] = useState("*/15 9-17 * * 1-5");
   const [systemdExpression, setSystemdExpression] = useState(() => cronToSystemd("*/15 9-17 * * 1-5"));
-  const [analysis, setAnalysis] = useState<CronAnalysis>(() => analyzeCron("*/15 9-17 * * 1-5"));
+  const [analysis, setAnalysis] = useState<CronAnalysis>(() => {
+    const result = analyzeCron("*/15 9-17 * * 1-5");
+    return { ...result, nextRuns: [] };
+  });
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    try {
+      setAnalysis(analyzeCron(expression));
+    } catch {
+      // Keep previous analysis on error.
+    }
+  }, []);
 
   function handleAnalyze() {
     try {

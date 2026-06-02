@@ -78,8 +78,14 @@ export default function ConventionalCommitHelperTool({ manifest }: ToolAppProps)
   const issues = validateCommit(subject, description, breaking, breakingDescription);
 
   async function copyCommit() {
-    await navigator.clipboard.writeText(commitMessage);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(commitMessage);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   return (
@@ -154,6 +160,7 @@ export default function ConventionalCommitHelperTool({ manifest }: ToolAppProps)
           </div>
         </div>
       </div>
+      <p className="tool-note">遵循 Conventional Commits 规范生成提交信息，支持 scope、body、footer 和破坏性变更声明。</p>
     </section>
   );
 }

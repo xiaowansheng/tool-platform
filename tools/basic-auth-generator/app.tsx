@@ -16,13 +16,20 @@ export default function BasicAuthGeneratorTool({ manifest }: ToolAppProps) {
   const [password, setPassword] = useState("secret");
   const [showPassword, setShowPassword] = useState(false);
   const [copied, setCopied] = useState("");
+  const [copyError, setCopyError] = useState("");
   const token = encodeBase64(username + ":" + password);
   const header = "Authorization: Basic " + token;
   const credentialBytes = new TextEncoder().encode(username + ":" + password).length;
 
   async function copyText(value: string, type: string) {
-    await navigator.clipboard.writeText(value);
-    setCopied(type);
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(type);
+      setCopyError("");
+      setTimeout(() => setCopied(""), 2000);
+    } catch (error) {
+      setCopyError("复制失败，请检查权限");
+    }
   }
 
   return (
@@ -79,6 +86,7 @@ export default function BasicAuthGeneratorTool({ manifest }: ToolAppProps) {
           {copied === "token" ? "已复制 Token" : "复制 Token"}
         </button>
       </div>
+      {copyError ? <p className="tool-error">{copyError}</p> : null}
       <p className="tool-note">Basic Auth 只是编码用户名和密码，不是加密；请只在 HTTPS 请求和可信调试环境中使用。</p>
     </section>
   );

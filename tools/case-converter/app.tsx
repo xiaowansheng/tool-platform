@@ -64,8 +64,14 @@ export default function CaseConverterTool({ manifest }: ToolAppProps) {
   const wordCount = splitWords(input).length;
 
   async function copyValue(label: string, value: string) {
-    await navigator.clipboard.writeText(value);
-    setCopied(label);
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(label);
+    } catch {
+      setCopied("");
+    } finally {
+      setTimeout(() => setCopied(""), 2000);
+    }
   }
 
   return (

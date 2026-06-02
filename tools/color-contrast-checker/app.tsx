@@ -97,8 +97,14 @@ export default function ColorContrastCheckerTool({ manifest }: ToolAppProps) {
   const css = `color: ${normalizeHexInput(foreground)};\nbackground-color: ${normalizeHexInput(background)};`;
 
   async function copyCss() {
-    await navigator.clipboard.writeText(css);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(css);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    } finally {
+      setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   return (

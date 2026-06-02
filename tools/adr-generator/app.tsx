@@ -52,12 +52,19 @@ export default function AdrGeneratorTool({ manifest }: ToolAppProps) {
   const [alternatives, setAlternatives] = useState("- Run all logic on the React thread\n- Create one-off workers per tool\n- Move parsing to a backend service");
   const [consequences, setConsequences] = useState("- UI remains responsive during large local tasks\n- Tool authors need to follow the runtime lifecycle\n- Worker RPC errors must be surfaced clearly");
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState("");
   const adr = buildAdr(number, title, status, date, owner, context, decision, alternatives, consequences);
   const fileName = `${number.trim().padStart(4, "0")}-${slugify(title) || "decision"}.md`;
 
   async function copyAdr() {
-    await navigator.clipboard.writeText(adr);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(adr);
+      setCopied(true);
+      setCopyError("");
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      setCopyError("复制失败，请检查权限");
+    }
   }
 
   return (
@@ -127,6 +134,8 @@ export default function AdrGeneratorTool({ manifest }: ToolAppProps) {
           </label>
         </div>
       </div>
+      {copyError ? <p className="tool-error">{copyError}</p> : null}
+      <p className="tool-note">ADR（Architecture Decision Record）用于记录重要的架构决策，便于团队回顾和追踪决策背景。</p>
     </section>
   );
 }

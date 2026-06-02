@@ -41,6 +41,7 @@ export default function BatchFileHashCalculatorTool({ manifest }: ToolAppProps) 
   const [rows, setRows] = useState<HashRow[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [copyError, setCopyError] = useState("");
   const csv = useMemo(() => rowsToCsv(rows, algorithm), [algorithm, rows]);
   const totalBytes = rows.reduce((sum, row) => sum + row.size, 0);
 
@@ -76,7 +77,14 @@ export default function BatchFileHashCalculatorTool({ manifest }: ToolAppProps) 
   }
 
   async function copyCsv() {
-    await navigator.clipboard.writeText(csv);
+    try {
+      await navigator.clipboard.writeText(csv);
+      setCopyError("");
+    } catch (copyErr) {
+      setCopyError("复制失败，请检查权限");
+    } finally {
+      setTimeout(() => setCopyError(""), 2000);
+    }
   }
 
   function downloadCsv() {
@@ -152,6 +160,7 @@ export default function BatchFileHashCalculatorTool({ manifest }: ToolAppProps) 
         ))}
       </div>
       {error ? <p className="tool-error">{error}</p> : null}
+      <p className="tool-note">选择多个文件后，自动计算每个文件的哈希值。支持 SHA-1、SHA-256、SHA-384、SHA-512 算法。</p>
     </section>
   );
 }

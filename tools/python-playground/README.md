@@ -1,30 +1,21 @@
 # Python Playground
 
-通过 Pyodide (WASM) 在浏览器中运行 Python 代码。
+通过 Pyodide (WASM) 在浏览器中运行 Python 代码，支持 pip 包安装和实时输出。
 
 ## 概述
 
 | 属性 | 值 |
 |------|-----|
-| 分类 | developer-tools |
-| 运行环境 | worker |
-| 运行时 | Pyodide (CPython → WASM) |
-| CDN | jsDelivr |
-
-## 功能
-
-- 在浏览器中执行 Python 代码（Pyodide WASM）
-- 实时捕获 stdout/stderr 输出
-- 支持通过 micropip 安装包（numpy、pandas、matplotlib、httpx 等）
-- 内置多个示例代码片段
-- Ctrl+Enter 快捷键运行
+| 分类 | 开发工具 |
+| 运行环境 | Web Worker |
+| 标签 | python、pyodide、wasm、playground、interpreter |
 
 ## 目录结构
 
 ```
 python-playground/
 ├── manifest.ts        # 工具元声明
-├── app.tsx     # 工具 UI 组件 & Worker 运行时
+├── app.tsx     # 工具 UI 组件
 ├── package.json      # 包配置
 └── README.md         # 本文档
 ```

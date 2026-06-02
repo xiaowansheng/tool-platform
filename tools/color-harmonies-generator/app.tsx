@@ -141,8 +141,14 @@ export default function ColorHarmoniesGeneratorTool({ manifest }: ToolAppProps) 
   }
 
   async function copy(val: string, label: string) {
-    await navigator.clipboard.writeText(val);
-    setCopied(label);
+    try {
+      await navigator.clipboard.writeText(val);
+      setCopied(label);
+    } catch {
+      setCopied("");
+    } finally {
+      setTimeout(() => setCopied(""), 2000);
+    }
   }
 
   return (

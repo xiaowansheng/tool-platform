@@ -69,6 +69,7 @@ function formatBytes(value: number) {
 
 export default function AccessLogParserTool({ manifest }: ToolAppProps) {
   const [input, setInput] = useState(sampleAccessLog);
+  const [copyError, setCopyError] = useState("");
   const parsed = useMemo(() => parseAccessLog(input), [input]);
   const statusCounts = countBy(parsed.entries.map((entry) => entry.status));
   const methodCounts = countBy(parsed.entries.map((entry) => entry.method));
@@ -80,12 +81,21 @@ export default function AccessLogParserTool({ manifest }: ToolAppProps) {
     const file = event.currentTarget.files?.[0];
 
     if (file) {
-      setInput(await file.text());
+      try {
+        setInput(await file.text());
+      } catch (error) {
+        // File read failed
+      }
     }
   }
 
   async function copyJson() {
-    await navigator.clipboard.writeText(JSON.stringify(parsed.entries, null, 2));
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(parsed.entries, null, 2));
+      setCopyError("");
+    } catch (error) {
+      setCopyError("复制失败，请检查权限");
+    }
   }
 
   return (
@@ -184,6 +194,8 @@ export default function AccessLogParserTool({ manifest }: ToolAppProps) {
           </div>
         ))}
       </div>
+      {copyError ? <p className="tool-error">{copyError}</p> : null}
+      <p className="tool-note">支持 Combined Log Format（Apache/Nginx 常见格式），可粘贴日志或上传 .log/.txt 文件。</p>
     </section>
   );
 }

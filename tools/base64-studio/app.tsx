@@ -62,8 +62,13 @@ export default function Base64StudioTool({ manifest }: ToolAppProps) {
       return;
     }
 
-    await navigator.clipboard.writeText(output);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(output);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      setError("复制失败，请检查权限");
+    }
   }
 
   function loadBasicAuthExample() {
