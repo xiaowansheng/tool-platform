@@ -509,6 +509,9 @@ importers:
       '@tool-platform/prompt-injection-detector':
         specifier: workspace:*
         version: link:../../tools/prompt-injection-detector
+      '@tool-platform/python-playground':
+        specifier: workspace:*
+        version: link:../../tools/python-playground
       '@tool-platform/qr-barcode-tool':
         specifier: workspace:*
         version: link:../../tools/qr-barcode-tool
@@ -542,6 +545,9 @@ importers:
       '@tool-platform/robots-txt-generator':
         specifier: workspace:*
         version: link:../../tools/robots-txt-generator
+      '@tool-platform/ruby-playground':
+        specifier: workspace:*
+        version: link:../../tools/ruby-playground
       '@tool-platform/sbom-viewer':
         specifier: workspace:*
         version: link:../../tools/sbom-viewer
@@ -632,6 +638,9 @@ importers:
       '@tool-platform/transform-generator':
         specifier: workspace:*
         version: link:../../tools/transform-generator
+      '@tool-platform/typescript-playground':
+        specifier: workspace:*
+        version: link:../../tools/typescript-playground
       '@tool-platform/unicode-inspector':
         specifier: workspace:*
         version: link:../../tools/unicode-inspector
@@ -1874,6 +1883,18 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/python-playground:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      '@tool-platform/worker-runtime':
+        specifier: workspace:*
+        version: link:../../packages/worker-runtime
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/qr-barcode-tool:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1975,6 +1996,15 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.2.6
+
+  tools/ruby-playground:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      '@tool-platform/worker-runtime':
+        specifier: workspace:*
+        version: link:../../packages/worker-runtime
 
   tools/sbom-viewer:
     dependencies:
@@ -2248,6 +2278,15 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.2.6
+
+  tools/typescript-playground:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      '@tool-platform/worker-runtime':
+        specifier: workspace:*
+        version: link:../../packages/worker-runtime
 
   tools/unicode-inspector:
     dependencies:

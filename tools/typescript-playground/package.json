@@ -1,0 +1,17 @@
+{
+  "name": "@tool-platform/typescript-playground",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manifest": "./manifest.ts",
+    "./tool": "./ToolClient.tsx"
+  },
+  "dependencies": {
+    "@tool-platform/tool-contracts": "workspace:*",
+    "@tool-platform/worker-runtime": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

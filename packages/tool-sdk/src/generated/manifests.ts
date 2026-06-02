@@ -126,6 +126,7 @@ import PrChangeRiskSummarizerManifest from "@tool-platform/pr-change-risk-summar
 import PrivacyCookieCopyGeneratorManifest from "@tool-platform/privacy-cookie-copy-generator/manifest";
 import PrometheusQueryHelperManifest from "@tool-platform/prometheus-query-helper/manifest";
 import PromptInjectionDetectorManifest from "@tool-platform/prompt-injection-detector/manifest";
+import PythonPlaygroundManifest from "@tool-platform/python-playground/manifest";
 import QrBarcodeToolManifest from "@tool-platform/qr-barcode-tool/manifest";
 import QueryParamBuilderManifest from "@tool-platform/query-param-builder/manifest";
 import RagChunkTokenEstimatorManifest from "@tool-platform/rag-chunk-token-estimator/manifest";
@@ -137,6 +138,7 @@ import ReleaseNotesBuilderManifest from "@tool-platform/release-notes-builder/ma
 import ResourceUnitConverterManifest from "@tool-platform/resource-unit-converter/manifest";
 import ReverseProxyHeaderAnalyzerManifest from "@tool-platform/reverse-proxy-header-analyzer/manifest";
 import RobotsTxtGeneratorManifest from "@tool-platform/robots-txt-generator/manifest";
+import RubyPlaygroundManifest from "@tool-platform/ruby-playground/manifest";
 import SbomViewerManifest from "@tool-platform/sbom-viewer/manifest";
 import SecretsScannerManifest from "@tool-platform/secrets-scanner/manifest";
 import SemgrepRulePlaygroundManifest from "@tool-platform/semgrep-rule-playground/manifest";
@@ -166,6 +168,7 @@ import TimestampConverterManifest from "@tool-platform/timestamp-converter/manif
 import TlsCertificateParserManifest from "@tool-platform/tls-certificate-parser/manifest";
 import TokenCostCalculatorManifest from "@tool-platform/token-cost-calculator/manifest";
 import TransformGeneratorManifest from "@tool-platform/transform-generator/manifest";
+import TypescriptPlaygroundManifest from "@tool-platform/typescript-playground/manifest";
 import UnicodeInspectorManifest from "@tool-platform/unicode-inspector/manifest";
 import UnitConverterManifest from "@tool-platform/unit-converter/manifest";
 import UrlCodecManifest from "@tool-platform/url-codec/manifest";
@@ -310,6 +313,7 @@ export const toolManifests: ToolManifest[] = [
   PrivacyCookieCopyGeneratorManifest,
   PrometheusQueryHelperManifest,
   PromptInjectionDetectorManifest,
+  PythonPlaygroundManifest,
   QrBarcodeToolManifest,
   QueryParamBuilderManifest,
   RagChunkTokenEstimatorManifest,
@@ -321,6 +325,7 @@ export const toolManifests: ToolManifest[] = [
   ResourceUnitConverterManifest,
   ReverseProxyHeaderAnalyzerManifest,
   RobotsTxtGeneratorManifest,
+  RubyPlaygroundManifest,
   SbomViewerManifest,
   SecretsScannerManifest,
   SemgrepRulePlaygroundManifest,
@@ -350,6 +355,7 @@ export const toolManifests: ToolManifest[] = [
   TlsCertificateParserManifest,
   TokenCostCalculatorManifest,
   TransformGeneratorManifest,
+  TypescriptPlaygroundManifest,
   UnicodeInspectorManifest,
   UnitConverterManifest,
   UrlCodecManifest,

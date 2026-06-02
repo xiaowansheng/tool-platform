@@ -94,7 +94,7 @@ export default function JsonFormatterTool({ manifest }: ToolClientProps) {
   useEffect(() => {
     if (parsed.error) return;
     try {
-      const formatted = JSON.stringify(parsed.data, sortKeys ? sortKeysFn : null, Number(indent));
+      const formatted = JSON.stringify(parsed.data, sortKeys ? sortKeysFn : undefined, Number(indent));
       setOutput(formatted);
       setError("");
     } catch {
@@ -114,7 +114,7 @@ export default function JsonFormatterTool({ manifest }: ToolClientProps) {
   function format(indentNum: number) {
     try {
       const p = JSON.parse(input);
-      const formatted = JSON.stringify(p, sortKeys ? sortKeysFn : null, indentNum);
+      const formatted = JSON.stringify(p, sortKeys ? sortKeysFn : undefined, indentNum);
       setOutput(formatted);
       setError("");
       setCopied("");
