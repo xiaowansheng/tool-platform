@@ -45,9 +45,33 @@ function normalizeId(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+function formatNumberedOptions(choices) {
+  return choices.map((choice, index) => `  ${index + 1}. ${choice}`).join("\n");
+}
+
+function resolveChoice(value, choices) {
+  const trimmedValue = value.trim();
+  const selectedIndex = Number(trimmedValue);
+
+  if (Number.isInteger(selectedIndex) && selectedIndex >= 1 && selectedIndex <= choices.length) {
+    return choices[selectedIndex - 1];
+  }
+
+  return trimmedValue;
+}
+
+async function promptForChoice(rl, label, choices) {
+  const answer = await rl.question(`${label}:\n${formatNumberedOptions(choices)}\nselect ${label} by number or value: `);
+  return resolveChoice(answer, choices);
+}
+
 async function promptForMissingOptions(options) {
   if (options.id && options.name && options.category && options.runtime) {
-    return options;
+    return {
+      ...options,
+      category: resolveChoice(options.category, allowedCategories),
+      runtime: resolveChoice(options.runtime, allowedRuntimes)
+    };
   }
 
   const rl = readline.createInterface({
@@ -57,8 +81,12 @@ async function promptForMissingOptions(options) {
 
   const id = options.id || normalizeId(await rl.question("tool id: "));
   const name = options.name || (await rl.question("display name: "));
-  const category = options.category || (await rl.question(`category (${allowedCategories.join(", ")}): `));
-  const runtime = options.runtime || (await rl.question(`runtime (${allowedRuntimes.join(", ")}): `));
+  const category = options.category
+    ? resolveChoice(options.category, allowedCategories)
+    : await promptForChoice(rl, "category", allowedCategories);
+  const runtime = options.runtime
+    ? resolveChoice(options.runtime, allowedRuntimes)
+    : await promptForChoice(rl, "runtime", allowedRuntimes);
 
   rl.close();
 
