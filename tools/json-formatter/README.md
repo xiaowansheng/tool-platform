@@ -18,7 +18,7 @@
 ```
 json-formatter/
 ├── manifest.ts        # 工具元声明
-├── ToolClient.tsx     # 工具 UI 组件
+├── app.tsx     # 工具 UI 组件
 ├── package.json      # 包配置
 └── README.md         # 本文档
 ```

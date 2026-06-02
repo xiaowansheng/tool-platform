@@ -1,13 +1,13 @@
-import { toolComponentLoaders } from "./generated/client-loaders";
+import { toolAppLoaders } from "./generated/client-loaders";
 
-export type { ToolComponentLoader, ToolComponentModule } from "./generated/client-loaders";
+export type { ToolAppLoader, ToolAppModule } from "./generated/client-loaders";
 
-export function getToolComponentLoader(id: string) {
-  return toolComponentLoaders[id as keyof typeof toolComponentLoaders] ?? null;
+export function getToolAppLoader(id: string) {
+  return toolAppLoaders[id as keyof typeof toolAppLoaders] ?? null;
 }
 
-export async function loadToolComponent(id: string) {
-  const loader = getToolComponentLoader(id);
+export async function loadToolApp(id: string) {
+  const loader = getToolAppLoader(id);
 
   if (!loader) {
     return null;

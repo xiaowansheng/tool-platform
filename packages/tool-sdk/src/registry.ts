@@ -4,7 +4,7 @@ import { getToolsByCategory, groupToolsByCategory, searchTools } from "./search"
 import type { ToolCategory } from "@tool-platform/tool-contracts";
 
 export { categories, getCategoryMeta, searchTools, groupToolsByCategory, getToolsByCategory };
-export type { CategoryMeta, ToolClientProps, ToolManifest, ToolRecord, ToolRuntime } from "@tool-platform/tool-contracts";
+export type { CategoryMeta, ToolAppProps, ToolManifest, ToolRecord, ToolRuntime } from "@tool-platform/tool-contracts";
 
 export function getAllTools() {
   return toolManifests;

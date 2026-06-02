@@ -29,6 +29,13 @@ function normalizePathname(pathname: string) {
   return pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
 }
 
+function normalizeWorkspaceTabPath(pathname: string) {
+  const normalizedPathname = normalizePathname(pathname);
+  const toolMatch = normalizedPathname.match(/^\/tools\/([^/]+)(?:\/.*)?$/);
+
+  return toolMatch ? `/tools/${toolMatch[1]}` : normalizedPathname;
+}
+
 function readStoredTabIds() {
   try {
     const value = window.sessionStorage.getItem(WORKSPACE_TABS_STORAGE_KEY);
@@ -84,7 +91,7 @@ export function WorkspaceTabs({
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
 
   const tabById = useMemo(() => new Map(availableTabs.map((tab) => [tab.id, tab])), [availableTabs]);
-  const activeTabId = normalizePathname(pathname);
+  const activeTabId = normalizeWorkspaceTabPath(pathname);
   const currentTab = tabById.get(activeTabId);
   const currentTabForCache = currentTab && currentTab.id !== suppressedTabId ? currentTab : null;
 

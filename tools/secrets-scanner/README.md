@@ -15,7 +15,7 @@
 ```
 secrets-scanner/
 ├── manifest.ts        # 工具元声明
-├── ToolClient.tsx     # 工具 UI 组件
+├── app.tsx     # 工具 UI 组件
 ├── package.json      # 包配置
 └── README.md         # 本文档
 ```
@@ -23,7 +23,7 @@ secrets-scanner/
 ## 开发指引
 
 1. 确保已安装依赖：`pnpm install`
-2. 修改 `ToolClient.tsx` 实现工具功能
+2. 修改 `app.tsx` 实现工具功能
 3. 运行 `pnpm generate:tools` 重新生成工具注册表
 4. 启动开发服务器：`pnpm dev`
 

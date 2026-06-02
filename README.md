@@ -8,9 +8,9 @@ The repository is currently in Phase One. It already includes the Next.js web ap
 
 ## Features
 
-- Plugin-based tool directory: each tool lives in `tools/<tool-id>/` with `manifest.ts` and `ToolClient.tsx`.
+- Plugin-based tool directory: each tool lives in `tools/<tool-id>/` with `manifest.ts` and `app.tsx`.
 - Automatic registration: `scripts/generate-tool-registry.mjs` scans tool directories and generates the tool registry.
-- Dynamic routes: the web app loads tool clients through `/tools/[slug]`.
+- Dynamic routes: the web app loads tool apps through `/tools/[slug]` and optional nested subpaths such as `/tools/[slug]/schema`.
 - Categories and search: tool manifests contribute `category`, `subCategory`, `tags`, and `description` metadata.
 - Runtime foundation: shared contracts and runtime packages for simple, worker, wasm, ai, sandbox, and realtime tools.
 - Browser SDK: shared helpers for clipboard, downloads, file opening, OPFS cache, toast feedback, runtime lifecycle, Worker, WASM, AI, and iframe sandbox capabilities.
@@ -106,14 +106,14 @@ tools/<tool-id>/manifest.ts
 packages/tool-sdk/src/generated/manifests.ts
 packages/tool-sdk/src/generated/client-loaders.ts
   ↓ apps/web
-Home / category pages / search page /tools/[slug]
+Home / category pages / search page /tools/[slug]/[[...segments]]
   ↓
-ToolClient.tsx
+app.tsx
   ↓
 tool-browser-sdk + runtime packages
 ```
 
-A tool only needs to provide its manifest and client component. The platform handles registration, navigation, search, dynamic import, and shared runtime capabilities.
+A tool only needs to provide its manifest and app entry. Single-page tools render directly from `app.tsx`; multi-page tools can branch on route segments inside the same entry. The platform handles registration, navigation, search, dynamic import, and shared runtime capabilities.
 
 ## Tool Directory Convention
 
@@ -123,7 +123,7 @@ A standard tool directory usually contains:
 tools/json-formatter/
 ├── package.json
 ├── manifest.ts
-├── ToolClient.tsx
+├── app.tsx
 └── README.md
 ```
 
@@ -133,7 +133,7 @@ tools/json-formatter/
 {
   "exports": {
     "./manifest": "./manifest.ts",
-    "./tool": "./ToolClient.tsx"
+    "./app": "./app.tsx"
   }
 }
 ```
@@ -158,14 +158,14 @@ const manifest: ToolManifest = {
 export default manifest;
 ```
 
-`ToolClient.tsx` is the actual tool UI. If it uses browser APIs, state, or interactions, declare it as a client component:
+`app.tsx` is the canonical tool entry. Single-page tools can render directly there; multi-page tools can branch on `segments`. If it uses browser APIs, state, or interactions, declare it as a client component:
 
 ```tsx
 "use client";
 
-import type { ToolClientProps } from "@tool-platform/tool-contracts";
+import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
-export default function JsonFormatterTool({ manifest }: ToolClientProps) {
+export default function JsonFormatterTool({ manifest }: ToolAppProps) {
   return (
     <section className="tool-panel">
       <h2>{manifest.name}</h2>
@@ -184,7 +184,7 @@ pnpm create-tool my-tool --name "My Tool" --category 开发工具 --runtime simp
 
 2. Edit `tools/my-tool/manifest.ts` with accurate description, tags, icon, and runtime information.
 
-3. Implement the input, processing, and output UI in `tools/my-tool/ToolClient.tsx`.
+3. Implement the input, processing, and output UI in `tools/my-tool/app.tsx`.
 
 4. Regenerate the registry:
 

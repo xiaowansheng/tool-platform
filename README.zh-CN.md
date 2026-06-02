@@ -8,9 +8,9 @@ Tool Platform 是一个面向浏览器的插件化工具平台。它把每个工
 
 ## 功能概览
 
-- 插件化工具目录：每个工具独立放在 `tools/<tool-id>/`，包含 `manifest.ts` 和 `ToolClient.tsx`。
+- 插件化工具目录：每个工具独立放在 `tools/<tool-id>/`，包含 `manifest.ts` 和 `app.tsx`。
 - 自动注册：`scripts/generate-tool-registry.mjs` 扫描工具目录并生成工具 registry。
-- 动态路由：Web 应用通过 `/tools/[slug]` 加载对应工具客户端。
+- 动态路由：Web 应用通过 `/tools/[slug]` 及其可选子路径（如 `/tools/[slug]/schema`）加载对应工具应用。
 - 分类与搜索：基于工具 manifest 的 `category`、`subCategory`、`tags`、`description` 建立入口。
 - 多运行时基础包：提供 simple、worker、wasm、ai、sandbox、realtime 等运行时类型的契约和基础封装。
 - 浏览器能力 SDK：统一封装复制、下载、文件打开、OPFS 缓存、toast、runtime 生命周期、Worker、WASM、AI 和 iframe sandbox 能力。
@@ -106,14 +106,14 @@ tools/<tool-id>/manifest.ts
 packages/tool-sdk/src/generated/manifests.ts
 packages/tool-sdk/src/generated/client-loaders.ts
   ↓ apps/web
-首页 / 分类页 / 搜索页 /tools/[slug]
+首页 / 分类页 / 搜索页 /tools/[slug]/[[...segments]]
   ↓
-ToolClient.tsx
+app.tsx
   ↓
 tool-browser-sdk + runtime packages
 ```
 
-工具只需要提供 manifest 和客户端组件，平台负责注册、导航、搜索、动态导入和基础运行时能力。
+工具只需要提供 manifest 和 `app.tsx` 入口；单页工具可以直接渲染，多页工具则可以在同一个入口里按路由 segments 切换视图。平台负责注册、导航、搜索、动态导入和基础运行时能力。
 
 ## 工具目录约定
 
@@ -123,7 +123,7 @@ tool-browser-sdk + runtime packages
 tools/json-formatter/
 ├── package.json
 ├── manifest.ts
-├── ToolClient.tsx
+├── app.tsx
 └── README.md
 ```
 
@@ -133,7 +133,7 @@ tools/json-formatter/
 {
   "exports": {
     "./manifest": "./manifest.ts",
-    "./tool": "./ToolClient.tsx"
+    "./app": "./app.tsx"
   }
 }
 ```
@@ -158,14 +158,14 @@ const manifest: ToolManifest = {
 export default manifest;
 ```
 
-`ToolClient.tsx` 是实际工具界面。需要浏览器 API、状态或交互时，应声明为客户端组件：
+`app.tsx` 是统一的工具入口。单页工具可以直接在这里渲染，多页工具可以根据 `segments` 切换内部页面；如果需要浏览器 API、状态或交互，则应声明为客户端组件：
 
 ```tsx
 "use client";
 
-import type { ToolClientProps } from "@tool-platform/tool-contracts";
+import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
-export default function JsonFormatterTool({ manifest }: ToolClientProps) {
+export default function JsonFormatterTool({ manifest }: ToolAppProps) {
   return (
     <section className="tool-panel">
       <h2>{manifest.name}</h2>
@@ -184,7 +184,7 @@ pnpm create-tool my-tool --name "My Tool" --category 开发工具 --runtime simp
 
 2. 修改 `tools/my-tool/manifest.ts`，补充准确的描述、标签、图标和运行时信息。
 
-3. 在 `tools/my-tool/ToolClient.tsx` 中实现输入、处理和输出界面。
+3. 在 `tools/my-tool/app.tsx` 中实现输入、处理和输出界面。
 
 4. 重新生成 registry：
 

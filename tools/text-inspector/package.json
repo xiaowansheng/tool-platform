@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     "./manifest": "./manifest.ts",
-    "./tool": "./ToolClient.tsx"
+    "./app": "./app.tsx"
   },
   "dependencies": {
     "@tool-platform/tool-browser-sdk": "workspace:*",

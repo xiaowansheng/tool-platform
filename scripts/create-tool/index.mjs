@@ -130,9 +130,9 @@ export default manifest;
 
   const component = `"use client";
 
-import type { ToolClientProps } from "@tool-platform/tool-contracts";
+import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
-export default function ${toTitleCase(toolId).replace(/\s+/g, "")}Tool({ manifest }: ToolClientProps) {
+export default function ${toTitleCase(toolId).replace(/\s+/g, "")}Tool({ manifest }: ToolAppProps) {
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
@@ -155,7 +155,7 @@ export default function ${toTitleCase(toolId).replace(/\s+/g, "")}Tool({ manifes
     type: "module",
     exports: {
       "./manifest": "./manifest.ts",
-      "./tool": "./ToolClient.tsx"
+      "./app": "./app.tsx"
     },
     dependencies: {
       "@tool-platform/tool-contracts": "workspace:*"
@@ -181,7 +181,7 @@ ${name} workspace
 \`\`\`
 ${toolId}/
 ├── manifest.ts        # 工具元声明
-├── ToolClient.tsx     # 工具 UI 组件
+├── app.tsx     # 工具 UI 组件
 ├── package.json      # 包配置
 └── README.md         # 本文档
 \`\`\`
@@ -189,7 +189,7 @@ ${toolId}/
 ## 开发指引
 
 1. 确保已安装依赖：\`pnpm install\`
-2. 修改 \`ToolClient.tsx\` 实现工具功能
+2. 修改 \`app.tsx\` 实现工具功能
 3. 运行 \`pnpm generate:tools\` 重新生成工具注册表
 4. 启动开发服务器：\`pnpm dev\`
 
@@ -205,7 +205,7 @@ pnpm test         # 运行测试
   await fs.mkdir(toolDir, { recursive: true });
   await fs.writeFile(path.join(toolDir, "package.json"), JSON.stringify(packageJson, null, 2) + "\n", "utf8");
   await fs.writeFile(path.join(toolDir, "manifest.ts"), manifest, "utf8");
-  await fs.writeFile(path.join(toolDir, "ToolClient.tsx"), component, "utf8");
+  await fs.writeFile(path.join(toolDir, "app.tsx"), component, "utf8");
   await fs.writeFile(path.join(toolDir, "README.md"), readme, "utf8");
 }
 

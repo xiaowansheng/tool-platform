@@ -1,7 +1,7 @@
 export type {
   CategoryMeta,
+  ToolAppProps,
   ToolCategory,
-  ToolClientProps,
   ToolManifest,
   ToolRecord,
   ToolRuntime

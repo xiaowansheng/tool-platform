@@ -59,13 +59,17 @@ export interface ToolManifest {
   ai?: boolean;
 }
 
-export interface ToolClientProps {
+export interface ToolAppProps {
   manifest: ToolManifest;
+  locale: string;
+  path: string;
+  segments: string[];
 }
+
 
 export interface ToolRecord {
   manifest: ToolManifest;
-  component: ComponentType<ToolClientProps>;
+  component: ComponentType<ToolAppProps>;
 }
 
 export interface CategoryMeta {

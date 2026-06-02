@@ -33,22 +33,22 @@ async function loadToolPackages() {
       const packageJson = JSON.parse(await fs.readFile(packageFile, "utf8"));
       const toolDir = path.dirname(packageFile);
       const manifestPath = path.join(toolDir, "manifest.ts");
-      const toolComponentPath = path.join(toolDir, "ToolClient.tsx");
+      const appEntryPath = path.join(toolDir, "app.tsx");
       const manifestExists = await fileExists(manifestPath);
-      const componentExists = await fileExists(toolComponentPath);
+      const appEntryExists = await fileExists(appEntryPath);
 
       return {
         directoryName: path.basename(toolDir),
         packageName: packageJson.name,
         manifestExists,
-        componentExists,
+        appEntryExists,
         toolId: manifestExists ? await readManifestId(manifestPath, path.basename(toolDir)) : path.basename(toolDir)
       };
     })
   );
 
   return tools
-    .filter((tool) => tool.manifestExists && tool.componentExists)
+    .filter((tool) => tool.manifestExists && tool.appEntryExists)
     .sort((left, right) => left.directoryName.localeCompare(right.directoryName));
 }
 
@@ -92,21 +92,22 @@ ${manifestLines.join(",\n")}
 
 async function writeClientLoaders(tools) {
   const loaderLines = tools.map(
-    (tool) => `  ${JSON.stringify(tool.toolId)}: () => import("${tool.packageName}/tool")`
+    (tool) => `  ${JSON.stringify(tool.toolId)}: () => import("${tool.packageName}/app")`
   );
   const source = `import type { ComponentType } from "react";
 
-import type { ToolClientProps } from "../types";
+import type { ToolAppProps } from "../types";
 
-export type ToolComponentModule = {
-  default: ComponentType<ToolClientProps>;
+export type ToolAppModule = {
+  default: ComponentType<ToolAppProps>;
 };
 
-export type ToolComponentLoader = () => Promise<ToolComponentModule>;
+export type ToolAppLoader = () => Promise<ToolAppModule>;
 
-export const toolComponentLoaders = {
+export const toolAppLoaders = {
 ${loaderLines.join(",\n")}
-} satisfies Record<string, ToolComponentLoader>;
+} satisfies Record<string, ToolAppLoader>;
+
 `;
 
   await fs.writeFile(generatedClientLoadersPath, source, "utf8");
