@@ -127,6 +127,7 @@ export const toolAppLoaders = {
   "pdf-tools": () => import("@tool-platform/pdf-tools/app"),
   "pem-jwk-toolkit": () => import("@tool-platform/pem-jwk-toolkit/app"),
   "percentage-calculator": () => import("@tool-platform/percentage-calculator/app"),
+  "physical-fitness-calculator": () => import("@tool-platform/physical-fitness-calculator/app"),
   "pii-detector": () => import("@tool-platform/pii-detector/app"),
   "pomodoro-focus-timer": () => import("@tool-platform/pomodoro-focus-timer/app"),
   "port-reference": () => import("@tool-platform/port-reference/app"),

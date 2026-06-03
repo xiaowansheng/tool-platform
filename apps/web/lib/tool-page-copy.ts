@@ -830,6 +830,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["查看第三方 ZIP 包内是否有可疑文件。", "分析归档文件的压缩效率和目录结构。"]
   },
+  "physical-fitness-calculator": {
+    name: "体测分数计算器",
+    description: "根据《国家学生体质健康标准》计算各年级各项体测分数、BMI、等级与建议。",
+    intro: "输入身高、体重及体测各项指标，系统会自动计算 BMI 分数、各单项及格等级并生成科学的运动建议。",
+    steps: [
+      "选择性别与学段年级标准。",
+      "输入身高、体重、肺活量及各项体能测试成绩。",
+      "在右侧查看体测总分、评定等级、单项明细与运动建议。"
+    ],
+    examples: ["计算大一男生的体测得分与加分情况。", "为核心力量偏弱的女大学生生成针对性运动建议。"]
+  },
   "aspect-ratio-calculator": {
     name: "宽高比计算器",
     description: "根据宽高计算比例，并按目标宽度或高度等比缩放。",
@@ -2026,6 +2037,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "api-error-code-doc-generator": "API 错误码文档生成器",
   "api-rate-limit-calculator": "API 限流计算器",
   "archive-structure-viewer": "归档结构查看器",
+  "physical-fitness-calculator": "体测分数计算器",
   "aspect-ratio-calculator": "宽高比计算器",
   "audio-tone-generator": "音频测试音生成器",
   "base64-studio": "Base64 工具",

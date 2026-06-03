@@ -116,6 +116,7 @@ import PdfMetadataToolManifest from "@tool-platform/pdf-metadata-tool/manifest";
 import PdfToolsManifest from "@tool-platform/pdf-tools/manifest";
 import PemJwkToolkitManifest from "@tool-platform/pem-jwk-toolkit/manifest";
 import PercentageCalculatorManifest from "@tool-platform/percentage-calculator/manifest";
+import PhysicalFitnessCalculatorManifest from "@tool-platform/physical-fitness-calculator/manifest";
 import PiiDetectorManifest from "@tool-platform/pii-detector/manifest";
 import PomodoroFocusTimerManifest from "@tool-platform/pomodoro-focus-timer/manifest";
 import PortReferenceManifest from "@tool-platform/port-reference/manifest";
@@ -300,6 +301,7 @@ export const toolManifests: ToolManifest[] = [
   PdfToolsManifest,
   PemJwkToolkitManifest,
   PercentageCalculatorManifest,
+  PhysicalFitnessCalculatorManifest,
   PiiDetectorManifest,
   PomodoroFocusTimerManifest,
   PortReferenceManifest,

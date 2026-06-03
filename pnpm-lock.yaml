@@ -479,6 +479,9 @@ importers:
       '@tool-platform/percentage-calculator':
         specifier: workspace:*
         version: link:../../tools/percentage-calculator
+      '@tool-platform/physical-fitness-calculator':
+        specifier: workspace:*
+        version: link:../../tools/physical-fitness-calculator
       '@tool-platform/pii-detector':
         specifier: workspace:*
         version: link:../../tools/pii-detector
@@ -1749,6 +1752,15 @@ importers:
         version: 19.2.6
 
   tools/percentage-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/physical-fitness-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
