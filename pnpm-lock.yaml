@@ -260,6 +260,9 @@ importers:
       '@tool-platform/dependency-risk-explainer':
         specifier: workspace:*
         version: link:../../tools/dependency-risk-explainer
+      '@tool-platform/dice-roller':
+        specifier: workspace:*
+        version: link:../../tools/dice-roller
       '@tool-platform/discount-stack-calculator':
         specifier: workspace:*
         version: link:../../tools/discount-stack-calculator
@@ -317,6 +320,9 @@ importers:
       '@tool-platform/font-scale-generator':
         specifier: workspace:*
         version: link:../../tools/font-scale-generator
+      '@tool-platform/game-2048':
+        specifier: workspace:*
+        version: link:../../tools/game-2048
       '@tool-platform/git-bisect-planner':
         specifier: workspace:*
         version: link:../../tools/git-bisect-planner
@@ -437,6 +443,9 @@ importers:
       '@tool-platform/mime-type-lookup':
         specifier: workspace:*
         version: link:../../tools/mime-type-lookup
+      '@tool-platform/minesweeper':
+        specifier: workspace:*
+        version: link:../../tools/minesweeper
       '@tool-platform/mock-data-generator':
         specifier: workspace:*
         version: link:../../tools/mock-data-generator
@@ -500,6 +509,9 @@ importers:
       '@tool-platform/query-param-builder':
         specifier: workspace:*
         version: link:../../tools/query-param-builder
+      '@tool-platform/random-picker':
+        specifier: workspace:*
+        version: link:../../tools/random-picker
       '@tool-platform/random-team-generator':
         specifier: workspace:*
         version: link:../../tools/random-team-generator
@@ -1094,6 +1106,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/dice-roller:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/discount-stack-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1257,6 +1278,15 @@ importers:
         version: 19.2.6
 
   tools/font-scale-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/game-2048:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1625,6 +1655,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/minesweeper:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/mock-data-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1809,6 +1848,15 @@ importers:
         version: 19.2.6
 
   tools/query-param-builder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/random-picker:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

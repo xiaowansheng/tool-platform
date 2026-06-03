@@ -43,6 +43,7 @@ import DataUrlGeneratorManifest from "@tool-platform/data-url-generator/manifest
 import DbConnectionStringWorkbenchManifest from "@tool-platform/db-connection-string-workbench/manifest";
 import DecisionWheelManifest from "@tool-platform/decision-wheel/manifest";
 import DependencyRiskExplainerManifest from "@tool-platform/dependency-risk-explainer/manifest";
+import DiceRollerManifest from "@tool-platform/dice-roller/manifest";
 import DiscountStackCalculatorManifest from "@tool-platform/discount-stack-calculator/manifest";
 import DnsInspectorManifest from "@tool-platform/dns-inspector/manifest";
 import DockerComposeValidatorManifest from "@tool-platform/docker-compose-validator/manifest";
@@ -62,6 +63,7 @@ import FileNameBatchRenamerManifest from "@tool-platform/file-name-batch-renamer
 import FlashcardClozeBuilderManifest from "@tool-platform/flashcard-cloze-builder/manifest";
 import FlexboxGeneratorManifest from "@tool-platform/flexbox-generator/manifest";
 import FontScaleGeneratorManifest from "@tool-platform/font-scale-generator/manifest";
+import Game2048Manifest from "@tool-platform/game-2048/manifest";
 import GitBisectPlannerManifest from "@tool-platform/git-bisect-planner/manifest";
 import GitPatchSecurityReviewerManifest from "@tool-platform/git-patch-security-reviewer/manifest";
 import GitignoreGeneratorManifest from "@tool-platform/gitignore-generator/manifest";
@@ -102,6 +104,7 @@ import MediaDevicePermissionLabManifest from "@tool-platform/media-device-permis
 import MermaidPreviewFormatterManifest from "@tool-platform/mermaid-preview-formatter/manifest";
 import MetaTagsSeoPreviewManifest from "@tool-platform/meta-tags-seo-preview/manifest";
 import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
+import MinesweeperManifest from "@tool-platform/minesweeper/manifest";
 import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manifest";
 import NotificationPayloadTesterManifest from "@tool-platform/notification-payload-tester/manifest";
 import NumberBaseConverterManifest from "@tool-platform/number-base-converter/manifest";
@@ -123,6 +126,7 @@ import PrometheusQueryHelperManifest from "@tool-platform/prometheus-query-helpe
 import PythonPlaygroundManifest from "@tool-platform/python-playground/manifest";
 import QrBarcodeToolManifest from "@tool-platform/qr-barcode-tool/manifest";
 import QueryParamBuilderManifest from "@tool-platform/query-param-builder/manifest";
+import RandomPickerManifest from "@tool-platform/random-picker/manifest";
 import RandomTeamGeneratorManifest from "@tool-platform/random-team-generator/manifest";
 import ReadmeBadgeGeneratorManifest from "@tool-platform/readme-badge-generator/manifest";
 import ReadmeQualityCheckerManifest from "@tool-platform/readme-quality-checker/manifest";
@@ -226,6 +230,7 @@ export const toolManifests: ToolManifest[] = [
   DbConnectionStringWorkbenchManifest,
   DecisionWheelManifest,
   DependencyRiskExplainerManifest,
+  DiceRollerManifest,
   DiscountStackCalculatorManifest,
   DnsInspectorManifest,
   DockerComposeValidatorManifest,
@@ -245,6 +250,7 @@ export const toolManifests: ToolManifest[] = [
   FlashcardClozeBuilderManifest,
   FlexboxGeneratorManifest,
   FontScaleGeneratorManifest,
+  Game2048Manifest,
   GitBisectPlannerManifest,
   GitPatchSecurityReviewerManifest,
   GitignoreGeneratorManifest,
@@ -285,6 +291,7 @@ export const toolManifests: ToolManifest[] = [
   MermaidPreviewFormatterManifest,
   MetaTagsSeoPreviewManifest,
   MimeTypeLookupManifest,
+  MinesweeperManifest,
   MockDataGeneratorManifest,
   NotificationPayloadTesterManifest,
   NumberBaseConverterManifest,
@@ -306,6 +313,7 @@ export const toolManifests: ToolManifest[] = [
   PythonPlaygroundManifest,
   QrBarcodeToolManifest,
   QueryParamBuilderManifest,
+  RandomPickerManifest,
   RandomTeamGeneratorManifest,
   ReadmeBadgeGeneratorManifest,
   ReadmeQualityCheckerManifest,

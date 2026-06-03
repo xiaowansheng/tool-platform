@@ -449,6 +449,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["确认 .wasm 应使用 application/wasm。", "查找 SVG 或 WebP 的正确 Content-Type。"]
   },
+  "minesweeper": {
+    name: "经典扫雷",
+    description: "经典扫雷游戏，支持初级、中级、高级与自定义参数，配备计时器、雷数指示、双击排雷与拟真爆炸音画效果。",
+    intro: "点击翻开格子，插旗标记地雷，数字双击可智能拓展排开周围无雷区域，体验首雷保命与丝滑音效。",
+    steps: [
+      "选择初级、中级、高级或输入行列雷数自定义参数。",
+      "左键点击翻开格子，右键点击插旗标记。",
+      "若已翻开数字格周围插旗数足够，可双击数字自动排雷四周。",
+      "清空所有安全格则胜利，踩到雷则引爆结束。"
+    ],
+    examples: ["在空闲时间开一局初级扫雷放松大脑。", "挑战 99 个雷的高级难度记录。"]
+  },
   "utm-builder": {
     name: "UTM 链接构建器",
     description: "生成带 UTM 参数的营销链接，并保留原始查询参数。",
@@ -646,6 +658,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "沿时间线定位慢服务、慢数据库调用或外部依赖。"
     ],
     examples: ["分析一次 checkout 请求中 payments 服务耗时。", "检查 trace 是否缺少 parentSpanId 或 service.name。"]
+  },
+  "game-2048": {
+    name: "2048 游戏",
+    description: "经典 2048 数字拼图游戏，支持 3x3、4x4、5x5 多种棋盘，具备丝滑的滑动合体动画、音效及键盘和触屏滑动操作。",
+    intro: "通过合并相同数字滑出最大值，电脑端可使用方向键/WASD操作，移动端支持触屏滑动手势。",
+    steps: [
+      "选择极速 3x3、经典 4x4 或轻松 5x5 的棋盘规格。",
+      "使用键盘方向键或触屏上下左右划动来移动所有方块。",
+      "将相同数字相撞以翻倍合成，每次合体得分为相应分值。",
+      "尽可能合成出 2048，当格子填满且无法移动时游戏结束。"
+    ],
+    examples: ["在经典 4x4 上尝试突破最高分记录。", "在较小的 3x3 棋盘上体验高难度超快节奏。"]
   },
   "prometheus-query-helper": {
     name: "Prometheus 查询助手",
@@ -983,6 +1007,29 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "查看抽取结果和选择历史。"
     ],
     examples: ["聚餐投票在几个餐厅中随机决定。", "团队活动抽奖分配奖品。"]
+  },
+  "random-picker": {
+    name: "随机抽取工具",
+    description: "支持随机数区间提取及自定义列表项抽取，配有卡片翻转动画与声音反馈。",
+    intro: "设定数字区间或导入列表，支持自定义抽取个数、排重与排序，快速摇出结果。",
+    steps: [
+      "选择‘随机抽取数字’或‘从列表抽取’页签。",
+      "设定取数范围或编辑/导入自定义列表项。",
+      "调整抽取个数、重复性、排序等设置，点击开始抽取。",
+      "等待卡片滚动动画停稳，查看结果并可在历史中一键复制。"
+    ],
+    examples: ["从班级名单中随机挑选学生发言。", "生成 1 到 100 之间的 5 个不重复中奖号码。"]
+  },
+  "dice-roller": {
+    name: "3D 摇色子与骰子游戏",
+    description: "多面体掷骰工具，包含 3D 物理立方骰和骰宝、骰子大对决等多种趣味小游戏。",
+    intro: "自由配置各种面数的骰子投掷，或者使用筹码畅玩猜大小（骰宝）和骰子点数比拼游戏。",
+    steps: [
+      "自由投掷模式下，点击增减 D4-D100 各类骰子个数，点击投掷查看 3D 旋转效果。",
+      "趣味骰宝模式下，下注‘大/小/单/双/豹子’，点击摇骰晃动金杯结算筹码。",
+      "骰子对决模式下，设置对战筹码后与 AI 各摇 5 颗骰子，根据扑克牌型比拼大小。"
+    ],
+    examples: ["桌游跑团掷 D20/D100 检定判定结果。", "休闲娱乐时和好友畅玩掷骰子猜点数比拼。"]
   },
   "dependency-risk-explainer": {
     name: "依赖风险解释器",
@@ -2044,6 +2091,8 @@ const zhToolNameOverrides: Record<string, string> = {
   "data-url-generator": "Data URL 生成器",
   "db-connection-string-workbench": "数据库连接串工作台",
   "decision-wheel": "随机决策转盘",
+  "random-picker": "随机抽取工具",
+  "dice-roller": "3D 摇色子与骰子游戏",
   "dependency-risk-explainer": "依赖风险解释器",
   "discount-stack-calculator": "叠加优惠计算器",
   "dns-inspector": "DNS 检查器",
@@ -2064,6 +2113,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "flashcard-cloze-builder": "闪卡填空题生成器",
   "flexbox-generator": "Flexbox 生成器",
   "font-scale-generator": "字号比例生成器",
+  "game-2048": "2048 游戏",
   "git-bisect-planner": "Git Bisect 规划器",
   "git-patch-security-reviewer": "Git Patch 安全审查器",
   "gitignore-generator": ".gitignore 生成器",
@@ -2104,6 +2154,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "mermaid-preview-formatter": "Mermaid 预览格式化器",
   "meta-tags-seo-preview": "Meta Tags SEO 预览器",
   "mime-type-lookup": "MIME 类型查询",
+  "minesweeper": "经典扫雷",
   "mock-data-generator": "Mock 数据生成器",
   "notification-payload-tester": "通知 Payload 测试器",
   "number-base-converter": "进制转换器",
