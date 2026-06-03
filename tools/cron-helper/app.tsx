@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
 interface FieldSpec {
@@ -297,18 +296,30 @@ export default function CronHelperTool({ manifest }: ToolAppProps) {
   const [expression, setExpression] = useState("*/15 9-17 * * 1-5");
   const [systemdExpression, setSystemdExpression] = useState(() => cronToSystemd("*/15 9-17 * * 1-5"));
   const [analysis, setAnalysis] = useState<CronAnalysis>(() => {
-    const result = analyzeCron("*/15 9-17 * * 1-5");
-    return { ...result, nextRuns: [] };
+    try {
+      return analyzeCron("*/15 9-17 * * 1-5");
+    } catch {
+      return { summary: [], nextRuns: [] };
+    }
   });
   const [error, setError] = useState("");
 
+  // 定时任务指令生成状态
+  const [command, setCommand] = useState("/usr/local/bin/backup.sh");
+  const [logPolicy, setLogPolicy] = useState(">> /var/log/myjob.log 2>&1");
+  const [serviceName, setServiceName] = useState("my-backup");
+  const [activeTab, setActiveTab] = useState<"crontab" | "systemd_service" | "systemd_timer">("crontab");
+  const [copied, setCopied] = useState(false);
+
+  // Trigger analysis update when expression changes
   useEffect(() => {
     try {
       setAnalysis(analyzeCron(expression));
+      setError("");
     } catch {
-      // Keep previous analysis on error.
+      // Keep previous analysis on edit error
     }
-  }, []);
+  }, [expression]);
 
   function handleAnalyze() {
     try {
@@ -339,8 +350,111 @@ export default function CronHelperTool({ manifest }: ToolAppProps) {
     }
   }
 
+  // 拼接 Crontab 定时命令行
+  const crontabCommand = `${expression} ${command} ${logPolicy}`.trim();
+
+  // 组装 Systemd Service
+  const systemdService = `[Unit]
+Description=Scheduled Job (${serviceName})
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=${command}
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target`;
+
+  // 组装 Systemd Timer
+  const systemdTimer = `[Unit]
+Description=Run Scheduled Job (${serviceName})
+
+[Timer]
+OnCalendar=${systemdExpression}
+Persistent=true
+
+[Install]
+WantedBy=timers.target`;
+
+  async function copyConfig(text: string) {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
   return (
     <section className="tool-panel">
+      <style>{`
+        .command-tabs {
+          display: flex;
+          border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+          margin-bottom: 12px;
+        }
+        [data-theme="light"] .command-tabs {
+          border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+        .command-tab-btn {
+          padding: 8px 16px;
+          background: none;
+          border: none;
+          color: var(--text-muted, #94a3b8);
+          font-weight: 600;
+          font-size: 13px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border-bottom: 2px solid transparent;
+          margin-bottom: -2px;
+        }
+        .command-tab-btn:hover {
+          color: var(--text-main, #f8fafc);
+        }
+        [data-theme="light"] .command-tab-btn:hover {
+          color: #1e293b;
+        }
+        .command-tab-btn.active {
+          color: var(--brand-primary, #6366f1);
+          border-bottom-color: var(--brand-primary, #6366f1);
+        }
+        .output-box-container {
+          position: relative;
+        }
+        .copy-overlay-btn {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          padding: 4px 10px;
+          font-size: 11px;
+          border-radius: 4px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(0, 0, 0, 0.4);
+          color: #ffffff;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .copy-overlay-btn:hover {
+          background: var(--brand-primary, #6366f1);
+          border-color: var(--brand-primary, #6366f1);
+        }
+        .guide-box {
+          margin-top: 10px;
+          padding: 10px 12px;
+          background: rgba(255, 255, 255, 0.01);
+          border: 1px dashed rgba(255, 255, 255, 0.08);
+          border-radius: 6px;
+          font-size: 11px;
+          font-family: var(--font-mono, monospace);
+          color: var(--text-muted, #94a3b8);
+          line-height: 1.4;
+        }
+        [data-theme="light"] .guide-box {
+          background: rgba(0, 0, 0, 0.01);
+          border: 1px dashed rgba(0, 0, 0, 0.08);
+          color: #475569;
+        }
+      `}</style>
+
       <div className="tool-panel__header">
         <div>
           <p className="eyebrow">运维工具</p>
@@ -348,49 +462,187 @@ export default function CronHelperTool({ manifest }: ToolAppProps) {
         </div>
         <p>{manifest.description}</p>
       </div>
-      <div className="tool-toolbar tool-toolbar--grid">
-        <label className="tool-field tool-field--compact">
-          <span>Cron 表达式</span>
-          <input value={expression} onChange={(event) => setExpression(event.target.value)} />
-        </label>
-        <label className="tool-field tool-field--compact">
-          <span>systemd OnCalendar</span>
-          <input value={systemdExpression} onChange={(event) => setSystemdExpression(event.target.value)} />
-        </label>
+
+      <div className="workspace workspace--stack">
+        {/* 基础表达式输入 */}
+        <div className="tool-toolbar tool-toolbar--grid">
+          <label className="tool-field tool-field--compact">
+            <span>Cron 表达式</span>
+            <input value={expression} onChange={(event) => setExpression(event.target.value)} />
+          </label>
+          <label className="tool-field tool-field--compact">
+            <span>systemd OnCalendar</span>
+            <input value={systemdExpression} onChange={(event) => setSystemdExpression(event.target.value)} />
+          </label>
+        </div>
+
+        <div className="tool-toolbar">
+          <button type="button" onClick={handleAnalyze}>
+            解析
+          </button>
+          <button type="button" onClick={handleCronToSystemd}>
+            Cron → systemd
+          </button>
+          <button type="button" onClick={handleSystemdToCron}>
+            systemd → Cron
+          </button>
+        </div>
+
+        <div className="workspace workspace--two-column" style={{ padding: 0 }}>
+          {/* 左列：解析详情 */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <article className="detail-card" style={{ flex: 1 }}>
+              <h3>字段解释</h3>
+              <ul className="compact-list">
+                {analysis.summary.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="detail-card" style={{ flex: 1 }}>
+              <h3>后续运行时间</h3>
+              <ol className="compact-list">
+                {analysis.nextRuns.length > 0 ? (
+                  analysis.nextRuns.map((item) => <li key={item}>{item}</li>)
+                ) : (
+                  <li>未来一年内未匹配</li>
+                )}
+              </ol>
+            </article>
+          </div>
+
+          {/* 右列：定时命令生成面板 */}
+          <article className="detail-card" style={{ display: "flex", flexDirection: "column" }}>
+            <h3>定时任务配置与定时命令生成</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "12px" }}>
+              <label className="tool-field">
+                <span>执行命令 (Command)</span>
+                <input
+                  value={command}
+                  onChange={(e) => setCommand(e.target.value)}
+                  placeholder="例如 /usr/local/bin/backup.sh"
+                />
+              </label>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                <label className="tool-field">
+                  <span>日志重定向策略</span>
+                  <select value={logPolicy} onChange={(e) => setLogPolicy(e.target.value)}>
+                    <option value=">> /var/log/cronjob.log 2>&1">追加记录 stdout & stderr</option>
+                    <option value="> /var/log/cronjob.log 2>&1">覆盖记录 stdout & stderr</option>
+                    <option value="> /dev/null 2>&1">丢弃所有输出 (静默)</option>
+                    <option value="> /dev/null 2>> /var/log/cronjob.err">仅记录错误输出</option>
+                    <option value="">不重定向 (依赖系统Mail)</option>
+                  </select>
+                </label>
+                <label className="tool-field">
+                  <span>Systemd 单元名称</span>
+                  <input
+                    value={serviceName}
+                    onChange={(e) => setServiceName(e.target.value)}
+                    placeholder="my-backup"
+                  />
+                </label>
+              </div>
+
+              {/* 选项卡 */}
+              <div style={{ marginTop: "10px" }}>
+                <div className="command-tabs">
+                  <button
+                    type="button"
+                    className={`command-tab-btn ${activeTab === "crontab" ? "active" : ""}`}
+                    onClick={() => setActiveTab("crontab")}
+                  >
+                    Crontab 命令行
+                  </button>
+                  <button
+                    type="button"
+                    className={`command-tab-btn ${activeTab === "systemd_service" ? "active" : ""}`}
+                    onClick={() => setActiveTab("systemd_service")}
+                  >
+                    Systemd Service
+                  </button>
+                  <button
+                    type="button"
+                    className={`command-tab-btn ${activeTab === "systemd_timer" ? "active" : ""}`}
+                    onClick={() => setActiveTab("systemd_timer")}
+                  >
+                    Systemd Timer
+                  </button>
+                </div>
+
+                <div className="output-box-container">
+                  {activeTab === "crontab" && (
+                    <>
+                      <button
+                        type="button"
+                        className="copy-overlay-btn"
+                        onClick={() => void copyConfig(crontabCommand)}
+                      >
+                        {copied ? "已复制" : "复制命令"}
+                      </button>
+                      <textarea
+                        readOnly
+                        value={crontabCommand}
+                        style={{ minHeight: "80px", fontFamily: "var(--font-mono)", fontSize: "13px" }}
+                      />
+                      <div className="guide-box">
+                        提示：使用命令 <code>crontab -e</code> 将以上单行指令粘贴在底端即可保存生效。
+                      </div>
+                    </>
+                  )}
+
+                  {activeTab === "systemd_service" && (
+                    <>
+                      <button
+                        type="button"
+                        className="copy-overlay-btn"
+                        onClick={() => void copyConfig(systemdService)}
+                      >
+                        {copied ? "已复制" : "复制配置"}
+                      </button>
+                      <textarea
+                        readOnly
+                        value={systemdService}
+                        style={{ minHeight: "150px", fontFamily: "var(--font-mono)", fontSize: "12px", lineHeight: "1.4" }}
+                      />
+                      <div className="guide-box">
+                        路径：保存至 <code>/etc/systemd/system/{serviceName}.service</code>
+                      </div>
+                    </>
+                  )}
+
+                  {activeTab === "systemd_timer" && (
+                    <>
+                      <button
+                        type="button"
+                        className="copy-overlay-btn"
+                        onClick={() => void copyConfig(systemdTimer)}
+                      >
+                        {copied ? "已复制" : "复制配置"}
+                      </button>
+                      <textarea
+                        readOnly
+                        value={systemdTimer}
+                        style={{ minHeight: "150px", fontFamily: "var(--font-mono)", fontSize: "12px", lineHeight: "1.4" }}
+                      />
+                      <div className="guide-box">
+                        路径：保存至 <code>/etc/systemd/system/{serviceName}.timer</code>
+                        <br />
+                        启用：<code>sudo systemctl daemon-reload && sudo systemctl enable --now {serviceName}.timer</code>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p className="tool-note">支持数字、逗号、范围、星号和步长语法，例如 0,30、9-18、*/15。</p>
+        {error ? <p className="tool-error">{error}</p> : null}
       </div>
-      <div className="tool-toolbar">
-        <button type="button" onClick={handleAnalyze}>
-          解析
-        </button>
-        <button type="button" onClick={handleCronToSystemd}>
-          Cron → systemd
-        </button>
-        <button type="button" onClick={handleSystemdToCron}>
-          systemd → Cron
-        </button>
-      </div>
-      <div className="workspace workspace--two-column">
-        <article className="detail-card">
-          <h3>字段解释</h3>
-          <ul className="compact-list">
-            {analysis.summary.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
-        <article className="detail-card">
-          <h3>后续运行时间</h3>
-          <ol className="compact-list">
-            {analysis.nextRuns.length > 0 ? (
-              analysis.nextRuns.map((item) => <li key={item}>{item}</li>)
-            ) : (
-              <li>未来一年内未匹配</li>
-            )}
-          </ol>
-        </article>
-      </div>
-      <p className="tool-note">支持数字、逗号、范围、星号和步长语法，例如 0,30、9-18、*/15。</p>
-      {error ? <p className="tool-error">{error}</p> : null}
     </section>
   );
 }
