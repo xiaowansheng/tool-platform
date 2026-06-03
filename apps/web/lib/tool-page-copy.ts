@@ -1678,7 +1678,19 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "选择目标单位进行换算。",
       "复制换算结果用于 Pod 配置。"
     ],
-    examples: ["把 512Mi 换算为字节数。", "将 0.5 CPU 换算为 millicores。"]
+    examples: ["为 Pod 配置合理的内存资源 Requests。", "计算 CPU 核心 millicores 映射。"]
+  },
+  "reversi": {
+    name: "黑白棋",
+    description: "精美 3D 翻转动效黑白棋（奥赛罗）。支持双人同屏对战与人机对战（极简/中级 AI），提供落子步数提示、棋盘实时数量占比分析与物理碰撞音效，支持自定义棋盘配色主题。",
+    intro: "点击发光合法点落子夹住对手棋子并翻面。在动态预览翻子路径和实时比率条中体验人机智力较量。",
+    steps: [
+      "在顶部下拉菜单中选择「人机对战」或「双人同屏」，还可指定 AI 难度与执子顺序。",
+      "轮到你落子时，棋盘上会浮现出绿色的合法落子提示点。",
+      "鼠标悬停在提示点上可实时预览落子后即将被翻转的所有对手棋盘子路径。",
+      "落子后，所有夹在中间的棋子都会以逼真的 3D 翻转动效切换为你的颜色，直到棋盘填满或者双方无处落子后以棋子多者获胜。"
+    ],
+    examples: ["与中级 AI 在“资深棋手”难度下一决高下。", "预览吃子路径，精密计算走位以夺取四个角落控制权。"]
   },
   "ruby-playground": {
     name: "Ruby Playground",
@@ -2240,6 +2252,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "release-notes-builder": "发布说明生成器",
   "resource-unit-converter": "资源单位换算器",
   "reverse-proxy-header-analyzer": "反向代理头分析器",
+  "reversi": "黑白棋",
   "robots-txt-generator": "robots.txt 生成器",
   "ruby-playground": "Ruby Playground",
   "sbom-viewer": "SBOM 查看器",

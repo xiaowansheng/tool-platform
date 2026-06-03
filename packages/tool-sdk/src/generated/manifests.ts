@@ -139,6 +139,7 @@ import RegexTesterManifest from "@tool-platform/regex-tester/manifest";
 import ReleaseNotesBuilderManifest from "@tool-platform/release-notes-builder/manifest";
 import ResourceUnitConverterManifest from "@tool-platform/resource-unit-converter/manifest";
 import ReverseProxyHeaderAnalyzerManifest from "@tool-platform/reverse-proxy-header-analyzer/manifest";
+import ReversiManifest from "@tool-platform/reversi/manifest";
 import RobotsTxtGeneratorManifest from "@tool-platform/robots-txt-generator/manifest";
 import RubyPlaygroundManifest from "@tool-platform/ruby-playground/manifest";
 import SbomViewerManifest from "@tool-platform/sbom-viewer/manifest";
@@ -330,6 +331,7 @@ export const toolManifests: ToolManifest[] = [
   ReleaseNotesBuilderManifest,
   ResourceUnitConverterManifest,
   ReverseProxyHeaderAnalyzerManifest,
+  ReversiManifest,
   RobotsTxtGeneratorManifest,
   RubyPlaygroundManifest,
   SbomViewerManifest,

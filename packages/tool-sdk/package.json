@@ -153,6 +153,7 @@
     "@tool-platform/release-notes-builder": "workspace:*",
     "@tool-platform/resource-unit-converter": "workspace:*",
     "@tool-platform/reverse-proxy-header-analyzer": "workspace:*",
+    "@tool-platform/reversi": "workspace:*",
     "@tool-platform/robots-txt-generator": "workspace:*",
     "@tool-platform/ruby-playground": "workspace:*",
     "@tool-platform/sbom-viewer": "workspace:*",

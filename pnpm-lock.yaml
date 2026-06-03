@@ -548,6 +548,9 @@ importers:
       '@tool-platform/reverse-proxy-header-analyzer':
         specifier: workspace:*
         version: link:../../tools/reverse-proxy-header-analyzer
+      '@tool-platform/reversi':
+        specifier: workspace:*
+        version: link:../../tools/reversi
       '@tool-platform/robots-txt-generator':
         specifier: workspace:*
         version: link:../../tools/robots-txt-generator
@@ -1980,6 +1983,15 @@ importers:
         version: 19.2.6
 
   tools/reverse-proxy-header-analyzer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/reversi:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

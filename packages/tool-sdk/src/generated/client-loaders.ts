@@ -150,6 +150,7 @@ export const toolAppLoaders = {
   "release-notes-builder": () => import("@tool-platform/release-notes-builder/app"),
   "resource-unit-converter": () => import("@tool-platform/resource-unit-converter/app"),
   "reverse-proxy-header-analyzer": () => import("@tool-platform/reverse-proxy-header-analyzer/app"),
+  "reversi": () => import("@tool-platform/reversi/app"),
   "robots-txt-generator": () => import("@tool-platform/robots-txt-generator/app"),
   "ruby-playground": () => import("@tool-platform/ruby-playground/app"),
   "sbom-viewer": () => import("@tool-platform/sbom-viewer/app"),
