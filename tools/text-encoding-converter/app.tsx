@@ -154,7 +154,7 @@ export default function TextEncodingConverterTool({ manifest }: ToolAppProps) {
       const formatted = bytesToFormattedString(bytes, format);
       setByteOutput(formatted);
     } catch (e) {
-      console.error(e);
+      console.warn(e);
       setByteOutput("【编码失败，所选字符集可能不支持此字符】");
     }
   };
@@ -175,7 +175,7 @@ export default function TextEncodingConverterTool({ manifest }: ToolAppProps) {
       const text = decoder.decode(bytes as any);
       setInputText(text);
     } catch (e) {
-      console.error(e);
+      console.warn(e);
     }
   };
 
@@ -210,7 +210,7 @@ export default function TextEncodingConverterTool({ manifest }: ToolAppProps) {
       const repaired = decoder.decode(bytes as any);
       setRepairedText(repaired);
     } catch (e) {
-      console.error("Repair failed:", e);
+      console.warn("Repair failed:", e);
       setRepairedText("【修复失败，编码解析出故障】");
     }
   };
@@ -268,7 +268,7 @@ export default function TextEncodingConverterTool({ manifest }: ToolAppProps) {
         setTimeout(() => setCopiedRepaired(false), 2000);
       }
     } catch (err) {
-      console.error("Failed to copy:", err);
+      console.warn("Failed to copy:", err);
     }
   };
 
