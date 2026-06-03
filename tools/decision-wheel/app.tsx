@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
+
+import { getWheelGeometry } from "./wheel-geometry";
 
 interface WheelOption {
   label: string;
@@ -98,6 +100,8 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const canvasBoxRef = useRef({ width: 0, height: 0 });
+  const [canvasResizeTick, setCanvasResizeTick] = useState(0);
 
   const options = useMemo(() => parseOptions(input), [input]);
   const totalWeight = useMemo(() => options.reduce((sum, o) => sum + o.weight, 0), [options]);
@@ -148,20 +152,20 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Clear and fix DPI blurriness
     const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-
     const width = rect.width;
     const height = rect.height;
-    const cx = width / 2;
-    const cy = height / 2;
-    const radius = Math.min(cx, cy) - 20;
+    const { cx, cy, radius } = getWheelGeometry(width, height);
+    const dpr = window.devicePixelRatio || 1;
 
+    canvas.width = Math.max(1, Math.round(width * dpr));
+    canvas.height = Math.max(1, Math.round(height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, width, height);
+
+    if (radius <= 0) {
+      return;
+    }
 
     if (options.length === 0) {
       // Draw placeholder
@@ -263,10 +267,38 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
     ctx.stroke();
   };
 
-  // Re-draw wheel when options or currentAngle changes
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || typeof ResizeObserver === "undefined") {
+      return;
+    }
+
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) {
+        return;
+      }
+
+      const nextWidth = Math.round(entry.contentRect.width);
+      const nextHeight = Math.round(entry.contentRect.height);
+      const previousBox = canvasBoxRef.current;
+
+      if (previousBox.width === nextWidth && previousBox.height === nextHeight) {
+        return;
+      }
+
+      canvasBoxRef.current = { width: nextWidth, height: nextHeight };
+      setCanvasResizeTick((tick) => tick + 1);
+    });
+
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
+
+  // Re-draw wheel when options, currentAngle, or canvas size changes
   useEffect(() => {
     drawWheel(currentAngle);
-  }, [options, currentAngle, totalWeight]);
+  }, [options, currentAngle, totalWeight, canvasResizeTick]);
 
   // Handle spin logic
   const startSpin = () => {
@@ -306,7 +338,6 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
     const totalRotation = targetAngle - startAngle;
 
     const startTime = performance.now();
-    let lastTickAngle = startAngle;
 
     // Easing out cubic: t = time / duration
     const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
