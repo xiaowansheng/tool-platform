@@ -2311,7 +2311,9 @@ const zhToolNameOverrides: Record<string, string> = {
   "sql-to-go": "SQL 转 Go Struct 工具",
   "chinese-converter": "中文简繁体转换",
   "loan-calculator": "房贷与贷款计算器",
-  "text-encoding-converter": "文字编码转换与乱码修复"
+  "text-encoding-converter": "文字编码转换与乱码修复",
+  "placeholder-generator": "占位图片生成器",
+  "image-splitter": "图片九宫格切图工具"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {

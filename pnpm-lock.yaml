@@ -392,6 +392,9 @@ importers:
       '@tool-platform/image-ocr-preprocessor':
         specifier: workspace:*
         version: link:../../tools/image-ocr-preprocessor
+      '@tool-platform/image-splitter':
+        specifier: workspace:*
+        version: link:../../tools/image-splitter
       '@tool-platform/image-watermark':
         specifier: workspace:*
         version: link:../../tools/image-watermark
@@ -536,6 +539,9 @@ importers:
       '@tool-platform/pii-detector':
         specifier: workspace:*
         version: link:../../tools/pii-detector
+      '@tool-platform/placeholder-generator':
+        specifier: workspace:*
+        version: link:../../tools/placeholder-generator
       '@tool-platform/pomodoro-focus-timer':
         specifier: workspace:*
         version: link:../../tools/pomodoro-focus-timer
@@ -1568,6 +1574,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/image-splitter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/image-watermark:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1992,6 +2007,15 @@ importers:
         version: 19.2.6
 
   tools/pii-detector:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/placeholder-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

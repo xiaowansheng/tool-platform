@@ -87,6 +87,7 @@ import HttpSecurityHeadersCheckerManifest from "@tool-platform/http-security-hea
 import HttpStatusReferenceManifest from "@tool-platform/http-status-reference/manifest";
 import ImageCompressorManifest from "@tool-platform/image-compressor/manifest";
 import ImageOcrPreprocessorManifest from "@tool-platform/image-ocr-preprocessor/manifest";
+import ImageSplitterManifest from "@tool-platform/image-splitter/manifest";
 import ImageWatermarkManifest from "@tool-platform/image-watermark/manifest";
 import IncidentTimelineGeneratorManifest from "@tool-platform/incident-timeline-generator/manifest";
 import Ipv4CidrCalculatorManifest from "@tool-platform/ipv4-cidr-calculator/manifest";
@@ -135,6 +136,7 @@ import PemJwkToolkitManifest from "@tool-platform/pem-jwk-toolkit/manifest";
 import PercentageCalculatorManifest from "@tool-platform/percentage-calculator/manifest";
 import PhysicalFitnessCalculatorManifest from "@tool-platform/physical-fitness-calculator/manifest";
 import PiiDetectorManifest from "@tool-platform/pii-detector/manifest";
+import PlaceholderGeneratorManifest from "@tool-platform/placeholder-generator/manifest";
 import PomodoroFocusTimerManifest from "@tool-platform/pomodoro-focus-timer/manifest";
 import PortReferenceManifest from "@tool-platform/port-reference/manifest";
 import PrivacyCookieCopyGeneratorManifest from "@tool-platform/privacy-cookie-copy-generator/manifest";
@@ -294,6 +296,7 @@ export const toolManifests: ToolManifest[] = [
   HttpStatusReferenceManifest,
   ImageCompressorManifest,
   ImageOcrPreprocessorManifest,
+  ImageSplitterManifest,
   ImageWatermarkManifest,
   IncidentTimelineGeneratorManifest,
   Ipv4CidrCalculatorManifest,
@@ -342,6 +345,7 @@ export const toolManifests: ToolManifest[] = [
   PercentageCalculatorManifest,
   PhysicalFitnessCalculatorManifest,
   PiiDetectorManifest,
+  PlaceholderGeneratorManifest,
   PomodoroFocusTimerManifest,
   PortReferenceManifest,
   PrivacyCookieCopyGeneratorManifest,
