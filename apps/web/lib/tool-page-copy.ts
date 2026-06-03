@@ -931,17 +931,6 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["检查每天凌晨 3 点备份任务的实际执行时间。", "验证 `0 9 * * 1-5` 是否在工作日 9 点执行。"]
   },
-  "css-clamp-generator": {
-    name: "响应式字号 Scale 生成器",
-    description: "生成响应式 CSS clamp() 字体比例、设计 token 和标题/正文排版代码。",
-    intro: "设置最小和最大字号及视口范围，生成平滑缩放的 CSS clamp() 排版代码。",
-    steps: [
-      "设置基础字号、最小视口和最大视口。",
-      "调整字号缩放比例和步进值。",
-      "复制生成的 clamp() CSS 或设计 Token。"
-    ],
-    examples: ["生成标题从 32px 到 48px 的平滑缩放。", "为设计系统制作响应式排版比例尺。"]
-  },
   "css-grid-generator": {
     name: "CSS Grid 生成器",
     description: "可视化调整列、行、间距和 auto-fit，生成可复制的 CSS Grid 布局代码。",
@@ -1188,14 +1177,14 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
   },
   "font-scale-generator": {
     name: "字号比例生成器",
-    description: "基于基础字号和比例生成排版 scale、CSS token 和预览样张。",
-    intro: "输入基础字号和缩放比例，生成一致的字号系统，适合设计系统和 CSS 变量定义。",
+    description: "生成静态字号比例或响应式 clamp() 排版 scale、CSS token 和预览样张。",
+    intro: "可在静态字号梯级和 fluid clamp 两种模式间切换，统一生成设计系统常用的排版 token。",
     steps: [
-      "设置基础字号和缩放比例（如 1.25、1.333）。",
-      "查看生成的标题到正文的字号梯级。",
-      "复制生成的 CSS token 或预览排版效果。"
+      "选择静态 scale 或 fluid clamp 模式。",
+      "根据模式设置基础字号、比例、视口范围和 token 前缀。",
+      "查看排版预览后复制 CSS token 或 clamp() 代码。"
     ],
-    examples: ["为设计系统生成 1.25 比例的 Major Third 字号系统。", "对比不同缩放比例下的排版效果。"]
+    examples: ["为设计系统生成 1.25 比例的 Major Third 字号系统。", "为标题生成从移动端到桌面端平滑缩放的 clamp() token。"]
   },
   "git-bisect-planner": {
     name: "Git Bisect 规划器",
@@ -2056,7 +2045,6 @@ const zhToolNameOverrides: Record<string, string> = {
   "cors-diagnostics": "CORS 诊断工具",
   "cron-helper": "Cron 表达式助手",
   "csp-generator": "CSP 生成器",
-  "css-clamp-generator": "响应式字号 Scale 生成器",
   "css-color-picker": "CSS 颜色拾取器",
   "css-grid-generator": "CSS Grid 生成器",
   "css-specificity-calculator": "CSS 权重计算器",

@@ -30,7 +30,6 @@ import CookieParserManifest from "@tool-platform/cookie-parser/manifest";
 import CorsDiagnosticsManifest from "@tool-platform/cors-diagnostics/manifest";
 import CronHelperManifest from "@tool-platform/cron-helper/manifest";
 import CspGeneratorManifest from "@tool-platform/csp-generator/manifest";
-import CssClampGeneratorManifest from "@tool-platform/css-clamp-generator/manifest";
 import CssColorPickerManifest from "@tool-platform/css-color-picker/manifest";
 import CssGridGeneratorManifest from "@tool-platform/css-grid-generator/manifest";
 import CssSpecificityCalculatorManifest from "@tool-platform/css-specificity-calculator/manifest";
@@ -215,7 +214,6 @@ export const toolManifests: ToolManifest[] = [
   CorsDiagnosticsManifest,
   CronHelperManifest,
   CspGeneratorManifest,
-  CssClampGeneratorManifest,
   CssColorPickerManifest,
   CssGridGeneratorManifest,
   CssSpecificityCalculatorManifest,

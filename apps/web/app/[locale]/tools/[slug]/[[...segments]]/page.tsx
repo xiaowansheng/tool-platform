@@ -22,6 +22,7 @@ interface ToolRouteParams {
 }
 
 const TOOL_ROUTE_ALIASES: Record<string, string> = {
+  "css-clamp-generator": "font-scale-generator",
   "open-graph-preview": "meta-tags-seo-preview",
   "sri-hash-generator": "hash-generator"
 };

@@ -41,7 +41,6 @@ export const toolAppLoaders = {
   "cors-diagnostics": () => import("@tool-platform/cors-diagnostics/app"),
   "cron-helper": () => import("@tool-platform/cron-helper/app"),
   "csp-generator": () => import("@tool-platform/csp-generator/app"),
-  "css-clamp-generator": () => import("@tool-platform/css-clamp-generator/app"),
   "css-color-picker": () => import("@tool-platform/css-color-picker/app"),
   "css-grid-generator": () => import("@tool-platform/css-grid-generator/app"),
   "css-specificity-calculator": () => import("@tool-platform/css-specificity-calculator/app"),

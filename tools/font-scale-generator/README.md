@@ -1,6 +1,6 @@
 # Font Scale Generator
 
-基于基础字号和比例生成排版 scale、CSS token 和预览样张。
+生成静态字号比例或响应式 clamp() 排版 scale、CSS token 和预览样张。
 
 ## 概述
 
@@ -8,7 +8,7 @@
 |------|-----|
 | 分类 | 设计工具 |
 | 运行环境 | 轻量（主线程） |
-| 标签 | typography、font scale、type scale、css tokens、design system |
+| 标签 | typography、font scale、type scale、css tokens、design system、clamp、fluid、responsive |
 | 权限 | clipboard |
 
 ## 目录结构
