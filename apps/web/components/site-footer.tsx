@@ -4,6 +4,7 @@ import { categories, getAllTools, type ToolCategory } from "@tool-platform/tool-
 
 import { Link } from "@/i18n/navigation";
 import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
+import { FeedbackButton } from "./feedback-button";
 
 const footerCategoryIds: ToolCategory[] = [
   "developer-tools",
@@ -27,6 +28,21 @@ export function SiteFooter() {
 
   return (
     <footer className="site-footer" aria-label={t("ariaLabel")}>
+      <div className="site-footer__feedback-section">
+        <div className="site-footer__feedback-card">
+          <div className="site-footer__feedback-info">
+            <h4>{t("feedbackCTA")}</h4>
+            <p>{t("feedbackCTAExplain")}</p>
+          </div>
+          <FeedbackButton variant="button" className="site-footer__feedback-btn">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <span>{t("submitFeedback")}</span>
+          </FeedbackButton>
+        </div>
+      </div>
+
       <div className="site-footer__content">
         <div className="site-footer__brand">
           <span className="pill">Tool Platform</span>

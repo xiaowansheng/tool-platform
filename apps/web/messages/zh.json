@@ -7,6 +7,7 @@
     "sidebarDescription": "面向插件化工具的浏览器工作台，优先实现文档中的第一阶段能力。",
     "home": "首页",
     "search": "搜索",
+    "feedback": "功能反馈",
     "footerFocus": "阶段聚焦：平台骨架、Manifest、动态路由、分类与搜索。"
   },
   "siteFooter": {
@@ -21,6 +22,9 @@
     "search": "搜索",
     "categories": "分类",
     "popularTools": "常用工具",
+    "feedbackCTA": "有任何好的建议或遇到问题？",
+    "feedbackCTAExplain": "无论是工具新增建议、使用体验吐槽还是 Bug 反馈，我们都非常看重您的意见。",
+    "submitFeedback": "提交功能反馈",
     "summary": "{tools} 个工具 · {categories} 个分类",
     "copyright": "© {year} Tool Platform"
   },
@@ -222,5 +226,31 @@
       "label": "导航发现",
       "description": "用于工具目录、资源导航、站点索引、发现入口和集合整理。"
     }
+  },
+  "feedback": {
+    "title": "功能反馈",
+    "description": "欢迎提交建议或问题，您可以通过邮件向我们反馈。",
+    "type": "反馈类型",
+    "typeBug": "🐛 缺陷反馈 (Bug)",
+    "typeFeature": "✨ 功能建议 (Feature)",
+    "typeTool": "🛠️ 新增工具 (New Tool)",
+    "typeOther": "💬 其他反馈 (Other)",
+    "tool": "涉及工具",
+    "toolPlaceholder": "请选择涉及的工具...",
+    "toolAll": "通用 / 平台本身",
+    "inputManually": "手动输入名称",
+    "selectFromList": "从列表选择",
+    "manualToolPlaceholder": "请输入涉及的工具名称 (例如：JSON 格式化)...",
+    "environment": "运行环境",
+    "envPlaceholder": "例如: macOS Chrome 120 或 移动端",
+    "envQuickTags": "常用环境标签：",
+    "content": "详细描述",
+    "contentPlaceholder": "请提供问题的重现步骤或建议的详细描述...",
+    "emailNotice": "反馈邮箱",
+    "sendEmail": "发送反馈邮件",
+    "copyTemplate": "复制反馈模板",
+    "copied": "模板已成功复制到剪贴板！",
+    "close": "关闭",
+    "requiredField": "此项为必填项"
   }
 }

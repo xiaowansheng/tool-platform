@@ -2849,6 +2849,171 @@ a.category-card:hover .category-card__tooltip {
   color: var(--accent-primary);
 }
 
+/* ==========================================================================
+   Feedback CTA in Footer
+   ========================================================================== */
+
+.site-footer__feedback-section {
+  grid-column: 1 / -1;
+  margin-bottom: 0.5rem;
+}
+
+.site-footer__feedback-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg-muted) 100%);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.site-footer__feedback-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: var(--shadow-glow), var(--shadow-sm);
+}
+
+.site-footer__feedback-info h4 {
+  margin: 0 0 0.35rem 0;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.site-footer__feedback-info p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.site-footer__feedback-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.65rem 1.25rem;
+  background: var(--accent-primary);
+  color: #000000;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+[data-theme="light"] .site-footer__feedback-btn {
+  color: #ffffff;
+}
+
+.site-footer__feedback-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  background: var(--accent-primary) !important;
+  border-color: transparent !important;
+}
+
+.site-footer__feedback-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Feedback Dialog Action Buttons */
+.feedback-dialog__btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  background: var(--accent-primary);
+  color: #000000;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+[data-theme="light"] .feedback-dialog__btn-primary {
+  color: #ffffff;
+}
+
+.feedback-dialog__btn-primary:hover {
+  opacity: 0.9 !important;
+  transform: translateY(-1px);
+  background: var(--accent-primary) !important;
+  border-color: transparent !important;
+  box-shadow: var(--shadow-md);
+}
+
+.feedback-dialog__btn-primary:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.feedback-dialog__btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  background: var(--bg-emphasis);
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-default);
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+.feedback-dialog__btn-secondary:hover {
+  background: var(--bg-emphasis) !important;
+  border-color: var(--border-strong) !important;
+  transform: translateY(-1px);
+}
+
+.feedback-dialog__btn-secondary:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.feedback-dialog__btn-close {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary) !important;
+  border: 1px solid transparent;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+.feedback-dialog__btn-close:hover {
+  background: var(--bg-emphasis) !important;
+  color: var(--text-primary) !important;
+  transform: translateY(-1px);
+}
+
+.feedback-dialog__btn-close:active {
+  transform: translateY(0) scale(0.97);
+}
+
+@media (max-width: 768px) {
+  .site-footer__feedback-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+  }
+  .site-footer__feedback-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .site-footer__bottom {
   display: flex;
   justify-content: space-between;

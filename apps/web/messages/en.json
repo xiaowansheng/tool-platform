@@ -7,6 +7,7 @@
     "sidebarDescription": "A browser workstation for plugin-based tools, focused on Phase One capabilities.",
     "home": "Home",
     "search": "Search",
+    "feedback": "Feedback",
     "footerFocus": "Phase focus: platform skeleton, Manifest, dynamic routing, categories & search."
   },
   "siteFooter": {
@@ -21,6 +22,9 @@
     "search": "Search",
     "categories": "Categories",
     "popularTools": "Popular Tools",
+    "feedbackCTA": "Have any feedback or questions?",
+    "feedbackCTAExplain": "Whether it's a tool request, usability complaint, or a bug report, we value your suggestions.",
+    "submitFeedback": "Submit Feedback",
     "summary": "{tools} tools · {categories} categories",
     "copyright": "© {year} Tool Platform"
   },
@@ -222,5 +226,31 @@
       "label": "Discovery Tools",
       "description": "Tool directories, resource navigation, site indexes, discovery entry points, and collections."
     }
+  },
+  "feedback": {
+    "title": "Feedback",
+    "description": "Welcome to submit suggestions or reports. You can send them to us via email.",
+    "type": "Feedback Type",
+    "typeBug": "🐛 Bug Report",
+    "typeFeature": "✨ Feature Request",
+    "typeTool": "🛠️ New Tool Request",
+    "typeOther": "💬 Other Feedback",
+    "tool": "Target Tool",
+    "toolPlaceholder": "Select target tool...",
+    "toolAll": "General / Platform",
+    "inputManually": "Input manually",
+    "selectFromList": "Select from list",
+    "manualToolPlaceholder": "Enter target tool name (e.g. JSON Formatter)...",
+    "environment": "Environment",
+    "envPlaceholder": "e.g., macOS Chrome 120 or Mobile",
+    "envQuickTags": "Quick tags:",
+    "content": "Description",
+    "contentPlaceholder": "Please describe the problem reproduction steps or details of your suggestion...",
+    "emailNotice": "Feedback Email",
+    "sendEmail": "Send Feedback Email",
+    "copyTemplate": "Copy Feedback Template",
+    "copied": "Template copied to clipboard successfully!",
+    "close": "Close",
+    "requiredField": "This field is required"
   }
 }
