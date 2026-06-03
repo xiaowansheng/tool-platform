@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
+// --- Quality Checker Definitions ---
 interface ReadmeCheck {
   label: string;
   weight: number;
@@ -31,6 +31,37 @@ Open a tool page, paste input, and copy the generated output.
 ## License
 
 MIT`;
+
+const badgeColors = ["brightgreen", "green", "yellowgreen", "yellow", "orange", "red", "blue", "lightgrey", "success", "important", "informational"];
+const badgeStyles = ["flat", "flat-square", "plastic", "for-the-badge", "social"];
+
+function encodeBadgeSegment(value: string) {
+  return encodeURIComponent(value.trim().replace(/-/g, "--").replace(/_/g, "__") || "badge");
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function buildBadgeUrl(label: string, message: string, color: string, style: string, logo: string) {
+  const normalizedColor = color.trim().replace(/^#/, "") || "blue";
+  const params = new URLSearchParams();
+
+  if (style) {
+    params.set("style", style);
+  }
+
+  if (logo.trim()) {
+    params.set("logo", logo.trim());
+  }
+
+  const query = params.toString();
+  return `https://img.shields.io/badge/${encodeBadgeSegment(label)}-${encodeBadgeSegment(message)}-${encodeURIComponent(normalizedColor)}${query ? `?${query}` : ""}`;
+}
 
 function wordCount(value: string) {
   return value.trim().split(/\s+/).filter(Boolean).length;
@@ -90,15 +121,41 @@ function buildReport(readme: string) {
 }
 
 export default function ReadmeQualityCheckerTool({ manifest }: ToolAppProps) {
-  const [input, setInput] = useState(sampleReadme);
-  const [copied, setCopied] = useState(false);
-  const analysis = analyzeReadme(input);
-  const report = buildReport(input);
+  const [activeTab, setActiveTab] = useState<"checker" | "badge">("checker");
 
-  async function copyReport() {
+  // --- Quality Checker States ---
+  const [checkerInput, setCheckerInput] = useState(sampleReadme);
+  const [checkerCopied, setCheckerCopied] = useState(false);
+
+  const analysis = analyzeReadme(checkerInput);
+  const report = buildReport(checkerInput);
+
+  const handleCopyReport = async () => {
     await navigator.clipboard.writeText(report);
-    setCopied(true);
-  }
+    setCheckerCopied(true);
+    setTimeout(() => setCheckerCopied(false), 2000);
+  };
+
+  // --- Badge Generator States ---
+  const [badgeLabel, setBadgeLabel] = useState("build");
+  const [badgeMessage, setBadgeMessage] = useState("passing");
+  const [badgeColor, setBadgeColor] = useState("brightgreen");
+  const [badgeStyle, setBadgeStyle] = useState("flat-square");
+  const [badgeLogo, setBadgeLogo] = useState("githubactions");
+  const [badgeLink, setBadgeLink] = useState("https://github.com/example/project/actions");
+  const [badgeCopied, setBadgeCopied] = useState(false);
+
+  const badgeUrl = buildBadgeUrl(badgeLabel, badgeMessage, badgeColor, badgeStyle, badgeLogo);
+  const badgeMarkdown = badgeLink.trim() ? `[![${badgeLabel}](${badgeUrl})](${badgeLink.trim()})` : `![${badgeLabel}](${badgeUrl})`;
+  const badgeHtml = badgeLink.trim()
+    ? `<a href="${escapeHtml(badgeLink.trim())}"><img alt="${escapeHtml(badgeLabel)}" src="${escapeHtml(badgeUrl)}"></a>`
+    : `<img alt="${escapeHtml(badgeLabel)}" src="${escapeHtml(badgeUrl)}">`;
+
+  const handleCopyBadge = async () => {
+    await navigator.clipboard.writeText(badgeMarkdown);
+    setBadgeCopied(true);
+    setTimeout(() => setBadgeCopied(false), 2000);
+  };
 
   return (
     <section className="tool-panel">
@@ -109,48 +166,149 @@ export default function ReadmeQualityCheckerTool({ manifest }: ToolAppProps) {
         </div>
         <p>{manifest.description}</p>
       </div>
-      <div className="tool-results">
-        <article className="detail-card">
-          <h3>得分</h3>
-          <p>{analysis.score}/100</p>
-        </article>
-        <article className="detail-card">
-          <h3>字数</h3>
-          <p>{analysis.metrics.words}</p>
-        </article>
-        <article className="detail-card">
-          <h3>缺口</h3>
-          <p>{analysis.checks.filter((check) => !check.passed).length}</p>
-        </article>
+
+      {/* Tabs */}
+      <div style={{ display: "flex", borderBottom: "2px solid #eee", gap: "24px", marginBottom: "20px" }}>
+        <button
+          type="button"
+          onClick={() => setActiveTab("checker")}
+          style={{
+            background: "none",
+            border: "none",
+            padding: "12px 4px",
+            fontSize: "16px",
+            fontWeight: activeTab === "checker" ? "bold" : "normal",
+            color: activeTab === "checker" ? "#4f46e5" : "#666",
+            borderBottom: activeTab === "checker" ? "3px solid #4f46e5" : "3px solid transparent",
+            cursor: "pointer"
+          }}
+        >
+          📊 质量检查报告
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("badge")}
+          style={{
+            background: "none",
+            border: "none",
+            padding: "12px 4px",
+            fontSize: "16px",
+            fontWeight: activeTab === "badge" ? "bold" : "normal",
+            color: activeTab === "badge" ? "#4f46e5" : "#666",
+            borderBottom: activeTab === "badge" ? "3px solid #4f46e5" : "3px solid transparent",
+            cursor: "pointer"
+          }}
+        >
+          🛡️ Badge 状态徽章生成器
+        </button>
       </div>
-      <div className="tool-toolbar">
-        <button type="button" onClick={() => void copyReport()}>{copied ? "已复制" : "复制质量报告"}</button>
-      </div>
-      <div className="workspace workspace--two-column">
-        <label className="tool-field">
-          <span>README.md</span>
-          <textarea value={input} onChange={(event) => {
-            setInput(event.target.value);
-            setCopied(false);
-          }} spellCheck={false} />
-        </label>
-        <label className="tool-field">
-          <span>报告</span>
-          <textarea value={report} readOnly spellCheck={false} />
-        </label>
-      </div>
-      <div className="tool-table">
-        <div className="tool-table__row tool-table__row--head">
-          <span>检查项</span>
-          <span>状态</span>
-        </div>
-        {analysis.checks.map((check) => (
-          <div className="tool-table__row" key={check.label}>
-            <span>{check.label}</span>
-            <span>{check.passed ? "通过" : check.hint}</span>
+
+      {activeTab === "checker" ? (
+        <>
+          <div className="tool-results">
+            <article className="detail-card">
+              <h3>得分</h3>
+              <p>{analysis.score}/100</p>
+            </article>
+            <article className="detail-card">
+              <h3>字数</h3>
+              <p>{analysis.metrics.words}</p>
+            </article>
+            <article className="detail-card">
+              <h3>缺口</h3>
+              <p>{analysis.checks.filter((check) => !check.passed).length}</p>
+            </article>
           </div>
-        ))}
-      </div>
+          <div className="tool-toolbar" style={{ marginTop: "16px" }}>
+            <button type="button" onClick={handleCopyReport}>
+              {checkerCopied ? "已复制" : "复制质量报告"}
+            </button>
+          </div>
+          <div className="workspace workspace--two-column" style={{ marginTop: "16px" }}>
+            <label className="tool-field">
+              <span>README.md</span>
+              <textarea value={checkerInput} onChange={(event) => setCheckerInput(event.target.value)} spellCheck={false} rows={12} />
+            </label>
+            <label className="tool-field">
+              <span>报告报告</span>
+              <textarea value={report} readOnly spellCheck={false} rows={12} />
+            </label>
+          </div>
+          <div className="tool-table" style={{ marginTop: "16px" }}>
+            <div className="tool-table__row tool-table__row--head">
+              <span>检查项</span>
+              <span>状态</span>
+            </div>
+            {analysis.checks.map((check) => (
+              <div className="tool-table__row" key={check.label}>
+                <span>{check.label}</span>
+                <span>{check.passed ? "🟢 通过" : `🔴 ${check.hint}`}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Badge Generator View */}
+          <div className="tool-toolbar tool-toolbar--grid">
+            <label className="tool-field tool-field--compact">
+              <span>标签</span>
+              <input value={badgeLabel} onChange={(event) => setBadgeLabel(event.target.value)} />
+            </label>
+            <label className="tool-field tool-field--compact">
+              <span>状态文本</span>
+              <input value={badgeMessage} onChange={(event) => setBadgeMessage(event.target.value)} />
+            </label>
+            <label className="tool-field tool-field--compact">
+              <span>颜色</span>
+              <select value={badgeColor} onChange={(event) => setBadgeColor(event.target.value)}>
+                {badgeColors.map((item) => <option key={item} value={item}>{item}</option>)}
+              </select>
+            </label>
+            <label className="tool-field tool-field--compact">
+              <span>样式</span>
+              <select value={badgeStyle} onChange={(event) => setBadgeStyle(event.target.value)}>
+                {badgeStyles.map((item) => <option key={item} value={item}>{item}</option>)}
+              </select>
+            </label>
+          </div>
+          <div className="workspace workspace--two-column" style={{ marginTop: "16px" }}>
+            <div className="workspace workspace--stack" style={{ gap: "16px" }}>
+              <label className="tool-field" style={{ margin: 0 }}>
+                <span>图标</span>
+                <input value={badgeLogo} onChange={(event) => setBadgeLogo(event.target.value)} placeholder="simple-icons 名称" />
+              </label>
+              <label className="tool-field" style={{ margin: 0 }}>
+                <span>链接</span>
+                <input value={badgeLink} onChange={(event) => setBadgeLink(event.target.value)} placeholder="可选跳转链接" />
+              </label>
+              <div className="detail-card" style={{ padding: "16px" }}>
+                <h3>预览效果</h3>
+                <p style={{ marginTop: "12px" }}>
+                  <img src={badgeUrl} alt={`${badgeLabel} badge`} style={{ display: "inline-block" }} />
+                </p>
+              </div>
+            </div>
+            <div className="workspace workspace--stack" style={{ gap: "16px" }}>
+              <button
+                type="button"
+                onClick={handleCopyBadge}
+                style={{ padding: "8px", fontWeight: "600", color: "#fff", background: "#4f46e5", border: "none", borderRadius: "4px", cursor: "pointer" }}
+              >
+                {badgeCopied ? "已复制" : "复制 Markdown Code"}
+              </button>
+              <label className="tool-field" style={{ margin: 0 }}>
+                <span>Markdown</span>
+                <textarea value={badgeMarkdown} readOnly spellCheck={false} rows={4} />
+              </label>
+              <label className="tool-field" style={{ margin: 0 }}>
+                <span>HTML</span>
+                <textarea value={badgeHtml} readOnly spellCheck={false} rows={4} />
+              </label>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }

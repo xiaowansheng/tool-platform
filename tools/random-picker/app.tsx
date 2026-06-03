@@ -55,7 +55,7 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
     localStorage.setItem("entertainment_theme", newTheme);
   };
 
-  const [activeTab, setActiveTab] = useState<"number" | "list">("number");
+  const [activeTab, setActiveTab] = useState<"number" | "list" | "team">("number");
   const [seed, setSeed] = useState("lucky-draw");
   const [extractCount, setExtractCount] = useState(1);
   const [spinCount, setSpinCount] = useState(0);
@@ -74,6 +74,11 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
   // Tab 2: List Config
   const [listInput, setListInput] = useState(listPresets.names);
   const [allowDupList, setAllowDupList] = useState(false);
+
+  // Tab 3: Grouping Config
+  const [teamNamesInput, setTeamNamesInput] = useState(listPresets.names);
+  const [teamCount, setTeamCount] = useState(3);
+  const [teamsState, setTeamsState] = useState<string[][]>([]);
 
   // Animation status
   const [cards, setCards] = useState<RollCard[]>([]);
@@ -152,6 +157,45 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
     const rng = seededRandom(`${seed}:${nextSpinCount}`);
 
     let winners: string[] = [];
+
+    if (activeTab === "team") {
+      const names = teamNamesInput.split(/\r?\n|,/).map((item) => item.trim()).filter(Boolean);
+      if (names.length === 0) {
+        setError("名单不能为空。");
+        return;
+      }
+      if (teamCount <= 0) {
+        setError("分组数量必须大于 0。");
+        return;
+      }
+      setSpinCount(nextSpinCount);
+      setIsSpinning(true);
+
+      // Play shuffling sound/ticks
+      let ticks = 0;
+      const tickTimer = setInterval(() => {
+        playTickSound();
+        ticks++;
+        if (ticks >= 10) clearInterval(tickTimer);
+      }, 100);
+
+      setTimeout(() => {
+        const rand = seededRandom(`${seed}:${nextSpinCount}`);
+        const shuffled = [...names].sort(() => rand() - 0.5);
+        const teams = Array.from({ length: Math.max(1, teamCount) }, () => [] as string[]);
+        shuffled.forEach((name, index) => teams[index % teams.length].push(name));
+
+        setTeamsState(teams);
+        setIsSpinning(false);
+        playResolveSound(0);
+
+        const timeString = new Date().toLocaleTimeString();
+        const output = teams.map((team, index) => `第 ${index + 1} 组: ${team.join(", ")}`).join("\n");
+        const record = `[${timeString}] 随机分组第 ${nextSpinCount} 组 (共 ${names.length} 人, ${teamCount} 组):\n${output}`;
+        setHistory((prev) => [record, ...prev].slice(0, 30));
+      }, 1000);
+      return;
+    }
 
     if (activeTab === "number") {
       if (numMin > numMax) {
@@ -559,7 +603,7 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
             ))}
           </div>
         </div>
-        <p style={{ marginTop: "0.5rem" }}>支持数字范围抽取和自定义文本列表抽取，采用精美的卡片翻转滚动动画和音乐音效。</p>
+        <p style={{ marginTop: "0.5rem" }}>支持数字范围抽取、自定义文本列表抽取以及随机分组，采用精美的卡片翻转滚动动画和音乐音效。</p>
       </div>
 
       {/* Tabs Menu */}
@@ -604,6 +648,26 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
         >
           📋 从列表抽取
         </button>
+        <button
+          type="button"
+          disabled={isSpinning}
+          onClick={() => {
+            setActiveTab("team");
+            setCards([]);
+          }}
+          style={{
+            padding: "0.75rem 1.25rem",
+            background: "none",
+            border: "none",
+            borderBottom: activeTab === "team" ? "2px solid var(--accent-primary, #ffe066)" : "none",
+            color: activeTab === "team" ? "var(--accent-primary, #ffe066)" : "var(--text-secondary, #8e8e93)",
+            fontWeight: "bold",
+            cursor: isSpinning ? "default" : "pointer",
+            marginBottom: "-2px"
+          }}
+        >
+          👥 随机分组
+        </button>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", paddingRight: "0.5rem" }}>
           <label style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem", fontSize: "0.85rem", cursor: "pointer", color: "var(--text-secondary, #8e8e93)" }}>
             <input type="checkbox" checked={soundEnabled} onChange={(e) => setSoundEnabled(e.target.checked)} />
@@ -619,17 +683,31 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
           <input value={seed} disabled={isSpinning} onChange={(e) => setSeed(e.target.value)} />
         </label>
 
-        <label className="tool-field tool-field--compact">
-          <span>抽取个数</span>
-          <input
-            type="number"
-            min={1}
-            max={50}
-            value={extractCount}
-            disabled={isSpinning}
-            onChange={(e) => setExtractCount(Math.max(1, Math.min(50, Number(e.target.value) || 1)))}
-          />
-        </label>
+        {activeTab !== "team" ? (
+          <label className="tool-field tool-field--compact">
+            <span>抽取个数</span>
+            <input
+              type="number"
+              min={1}
+              max={50}
+              value={extractCount}
+              disabled={isSpinning}
+              onChange={(e) => setExtractCount(Math.max(1, Math.min(50, Number(e.target.value) || 1)))}
+            />
+          </label>
+        ) : (
+          <label className="tool-field tool-field--compact">
+            <span>分组数量</span>
+            <input
+              type="number"
+              min={1}
+              max={20}
+              value={teamCount}
+              disabled={isSpinning}
+              onChange={(e) => setTeamCount(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
+            />
+          </label>
+        )}
 
         <button type="button" disabled={isSpinning} onClick={() => setSeed(String(Date.now()).slice(-6))}>随机生成种子</button>
         <button
@@ -699,7 +777,7 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
                 </label>
               </div>
             </>
-          ) : (
+          ) : activeTab === "list" ? (
             <>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border-default, #2d2d30)", paddingBottom: "0.5rem" }}>
                 <h3 style={{ fontSize: "1.1rem", margin: 0, color: "var(--text-primary)" }}>候选项列表</h3>
@@ -732,6 +810,25 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
                 允许选项重复抽取
               </label>
             </>
+          ) : (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border-default, #2d2d30)", paddingBottom: "0.5rem" }}>
+                <h3 style={{ fontSize: "1.1rem", margin: 0, color: "var(--text-primary)" }}>分组名单</h3>
+                <button type="button" className="presets-btn" disabled={isSpinning} onClick={() => setTeamNamesInput(listPresets.names)}>加载示例名单</button>
+              </div>
+
+              <label className="tool-field">
+                <span>每行输入或逗号分隔一个名字</span>
+                <textarea
+                  value={teamNamesInput}
+                  disabled={isSpinning}
+                  onChange={(e) => setTeamNamesInput(e.target.value)}
+                  placeholder="输入名字，例如：&#10;Ada&#10;Linus&#10;Grace"
+                  rows={8}
+                  style={{ fontFamily: "sans-serif", fontSize: "0.9rem" }}
+                />
+              </label>
+            </>
           )}
         </div>
 
@@ -740,40 +837,64 @@ export default function RandomPickerTool({ manifest }: ToolAppProps) {
           {/* Output Display Card */}
           <div style={{ background: "var(--bg-base, #121214)", border: "1px solid var(--border-default, #2d2d30)", borderRadius: "8px", padding: "1.5rem", minHeight: "220px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", position: "relative" }}>
             <h4 style={{ position: "absolute", top: "0.75rem", left: "0.75rem", margin: 0, fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.5, color: "var(--text-secondary)" }}>
-              🎯 抽取成果区
+              {activeTab === "team" ? "👥 分组结果区" : "🎯 抽取成果区"}
             </h4>
 
-            {cards.length === 0 ? (
-              <div style={{ textAlign: "center", color: "var(--text-secondary, #8e8e93)" }}>
-                <p style={{ fontSize: "1.2rem", fontWeight: "500", marginBottom: "0.5rem" }}>准备就绪</p>
-                <p style={{ fontSize: "0.85rem", opacity: 0.8 }}>点击上方的“开始抽取结果”按钮进行抽取</p>
-              </div>
+            {activeTab === "team" ? (
+              isSpinning ? (
+                <div style={{ textAlign: "center", color: "var(--text-secondary)" }}>
+                  <p style={{ fontSize: "1.2rem", fontWeight: "500", marginBottom: "0.5rem" }}>🔄 正在随机打乱名单并分组...</p>
+                </div>
+              ) : teamsState.length === 0 ? (
+                <div style={{ textAlign: "center", color: "var(--text-secondary)" }}>
+                  <p style={{ fontSize: "1.2rem", fontWeight: "500", marginBottom: "0.5rem" }}>等待分组</p>
+                  <p style={{ fontSize: "0.85rem", opacity: 0.8 }}>点击上方的“开始抽取结果”按钮进行分组</p>
+                </div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "100%", maxHeight: "400px", overflowY: "auto" }}>
+                  {teamsState.map((team, idx) => (
+                    <div key={idx} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border-default)", borderRadius: "6px", padding: "10px 14px", textAlign: "left" }}>
+                      <strong style={{ color: "var(--accent-primary)", fontSize: "0.95rem" }}>第 {idx + 1} 组 ({team.length} 人)</strong>
+                      <p style={{ margin: "5px 0 0 0", color: "var(--text-primary)" }}>{team.join(", ") || "-"}</p>
+                    </div>
+                  ))}
+                </div>
+              )
             ) : (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", justifyContent: "center", width: "100%", padding: "0.5rem 0" }}>
-                {cards.map((card) => (
-                  <div
-                    key={card.id}
-                    className={`picker-card ${card.isRolling ? "rolling" : "resolved"}`}
-                  >
-                    <span
-                      style={{
-                        fontSize: "1.6rem",
-                        fontWeight: "bold",
-                        fontFamily: activeTab === "number" ? "monospace" : "inherit",
-                        wordBreak: "break-all"
-                      }}
-                    >
-                      {card.currentDisplay}
-                    </span>
+              <>
+                {cards.length === 0 ? (
+                  <div style={{ textAlign: "center", color: "var(--text-secondary, #8e8e93)" }}>
+                    <p style={{ fontSize: "1.2rem", fontWeight: "500", marginBottom: "0.5rem" }}>准备就绪</p>
+                    <p style={{ fontSize: "0.85rem", opacity: 0.8 }}>点击上方的“开始抽取结果”按钮进行抽取</p>
                   </div>
-                ))}
-              </div>
-            )}
+                ) : (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", justifyContent: "center", width: "100%", padding: "0.5rem 0" }}>
+                    {cards.map((card) => (
+                      <div
+                        key={card.id}
+                        className={`picker-card ${card.isRolling ? "rolling" : "resolved"}`}
+                      >
+                        <span
+                          style={{
+                            fontSize: "1.6rem",
+                            fontWeight: "bold",
+                            fontFamily: activeTab === "number" ? "monospace" : "inherit",
+                            wordBreak: "break-all"
+                          }}
+                        >
+                          {card.currentDisplay}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-            {!isSpinning && cards.length > 0 && (
-              <div style={{ marginTop: "1rem", color: "var(--accent-primary, #ff4d4f)", fontSize: "0.85rem", fontWeight: "bold" }}>
-                🎉 抽取完成！
-              </div>
+                {!isSpinning && cards.length > 0 && (
+                  <div style={{ marginTop: "1rem", color: "var(--accent-primary, #ff4d4f)", fontSize: "0.85rem", fontWeight: "bold" }}>
+                    🎉 抽取完成！
+                  </div>
+                )}
+              </>
             )}
           </div>
 

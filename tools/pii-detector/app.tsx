@@ -94,6 +94,36 @@ const detectors: Detector[] = [
     type: "Street address",
     severity: "medium",
     regex: /\b\d{1,6}\s+[A-Za-z0-9.'-]+(?:\s+[A-Za-z0-9.'-]+){0,4}\s+(?:Street|St|Road|Rd|Avenue|Ave|Boulevard|Blvd|Lane|Ln|Drive|Dr)\b/gi
+  },
+  {
+    type: "AWS 访问密钥",
+    severity: "high",
+    regex: /AKIA[0-9A-Z]{16}/g
+  },
+  {
+    type: "GitHub Token",
+    severity: "high",
+    regex: /gh[pousr]_[A-Za-z0-9_]{20,}/g
+  },
+  {
+    type: "Slack Token",
+    severity: "high",
+    regex: /xox[baprs]-[A-Za-z0-9-]{20,}/g
+  },
+  {
+    type: "私钥 (Private Key)",
+    severity: "high",
+    regex: /-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----/g
+  },
+  {
+    type: "Env 环境变量密钥",
+    severity: "medium",
+    regex: /\b[A-Z0-9_]*(SECRET|TOKEN|PASSWORD|API_KEY)[A-Z0-9_]*\s*=\s*["']?[^"'\s]{8,}/g
+  },
+  {
+    type: "高熵通用字符串 (高熵数据)",
+    severity: "low",
+    regex: /\b[A-Za-z0-9+/=_-]{32,}\b/g
   }
 ];
 
