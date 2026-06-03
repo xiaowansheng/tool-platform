@@ -329,6 +329,9 @@ importers:
       '@tool-platform/gitignore-generator':
         specifier: workspace:*
         version: link:../../tools/gitignore-generator
+      '@tool-platform/gobang-game':
+        specifier: workspace:*
+        version: link:../../tools/gobang-game
       '@tool-platform/grade-weight-calculator':
         specifier: workspace:*
         version: link:../../tools/grade-weight-calculator
@@ -1311,6 +1314,15 @@ importers:
         version: 19.2.6
 
   tools/gitignore-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/gobang-game:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

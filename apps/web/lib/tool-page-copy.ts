@@ -684,6 +684,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["在经典 4x4 上尝试突破最高分记录。", "在较小的 3x3 棋盘上体验高难度超快节奏。"]
   },
+  "gobang-game": {
+    name: "五子棋大师",
+    description: "经典五子棋对弈游戏，提供人机对战（智能启发式AI）与双人同屏对战模式，具备悔棋、落子声效、胜利连线高亮及逼真棋盘视觉效果。",
+    intro: "两人在棋盘上轮流落子，先在横、竖、斜任意方向连成五子（或以上）者获胜，人机模式配备强力防守/进攻AI。",
+    steps: [
+      "选择人机对战（PvE）或者同屏双人对战（PvP）对局模式。",
+      "黑子先行，点击棋盘上的任意网格线交叉点完成落子。",
+      "如果不小心点错或者想重新谋划，可以点击「悔棋」撤销历史落子。",
+      "当任意一方连成 5 子时，棋子将闪烁连线高亮表示获胜。"
+    ],
+    examples: ["在人机模式下与智能启发式 AI 展开策略攻防对决。", "在双人同屏模式下和身旁好友下一盘，进行逻辑博弈。"]
+  },
   "prometheus-query-helper": {
     name: "Prometheus 查询助手",
     description: "按常见监控场景生成 PromQL，并提示高基数和低效查询风险。",
@@ -2130,6 +2142,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "flexbox-generator": "Flexbox 生成器",
   "font-scale-generator": "字号比例生成器",
   "game-2048": "2048 游戏",
+  "gobang-game": "五子棋大师",
   "git-bisect-planner": "Git Bisect 规划器",
   "git-patch-security-reviewer": "Git Patch 安全审查器",
   "gitignore-generator": ".gitignore 生成器",

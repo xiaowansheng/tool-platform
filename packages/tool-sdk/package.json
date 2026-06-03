@@ -80,6 +80,7 @@
     "@tool-platform/git-bisect-planner": "workspace:*",
     "@tool-platform/git-patch-security-reviewer": "workspace:*",
     "@tool-platform/gitignore-generator": "workspace:*",
+    "@tool-platform/gobang-game": "workspace:*",
     "@tool-platform/grade-weight-calculator": "workspace:*",
     "@tool-platform/gradient-generator": "workspace:*",
     "@tool-platform/grafana-dashboard-formatter": "workspace:*",

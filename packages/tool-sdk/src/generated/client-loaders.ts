@@ -77,6 +77,7 @@ export const toolAppLoaders = {
   "git-bisect-planner": () => import("@tool-platform/git-bisect-planner/app"),
   "git-patch-security-reviewer": () => import("@tool-platform/git-patch-security-reviewer/app"),
   "gitignore-generator": () => import("@tool-platform/gitignore-generator/app"),
+  "gobang-game": () => import("@tool-platform/gobang-game/app"),
   "grade-weight-calculator": () => import("@tool-platform/grade-weight-calculator/app"),
   "gradient-generator": () => import("@tool-platform/gradient-generator/app"),
   "grafana-dashboard-formatter": () => import("@tool-platform/grafana-dashboard-formatter/app"),

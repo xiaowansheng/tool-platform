@@ -66,6 +66,7 @@ import Game2048Manifest from "@tool-platform/game-2048/manifest";
 import GitBisectPlannerManifest from "@tool-platform/git-bisect-planner/manifest";
 import GitPatchSecurityReviewerManifest from "@tool-platform/git-patch-security-reviewer/manifest";
 import GitignoreGeneratorManifest from "@tool-platform/gitignore-generator/manifest";
+import GobangGameManifest from "@tool-platform/gobang-game/manifest";
 import GradeWeightCalculatorManifest from "@tool-platform/grade-weight-calculator/manifest";
 import GradientGeneratorManifest from "@tool-platform/gradient-generator/manifest";
 import GrafanaDashboardFormatterManifest from "@tool-platform/grafana-dashboard-formatter/manifest";
@@ -254,6 +255,7 @@ export const toolManifests: ToolManifest[] = [
   GitBisectPlannerManifest,
   GitPatchSecurityReviewerManifest,
   GitignoreGeneratorManifest,
+  GobangGameManifest,
   GradeWeightCalculatorManifest,
   GradientGeneratorManifest,
   GrafanaDashboardFormatterManifest,
