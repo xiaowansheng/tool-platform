@@ -117,6 +117,7 @@ export const toolAppLoaders = {
   "minesweeper": () => import("@tool-platform/minesweeper/app"),
   "mock-data-generator": () => import("@tool-platform/mock-data-generator/app"),
   "neon-snake": () => import("@tool-platform/neon-snake/app"),
+  "neon-tetris": () => import("@tool-platform/neon-tetris/app"),
   "notification-payload-tester": () => import("@tool-platform/notification-payload-tester/app"),
   "number-base-converter": () => import("@tool-platform/number-base-converter/app"),
   "oauth-oidc-debugger": () => import("@tool-platform/oauth-oidc-debugger/app"),

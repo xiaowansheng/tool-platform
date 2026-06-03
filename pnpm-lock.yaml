@@ -449,6 +449,9 @@ importers:
       '@tool-platform/neon-snake':
         specifier: workspace:*
         version: link:../../tools/neon-snake
+      '@tool-platform/neon-tetris':
+        specifier: workspace:*
+        version: link:../../tools/neon-tetris
       '@tool-platform/notification-payload-tester':
         specifier: workspace:*
         version: link:../../tools/notification-payload-tester
@@ -1668,6 +1671,15 @@ importers:
         version: 19.2.6
 
   tools/neon-snake:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/neon-tetris:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

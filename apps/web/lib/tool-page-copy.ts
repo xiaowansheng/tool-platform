@@ -473,6 +473,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["在极速 + 障碍物的高难度下挑战最高得分记录。", "开启穿墙模式，体验轻松休闲的合成蛇长龙。"]
   },
+  "neon-tetris": {
+    name: "霓虹方块",
+    description: "赛博霓虹经典方块游戏，拥有炫酷的流光特效、满行消除爆破动画、行数与等级成长机制，配有合成器音乐般动作音效，支持按键暂存（Hold）与下坠预测。",
+    intro: "经典俄罗斯方块玩法的霓虹街机升级版，拖拽或按键旋转方块填满整行消除，挑战自我极限得分。",
+    steps: [
+      "使用键盘方向键或触屏按钮左右移动方块，按上键旋转，空格键瞬落。",
+      "按 Shift 键可以把当前方块暂存（Hold）到左侧，留到关键时刻使用。",
+      "利用下方浅色虚线框预测影确定降落位置，避免误放产生空隙。",
+      "每消除 10 行将提升等级并增加下滑速度，行数越多得分倍增越高。"
+    ],
+    examples: ["在高等级速度下依靠瞬落（Hard Drop）斩获极限分数。", "合理利用 Hold 暂存区，保留 I 型方块连续消去 4 行达成 Tetris。"]
+  },
   "utm-builder": {
     name: "UTM 链接构建器",
     description: "生成带 UTM 参数的营销链接，并保留原始查询参数。",
@@ -2160,6 +2172,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "mime-type-lookup": "MIME 类型查询",
   "minesweeper": "经典扫雷",
   "neon-snake": "霓虹贪吃蛇",
+  "neon-tetris": "霓虹方块",
   "mock-data-generator": "Mock 数据生成器",
   "notification-payload-tester": "通知 Payload 测试器",
   "number-base-converter": "进制转换器",

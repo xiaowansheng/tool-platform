@@ -120,6 +120,7 @@
     "@tool-platform/minesweeper": "workspace:*",
     "@tool-platform/mock-data-generator": "workspace:*",
     "@tool-platform/neon-snake": "workspace:*",
+    "@tool-platform/neon-tetris": "workspace:*",
     "@tool-platform/notification-payload-tester": "workspace:*",
     "@tool-platform/number-base-converter": "workspace:*",
     "@tool-platform/oauth-oidc-debugger": "workspace:*",

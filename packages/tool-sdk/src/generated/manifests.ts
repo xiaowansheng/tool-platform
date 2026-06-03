@@ -106,6 +106,7 @@ import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
 import MinesweeperManifest from "@tool-platform/minesweeper/manifest";
 import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manifest";
 import NeonSnakeManifest from "@tool-platform/neon-snake/manifest";
+import NeonTetrisManifest from "@tool-platform/neon-tetris/manifest";
 import NotificationPayloadTesterManifest from "@tool-platform/notification-payload-tester/manifest";
 import NumberBaseConverterManifest from "@tool-platform/number-base-converter/manifest";
 import OauthOidcDebuggerManifest from "@tool-platform/oauth-oidc-debugger/manifest";
@@ -293,6 +294,7 @@ export const toolManifests: ToolManifest[] = [
   MinesweeperManifest,
   MockDataGeneratorManifest,
   NeonSnakeManifest,
+  NeonTetrisManifest,
   NotificationPayloadTesterManifest,
   NumberBaseConverterManifest,
   OauthOidcDebuggerManifest,
