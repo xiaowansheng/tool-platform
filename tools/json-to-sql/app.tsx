@@ -237,7 +237,7 @@ export default function JsonToSqlTool({ manifest }: ToolAppProps) {
 
     if (batchMode === "batch" && dialect !== "mssql") {
       // Batch mode INSERT INTO table (cols) VALUES (v1, v2), (v3, v4)...
-      const chunks: string[][] = [];
+      const chunks: Array<typeof parsedRows> = [];
       const chunkSize = 500; // max batch size to avoid huge SQL queries
       for (let i = 0; i < parsedRows.length; i += chunkSize) {
         chunks.push(parsedRows.slice(i, i + chunkSize));
