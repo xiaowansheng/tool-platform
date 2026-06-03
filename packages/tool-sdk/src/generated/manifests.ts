@@ -1,13 +1,10 @@
 import AccessLogParserManifest from "@tool-platform/access-log-parser/manifest";
 import AdrGeneratorManifest from "@tool-platform/adr-generator/manifest";
-import AgentBehaviorLogViewerManifest from "@tool-platform/agent-behavior-log-viewer/manifest";
 import AiBriefSynthesizerManifest from "@tool-platform/ai-brief-synthesizer/manifest";
 import AiChatManifest from "@tool-platform/ai-chat/manifest";
-import AiGeneratedCodeRiskCheckerManifest from "@tool-platform/ai-generated-code-risk-checker/manifest";
-import AiPromptVersionDiffManifest from "@tool-platform/ai-prompt-version-diff/manifest";
 import AiSandboxLabManifest from "@tool-platform/ai-sandbox-lab/manifest";
+import AiTrustAnalyzerManifest from "@tool-platform/ai-trust-analyzer/manifest";
 import AnimationKeyframesGeneratorManifest from "@tool-platform/animation-keyframes-generator/manifest";
-import ApiDocsSdkExampleGeneratorManifest from "@tool-platform/api-docs-sdk-example-generator/manifest";
 import ApiErrorCodeDocGeneratorManifest from "@tool-platform/api-error-code-doc-generator/manifest";
 import ApiRateLimitCalculatorManifest from "@tool-platform/api-rate-limit-calculator/manifest";
 import ArchiveStructureViewerManifest from "@tool-platform/archive-structure-viewer/manifest";
@@ -19,18 +16,15 @@ import BatchFileHashCalculatorManifest from "@tool-platform/batch-file-hash-calc
 import BorderRadiusGeneratorManifest from "@tool-platform/border-radius-generator/manifest";
 import BoxShadowGeneratorManifest from "@tool-platform/box-shadow-generator/manifest";
 import BrowserSandboxConsoleManifest from "@tool-platform/browser-sandbox-console/manifest";
-import BugReportReproStepsGeneratorManifest from "@tool-platform/bug-report-repro-steps-generator/manifest";
 import CaseConverterManifest from "@tool-platform/case-converter/manifest";
 import ChangelogGeneratorManifest from "@tool-platform/changelog-generator/manifest";
 import ChmodCalculatorManifest from "@tool-platform/chmod-calculator/manifest";
-import CodeSnippetSecurityReviewManifest from "@tool-platform/code-snippet-security-review/manifest";
 import ColorBlindnessSimulatorManifest from "@tool-platform/color-blindness-simulator/manifest";
 import ColorContrastCheckerManifest from "@tool-platform/color-contrast-checker/manifest";
 import ColorConverterManifest from "@tool-platform/color-converter/manifest";
 import ColorExtractorManifest from "@tool-platform/color-extractor/manifest";
 import ColorHarmoniesGeneratorManifest from "@tool-platform/color-harmonies-generator/manifest";
 import ColorPaletteGeneratorManifest from "@tool-platform/color-palette-generator/manifest";
-import ColorPickerManifest from "@tool-platform/color-picker/manifest";
 import ConventionalCommitHelperManifest from "@tool-platform/conventional-commit-helper/manifest";
 import CookieParserManifest from "@tool-platform/cookie-parser/manifest";
 import CorsDiagnosticsManifest from "@tool-platform/cors-diagnostics/manifest";
@@ -39,10 +33,8 @@ import CspGeneratorManifest from "@tool-platform/csp-generator/manifest";
 import CssClampGeneratorManifest from "@tool-platform/css-clamp-generator/manifest";
 import CssColorPickerManifest from "@tool-platform/css-color-picker/manifest";
 import CssGridGeneratorManifest from "@tool-platform/css-grid-generator/manifest";
-import CssNamedColorsManifest from "@tool-platform/css-named-colors/manifest";
 import CssSpecificityCalculatorManifest from "@tool-platform/css-specificity-calculator/manifest";
 import CsvCleanerManifest from "@tool-platform/csv-cleaner/manifest";
-import CsvJsonConverterManifest from "@tool-platform/csv-json-converter/manifest";
 import CsvJsonNdjsonConverterManifest from "@tool-platform/csv-json-ndjson-converter/manifest";
 import CsvProfileWorkerManifest from "@tool-platform/csv-profile-worker/manifest";
 import CurlBuilderManifest from "@tool-platform/curl-builder/manifest";
@@ -62,7 +54,6 @@ import EcommerceMarginCalculatorManifest from "@tool-platform/ecommerce-margin-c
 import EmailTemplateSandboxPreviewManifest from "@tool-platform/email-template-sandbox-preview/manifest";
 import EnvDiffMergeSanitizerManifest from "@tool-platform/env-diff-merge-sanitizer/manifest";
 import EnvParserManifest from "@tool-platform/env-parser/manifest";
-import ErrorLogTroubleshootingPathGeneratorManifest from "@tool-platform/error-log-troubleshooting-path-generator/manifest";
 import ExifMetadataToolManifest from "@tool-platform/exif-metadata-tool/manifest";
 import FaviconAppIconGeneratorManifest from "@tool-platform/favicon-app-icon-generator/manifest";
 import FfmpegEditorManifest from "@tool-platform/ffmpeg-editor/manifest";
@@ -102,8 +93,6 @@ import LicenseCompatibilityCheckerManifest from "@tool-platform/license-compatib
 import LineToolsManifest from "@tool-platform/line-tools/manifest";
 import LinkCollectionCuratorManifest from "@tool-platform/link-collection-curator/manifest";
 import LiveEventCountdownManifest from "@tool-platform/live-event-countdown/manifest";
-import LlmEvalCaseGeneratorManifest from "@tool-platform/llm-eval-case-generator/manifest";
-import LlmFactCheckChecklistGeneratorManifest from "@tool-platform/llm-fact-check-checklist-generator/manifest";
 import LogFileAnalyzerManifest from "@tool-platform/log-file-analyzer/manifest";
 import LoremIpsumGeneratorManifest from "@tool-platform/lorem-ipsum-generator/manifest";
 import MarkdownLinterManifest from "@tool-platform/markdown-linter/manifest";
@@ -129,14 +118,11 @@ import PercentageCalculatorManifest from "@tool-platform/percentage-calculator/m
 import PiiDetectorManifest from "@tool-platform/pii-detector/manifest";
 import PomodoroFocusTimerManifest from "@tool-platform/pomodoro-focus-timer/manifest";
 import PortReferenceManifest from "@tool-platform/port-reference/manifest";
-import PrChangeRiskSummarizerManifest from "@tool-platform/pr-change-risk-summarizer/manifest";
 import PrivacyCookieCopyGeneratorManifest from "@tool-platform/privacy-cookie-copy-generator/manifest";
 import PrometheusQueryHelperManifest from "@tool-platform/prometheus-query-helper/manifest";
-import PromptInjectionDetectorManifest from "@tool-platform/prompt-injection-detector/manifest";
 import PythonPlaygroundManifest from "@tool-platform/python-playground/manifest";
 import QrBarcodeToolManifest from "@tool-platform/qr-barcode-tool/manifest";
 import QueryParamBuilderManifest from "@tool-platform/query-param-builder/manifest";
-import RagChunkTokenEstimatorManifest from "@tool-platform/rag-chunk-token-estimator/manifest";
 import RandomTeamGeneratorManifest from "@tool-platform/random-team-generator/manifest";
 import ReadmeBadgeGeneratorManifest from "@tool-platform/readme-badge-generator/manifest";
 import ReadmeQualityCheckerManifest from "@tool-platform/readme-quality-checker/manifest";
@@ -164,20 +150,17 @@ import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
 import SqlIndexAdvisorManifest from "@tool-platform/sql-index-advisor/manifest";
 import SqlPlaygroundManifest from "@tool-platform/sql-playground/manifest";
 import SriHashGeneratorManifest from "@tool-platform/sri-hash-generator/manifest";
-import StackTraceExplainerManifest from "@tool-platform/stack-trace-explainer/manifest";
 import StudyPlanSchedulerManifest from "@tool-platform/study-plan-scheduler/manifest";
 import SvgOptimizerViewboxEditorManifest from "@tool-platform/svg-optimizer-viewbox-editor/manifest";
 import SystemdUnitAnalyzerManifest from "@tool-platform/systemd-unit-analyzer/manifest";
 import TailwindClassLabManifest from "@tool-platform/tailwind-class-lab/manifest";
 import TaskPriorityMatrixManifest from "@tool-platform/task-priority-matrix/manifest";
 import TerraformPlanFormatterManifest from "@tool-platform/terraform-plan-formatter/manifest";
-import TestCaseGeneratorManifest from "@tool-platform/test-case-generator/manifest";
 import TextDiffManifest from "@tool-platform/text-diff/manifest";
 import TextInspectorManifest from "@tool-platform/text-inspector/manifest";
 import ThreatModelCanvasManifest from "@tool-platform/threat-model-canvas/manifest";
 import TimestampConverterManifest from "@tool-platform/timestamp-converter/manifest";
 import TlsCertificateParserManifest from "@tool-platform/tls-certificate-parser/manifest";
-import TokenCostCalculatorManifest from "@tool-platform/token-cost-calculator/manifest";
 import TransformGeneratorManifest from "@tool-platform/transform-generator/manifest";
 import TypescriptPlaygroundManifest from "@tool-platform/typescript-playground/manifest";
 import UnicodeInspectorManifest from "@tool-platform/unicode-inspector/manifest";
@@ -200,14 +183,11 @@ import type { ToolManifest } from "../types";
 export const toolManifests: ToolManifest[] = [
   AccessLogParserManifest,
   AdrGeneratorManifest,
-  AgentBehaviorLogViewerManifest,
   AiBriefSynthesizerManifest,
   AiChatManifest,
-  AiGeneratedCodeRiskCheckerManifest,
-  AiPromptVersionDiffManifest,
   AiSandboxLabManifest,
+  AiTrustAnalyzerManifest,
   AnimationKeyframesGeneratorManifest,
-  ApiDocsSdkExampleGeneratorManifest,
   ApiErrorCodeDocGeneratorManifest,
   ApiRateLimitCalculatorManifest,
   ArchiveStructureViewerManifest,
@@ -219,18 +199,15 @@ export const toolManifests: ToolManifest[] = [
   BorderRadiusGeneratorManifest,
   BoxShadowGeneratorManifest,
   BrowserSandboxConsoleManifest,
-  BugReportReproStepsGeneratorManifest,
   CaseConverterManifest,
   ChangelogGeneratorManifest,
   ChmodCalculatorManifest,
-  CodeSnippetSecurityReviewManifest,
   ColorBlindnessSimulatorManifest,
   ColorContrastCheckerManifest,
   ColorConverterManifest,
   ColorExtractorManifest,
   ColorHarmoniesGeneratorManifest,
   ColorPaletteGeneratorManifest,
-  ColorPickerManifest,
   ConventionalCommitHelperManifest,
   CookieParserManifest,
   CorsDiagnosticsManifest,
@@ -239,10 +216,8 @@ export const toolManifests: ToolManifest[] = [
   CssClampGeneratorManifest,
   CssColorPickerManifest,
   CssGridGeneratorManifest,
-  CssNamedColorsManifest,
   CssSpecificityCalculatorManifest,
   CsvCleanerManifest,
-  CsvJsonConverterManifest,
   CsvJsonNdjsonConverterManifest,
   CsvProfileWorkerManifest,
   CurlBuilderManifest,
@@ -262,7 +237,6 @@ export const toolManifests: ToolManifest[] = [
   EmailTemplateSandboxPreviewManifest,
   EnvDiffMergeSanitizerManifest,
   EnvParserManifest,
-  ErrorLogTroubleshootingPathGeneratorManifest,
   ExifMetadataToolManifest,
   FaviconAppIconGeneratorManifest,
   FfmpegEditorManifest,
@@ -302,8 +276,6 @@ export const toolManifests: ToolManifest[] = [
   LineToolsManifest,
   LinkCollectionCuratorManifest,
   LiveEventCountdownManifest,
-  LlmEvalCaseGeneratorManifest,
-  LlmFactCheckChecklistGeneratorManifest,
   LogFileAnalyzerManifest,
   LoremIpsumGeneratorManifest,
   MarkdownLinterManifest,
@@ -329,14 +301,11 @@ export const toolManifests: ToolManifest[] = [
   PiiDetectorManifest,
   PomodoroFocusTimerManifest,
   PortReferenceManifest,
-  PrChangeRiskSummarizerManifest,
   PrivacyCookieCopyGeneratorManifest,
   PrometheusQueryHelperManifest,
-  PromptInjectionDetectorManifest,
   PythonPlaygroundManifest,
   QrBarcodeToolManifest,
   QueryParamBuilderManifest,
-  RagChunkTokenEstimatorManifest,
   RandomTeamGeneratorManifest,
   ReadmeBadgeGeneratorManifest,
   ReadmeQualityCheckerManifest,
@@ -364,20 +333,17 @@ export const toolManifests: ToolManifest[] = [
   SqlIndexAdvisorManifest,
   SqlPlaygroundManifest,
   SriHashGeneratorManifest,
-  StackTraceExplainerManifest,
   StudyPlanSchedulerManifest,
   SvgOptimizerViewboxEditorManifest,
   SystemdUnitAnalyzerManifest,
   TailwindClassLabManifest,
   TaskPriorityMatrixManifest,
   TerraformPlanFormatterManifest,
-  TestCaseGeneratorManifest,
   TextDiffManifest,
   TextInspectorManifest,
   ThreatModelCanvasManifest,
   TimestampConverterManifest,
   TlsCertificateParserManifest,
-  TokenCostCalculatorManifest,
   TransformGeneratorManifest,
   TypescriptPlaygroundManifest,
   UnicodeInspectorManifest,

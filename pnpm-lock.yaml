@@ -131,30 +131,21 @@ importers:
       '@tool-platform/adr-generator':
         specifier: workspace:*
         version: link:../../tools/adr-generator
-      '@tool-platform/agent-behavior-log-viewer':
-        specifier: workspace:*
-        version: link:../../tools/agent-behavior-log-viewer
       '@tool-platform/ai-brief-synthesizer':
         specifier: workspace:*
         version: link:../../tools/ai-brief-synthesizer
       '@tool-platform/ai-chat':
         specifier: workspace:*
         version: link:../../tools/ai-chat
-      '@tool-platform/ai-generated-code-risk-checker':
-        specifier: workspace:*
-        version: link:../../tools/ai-generated-code-risk-checker
-      '@tool-platform/ai-prompt-version-diff':
-        specifier: workspace:*
-        version: link:../../tools/ai-prompt-version-diff
       '@tool-platform/ai-sandbox-lab':
         specifier: workspace:*
         version: link:../../tools/ai-sandbox-lab
+      '@tool-platform/ai-trust-analyzer':
+        specifier: workspace:*
+        version: link:../../tools/ai-trust-analyzer
       '@tool-platform/animation-keyframes-generator':
         specifier: workspace:*
         version: link:../../tools/animation-keyframes-generator
-      '@tool-platform/api-docs-sdk-example-generator':
-        specifier: workspace:*
-        version: link:../../tools/api-docs-sdk-example-generator
       '@tool-platform/api-error-code-doc-generator':
         specifier: workspace:*
         version: link:../../tools/api-error-code-doc-generator
@@ -188,9 +179,6 @@ importers:
       '@tool-platform/browser-sandbox-console':
         specifier: workspace:*
         version: link:../../tools/browser-sandbox-console
-      '@tool-platform/bug-report-repro-steps-generator':
-        specifier: workspace:*
-        version: link:../../tools/bug-report-repro-steps-generator
       '@tool-platform/case-converter':
         specifier: workspace:*
         version: link:../../tools/case-converter
@@ -200,9 +188,6 @@ importers:
       '@tool-platform/chmod-calculator':
         specifier: workspace:*
         version: link:../../tools/chmod-calculator
-      '@tool-platform/code-snippet-security-review':
-        specifier: workspace:*
-        version: link:../../tools/code-snippet-security-review
       '@tool-platform/color-blindness-simulator':
         specifier: workspace:*
         version: link:../../tools/color-blindness-simulator
@@ -221,9 +206,6 @@ importers:
       '@tool-platform/color-palette-generator':
         specifier: workspace:*
         version: link:../../tools/color-palette-generator
-      '@tool-platform/color-picker':
-        specifier: workspace:*
-        version: link:../../tools/color-picker
       '@tool-platform/conventional-commit-helper':
         specifier: workspace:*
         version: link:../../tools/conventional-commit-helper
@@ -242,21 +224,18 @@ importers:
       '@tool-platform/css-clamp-generator':
         specifier: workspace:*
         version: link:../../tools/css-clamp-generator
+      '@tool-platform/css-color-picker':
+        specifier: workspace:*
+        version: link:../../tools/css-color-picker
       '@tool-platform/css-grid-generator':
         specifier: workspace:*
         version: link:../../tools/css-grid-generator
-      '@tool-platform/css-named-colors':
-        specifier: workspace:*
-        version: link:../../tools/css-named-colors
       '@tool-platform/css-specificity-calculator':
         specifier: workspace:*
         version: link:../../tools/css-specificity-calculator
       '@tool-platform/csv-cleaner':
         specifier: workspace:*
         version: link:../../tools/csv-cleaner
-      '@tool-platform/csv-json-converter':
-        specifier: workspace:*
-        version: link:../../tools/csv-json-converter
       '@tool-platform/csv-json-ndjson-converter':
         specifier: workspace:*
         version: link:../../tools/csv-json-ndjson-converter
@@ -314,9 +293,6 @@ importers:
       '@tool-platform/env-parser':
         specifier: workspace:*
         version: link:../../tools/env-parser
-      '@tool-platform/error-log-troubleshooting-path-generator':
-        specifier: workspace:*
-        version: link:../../tools/error-log-troubleshooting-path-generator
       '@tool-platform/exif-metadata-tool':
         specifier: workspace:*
         version: link:../../tools/exif-metadata-tool
@@ -434,12 +410,6 @@ importers:
       '@tool-platform/live-event-countdown':
         specifier: workspace:*
         version: link:../../tools/live-event-countdown
-      '@tool-platform/llm-eval-case-generator':
-        specifier: workspace:*
-        version: link:../../tools/llm-eval-case-generator
-      '@tool-platform/llm-fact-check-checklist-generator':
-        specifier: workspace:*
-        version: link:../../tools/llm-fact-check-checklist-generator
       '@tool-platform/log-file-analyzer':
         specifier: workspace:*
         version: link:../../tools/log-file-analyzer
@@ -515,18 +485,12 @@ importers:
       '@tool-platform/port-reference':
         specifier: workspace:*
         version: link:../../tools/port-reference
-      '@tool-platform/pr-change-risk-summarizer':
-        specifier: workspace:*
-        version: link:../../tools/pr-change-risk-summarizer
       '@tool-platform/privacy-cookie-copy-generator':
         specifier: workspace:*
         version: link:../../tools/privacy-cookie-copy-generator
       '@tool-platform/prometheus-query-helper':
         specifier: workspace:*
         version: link:../../tools/prometheus-query-helper
-      '@tool-platform/prompt-injection-detector':
-        specifier: workspace:*
-        version: link:../../tools/prompt-injection-detector
       '@tool-platform/python-playground':
         specifier: workspace:*
         version: link:../../tools/python-playground
@@ -536,9 +500,6 @@ importers:
       '@tool-platform/query-param-builder':
         specifier: workspace:*
         version: link:../../tools/query-param-builder
-      '@tool-platform/rag-chunk-token-estimator':
-        specifier: workspace:*
-        version: link:../../tools/rag-chunk-token-estimator
       '@tool-platform/random-team-generator':
         specifier: workspace:*
         version: link:../../tools/random-team-generator
@@ -620,9 +581,6 @@ importers:
       '@tool-platform/sri-hash-generator':
         specifier: workspace:*
         version: link:../../tools/sri-hash-generator
-      '@tool-platform/stack-trace-explainer':
-        specifier: workspace:*
-        version: link:../../tools/stack-trace-explainer
       '@tool-platform/study-plan-scheduler':
         specifier: workspace:*
         version: link:../../tools/study-plan-scheduler
@@ -641,9 +599,6 @@ importers:
       '@tool-platform/terraform-plan-formatter':
         specifier: workspace:*
         version: link:../../tools/terraform-plan-formatter
-      '@tool-platform/test-case-generator':
-        specifier: workspace:*
-        version: link:../../tools/test-case-generator
       '@tool-platform/text-diff':
         specifier: workspace:*
         version: link:../../tools/text-diff
@@ -659,9 +614,6 @@ importers:
       '@tool-platform/tls-certificate-parser':
         specifier: workspace:*
         version: link:../../tools/tls-certificate-parser
-      '@tool-platform/token-cost-calculator':
-        specifier: workspace:*
-        version: link:../../tools/token-cost-calculator
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../tool-contracts
@@ -743,18 +695,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/agent-behavior-log-viewer:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/ai-brief-synthesizer:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -776,30 +716,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/ai-generated-code-risk-checker:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/ai-prompt-version-diff:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/ai-sandbox-lab:
     dependencies:
       '@tool-platform/tool-browser-sdk':
@@ -812,8 +728,11 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/animation-keyframes-generator:
+  tools/ai-trust-analyzer:
     dependencies:
+      '@tool-platform/ai-trust-tools':
+        specifier: workspace:*
+        version: link:../../packages/ai-trust-tools
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -821,11 +740,8 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/api-docs-sdk-example-generator:
+  tools/animation-keyframes-generator:
     dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -935,18 +851,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/bug-report-repro-steps-generator:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/case-converter:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -967,18 +871,6 @@ importers:
 
   tools/chmod-calculator:
     dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/code-snippet-security-review:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -1032,15 +924,6 @@ importers:
         version: 19.2.6
 
   tools/color-palette-generator:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/color-picker:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1103,7 +986,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/css-grid-generator:
+  tools/css-color-picker:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1112,7 +995,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/css-named-colors:
+  tools/css-grid-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1131,15 +1014,6 @@ importers:
         version: 19.2.6
 
   tools/csv-cleaner:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/csv-json-converter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1312,18 +1186,6 @@ importers:
 
   tools/env-parser:
     dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/error-log-troubleshooting-path-generator:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -1682,30 +1544,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/llm-eval-case-generator:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/llm-fact-check-checklist-generator:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/log-file-analyzer:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1931,18 +1769,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/pr-change-risk-summarizer:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/privacy-cookie-copy-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1954,18 +1780,6 @@ importers:
 
   tools/prometheus-query-helper:
     dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/prompt-injection-detector:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -1996,18 +1810,6 @@ importers:
 
   tools/query-param-builder:
     dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/rag-chunk-token-estimator:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2264,18 +2066,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/stack-trace-explainer:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/study-plan-scheduler:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2330,18 +2120,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/test-case-generator:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/text-diff:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2383,18 +2161,6 @@ importers:
 
   tools/tls-certificate-parser:
     dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/token-cost-calculator:
-    dependencies:
-      '@tool-platform/ai-trust-tools':
-        specifier: workspace:*
-        version: link:../../packages/ai-trust-tools
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts

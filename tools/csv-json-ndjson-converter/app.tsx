@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
@@ -126,12 +126,25 @@ function convert(input: string, from: DataFormat, to: DataFormat) {
   return JSON.stringify(rows, null, 2);
 }
 
+function getCsvStats(input: string) {
+  try {
+    const rows = parseCsvRecords(input).filter((row) => row.some((cell) => cell.trim() !== ""));
+    return {
+      rows: Math.max(0, rows.length - 1),
+      columns: rows[0]?.length ?? 0
+    };
+  } catch {
+    return { rows: 0, columns: 0 };
+  }
+}
+
 export default function CsvJsonNdjsonConverterTool({ manifest }: ToolAppProps) {
   const [input, setInput] = useState(sampleCsv);
   const [output, setOutput] = useState("");
   const [from, setFrom] = useState<DataFormat>("csv");
   const [to, setTo] = useState<DataFormat>("json");
   const [error, setError] = useState("");
+  const csvStats = useMemo(() => from === "csv" ? getCsvStats(input) : null, [from, input]);
 
   function run() {
     try {
@@ -179,6 +192,22 @@ export default function CsvJsonNdjsonConverterTool({ manifest }: ToolAppProps) {
           复制输出
         </button>
       </div>
+      {csvStats ? (
+        <div className="detail-grid" style={{ marginBottom: 12 }}>
+          <article className="detail-card">
+            <h3>数据行</h3>
+            <p>{csvStats.rows}</p>
+          </article>
+          <article className="detail-card">
+            <h3>列</h3>
+            <p>{csvStats.columns}</p>
+          </article>
+          <article className="detail-card">
+            <h3>输出字符</h3>
+            <p>{output.length}</p>
+          </article>
+        </div>
+      ) : null}
       <div className="workspace workspace--two-column">
         <label className="tool-field">
           <span>输入</span>

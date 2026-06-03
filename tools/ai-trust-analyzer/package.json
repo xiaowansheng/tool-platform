@@ -1,5 +1,5 @@
 {
-  "name": "@tool-platform/csv-json-converter",
+  "name": "@tool-platform/ai-trust-analyzer",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,6 +8,7 @@
     "./app": "./app.tsx"
   },
   "dependencies": {
+    "@tool-platform/ai-trust-tools": "workspace:*",
     "@tool-platform/tool-contracts": "workspace:*"
   },
   "peerDependencies": {

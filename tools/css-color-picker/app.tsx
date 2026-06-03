@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
 type ColorFormat = "hex" | "rgb" | "hsl" | "rgba" | "hsla";
@@ -252,8 +252,10 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
   const [format, setFormat] = useState<ColorFormat>("hex");
   const [alpha, setAlpha] = useState(1);
   const [copied, setCopied] = useState("");
-  const [activeTab, setActiveTab] = useState<"picker" | "palettes">("palettes");
+  const [activeTab, setActiveTab] = useState<"picker" | "palettes">("picker");
   const [paletteTab, setPaletteTab] = useState<PaletteTab>("css-named");
+  const [hexInput, setHexInput] = useState("");
+  const [query, setQuery] = useState("");
   const svRef = useRef<SVGSVGElement>(null);
   const hueRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState<"sv" | "hue" | null>(null);
@@ -263,6 +265,22 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
   const textClr = luminance(hex) > 0.55 ? "#081018" : "#f8fafc";
   const formatted = formatColor(hex, format, alpha);
 
+  const rgb = `rgb(${Number.parseInt(hex.slice(1, 3), 16)}, ${Number.parseInt(hex.slice(3, 5), 16)}, ${Number.parseInt(hex.slice(5, 7), 16)})`;
+  const hslStr = `hsl(${h}, ${s}%, ${l}%)`;
+
+  const filteredNamedGroups = useMemo(() => {
+    if (!query.trim()) return CSS_NAMED_GROUPS;
+    const q = query.toLowerCase().trim();
+    return CSS_NAMED_GROUPS.map((group) => ({
+      ...group,
+      colors: group.colors.filter((c) => c.name.toLowerCase().includes(q) || c.hex.includes(q))
+    })).filter((group) => group.colors.length > 0);
+  }, [query]);
+
+  const filteredNamedCount = useMemo(() => {
+    return filteredNamedGroups.reduce((sum, g) => sum + g.colors.length, 0);
+  }, [filteredNamedGroups]);
+
   const updateFromSv = useCallback((clientX: number, clientY: number) => {
     const el = svRef.current;
     if (!el) return;
@@ -270,6 +288,7 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
     const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
     setHsl((prev) => ({ ...prev, s: Math.round(x * 100), l: Math.round((1 - y) * 100) }));
+    setHexInput("");
   }, []);
 
   const updateFromHue = useCallback((clientX: number) => {
@@ -278,6 +297,7 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
     const rect = el.getBoundingClientRect();
     const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     setHsl((prev) => ({ ...prev, h: Math.round(x * 360) }));
+    setHexInput("");
   }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -297,6 +317,15 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
       };
     }
   }, [dragging, handleMouseMove, handleMouseUp]);
+
+  function handleHexChange(value: string) {
+    setHexInput(value);
+    const parsed = value.trim().replace(/^#/, "");
+    const n = parsed.length === 3 ? parsed.split("").map((p) => p + p).join("") : parsed;
+    if (n.length === 6 && /^[0-9a-fA-F]{6}$/.test(n)) {
+      setHsl(hexToHsl("#" + n));
+    }
+  }
 
   async function copyColor(val: string, label: string) {
     await navigator.clipboard.writeText(val);
@@ -382,19 +411,23 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
                 <label className="tool-field tool-field--compact">
                   <span>H {h}°</span>
                   <input type="range" min={0} max={360} value={h}
-                    onChange={(e) => setHsl((p) => ({ ...p, h: Number(e.target.value) }))} />
+                    onChange={(e) => { setHsl((p) => ({ ...p, h: Number(e.target.value) })); setHexInput(""); }} />
                 </label>
                 <label className="tool-field tool-field--compact">
                   <span>S {s}%</span>
                   <input type="range" min={0} max={100} value={s}
-                    onChange={(e) => setHsl((p) => ({ ...p, s: Number(e.target.value) }))} />
+                    onChange={(e) => { setHsl((p) => ({ ...p, s: Number(e.target.value) })); setHexInput(""); }} />
                 </label>
                 <label className="tool-field tool-field--compact">
                   <span>L {l}%</span>
                   <input type="range" min={0} max={100} value={l}
-                    onChange={(e) => setHsl((p) => ({ ...p, l: Number(e.target.value) }))} />
+                    onChange={(e) => { setHsl((p) => ({ ...p, l: Number(e.target.value) })); setHexInput(""); }} />
                 </label>
               </div>
+              <label className="tool-field">
+                <span>HEX</span>
+                <input value={hexInput || hex} onChange={(e) => handleHexChange(e.target.value)} spellCheck={false} placeholder="#000000" />
+              </label>
               <div className="tool-toolbar">
                 <label className="tool-field tool-field--compact" style={{ flex: 1 }}>
                   <span>格式</span>
@@ -418,6 +451,16 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
                 style={{ width: "100%", marginTop: 8 }}>
                 {copied === "picker" ? "已复制" : `复制 ${format.toUpperCase()}`}
               </button>
+              <div className="detail-grid" style={{ marginTop: 12 }}>
+                <article className="detail-card">
+                  <h3>RGB</h3>
+                  <p>{rgb}</p>
+                </article>
+                <article className="detail-card">
+                  <h3>HSL</h3>
+                  <p>{hslStr}</p>
+                </article>
+              </div>
             </div>
           </div>
           <p className="tool-note">在色板中拖拽选择颜色，或使用滑块微调。点击按钮复制当前颜色值。</p>
@@ -459,7 +502,16 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
 
           {paletteTab === "css-named" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              {CSS_NAMED_GROUPS.map((group) => (
+              <label className="tool-field">
+                <span>搜索颜色</span>
+                <input value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="输入颜色名称或 HEX 值…" spellCheck={false} />
+              </label>
+              <p className="tool-note">
+                {query ? `找到 ${filteredNamedCount} 个匹配颜色` : `共 ${CSS_NAMED_GROUPS.reduce((s, g) => s + g.colors.length, 0)} 个 CSS 命名颜色`}
+              </p>
+              {filteredNamedGroups.map((group) => (
                 <div key={group.label}>
                   <p className="eyebrow" style={{ marginBottom: 8 }}>{group.label}</p>
                   <div className="palette-grid">
@@ -467,6 +519,7 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
                   </div>
                 </div>
               ))}
+              {query && filteredNamedCount === 0 ? <p className="tool-error">未找到匹配的颜色</p> : null}
             </div>
           )}
 

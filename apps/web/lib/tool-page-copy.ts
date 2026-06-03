@@ -218,16 +218,16 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["把 `user profile URL` 转成 `userProfileUrl`。", "把接口字段名快速转成 CONSTANT_CASE 环境变量名。"]
   },
-  "csv-json-converter": {
-    name: "CSV / JSON 转换器",
-    description: "在 CSV 表格和 JSON 对象数组之间互转，适合小型数据整理和接口样例准备。",
-    intro: "支持带引号 CSV 的基础解析和对象数组 JSON 输出，适合把表格数据转成 mock payload，或把接口样例转成可粘贴表格。",
+  "csv-json-ndjson-converter": {
+    name: "CSV / JSON / NDJSON 转换器",
+    description: "在 CSV、JSON 数组和 NDJSON 流之间互转，保留列名和对象字段，支持统计数据实时预览。",
+    intro: "支持 CSV、JSON 和 NDJSON 三种格式互转。CSV 解析支持引号和换行，JSON 支持对象数组和嵌套对象，NDJSON 支持逐行流式数据。",
     steps: [
-      "粘贴 CSV 或 JSON 对象数组。",
-      "选择 CSV 转 JSON 或 JSON 转 CSV。",
-      "检查行数、列数和错误提示，再复制输出。"
+      "在输入区域粘贴源数据，选择输入格式。",
+      "选择目标格式。",
+      "点击转换按钮，检查行数列数统计和转换结果，再复制输出。"
     ],
-    examples: ["把产品清单 CSV 转成前端 mock JSON。", "把接口返回的对象数组转成 CSV，便于贴到表格工具。"]
+    examples: ["把产品清单 CSV 转成前端 mock JSON。", "把日志 NDJSON 流转成 CSV 便于分析。", "在 JSON 和 NDJSON 之间互转。"]
   },
   "text-diff": {
     name: "文本差异对比",
@@ -702,17 +702,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["记录微服务拆分决策的背景和备选方案。", "生成 API 网关选型 ADR，包含评估矩阵。"]
   },
-  "agent-behavior-log-viewer": {
-    name: "Agent 行为日志查看器",
-    description: "查看 Agent 行为日志，汇总工具调用、审批边界、失败恢复和潜在破坏性动作。",
-    intro: "把 Agent 的 JSON 行为日志粘贴进来，快速查看调用汇总、边界越限和失败恢复记录。",
-    steps: [
-      "粘贴 Agent 行为日志 JSON。",
-      "查看工具调用次数、审批边界越限和失败恢复汇总。",
-      "定位破坏性动作或异常行为，评估安全边界配置。"
-    ],
-    examples: ["审查 AI Agent 是否越权调用了敏感工具。", "排查 Agent 在失败恢复时的重试行为。"]
-  },
+
   "ai-chat": {
     name: "AI 聊天工作台",
     description: "浏览器内 AI Chat 工作台，支持 system prompt、流式输出、会话记录和本地 token 估算。",
@@ -724,28 +714,8 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["调试复杂 prompt 的逐轮表现。", "对比不同 system prompt 下的回复风格。"]
   },
-  "ai-generated-code-risk-checker": {
-    name: "AI 生成代码风险检查器",
-    description: "扫描 AI 生成代码里的占位符、注入面、鉴权绕过、密钥和静默失败风险。",
-    intro: "把 AI 助手生成的代码片段粘贴进来，快速扫描占位符、硬编码密钥和潜在安全风险。",
-    steps: [
-      "粘贴 AI 生成的代码片段。",
-      "查看风险等级、位置和具体描述。",
-      "按风险建议修复问题后重新检查。"
-    ],
-    examples: ["审查 ChatGPT 生成的 SQL 注入风险。", "检查 Copilot 建议代码中的硬编码密钥。"]
-  },
-  "ai-prompt-version-diff": {
-    name: "AI Prompt 版本差异对比",
-    description: "对比新旧 Prompt，识别约束删除、能力面变化、token 漂移和需要补 eval 的风险。",
-    intro: "把两版 Prompt 粘贴对比，查看约束变化和能力差异，确保升级不改行为。",
-    steps: [
-      "粘贴旧版本和新版本 Prompt。",
-      "查看约束、能力面、Token 数的变化差异。",
-      "根据识别到的风险补充 eval 测试用例。"
-    ],
-    examples: ["升级系统提示词后检查行为漂移。", "对比 A/B 测试中的 Prompt 差异。"]
-  },
+
+
   "ai-sandbox-lab": {
     name: "AI 沙箱实验室",
     description: "流式生成 AI 响应，并在隔离 iframe 中预览结果。",
@@ -756,6 +726,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "在隔离 iframe 中预览渲染效果。"
     ],
     examples: ["测试 HTML 内容是否安全渲染。", "验证 AI 回复在沙箱中的展示效果。"]
+  },
+  "ai-trust-analyzer": {
+    name: "AI Trust Analyzer",
+    description: "AI 代码风险扫描、Prompt 注入检测、事实核查、PR 风险分析、测试用例生成、Bug 复现、错误排查、Token 成本估算等 15 种分析工具。",
+    intro: "集成了 15 种 AI 信任与安全分析工具：AI 代码风险扫描、Prompt Injection 检测、LLM 事实核查、PR 风险分析、测试用例生成、Bug 复现步骤、错误日志排查、堆栈解释、API SDK 示例生成、代码安全审查、Prompt 版本对比、Agent 日志审计、LLM 评测用例、RAG 分块估算和 Token 成本计算。",
+    steps: [
+      "从顶部的下拉菜单选择需要使用的分析工具。",
+      "根据工具的输入要求粘贴相关内容。",
+      "查看分析结果，包括风险信号、统计数据和建议措施。",
+      "复制生成的结果用于报告或进一步处理。"
+    ],
+    examples: ["扫描 AI 生成代码中的硬编码密钥和注入风险。", "检测用户输入中的 Prompt Injection 攻击。", "估算 LLM 调用的 token 消耗和成本。"]
   },
   "animation-keyframes-generator": {
     name: "动画关键帧生成器",
@@ -768,17 +750,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["创建一个带旋转和位移的淡入动画。", "制作一个无限循环的呼吸缩放效果。"]
   },
-  "api-docs-sdk-example-generator": {
-    name: "API 文档 SDK 示例生成器",
-    description: "从 API 文档或 OpenAPI 片段提取 endpoint，并生成 TypeScript、Python 或 cURL SDK 示例。",
-    intro: "粘贴接口 URL 或 OpenAPI 片段，快速生成 TypeScript、Python 或 cURL 的 SDK 调用示例。",
-    steps: [
-      "填写 API endpoint URL 或粘贴 OpenAPI 片段。",
-      "选择目标语言和请求方法。",
-      "复制生成的 SDK 代码示例到项目中。"
-    ],
-    examples: ["为新 API 接口生成 TypeScript fetch 示例。", "把 OpenAPI 路径转成 Python requests 调用。"]
-  },
+
   "api-error-code-doc-generator": {
     name: "API 错误码文档生成器",
     description: "把错误码清单转换为 Markdown 文档、响应结构和排查建议表。",
@@ -878,17 +850,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["测试第三方组件在沙箱中的行为。", "调试 JavaScript 代码片段的 console 输出。"]
   },
-  "bug-report-repro-steps-generator": {
-    name: "Bug 复现步骤生成器",
-    description: "把 Bug Report 整理成可执行复现步骤、前置条件、期望结果、实际结果和证据清单。",
-    intro: "把 Bug 描述粘贴进来，工具会将其整理为结构化的复现步骤和测试用例。",
-    steps: [
-      "粘贴 Bug 描述的原始文本。",
-      "补充环境信息、实际结果和期望结果。",
-      "复制结构化的 Bug Report，提交到 Issue 跟踪系统。"
-    ],
-    examples: ["把用户反馈整理成可执行的 Bug Report。", "为 QA 团队生成标准格式的复现步骤。"]
-  },
+
   "changelog-generator": {
     name: "Changelog 生成器",
     description: "从 Conventional Commit 文本生成 Keep a Changelog 风格的版本记录。",
@@ -900,17 +862,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为发布版本生成 Features / Fixes 分类。", "把 Git log 整理成面向用户的变更日志。"]
   },
-  "code-snippet-security-review": {
-    name: "代码片段安全审查",
-    description: "对代码片段生成安全审查报告，覆盖密钥、注入、弱加密、CORS、Cookie 和 TLS 配置。",
-    intro: "把代码片段粘贴进来，自动扫描密钥泄露、注入风险、弱加密和其他安全漏洞。",
-    steps: [
-      "粘贴需要审查的代码片段。",
-      "查看安全风险等级、位置和详细描述。",
-      "根据修复建议调整代码后重新审查。"
-    ],
-    examples: ["审查配置文件中的密钥泄露风险。", "检查 SQL 查询片段是否存在注入漏洞。"]
-  },
+
   "color-palette-generator": {
     name: "配色方案生成器",
     description: "基于一个 HEX 颜色生成浅色、深色和强调色阶。",
@@ -976,17 +928,6 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "复制清洗后的 CSV 或导出为文件。"
     ],
     examples: ["清洗用户导入数据中的重复行。", "过滤 CSV 中的空值和异常数据。"]
-  },
-  "csv-json-ndjson-converter": {
-    name: "CSV / JSON / NDJSON 转换器",
-    description: "在 CSV、JSON 数组和 NDJSON 流之间互转，保留列名和对象字段。",
-    intro: "在 CSV 表格、JSON 数组和 NDJSON 流格式之间互相转换，适合数据处理管线。",
-    steps: [
-      "粘贴 CSV、JSON 或 NDJSON 输入。",
-      "选择源格式和目标格式。",
-      "复制转换结果或检查错误提示。"
-    ],
-    examples: ["把 NDJSON 日志流转换成 CSV 表格。", "将 CSV 格式的数据字典转为 JSON 对象数组。"]
   },
   "db-connection-string-workbench": {
     name: "数据库连接串工作台",
@@ -1098,17 +1039,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["部署前合并多个环境配置。", "从生产 .env 生成不含值的示例配置。"]
   },
-  "error-log-troubleshooting-path-generator": {
-    name: "错误日志排查路径生成器",
-    description: "从错误日志中提取 5xx、超时、数据库、权限和资源耗尽信号，并生成排查路径。",
-    intro: "粘贴错误日志，自动识别错误类型并生成逐步排查指南。",
-    steps: [
-      "粘贴错误日志片段。",
-      "查看识别的错误类型和严重程度。",
-      "按生成的排查路径逐步检查。"
-    ],
-    examples: ["从 5xx 错误日志生成排查步骤。", "分析数据库连接超时的可能原因和解决路径。"]
-  },
+
   "exif-metadata-tool": {
     name: "EXIF 元数据工具",
     description: "查看 JPEG EXIF 和 PNG 文本元数据，并生成移除元数据后的图片文件。",
@@ -1362,28 +1293,8 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["整理研究资料链接收藏。", "为团队导出带分类的文档链接清单。"]
   },
-  "llm-eval-case-generator": {
-    name: "LLM 评测用例生成器",
-    description: "根据模型行为规格生成指令遵循、RAG、事实性、安全和工具使用 eval 用例。",
-    intro: "输入模型行为规格，自动生成覆盖多维度测试的评测用例。",
-    steps: [
-      "填写模型行为规格或使用场景。",
-      "选择评测维度（指令遵循、RAG、安全性等）。",
-      "复制生成的 eval 用例列表。"
-    ],
-    examples: ["为 RAG 应用生成事实性测试用例。", "生成指令遵循的安全边界测试。"]
-  },
-  "llm-fact-check-checklist-generator": {
-    name: "LLM 事实核查清单生成器",
-    description: "从 LLM 输出中抽取可核查断言，并生成来源、日期、范围和置信度检查清单。",
-    intro: "粘贴 LLM 生成的文本，提取其中的可核查断言并生成事实核查清单。",
-    steps: [
-      "粘贴 LLM 输出的文本。",
-      "查看抽取的可核查断言列表。",
-      "按清单逐项核查来源和准确性。"
-    ],
-    examples: ["核查 AI 生成的报告中的数据准确性。", "评估 LLM 回答中的事实性陈述。"]
-  },
+
+
   "lorem-ipsum-generator": {
     name: "占位文本生成器",
     description: "生成占位标题、句子和段落，用于原型和视觉稿。",
@@ -1538,17 +1449,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["使用 25 分钟番茄钟进入深度工作。", "设置 4 轮番茄钟后的长休息节奏。"]
   },
-  "pr-change-risk-summarizer": {
-    name: "PR 变更风险摘要器",
-    description: "解析 PR 描述或 diff，按鉴权、迁移、依赖、部署和大变更面生成风险摘要。",
-    intro: "粘贴 PR 描述或 diff 内容，自动评估变更风险等级和影响面。",
-    steps: [
-      "粘贴 PR 描述或代码 diff。",
-      "查看变更风险等级和影响分析。",
-      "根据风险摘要优化 Code Review 重点。"
-    ],
-    examples: ["评估包含依赖升级的 PR 影响。", "检查涉及鉴权模块改动的迁移风险。"]
-  },
+
   "privacy-cookie-copy-generator": {
     name: "隐私 / Cookie 文案生成器",
     description: "根据数据类型、用途和 Cookie 分类生成隐私政策与 Cookie 文案草稿。",
@@ -1560,17 +1461,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为 SaaS 产品生成隐私政策初稿。", "生成 Cookie 同意弹窗的文案内容。"]
   },
-  "prompt-injection-detector": {
-    name: "Prompt Injection 检测器",
-    description: "检测覆盖系统指令、泄露隐藏提示词、工具滥用和编码载荷等 Prompt Injection 信号。",
-    intro: "输入用户提示词，检测是否包含 Prompt 注入攻击特征。",
-    steps: [
-      "粘贴需要检测的用户输入或提示词。",
-      "查看注入攻击类型和风险等级。",
-      "根据检测结果加固提示词安全策略。"
-    ],
-    examples: ["检测用户输入中的系统指令覆盖攻击。", "扫描对话历史中的 Prompt 泄露风险。"]
-  },
+
   "qr-barcode-tool": {
     name: "二维码 / 条形码工具",
     description: "生成本地 QR Code 与 Code 128 条形码，并通过浏览器 BarcodeDetector 解析图片。",
@@ -1582,17 +1473,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为 URL 生成二维码方便扫码访问。", "解析图片中的条形码内容。"]
   },
-  "rag-chunk-token-estimator": {
-    name: "RAG 分块与 Token 估算器",
-    description: "预览 RAG 文档 chunk，估算 token、重叠比例和超大段落风险。",
-    intro: "粘贴文档内容，预览分块效果，估算 token 消耗和重叠比例。",
-    steps: [
-      "粘贴文档内容。",
-      "设置分块大小和重叠比例。",
-      "查看分块预览和 token 估算结果。"
-    ],
-    examples: ["优化 RAG 文档的分块策略减少截断。", "估算长文档的 token 消耗。"]
-  },
+
   "random-team-generator": {
     name: "随机分队生成器",
     description: "把名单随机分队，支持种子、队伍数量、每队人数和避开同组约束。",
@@ -1758,17 +1639,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为 CDN 加载的 JS 生成 integrity 属性。", "为第三方样式生成 SRI 哈希。"]
   },
-  "stack-trace-explainer": {
-    name: "堆栈追踪解释器",
-    description: "解释 JS、Python、Java 等堆栈，定位异常类型、应用代码帧和下一步调试动作。",
-    intro: "粘贴错误堆栈，自动识别异常类型和应用代码帧，给出调试建议。",
-    steps: [
-      "粘贴错误堆栈信息。",
-      "查看异常类型和应用代码位置。",
-      "按调试建议定位和修复问题。"
-    ],
-    examples: ["解析 Node.js 生产环境的异常堆栈。", "定位 Python Flask 应用崩溃的代码行。"]
-  },
+
   "study-plan-scheduler": {
     name: "学习计划排期器",
     description: "根据主题、预计时长、优先级和每日可用时间生成学习排期与复习清单。",
@@ -1846,17 +1717,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["Code Review 时格式化 Terraform plan 输出。", "统计基础设施变更的影响面。"]
   },
-  "test-case-generator": {
-    name: "测试用例生成器",
-    description: "根据需求、验收标准或代码说明生成 happy path、边界、负向、权限和回归测试用例。",
-    intro: "输入需求描述或验收标准，自动生成覆盖多场景的测试用例。",
-    steps: [
-      "粘贴功能需求或验收标准。",
-      "选择测试类型（Happy Path、边界值、负向等）。",
-      "复制生成的测试用例表格。"
-    ],
-    examples: ["为登录功能生成完整的测试用例。", "为表单校验生成边界值和异常场景测试。"]
-  },
+
   "text-inspector": {
     name: "文本检查器",
     description: "在 Worker 中分析大文本，并把报告缓存到 OPFS。",
@@ -1879,17 +1740,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为 Web 应用进行 STRIDE 威胁建模。", "评估微服务架构的信任边界风险。"]
   },
-  "token-cost-calculator": {
-    name: "Token 成本计算器",
-    description: "按输入/输出 token、运行次数和可编辑单价估算 LLM 调用成本。",
-    intro: "输入 Token 使用量和模型单价，快速估算 LLM 调用的总成本。",
-    steps: [
-      "输入输入和输出的 token 数量。",
-      "选择模型和单价。",
-      "查看估算的总成本和运行次数对比。"
-    ],
-    examples: ["估算每月 LLM API 调用的总成本。", "比较不同模型的价格差异。"]
-  },
+
   "unit-converter": {
     name: "单位换算器",
     description: "换算长度、重量、数据大小和温度等常用单位。",
@@ -1967,16 +1818,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为品牌色 #6366f1 生成整套配色方案。", "从主色 #0ea5e9 提取邻近色和三角配色。"]
   },
-  "css-named-colors": {
-    name: "CSS 命名颜色查询",
-    description: "搜索、浏览并复制所有 148 个 CSS 命名颜色。",
-    intro: "完整收录所有 CSS 命名颜色，支持按名称和 HEX 搜索，点击即可复制。",
+  "css-color-picker": {
+    name: "CSS 颜色拾取器",
+    description: "从色板中取色或浏览 CSS 命名色、Flat UI、语义色、Tailwind 等常用色板；支持 HEX/RGB/HSL/RGBA/HSLA 多格式复制与搜索过滤。",
+    intro: "可视化颜色选取工具，支持饱和度/明度面板、色相滑块和 HSL 精确微调；同时内置 4 套色板库（CSS 命名色、Flat UI、语义色、Tailwind），支持搜索过滤和一键复制。",
     steps: [
-      "在搜索框中输入颜色名称或 HEX 值进行过滤。",
-      "在颜色网格中浏览匹配的颜色。",
-      "点击任意色块复制其 HEX 值到剪贴板。"
+      "在「取色器」选项卡中，从色板拖拽选择颜色，或直接输入 HEX 值。",
+      "使用 HSL 滑块微调，选择 RGBA/HSLA 格式时调节 Alpha 透明度。",
+      "切换到「色板库」选项卡浏览 CSS 命名色、Flat UI、语义色或 Tailwind 色板。",
+      "在 CSS 命名色标签页中可搜索过滤颜色名称或 HEX 值。",
+      "点击颜色块按所选格式一键复制。"
     ],
-    examples: ["搜索 \"sky\" 查找所有跟天空相关的颜色。", "搜索 \"#ff\" 过滤出红色系命名颜色。"]
+    examples: ["从色板中选取品牌主色。", "在 CSS 命名色中搜索 'blue' 找到所有蓝色。", "从 Tailwind 色板中选取 Slate 系列中性色。"]
   },
   "color-blindness-simulator": {
     name: "色盲模拟器",
@@ -1989,29 +1842,15 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["测试品牌色 #6366f1 在红色盲下的表现。", "检查 #22c55e 是否在各类色盲下都能辨识。"]
   },
-  "color-picker": {
-    name: "颜色选择器",
-    description: "通过色相、饱和度、明度面板选取并微调颜色，一键复制多格式值。",
-    intro: "可视化颜色选取工具，支持饱和度/明度面板、色相滑块和 HSL 精确微调，实时预览并复制多种格式。",
-    steps: [
-      "在色相滑块上拖动选取色相。",
-      "在色板中点击或拖动调整饱和度（横向）和明度（纵向）。",
-      "使用 HSL 滑块进行微调，或直接输入 HEX 值。",
-      "点击复制按钮获取 HEX、RGB 或 HSL 格式的值。"
-    ],
-    examples: ["从色板中选取品牌主色。", "微调 HSL 滑块找到理想的颜色明度。"]
-  },
+
 };
 
 const zhToolNameOverrides: Record<string, string> = {
   "adr-generator": "ADR 生成器",
-  "agent-behavior-log-viewer": "Agent 行为日志查看器",
   "ai-chat": "AI 聊天工作台",
-  "ai-generated-code-risk-checker": "AI 生成代码风险检查器",
-  "ai-prompt-version-diff": "AI Prompt 版本差异对比",
   "ai-sandbox-lab": "AI 沙箱实验室",
+  "ai-trust-analyzer": "AI Trust Analyzer",
   "animation-keyframes-generator": "动画关键帧生成器",
-  "api-docs-sdk-example-generator": "API 文档 SDK 示例生成器",
   "api-error-code-doc-generator": "API 错误码文档生成器",
   "api-rate-limit-calculator": "API 限流计算器",
   "archive-structure-viewer": "归档结构查看器",
@@ -2021,11 +1860,10 @@ const zhToolNameOverrides: Record<string, string> = {
   "border-radius-generator": "圆角生成器",
   "box-shadow-generator": "CSS 效果工作台",
   "browser-sandbox-console": "浏览器沙箱控制台",
-  "bug-report-repro-steps-generator": "Bug 复现步骤生成器",
   "changelog-generator": "Changelog 生成器",
-  "code-snippet-security-review": "代码片段安全审查",
   "color-palette-generator": "配色方案生成器",
   "cron-helper": "Cron 表达式助手",
+  "css-color-picker": "CSS 颜色拾取器",
   "css-clamp-generator": "响应式字号 Scale 生成器",
   "css-grid-generator": "CSS Grid 生成器",
   "css-specificity-calculator": "CSS 权重计算器",
@@ -2041,7 +1879,6 @@ const zhToolNameOverrides: Record<string, string> = {
   "easing-cubic-bezier-debugger": "Easing / Cubic Bezier 调试器",
   "ecommerce-margin-calculator": "电商利润计算器",
   "env-diff-merge-sanitizer": ".env 对比合并脱敏工具",
-  "error-log-troubleshooting-path-generator": "错误日志排查路径生成器",
   "exif-metadata-tool": "EXIF 元数据工具",
   "favicon-app-icon-generator": "Favicon / App Icon 生成器",
   "ffmpeg-editor": "FFmpeg 命令编辑器",
@@ -2065,8 +1902,6 @@ const zhToolNameOverrides: Record<string, string> = {
   "large-text-tools": "大文本处理工具",
   "license-compatibility-checker": "许可证兼容性检查器",
   "link-collection-curator": "链接收藏整理器",
-  "llm-eval-case-generator": "LLM 评测用例生成器",
-  "llm-fact-check-checklist-generator": "LLM 事实核查清单生成器",
   "lorem-ipsum-generator": "占位文本生成器",
   "media-device-permission-lab": "媒体设备权限实验室",
   "meta-tags-seo-preview": "Meta Tags SEO 预览器",
@@ -2081,11 +1916,8 @@ const zhToolNameOverrides: Record<string, string> = {
   "percentage-calculator": "百分比计算器",
   "pii-detector": "PII 检测器",
   "pomodoro-focus-timer": "番茄专注计时器",
-  "pr-change-risk-summarizer": "PR 变更风险摘要器",
   "privacy-cookie-copy-generator": "隐私 / Cookie 文案生成器",
-  "prompt-injection-detector": "Prompt Injection 检测器",
   "qr-barcode-tool": "二维码 / 条形码工具",
-  "rag-chunk-token-estimator": "RAG 分块与 Token 估算器",
   "random-team-generator": "随机分队生成器",
   "release-notes-builder": "发布说明生成器",
   "resource-unit-converter": "资源单位换算器",
@@ -2101,7 +1933,6 @@ const zhToolNameOverrides: Record<string, string> = {
   "sql-index-advisor": "SQL 索引顾问",
   "sql-playground": "SQL Playground",
   "sri-hash-generator": "SRI 哈希生成器",
-  "stack-trace-explainer": "堆栈追踪解释器",
   "study-plan-scheduler": "学习计划排期器",
   "svg-optimizer-viewbox-editor": "SVG 优化与 ViewBox 编辑器",
   "systemd-unit-analyzer": "systemd Unit 分析器",
@@ -2109,10 +1940,8 @@ const zhToolNameOverrides: Record<string, string> = {
   "transform-generator": "CSS Transform 生成器",
   "task-priority-matrix": "任务优先级矩阵",
   "terraform-plan-formatter": "Terraform Plan 格式化器",
-  "test-case-generator": "测试用例生成器",
   "text-inspector": "文本检查器",
   "threat-model-canvas": "威胁建模画布",
-  "token-cost-calculator": "Token 成本计算器",
   "unit-converter": "单位换算器",
   "url-safety-checker": "URL 安全检查器",
   "wasm-binary-inspector": "WASM 二进制检查器",
@@ -2120,9 +1949,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "websocket-client": "WebSocket 客户端",
   "yaml-json-toml-converter": "YAML / JSON / TOML 转换器",
   "color-harmonies-generator": "配色方案生成器",
-  "css-named-colors": "CSS 命名颜色查询",
-  "color-blindness-simulator": "色盲模拟器",
-  "color-picker": "颜色选择器"
+  "color-blindness-simulator": "色盲模拟器"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {
