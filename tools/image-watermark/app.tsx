@@ -82,17 +82,22 @@ export default function ImageWatermarkTool({ manifest }: ToolAppProps) {
       ctx.textBaseline = "middle";
 
       const rad = (angle * Math.PI) / 180;
-      const maxDim = Math.max(canvas.width, canvas.height) * 1.5;
+      const maxDim = Math.max(canvas.width, canvas.height) * 1.8; // Expanded bounds to ensure coverage under rotation
       
+      // Measure text width to calculate dynamic spacing that scales with text length and font size
+      const textWidth = ctx.measureText(watermarkText).width || 100;
+      const pitchX = textWidth + gridSpacing;
+      const pitchY = fontSize + gridSpacing;
+
       // Move to center of canvas and rotate
       ctx.translate(canvas.width / 2, canvas.height / 2);
       ctx.rotate(rad);
 
       // Draw grid
-      for (let x = -maxDim; x < maxDim; x += gridSpacing) {
-        for (let y = -maxDim; y < maxDim; y += gridSpacing) {
+      for (let x = -maxDim; x < maxDim; x += pitchX) {
+        for (let y = -maxDim; y < maxDim; y += pitchY) {
           // Stagger alternate rows
-          const rowOffset = (Math.floor(y / gridSpacing) % 2 === 0) ? gridSpacing / 2 : 0;
+          const rowOffset = (Math.floor(y / pitchY) % 2 === 0) ? pitchX / 2 : 0;
           ctx.fillText(watermarkText, x + rowOffset, y);
         }
       }
