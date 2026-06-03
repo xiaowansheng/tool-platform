@@ -446,6 +446,9 @@ importers:
       '@tool-platform/mock-data-generator':
         specifier: workspace:*
         version: link:../../tools/mock-data-generator
+      '@tool-platform/neon-snake':
+        specifier: workspace:*
+        version: link:../../tools/neon-snake
       '@tool-platform/notification-payload-tester':
         specifier: workspace:*
         version: link:../../tools/notification-payload-tester
@@ -590,6 +593,9 @@ importers:
       '@tool-platform/study-plan-scheduler':
         specifier: workspace:*
         version: link:../../tools/study-plan-scheduler
+      '@tool-platform/sudoku-game':
+        specifier: workspace:*
+        version: link:../../tools/sudoku-game
       '@tool-platform/svg-optimizer-viewbox-editor':
         specifier: workspace:*
         version: link:../../tools/svg-optimizer-viewbox-editor
@@ -1661,6 +1667,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/neon-snake:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/notification-payload-tester:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2094,6 +2109,15 @@ importers:
         version: 19.2.6
 
   tools/study-plan-scheduler:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/sudoku-game:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

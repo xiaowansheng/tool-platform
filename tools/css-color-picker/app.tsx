@@ -60,6 +60,32 @@ function hexToRgb(hex: string) {
   };
 }
 
+interface Hsv { h: number; s: number; v: number }
+
+function hslToHsv({ h, s, l }: Hsl): Hsv {
+  const sDouble = s / 100;
+  const lDouble = l / 100;
+  const v = lDouble + sDouble * Math.min(lDouble, 1 - lDouble);
+  const sv = v === 0 ? 0 : 2 * (1 - lDouble / v);
+  return {
+    h,
+    s: Math.round(sv * 100),
+    v: Math.round(v * 100)
+  };
+}
+
+function hsvToHsl({ h, s, v }: Hsv): Hsl {
+  const sDouble = s / 100;
+  const vDouble = v / 100;
+  const l = vDouble * (1 - sDouble / 2);
+  const sl = (l === 0 || l === 1) ? 0 : (vDouble - l) / Math.min(l, 1 - l);
+  return {
+    h,
+    s: Math.round(sl * 100),
+    l: Math.round(l * 100)
+  };
+}
+
 function formatColor(hex: string, format: ColorFormat, alpha = 1) {
   const { r, g, b } = hexToRgb(hex);
   switch (format) {
@@ -265,6 +291,8 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
   const textClr = luminance(hex) > 0.55 ? "#081018" : "#f8fafc";
   const formatted = formatColor(hex, format, alpha);
 
+  const hsv = useMemo(() => hslToHsv(hsl), [hsl]);
+
   const rgb = `rgb(${Number.parseInt(hex.slice(1, 3), 16)}, ${Number.parseInt(hex.slice(3, 5), 16)}, ${Number.parseInt(hex.slice(5, 7), 16)})`;
   const hslStr = `hsl(${h}, ${s}%, ${l}%)`;
 
@@ -287,9 +315,10 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
     const rect = el.getBoundingClientRect();
     const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
-    setHsl((prev) => ({ ...prev, s: Math.round(x * 100), l: Math.round((1 - y) * 100) }));
+    const nextHsv = { h: hsl.h, s: Math.round(x * 100), v: Math.round((1 - y) * 100) };
+    setHsl(hsvToHsl(nextHsv));
     setHexInput("");
-  }, []);
+  }, [hsl.h]);
 
   const updateFromHue = useCallback((clientX: number) => {
     const el = hueRef.current;
@@ -305,18 +334,32 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
     else if (dragging === "hue") updateFromHue(e.clientX);
   }, [dragging, updateFromSv, updateFromHue]);
 
+  const handleTouchMove = useCallback((e: TouchEvent) => {
+    if (!dragging) return;
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+    const touch = e.touches[0];
+    if (dragging === "sv") updateFromSv(touch.clientX, touch.clientY);
+    else if (dragging === "hue") updateFromHue(touch.clientX);
+  }, [dragging, updateFromSv, updateFromHue]);
+
   const handleMouseUp = useCallback(() => setDragging(null), []);
 
   useEffect(() => {
     if (dragging) {
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("touchmove", handleTouchMove, { passive: false });
+      window.addEventListener("touchend", handleMouseUp);
       return () => {
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("mouseup", handleMouseUp);
+        window.removeEventListener("touchmove", handleTouchMove);
+        window.removeEventListener("touchend", handleMouseUp);
       };
     }
-  }, [dragging, handleMouseMove, handleMouseUp]);
+  }, [dragging, handleMouseMove, handleTouchMove, handleMouseUp]);
 
   function handleHexChange(value: string) {
     setHexInput(value);
@@ -334,23 +377,43 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
   }
 
   function renderSwatch(color: PaletteColor) {
-    const lum = luminance(color.hex);
-    const textColor = lum > 0.55 ? "#081018" : "#f8fafc";
     const val = formatColor(color.hex, format);
+    const isCopied = copied === color.name;
+
     return (
-      <button key={color.hex + color.name} type="button"
-        style={{
-          background: color.hex, color: textColor,
-          border: "1px solid rgba(0,0,0,0.08)", cursor: "pointer",
-          padding: "10px 6px", borderRadius: 6, textAlign: "center",
-          fontFamily: "inherit", lineHeight: 1.4, fontSize: 11, minWidth: 0
-        }}
-        onClick={() => void copyColor(val, color.name)}>
-        <span style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 2 }}>
-          {copied === color.name ? "已复制" : val}
-        </span>
-        <span style={{ display: "block", opacity: 0.75, wordBreak: "break-all" }}>{color.name}</span>
-      </button>
+      <div
+        key={color.hex + color.name}
+        className="color-picker-card"
+        onClick={() => void copyColor(val, color.name)}
+      >
+        <div className="color-picker-swatch-preview" style={{ background: color.hex }}>
+          <span style={{
+            background: isCopied ? "rgba(0,0,0,0.8)" : "transparent",
+            color: "#fff",
+            padding: "4px 8px",
+            borderRadius: "var(--radius-sm)",
+            fontSize: "0.75rem",
+            fontWeight: 600,
+            opacity: isCopied ? 1 : 0,
+            transition: "opacity var(--duration-fast) var(--ease-out)",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px",
+            boxShadow: isCopied ? "0 2px 8px rgba(0,0,0,0.2)" : "none"
+          }}>
+            {isCopied && (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+            已复制
+          </span>
+        </div>
+        <div className="color-picker-swatch-info">
+          <span className="color-picker-swatch-name">{color.name}</span>
+          <span className="color-picker-swatch-value">{val}</span>
+        </div>
+      </div>
     );
   }
 
@@ -364,14 +427,12 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
         <p>{manifest.description}</p>
       </div>
 
-      <div className="tool-toolbar" style={{ gap: 0, marginBottom: 16 }}>
+      <div className="segmented-control">
         <button type="button"
-          className={activeTab === "picker" ? "button--primary" : ""}
-          style={{ flex: 1, borderTopLeftRadius: 6, borderBottomLeftRadius: 6 }}
+          className={activeTab === "picker" ? "active" : ""}
           onClick={() => setActiveTab("picker")}>取色器</button>
         <button type="button"
-          className={activeTab === "palettes" ? "button--primary" : ""}
-          style={{ flex: 1, borderTopRightRadius: 6, borderBottomRightRadius: 6 }}
+          className={activeTab === "palettes" ? "active" : ""}
           onClick={() => setActiveTab("palettes")}>色板库</button>
       </div>
 
@@ -379,7 +440,8 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
         <>
           <div className="picker-layout">
             <div className="picker-canvas-area">
-              <div className="picker-sv-container">
+              <div className="picker-sv-container"
+                onTouchStart={(e) => { setDragging("sv"); updateFromSv(e.touches[0].clientX, e.touches[0].clientY); }}>
                 <svg ref={svRef} className="picker-sv-canvas" viewBox="0 0 100 100" preserveAspectRatio="none"
                   onMouseDown={(e) => { setDragging("sv"); updateFromSv(e.clientX, e.clientY); }}>
                   <defs>
@@ -394,44 +456,119 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
                   </defs>
                   <rect x="0" y="0" width="100" height="100" fill="url(#sv-white)" />
                   <rect x="0" y="0" width="100" height="100" fill="url(#sv-black)" />
-                  <circle cx={s} cy={100 - l} r="4" fill="none" stroke={textClr} strokeWidth="1.5" />
+                  <g transform={`translate(${hsv.s}, ${100 - hsv.v})`}>
+                    <circle cx="0" cy="0" r="5.5" fill="none" stroke="rgba(0,0,0,0.6)" strokeWidth="2.5" />
+                    <circle cx="0" cy="0" r="5.5" fill="none" stroke="white" strokeWidth="1.5" />
+                    <circle cx="0" cy="0" r="1.5" fill="white" />
+                  </g>
                 </svg>
               </div>
               <div ref={hueRef} className="picker-hue-slider"
                 style={{ background: "linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)" }}
-                onMouseDown={(e) => { setDragging("hue"); updateFromHue(e.clientX); }}>
-                <div className="picker-hue-thumb" style={{ left: `${(h / 360) * 100}%` }} />
+                onMouseDown={(e) => { setDragging("hue"); updateFromHue(e.clientX); }}
+                onTouchStart={(e) => { setDragging("hue"); updateFromHue(e.touches[0].clientX); }}>
+                <div className="picker-hue-thumb" style={{ left: `${(h / 360) * 100}%`, background: `hsl(${h}, 100%, 50%)` }} />
               </div>
             </div>
             <div className="picker-controls">
-              <div className="picker-preview" style={{ background: hex, color: textClr }}>
-                <span className="picker-preview__hex">{formatted}</span>
+              <div className="picker-preview">
+                <div className="picker-preview-overlay" style={{ backgroundColor: formatted }} />
+                <div className="picker-preview-content">
+                  <div style={{
+                    background: textClr === "#081018" ? "rgba(255, 255, 255, 0.85)" : "rgba(0, 0, 0, 0.7)",
+                    color: textClr,
+                    padding: "8px 14px",
+                    borderRadius: "var(--radius-md)",
+                    fontFamily: "var(--font-mono), monospace",
+                    fontWeight: 700,
+                    fontSize: "1.05rem",
+                    backdropFilter: "blur(8px)",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    border: textClr === "#081018" ? "1px solid rgba(0, 0, 0, 0.08)" : "1px solid rgba(255, 255, 255, 0.15)",
+                  }}>
+                    {formatted}
+                  </div>
+                  <button type="button" className="button--primary" onClick={() => void copyColor(formatted, "picker")}
+                    style={{
+                      margin: 0,
+                      padding: "8px 14px",
+                      fontSize: "0.85rem",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+                      borderRadius: "var(--radius-md)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px"
+                    }}>
+                    {copied === "picker" ? (
+                      <>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        已复制
+                      </>
+                    ) : (
+                      <>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                        复制
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
               <div className="picker-sliders">
                 <label className="tool-field tool-field--compact">
-                  <span>H {h}°</span>
+                  <span style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                    <span>色相 (Hue)</span>
+                    <span style={{ fontFamily: "var(--font-mono), monospace", opacity: 0.85 }}>{h}°</span>
+                  </span>
                   <input type="range" min={0} max={360} value={h}
+                    style={{ background: `linear-gradient(to right, hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(360, 100%, 50%))` }}
                     onChange={(e) => { setHsl((p) => ({ ...p, h: Number(e.target.value) })); setHexInput(""); }} />
                 </label>
                 <label className="tool-field tool-field--compact">
-                  <span>S {s}%</span>
+                  <span style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                    <span>饱和度 (Saturation)</span>
+                    <span style={{ fontFamily: "var(--font-mono), monospace", opacity: 0.85 }}>{s}%</span>
+                  </span>
                   <input type="range" min={0} max={100} value={s}
+                    style={{ background: `linear-gradient(to right, hsl(${h}, 0%, ${l}%), hsl(${h}, 100%, ${l}%))` }}
                     onChange={(e) => { setHsl((p) => ({ ...p, s: Number(e.target.value) })); setHexInput(""); }} />
                 </label>
                 <label className="tool-field tool-field--compact">
-                  <span>L {l}%</span>
+                  <span style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                    <span>亮度 (Lightness)</span>
+                    <span style={{ fontFamily: "var(--font-mono), monospace", opacity: 0.85 }}>{l}%</span>
+                  </span>
                   <input type="range" min={0} max={100} value={l}
+                    style={{ background: `linear-gradient(to right, #000, hsl(${h}, ${s}%, 50%), #fff)` }}
                     onChange={(e) => { setHsl((p) => ({ ...p, l: Number(e.target.value) })); setHexInput(""); }} />
                 </label>
+                {(format === "rgba" || format === "hsla") && (
+                  <label className="tool-field tool-field--compact">
+                    <span style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                      <span>不透明度 (Alpha)</span>
+                      <span style={{ fontFamily: "var(--font-mono), monospace", opacity: 0.85 }}>{Math.round(alpha * 100)}%</span>
+                    </span>
+                    <input type="range" min={0} max={1} step={0.01} value={alpha}
+                      style={{
+                        backgroundImage: `linear-gradient(to right, transparent, ${hex}), conic-gradient(rgba(128, 128, 128, 0.15) 25%, transparent 0 50%, rgba(128, 128, 128, 0.15) 0 75%, transparent 0)`,
+                        backgroundSize: "auto, 8px 8px"
+                      }}
+                      onChange={(e) => setAlpha(Number(e.target.value))} />
+                  </label>
+                )}
               </div>
-              <label className="tool-field">
-                <span>HEX</span>
-                <input value={hexInput || hex} onChange={(e) => handleHexChange(e.target.value)} spellCheck={false} placeholder="#000000" />
-              </label>
-              <div className="tool-toolbar">
-                <label className="tool-field tool-field--compact" style={{ flex: 1 }}>
-                  <span>格式</span>
-                  <select value={format} onChange={(e) => setFormat(e.target.value as ColorFormat)}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+                <label className="tool-field">
+                  <span>HEX 格式输入/编辑</span>
+                  <input value={hexInput || hex} onChange={(e) => handleHexChange(e.target.value)} spellCheck={false} placeholder="#000000" />
+                </label>
+                <label className="tool-field">
+                  <span>选择格式</span>
+                  <select value={format} onChange={(e) => setFormat(e.target.value as ColorFormat)} style={{ width: "100%" }}>
                     <option value="hex">HEX</option>
                     <option value="rgb">RGB</option>
                     <option value="hsl">HSL</option>
@@ -439,82 +576,82 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
                     <option value="hsla">HSLA</option>
                   </select>
                 </label>
-                {(format === "rgba" || format === "hsla") && (
-                  <label className="tool-field tool-field--compact" style={{ flex: 0.6 }}>
-                    <span>Alpha</span>
-                    <input type="number" min={0} max={1} step={0.05} value={alpha}
-                      onChange={(e) => setAlpha(Number(e.target.value))} />
-                  </label>
-                )}
               </div>
-              <button type="button" onClick={() => void copyColor(formatted, "picker")}
-                style={{ width: "100%", marginTop: 8 }}>
-                {copied === "picker" ? "已复制" : `复制 ${format.toUpperCase()}`}
-              </button>
-              <div className="detail-grid" style={{ marginTop: 12 }}>
-                <article className="detail-card">
-                  <h3>RGB</h3>
-                  <p>{rgb}</p>
-                </article>
-                <article className="detail-card">
-                  <h3>HSL</h3>
-                  <p>{hslStr}</p>
-                </article>
+
+              <div style={{
+                background: "var(--bg-muted)",
+                borderRadius: "var(--radius-md)",
+                padding: "12px 16px",
+                display: "grid",
+                gap: "8px",
+                border: "1px solid var(--border-default)",
+                marginTop: "4px"
+              }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem" }}>
+                  <span style={{ color: "var(--text-secondary)" }}>HEX</span>
+                  <span style={{ fontFamily: "var(--font-mono), monospace", fontWeight: 600 }}>{hex}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", borderTop: "1px solid var(--border-subtle)", paddingTop: "8px" }}>
+                  <span style={{ color: "var(--text-secondary)" }}>RGB</span>
+                  <span style={{ fontFamily: "var(--font-mono), monospace", fontWeight: 600 }}>{rgb}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", borderTop: "1px solid var(--border-subtle)", paddingTop: "8px" }}>
+                  <span style={{ color: "var(--text-secondary)" }}>HSL</span>
+                  <span style={{ fontFamily: "var(--font-mono), monospace", fontWeight: 600 }}>{hslStr}</span>
+                </div>
               </div>
             </div>
           </div>
-          <p className="tool-note">在色板中拖拽选择颜色，或使用滑块微调。点击按钮复制当前颜色值。</p>
+          <p className="tool-note">在色板中拖拽或使用滑块来微调颜色。点击格式按钮并复制即可。</p>
         </>
       )}
 
       {activeTab === "palettes" && (
         <>
-          <div className="tool-toolbar" style={{ gap: 0, marginBottom: 16 }}>
-            {(["css-named", "flat-ui", "semantic", "tailwind"] as PaletteTab[]).map((tab, i) => (
+          <div className="segmented-control" style={{ marginBottom: 16 }}>
+            {(["css-named", "flat-ui", "semantic", "tailwind"] as PaletteTab[]).map((tab) => (
               <button key={tab} type="button"
-                className={paletteTab === tab ? "button--primary" : ""}
-                style={{
-                  flex: 1,
-                  borderRadius: 0,
-                  borderTopLeftRadius: i === 0 ? 6 : 0,
-                  borderBottomLeftRadius: i === 0 ? 6 : 0,
-                  borderTopRightRadius: i === 3 ? 6 : 0,
-                  borderBottomRightRadius: i === 3 ? 6 : 0
-                }}
+                className={paletteTab === tab ? "active" : ""}
                 onClick={() => setPaletteTab(tab)}>
                 {tab === "css-named" ? "CSS 命名色" : tab === "flat-ui" ? "Flat UI" : tab === "semantic" ? "语义色" : "Tailwind"}
               </button>
             ))}
           </div>
 
-          <div className="tool-toolbar tool-toolbar--inline">
-            <label className="tool-field tool-field--compact">
-              <span>复制格式</span>
-              <select value={format} onChange={(e) => setFormat(e.target.value as ColorFormat)}>
-                <option value="hex">HEX</option>
-                <option value="rgb">RGB</option>
-                <option value="hsl">HSL</option>
-                <option value="rgba">RGBA</option>
-                <option value="hsla">HSLA</option>
-              </select>
-            </label>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <label className="tool-field">
+                <span>复制格式</span>
+                <select value={format} onChange={(e) => setFormat(e.target.value as ColorFormat)}>
+                  <option value="hex">HEX</option>
+                  <option value="rgb">RGB</option>
+                  <option value="hsl">HSL</option>
+                  <option value="rgba">RGBA</option>
+                  <option value="hsla">HSLA</option>
+                </select>
+              </label>
+              {paletteTab === "css-named" && (
+                <label className="tool-field">
+                  <span>搜索颜色</span>
+                  <input value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="输入颜色名称或 HEX 值…" spellCheck={false} />
+                </label>
+              )}
+            </div>
+            {paletteTab === "css-named" && (
+              <p className="tool-note" style={{ margin: 0 }}>
+                {query ? `找到 ${filteredNamedCount} 个匹配颜色` : `共 ${CSS_NAMED_GROUPS.reduce((s, g) => s + g.colors.length, 0)} 个 CSS 命名颜色`}
+              </p>
+            )}
           </div>
 
           {paletteTab === "css-named" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              <label className="tool-field">
-                <span>搜索颜色</span>
-                <input value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="输入颜色名称或 HEX 值…" spellCheck={false} />
-              </label>
-              <p className="tool-note">
-                {query ? `找到 ${filteredNamedCount} 个匹配颜色` : `共 ${CSS_NAMED_GROUPS.reduce((s, g) => s + g.colors.length, 0)} 个 CSS 命名颜色`}
-              </p>
               {filteredNamedGroups.map((group) => (
                 <div key={group.label}>
-                  <p className="eyebrow" style={{ marginBottom: 8 }}>{group.label}</p>
-                  <div className="palette-grid">
+                  <p className="eyebrow" style={{ marginBottom: 12 }}>{group.label}</p>
+                  <div className="color-picker-grid">
                     {group.colors.map(renderSwatch)}
                   </div>
                 </div>
@@ -526,7 +663,7 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
           {paletteTab === "flat-ui" && (
             <div>
               <p className="tool-note" style={{ marginBottom: 12 }}>Flat UI 经典配色</p>
-              <div className="palette-grid">
+              <div className="color-picker-grid">
                 {FLAT_UI_COLORS.map(renderSwatch)}
               </div>
             </div>
@@ -535,7 +672,7 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
           {paletteTab === "semantic" && (
             <div>
               <p className="tool-note" style={{ marginBottom: 12 }}>UI 语义色 — 常用于状态指示</p>
-              <div className="palette-grid">
+              <div className="color-picker-grid">
                 {SEMANTIC_COLORS.map(renderSwatch)}
               </div>
             </div>
@@ -544,7 +681,7 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
           {paletteTab === "tailwind" && (
             <div>
               <p className="tool-note" style={{ marginBottom: 12 }}>Tailwind CSS 常用色板</p>
-              <div className="palette-grid">
+              <div className="color-picker-grid">
                 {TAILWIND_COLORS.map(renderSwatch)}
               </div>
             </div>
@@ -552,7 +689,7 @@ export default function CssColorPickerTool({ manifest }: ToolAppProps) {
         </>
       )}
 
-      <p className="tool-note">所有颜色值在本地生成，点击色块即可按所选格式复制。</p>
+      <p className="tool-note" style={{ marginTop: 20 }}>所有颜色值在本地生成，点击色块即可按所选格式复制。</p>
     </section>
   );
 }

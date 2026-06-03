@@ -461,6 +461,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["在空闲时间开一局初级扫雷放松大脑。", "挑战 99 个雷的高级难度记录。"]
   },
+  "neon-snake": {
+    name: "霓虹贪吃蛇",
+    description: "赛博霓虹贪吃蛇游戏，配备炫目粒子吃食特效、震屏反馈、速度难度调节及复古街机电子合成音效，支持自定义外观与障碍物模式。",
+    intro: "控制发光的霓虹贪吃蛇在网格中移动，吃掉粉色能量核心增长积分，注意避开障碍物与自身身体。",
+    steps: [
+      "选择赛博霓虹、翡翠之光等酷炫主题皮肤。",
+      "设定常速、慢速或极速，并可开启障碍物和穿墙模式。",
+      "使用键盘方向键/WASD或手机虚拟摇杆控制贪吃蛇转向。",
+      "吃掉能量果实增加得分，并欣赏炫目的粒子爆炸和电子音效。"
+    ],
+    examples: ["在极速 + 障碍物的高难度下挑战最高得分记录。", "开启穿墙模式，体验轻松休闲的合成蛇长龙。"]
+  },
   "utm-builder": {
     name: "UTM 链接构建器",
     description: "生成带 UTM 参数的营销链接，并保留原始查询参数。",
@@ -1730,6 +1742,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["从生产环境错误堆栈定位到源码。", "分析打包后的源码文件大小分布。"]
   },
+  "sudoku-game": {
+    name: "数独大师",
+    description: "经典数独游戏，支持多种难度，具备草稿笔记、一键排查冲突、计时与游戏存档功能，配有清新的动画及拟真音效。",
+    intro: "填充 9x9 网格，让每一行、每一列及 9 个 3x3 宫格内均包含 1 到 9 的数字且不重复。",
+    steps: [
+      "选择简单、中等或困难的挑战难度，自动生成全新数独题目。",
+      "点击格子，使用下方数字键盘或电脑键盘输入 1-9 填数。",
+      "开启「草稿笔记」在格子内记录可能的候选数字，再次输入则消除。",
+      "随时开启「实时冲突排查」辅助纠错，清空所有未填格且无冲突即可通关。"
+    ],
+    examples: ["在空闲碎片时间开一局简单数独开动脑筋。", "关闭冲突排查，挑战高难度的无提示硬核通关。"]
+  },
   "spaced-repetition-planner": {
     name: "间隔重复学习计划器",
     description: "基于间隔重复算法生成学习计划，支持 SM-2 算法和自定义复习间隔。",
@@ -2135,6 +2159,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "meta-tags-seo-preview": "Meta Tags SEO 预览器",
   "mime-type-lookup": "MIME 类型查询",
   "minesweeper": "经典扫雷",
+  "neon-snake": "霓虹贪吃蛇",
   "mock-data-generator": "Mock 数据生成器",
   "notification-payload-tester": "通知 Payload 测试器",
   "number-base-converter": "进制转换器",
@@ -2182,6 +2207,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "sql-index-advisor": "SQL 索引顾问",
   "sql-playground": "SQL Playground",
   "study-plan-scheduler": "学习计划排期器",
+  "sudoku-game": "数独大师",
   "svg-optimizer-viewbox-editor": "SVG 优化与 ViewBox 编辑器",
   "systemd-unit-analyzer": "systemd Unit 分析器",
   "tailwind-class-lab": "Tailwind Class 实验室",

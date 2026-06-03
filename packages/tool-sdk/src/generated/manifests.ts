@@ -105,6 +105,7 @@ import MetaTagsSeoPreviewManifest from "@tool-platform/meta-tags-seo-preview/man
 import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
 import MinesweeperManifest from "@tool-platform/minesweeper/manifest";
 import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manifest";
+import NeonSnakeManifest from "@tool-platform/neon-snake/manifest";
 import NotificationPayloadTesterManifest from "@tool-platform/notification-payload-tester/manifest";
 import NumberBaseConverterManifest from "@tool-platform/number-base-converter/manifest";
 import OauthOidcDebuggerManifest from "@tool-platform/oauth-oidc-debugger/manifest";
@@ -153,6 +154,7 @@ import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
 import SqlIndexAdvisorManifest from "@tool-platform/sql-index-advisor/manifest";
 import SqlPlaygroundManifest from "@tool-platform/sql-playground/manifest";
 import StudyPlanSchedulerManifest from "@tool-platform/study-plan-scheduler/manifest";
+import SudokuGameManifest from "@tool-platform/sudoku-game/manifest";
 import SvgOptimizerViewboxEditorManifest from "@tool-platform/svg-optimizer-viewbox-editor/manifest";
 import SystemdUnitAnalyzerManifest from "@tool-platform/systemd-unit-analyzer/manifest";
 import TailwindClassLabManifest from "@tool-platform/tailwind-class-lab/manifest";
@@ -290,6 +292,7 @@ export const toolManifests: ToolManifest[] = [
   MimeTypeLookupManifest,
   MinesweeperManifest,
   MockDataGeneratorManifest,
+  NeonSnakeManifest,
   NotificationPayloadTesterManifest,
   NumberBaseConverterManifest,
   OauthOidcDebuggerManifest,
@@ -338,6 +341,7 @@ export const toolManifests: ToolManifest[] = [
   SqlIndexAdvisorManifest,
   SqlPlaygroundManifest,
   StudyPlanSchedulerManifest,
+  SudokuGameManifest,
   SvgOptimizerViewboxEditorManifest,
   SystemdUnitAnalyzerManifest,
   TailwindClassLabManifest,
