@@ -221,9 +221,6 @@ importers:
       '@tool-platform/csp-generator':
         specifier: workspace:*
         version: link:../../tools/csp-generator
-      '@tool-platform/css-clamp-generator':
-        specifier: workspace:*
-        version: link:../../tools/css-clamp-generator
       '@tool-platform/css-color-picker':
         specifier: workspace:*
         version: link:../../tools/css-color-picker
@@ -458,9 +455,6 @@ importers:
       '@tool-platform/oauth-oidc-debugger':
         specifier: workspace:*
         version: link:../../tools/oauth-oidc-debugger
-      '@tool-platform/open-graph-preview':
-        specifier: workspace:*
-        version: link:../../tools/open-graph-preview
       '@tool-platform/openapi-workbench':
         specifier: workspace:*
         version: link:../../tools/openapi-workbench
@@ -590,9 +584,6 @@ importers:
       '@tool-platform/sql-playground':
         specifier: workspace:*
         version: link:../../tools/sql-playground
-      '@tool-platform/sri-hash-generator':
-        specifier: workspace:*
-        version: link:../../tools/sri-hash-generator
       '@tool-platform/study-plan-scheduler':
         specifier: workspace:*
         version: link:../../tools/study-plan-scheduler
@@ -709,6 +700,9 @@ importers:
 
   tools/ai-brief-synthesizer:
     dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -981,15 +975,6 @@ importers:
         version: 19.2.6
 
   tools/csp-generator:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/css-clamp-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1700,15 +1685,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/open-graph-preview:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/openapi-workbench:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2098,15 +2074,6 @@ importers:
       '@tool-platform/tool-browser-sdk':
         specifier: workspace:*
         version: link:../../packages/tool-browser-sdk
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/sri-hash-generator:
-    dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts

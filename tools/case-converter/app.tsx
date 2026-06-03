@@ -18,6 +18,17 @@ function capitalize(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
+function createSlug(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 function convertCases(value: string) {
   const words = splitWords(value);
 
@@ -45,6 +56,10 @@ function convertCases(value: string) {
     {
       label: "dot.case",
       value: words.join(".")
+    },
+    {
+      label: "slug",
+      value: createSlug(value)
     },
     {
       label: "Title Case",

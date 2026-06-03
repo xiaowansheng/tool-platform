@@ -7,7 +7,10 @@ import {
   DEFAULT_IFRAME_SANDBOX,
   createToolSdk,
   useToolRuntime,
-  type IframeSandboxClient
+  type IframeSandboxClient,
+  AiSettingsPanel,
+  getSavedAiConfig,
+  resolveAiConfig
 } from "@tool-platform/tool-browser-sdk";
 
 export default function AiSandboxLabTool({ manifest }: ToolAppProps) {
@@ -22,7 +25,9 @@ export default function AiSandboxLabTool({ manifest }: ToolAppProps) {
 
   const sdk = sdkRef.current;
   const runtime = useToolRuntime(manifest.id);
-  const aiRuntime = useMemo(() => sdk.createAiRuntime(), [sdk]);
+  const [config, setConfig] = useState(() => getSavedAiConfig());
+  const resolvedConfig = useMemo(() => resolveAiConfig(config), [config]);
+  const aiRuntime = useMemo(() => sdk.createConfiguredAiRuntime(config), [sdk, config]);
   const sandboxDocument = useMemo(
     () =>
       sdk.createSandboxDocument({
@@ -108,7 +113,7 @@ export default function AiSandboxLabTool({ manifest }: ToolAppProps) {
       await sdk.openTool(manifest.id);
 
       for await (const chunk of aiRuntime.streamChat(
-        "local-text-sim",
+        resolvedConfig.modelId,
         [
           {
             role: "system",
@@ -121,7 +126,7 @@ export default function AiSandboxLabTool({ manifest }: ToolAppProps) {
         ],
         {
           signal: abortController.signal,
-          maxTokens: 140
+          maxTokens: 1000
         }
       )) {
         if (chunk.type === "status") {
@@ -138,11 +143,14 @@ export default function AiSandboxLabTool({ manifest }: ToolAppProps) {
         }
       }
 
-      const vector = await aiRuntime.embed("local-text-sim", `${systemPrompt}\n${prompt}`, {
-        signal: abortController.signal
-      });
-
-      setEmbedding(vector.slice(0, 8));
+      try {
+        const vector = await aiRuntime.embed(resolvedConfig.modelId, `${systemPrompt}\n${prompt}`, {
+          signal: abortController.signal
+        });
+        setEmbedding(vector.slice(0, 8));
+      } catch (embedError) {
+        console.warn("Embedding not supported by this model provider:", embedError);
+      }
       await renderSandbox(nextResponse);
       sdk.toast({
         tone: "success",
@@ -180,6 +188,8 @@ export default function AiSandboxLabTool({ manifest }: ToolAppProps) {
         <p>{manifest.description}</p>
       </div>
 
+      <AiSettingsPanel onSave={setConfig} />
+
       <div className="tool-toolbar">
         <button type="button" onClick={handleGenerate} disabled={busy}>
           生成
@@ -213,6 +223,16 @@ export default function AiSandboxLabTool({ manifest }: ToolAppProps) {
             <div>
               <p className="eyebrow">模型</p>
               <strong>{status}</strong>
+            </div>
+            <div>
+              <p className="eyebrow">配置</p>
+              <strong style={{ fontSize: "0.85rem", wordBreak: "break-all" }}>
+                {config.provider === "local-sim"
+                  ? "本地模拟器"
+                  : resolvedConfig.fallback
+                    ? "本地模拟器 (远端配置未完成，已回退)"
+                    : `${config.provider === "openai" ? "OpenAI兼容" : "Gemini"}: ${config.modelId}`}
+              </strong>
             </div>
             <div>
               <p className="eyebrow">沙箱</p>

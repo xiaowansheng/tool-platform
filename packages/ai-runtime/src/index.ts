@@ -214,3 +214,327 @@ export function createLocalTextModelProvider(): AiModelProvider {
     }
   };
 }
+
+export interface OpenAiConfig {
+  apiKey: string;
+  baseUrl: string;
+  modelId: string;
+  temperature?: number;
+}
+
+export function createOpenAiCompatibleProvider(config: OpenAiConfig): AiModelProvider {
+  const modelManifest: AiModelManifest = {
+    id: config.modelId,
+    name: `${config.modelId} (OpenAI-compatible)`,
+    provider: "openai-compatible",
+    capabilities: ["chat", "stream"],
+    source: "remote"
+  };
+
+  return {
+    listModels() {
+      return [modelManifest];
+    },
+    loadModel(modelId) {
+      if (modelId !== config.modelId) {
+        throw new Error(`Unknown model "${modelId}", expected "${config.modelId}"`);
+      }
+
+      return {
+        manifest: modelManifest,
+        async chat(messages, options = {}) {
+          const res = await fetch(`${config.baseUrl}/chat/completions`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${config.apiKey}`
+            },
+            body: JSON.stringify({
+              model: config.modelId,
+              messages: messages.map(m => ({ role: m.role, content: m.content })),
+              temperature: config.temperature ?? options.temperature ?? 0.7,
+              max_tokens: options.maxTokens,
+              stream: false
+            }),
+            signal: options.signal
+          });
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`API error (${res.status}): ${errText}`);
+          }
+          const json = await res.json();
+          const content = json.choices?.[0]?.message?.content || "";
+          return {
+            modelId: config.modelId,
+            content,
+            usage: {
+              inputTokens: json.usage?.prompt_tokens ?? 0,
+              outputTokens: json.usage?.completion_tokens ?? 0
+            }
+          };
+        },
+        async *streamChat(messages, options = {}) {
+          yield { type: "status", value: "connecting" };
+          const res = await fetch(`${config.baseUrl}/chat/completions`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${config.apiKey}`
+            },
+            body: JSON.stringify({
+              model: config.modelId,
+              messages: messages.map(m => ({ role: m.role, content: m.content })),
+              temperature: config.temperature ?? options.temperature ?? 0.7,
+              max_tokens: options.maxTokens,
+              stream: true
+            }),
+            signal: options.signal
+          });
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`API stream error (${res.status}): ${errText}`);
+          }
+          if (!res.body) {
+            throw new Error("Response body is empty");
+          }
+          
+          yield { type: "status", value: "streaming" };
+          
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder("utf-8");
+          let buffer = "";
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer.split("\n");
+              buffer = lines.pop() || "";
+              for (const line of lines) {
+                const trimmed = line.trim();
+                if (!trimmed) continue;
+                if (trimmed === "data: [DONE]") continue;
+                if (trimmed.startsWith("data: ")) {
+                  try {
+                    const json = JSON.parse(trimmed.slice(6));
+                    const delta = json.choices?.[0]?.delta?.content;
+                    if (delta) {
+                      yield { type: "token", value: delta };
+                    }
+                  } catch (e) {
+                    // Ignore parsing error for partial chunks
+                  }
+                }
+              }
+            }
+            if (buffer.trim().startsWith("data: ") && buffer.trim() !== "data: [DONE]") {
+              try {
+                const json = JSON.parse(buffer.trim().slice(6));
+                const delta = json.choices?.[0]?.delta?.content;
+                if (delta) {
+                  yield { type: "token", value: delta };
+                }
+              } catch (e) {}
+            }
+          } finally {
+            reader.releaseLock();
+          }
+          yield { type: "done", value: "" };
+        }
+      };
+    }
+  };
+}
+
+export interface GeminiConfig {
+  apiKey: string;
+  modelId: string;
+  temperature?: number;
+}
+
+export function createGeminiProvider(config: GeminiConfig): AiModelProvider {
+  const modelManifest: AiModelManifest = {
+    id: config.modelId,
+    name: `${config.modelId} (Gemini)`,
+    provider: "gemini",
+    capabilities: ["chat", "stream"],
+    source: "remote"
+  };
+
+  return {
+    listModels() {
+      return [modelManifest];
+    },
+    loadModel(modelId) {
+      if (modelId !== config.modelId) {
+        throw new Error(`Unknown model "${modelId}", expected "${config.modelId}"`);
+      }
+
+      return {
+        manifest: modelManifest,
+        async chat(messages, options = {}) {
+          const systemMsg = messages.find(m => m.role === "system")?.content;
+          const otherMsgs = messages.filter(m => m.role !== "system");
+          
+          const contents = otherMsgs.map(m => ({
+            role: m.role === "user" ? "user" : "model",
+            parts: [{ text: m.content }]
+          }));
+
+          const requestBody: any = {
+            contents,
+            generationConfig: {
+              temperature: config.temperature ?? options.temperature ?? 0.7,
+              maxOutputTokens: options.maxTokens
+            }
+          };
+
+          if (systemMsg) {
+            requestBody.systemInstruction = {
+              parts: [{ text: systemMsg }]
+            };
+          }
+
+          const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${config.modelId}:generateContent?key=${config.apiKey}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(requestBody),
+              signal: options.signal
+            }
+          );
+
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`Gemini API error (${res.status}): ${errText}`);
+          }
+
+          const json = await res.json();
+          const content = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
+          return {
+            modelId: config.modelId,
+            content,
+            usage: {
+              inputTokens: json.usageMetadata?.promptTokenCount ?? 0,
+              outputTokens: json.usageMetadata?.candidatesTokenCount ?? 0
+            }
+          };
+        },
+        async *streamChat(messages, options = {}) {
+          yield { type: "status", value: "connecting" };
+          const systemMsg = messages.find(m => m.role === "system")?.content;
+          const otherMsgs = messages.filter(m => m.role !== "system");
+
+          const contents = otherMsgs.map(m => ({
+            role: m.role === "user" ? "user" : "model",
+            parts: [{ text: m.content }]
+          }));
+
+          const requestBody: any = {
+            contents,
+            generationConfig: {
+              temperature: config.temperature ?? options.temperature ?? 0.7,
+              maxOutputTokens: options.maxTokens
+            }
+          };
+
+          if (systemMsg) {
+            requestBody.systemInstruction = {
+              parts: [{ text: systemMsg }]
+            };
+          }
+
+          const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${config.modelId}:streamGenerateContent?key=${config.apiKey}&alt=sse`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(requestBody),
+              signal: options.signal
+            }
+          );
+
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`Gemini API stream error (${res.status}): ${errText}`);
+          }
+          if (!res.body) {
+            throw new Error("Response body is empty");
+          }
+
+          yield { type: "status", value: "streaming" };
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder("utf-8");
+          let buffer = "";
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              buffer += decoder.decode(value, { stream: true });
+              
+              let braceCount = 0;
+              let inString = false;
+              let escape = false;
+              let startIdx = -1;
+
+              for (let i = 0; i < buffer.length; i++) {
+                const char = buffer[i];
+                if (escape) {
+                  escape = false;
+                  continue;
+                }
+                if (char === "\\") {
+                  escape = true;
+                  continue;
+                }
+                if (char === '"') {
+                  inString = !inString;
+                  continue;
+                }
+                if (!inString) {
+                  if (char === "{") {
+                    if (braceCount === 0) {
+                      startIdx = i;
+                    }
+                    braceCount++;
+                  } else if (char === "}") {
+                    braceCount--;
+                    if (braceCount === 0 && startIdx !== -1) {
+                      const jsonStr = buffer.slice(startIdx, i + 1);
+                      try {
+                        const json = JSON.parse(jsonStr);
+                        const text = json.candidates?.[0]?.content?.parts?.[0]?.text;
+                        if (text) {
+                          yield { type: "token", value: text };
+                        }
+                      } catch (e) {
+                        // ignore malformed chunks
+                      }
+                      startIdx = -1;
+                    }
+                  }
+                }
+              }
+
+              if (startIdx !== -1) {
+                buffer = buffer.slice(startIdx);
+              } else {
+                buffer = "";
+              }
+            }
+          } finally {
+            reader.releaseLock();
+          }
+          yield { type: "done", value: "" };
+        }
+      };
+    }
+  };
+}
+

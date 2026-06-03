@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
-import { createToolSdk } from "@tool-platform/tool-browser-sdk";
+import { createToolSdk, AiSettingsPanel, getSavedAiConfig, resolveAiConfig } from "@tool-platform/tool-browser-sdk";
 
 type Role = "system" | "user" | "assistant";
 
@@ -44,7 +44,9 @@ export default function AiChatTool({ manifest }: ToolAppProps) {
     sdkRef.current = createToolSdk();
   }
 
-  const aiRuntime = useMemo(() => sdkRef.current!.createAiRuntime(), []);
+  const [config, setConfig] = useState(() => getSavedAiConfig());
+  const resolvedConfig = useMemo(() => resolveAiConfig(config), [config]);
+  const aiRuntime = useMemo(() => sdkRef.current!.createConfiguredAiRuntime(config), [config]);
   const [systemPrompt, setSystemPrompt] = useState("你是浏览器工具平台中一位简洁的产品工程助手。");
   const [input, setInput] = useState("帮我把一个新开发者工具拆成核心功能、输入输出和测试点。");
   const [messages, setMessages] = useState<ChatMessage[]>(sampleMessages);
@@ -78,7 +80,7 @@ export default function AiChatTool({ manifest }: ToolAppProps) {
 
     try {
       for await (const chunk of aiRuntime.streamChat(
-        "local-text-sim",
+        resolvedConfig.modelId,
         [
           { role: "system", content: systemPrompt },
           ...messages.map((message) => ({ role: message.role, content: message.content })),
@@ -86,7 +88,7 @@ export default function AiChatTool({ manifest }: ToolAppProps) {
         ],
         {
           signal: abortController.signal,
-          maxTokens: 180
+          maxTokens: 1000
         }
       )) {
         if (chunk.type === "status") {
@@ -143,6 +145,8 @@ export default function AiChatTool({ manifest }: ToolAppProps) {
         <p>{manifest.description}</p>
       </div>
 
+      <AiSettingsPanel onSave={setConfig} />
+
       <div className="tool-toolbar">
         <button type="button" onClick={() => void sendMessage()} disabled={busy || !input.trim()}>
           发送
@@ -162,6 +166,16 @@ export default function AiChatTool({ manifest }: ToolAppProps) {
         <article className="detail-card">
           <h3>状态</h3>
           <p>{status}</p>
+        </article>
+        <article className="detail-card">
+          <h3>当前模型</h3>
+          <p style={{ wordBreak: "break-all" }}>
+            {config.provider === "local-sim"
+              ? "本地模拟器 (Simulator)"
+              : resolvedConfig.fallback
+                ? "本地模拟器 (远端配置未完成，已回退)"
+                : `${config.provider === "openai" ? "OpenAI兼容" : "Gemini"}: ${config.modelId}`}
+          </p>
         </article>
         <article className="detail-card">
           <h3>消息数</h3>
@@ -205,7 +219,9 @@ export default function AiChatTool({ manifest }: ToolAppProps) {
         </div>
       </div>
 
-      <p className="tool-note">当前接入平台内置 local-text-sim runtime，用于验证 AI 工具交互；后续可替换为真实模型提供方。</p>
+      <p className="tool-note">
+        当前接入平台支持真实模型配置，您可以在上方配置 OpenAI 兼容的 API（如 DeepSeek、OpenAI）或 Google Gemini API，配置将被缓存到本地浏览器中。
+      </p>
       {error ? <p className="tool-error">{error}</p> : null}
     </section>
   );

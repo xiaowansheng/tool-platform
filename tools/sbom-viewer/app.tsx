@@ -4,6 +4,22 @@ import { useMemo, useState } from "react";
 
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
+const TABS = ["SBOM", "Plain Dependencies"] as const;
+
+const majorVersions: Record<string, string> = {
+  react: "19",
+  vue: "3",
+  angular: "18",
+  next: "15",
+  typescript: "5",
+  express: "5",
+  webpack: "5",
+  vite: "6",
+  eslint: "9",
+  python: "3.13",
+  node: "22"
+};
+
 interface SbomComponent {
   id: string;
   name: string;
@@ -273,10 +289,48 @@ function summarizeLicenses(components: SbomComponent[]) {
   return Array.from(counts.entries()).sort((left, right) => right[1] - left[1]);
 }
 
+function parseDeps(text: string) {
+  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  const deps: Array<{ name: string; version: string; raw: string }> = [];
+
+  for (const line of lines) {
+    const atMatch = /^@?[^@]+@([\w.~^*-]+)/.exec(line);
+    const colonMatch = /^([\w.-]+)\s*:\s*([\w.~^*,-]+)/.exec(line);
+
+    if (atMatch) {
+      const atIdx = line.lastIndexOf("@");
+      deps.push({ name: line.slice(0, atIdx), version: atMatch[1]!, raw: line });
+    } else if (colonMatch) {
+      deps.push({ name: colonMatch[1]!, version: colonMatch[2]!, raw: line });
+    } else {
+      deps.push({ name: line, version: "latest", raw: line });
+    }
+  }
+
+  return deps;
+}
+
+function depRiskFlags(name: string, version: string) {
+  const flags: string[] = [];
+  const latestMajor = majorVersions[name.toLowerCase()];
+
+  if (latestMajor) {
+    const major = version.split(".")[0];
+    if (major && Number(major) < Number(latestMajor)) {
+      flags.push(`旧版本 (最新: ${latestMajor}.x)`);
+    }
+  }
+
+  return flags;
+}
+
+
 export default function SbomViewerTool({ manifest }: ToolAppProps) {
+  const [tab, setTab] = useState<(typeof TABS)[number]>("SBOM");
   const [input, setInput] = useState(sampleCycloneDx);
   const [query, setQuery] = useState("");
   const [licenseFilter, setLicenseFilter] = useState("all");
+  const [depInput, setDepInput] = useState("react@19.0.0\nvue@3.4.0\nlegacy-auth@0.8.1\ntypescript: 4.5.0\nexpress: 3.0.0");
 
   const result = useMemo(() => {
     try {
@@ -300,6 +354,8 @@ export default function SbomViewerTool({ manifest }: ToolAppProps) {
   });
   const vulnerabilityTotal = components.reduce((total, component) => total + component.vulnerabilityCount, 0);
 
+  const parsedDeps = useMemo(() => parseDeps(depInput), [depInput]);
+
   return (
     <section className="tool-panel">
       <div className="tool-panel__header">
@@ -310,75 +366,124 @@ export default function SbomViewerTool({ manifest }: ToolAppProps) {
         <p>{manifest.description}</p>
       </div>
 
-      <label className="tool-field">
-        <span>SBOM</span>
-        <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
-      </label>
+      <div className="tool-toolbar">
+        {TABS.map((t) => (
+          <button key={t} type="button" className={tab === t ? "tool-toolbar__btn tool-toolbar__btn--active" : "tool-toolbar__btn"} onClick={() => setTab(t)}>{t}</button>
+        ))}
+      </div>
 
-      {result.sbom ? (
+      {tab === "SBOM" ? (
         <>
+          <label className="tool-field">
+            <span>SBOM</span>
+            <textarea value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} />
+          </label>
+
+          {result.sbom ? (
+            <>
+              <div className="detail-grid">
+                <article className="detail-card">
+                  <h3>格式</h3>
+                  <p>{result.sbom.format}</p>
+                </article>
+                <article className="detail-card">
+                  <h3>文档</h3>
+                  <p>{result.sbom.name}{result.sbom.version ? ` ${result.sbom.version}` : ""}</p>
+                </article>
+                <article className="detail-card">
+                  <h3>组件</h3>
+                  <p>{components.length}</p>
+                </article>
+                <article className="detail-card">
+                  <h3>漏洞</h3>
+                  <p>{vulnerabilityTotal}</p>
+                </article>
+              </div>
+
+              <div className="tool-toolbar tool-toolbar--grid">
+                <label className="tool-field tool-field--compact">
+                  <span>搜索</span>
+                  <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="组件 / 许可证 / purl" />
+                </label>
+                <label className="tool-field tool-field--compact">
+                  <span>许可证</span>
+                  <select value={licenseFilter} onChange={(event) => setLicenseFilter(event.target.value)}>
+                    <option value="all">全部许可证</option>
+                    {licenseStats.map(([license]) => (
+                      <option key={license} value={license}>{license}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <div className="tag-list">
+                {licenseStats.map(([license, count]) => (
+                  <span key={license} className="tag">{license}: {count}</span>
+                ))}
+              </div>
+
+              <div className="tool-table">
+                <div className="tool-table__row tool-table__row--head">
+                  <span>组件</span>
+                  <span>详情</span>
+                </div>
+                {filteredComponents.map((component) => (
+                  <div key={component.id} className="tool-table__row">
+                    <span>
+                      <strong>{component.name}</strong><br />
+                      <span className="mono-output">{component.version}</span>
+                    </span>
+                    <span>
+                      {component.type} / {component.license} / 依赖 {component.dependencyCount} / 漏洞 {component.vulnerabilityCount}
+                      {component.purl ? <><br /><span className="mono-output">{component.purl}</span></> : null}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="tool-error">{result.error}</p>
+          )}
+        </>
+      ) : (
+        <>
+          <label className="tool-field">
+            <span>每行一个依赖（支持 name@version 或 name: version）</span>
+            <textarea value={depInput} onChange={(event) => setDepInput(event.target.value)} spellCheck={false} />
+          </label>
+
           <div className="detail-grid">
             <article className="detail-card">
-              <h3>格式</h3>
-              <p>{result.sbom.format}</p>
+              <h3>依赖数</h3>
+              <p>{parsedDeps.length}</p>
             </article>
             <article className="detail-card">
-              <h3>文档</h3>
-              <p>{result.sbom.name}{result.sbom.version ? ` ${result.sbom.version}` : ""}</p>
+              <h3>旧版本</h3>
+              <p>{parsedDeps.filter((d) => depRiskFlags(d.name, d.version).length > 0).length}</p>
             </article>
-            <article className="detail-card">
-              <h3>组件</h3>
-              <p>{components.length}</p>
-            </article>
-            <article className="detail-card">
-              <h3>漏洞</h3>
-              <p>{vulnerabilityTotal}</p>
-            </article>
-          </div>
-
-          <div className="tool-toolbar tool-toolbar--grid">
-            <label className="tool-field tool-field--compact">
-              <span>搜索</span>
-              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="组件 / 许可证 / purl" />
-            </label>
-            <label className="tool-field tool-field--compact">
-              <span>许可证</span>
-              <select value={licenseFilter} onChange={(event) => setLicenseFilter(event.target.value)}>
-                <option value="all">全部许可证</option>
-                {licenseStats.map(([license]) => (
-                  <option key={license} value={license}>{license}</option>
-                ))}
-              </select>
-            </label>
-          </div>
-
-          <div className="tag-list">
-            {licenseStats.map(([license, count]) => (
-              <span key={license} className="tag">{license}: {count}</span>
-            ))}
           </div>
 
           <div className="tool-table">
             <div className="tool-table__row tool-table__row--head">
-              <span>组件</span>
-              <span>详情</span>
+              <span>包名</span>
+              <span>版本</span>
+              <span>风险</span>
             </div>
-            {filteredComponents.map((component) => (
-              <div key={component.id} className="tool-table__row">
-                <span>
-                  <strong>{component.name}</strong><br />
-                  <span className="mono-output">{component.version}</span>
-                </span>
-                <span>
-                  {component.type} / {component.license} / 依赖 {component.dependencyCount} / 漏洞 {component.vulnerabilityCount}
-                  {component.purl ? <><br /><span className="mono-output">{component.purl}</span></> : null}
-                </span>
-              </div>
-            ))}
+            {parsedDeps.map((dep, index) => {
+              const versionFlags = depRiskFlags(dep.name, dep.version);
+              const hasRisks = versionFlags.length > 0;
+
+              return (
+                <div key={`${dep.name}-${index}`} className="tool-table__row">
+                  <span><strong>{dep.name}</strong></span>
+                  <span className="mono-output">{dep.version}</span>
+                  <span>{hasRisks ? versionFlags.join("; ") : "无"}</span>
+                </div>
+              );
+            })}
           </div>
+          <p className="tool-note">旧版本检测基于已知最新主版本号，仅供参考；许可证与漏洞风险需使用 SBOM 模式获取完整分析。</p>
         </>
-      ) : (
-        <p className="tool-error">{result.error}</p>
       )}
     </section>
   );

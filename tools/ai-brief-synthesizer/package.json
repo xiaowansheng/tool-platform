@@ -8,6 +8,7 @@
     "./app": "./app.tsx"
   },
   "dependencies": {
+    "@tool-platform/tool-browser-sdk": "workspace:*",
     "@tool-platform/tool-contracts": "workspace:*"
   },
   "peerDependencies": {
