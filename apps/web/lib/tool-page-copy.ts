@@ -229,6 +229,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["把产品清单 CSV 转成前端 mock JSON。", "把日志 NDJSON 流转成 CSV 便于分析。", "在 JSON 和 NDJSON 之间互转。"]
   },
+  "csv-profile-worker": {
+    name: "CSV 数据画像工具",
+    description: "解析 CSV 文件并生成数据画像，包括列类型推断、空值统计、唯一值计数和分布概览。",
+    intro: "上传或粘贴 CSV 数据，自动分析每列的类型、空值率、唯一值分布，生成数据质量报告。",
+    steps: [
+      "上传 CSV 文件或粘贴 CSV 文本。",
+      "查看每列的数据类型推断和统计信息。",
+      "检查空值、唯一值和分布概览。"
+    ],
+    examples: ["分析导入数据的质量，发现空值列。", "快速了解 CSV 的列结构和数据分布。"]
+  },
   "text-diff": {
     name: "文本差异对比",
     description: "对比两段文本，生成行级新增、删除和未变更统计。",
@@ -305,6 +316,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "按诊断结果补齐 Secure、HttpOnly、SameSite 或前缀要求。"
     ],
     examples: ["检查登录 Session Cookie 是否缺少 HttpOnly。", "解析浏览器请求里的 Cookie 值，定位编码后的偏好字段。"]
+  },
+  "regex-batch-extractor": {
+    name: "正则批量提取器",
+    description: "使用正则表达式从批量文本中提取匹配项，支持捕获组、去重和多种输出格式。",
+    intro: "输入多行文本和正则表达式，批量提取匹配内容，支持捕获组和输出格式选择。",
+    steps: [
+      "粘贴待提取的批量文本。",
+      "输入正则表达式，可使用捕获组提取特定部分。",
+      "查看提取结果，选择去重或更改输出格式。"
+    ],
+    examples: ["从日志中批量提取 IP 地址。", "从 HTML 中提取所有链接 URL。"]
   },
   "user-agent-parser": {
     name: "User-Agent 解析器",
@@ -702,6 +724,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["记录微服务拆分决策的背景和备选方案。", "生成 API 网关选型 ADR，包含评估矩阵。"]
   },
+  "ai-brief-synthesizer": {
+    name: "AI 简报合成器",
+    description: "将长文本提炼为结构化简报，支持摘要、要点提取和关键结论生成。",
+    intro: "粘贴长文本或文章，自动生成结构化简报，包含摘要、关键要点和结论。",
+    steps: [
+      "粘贴需要提炼的长文本或文章内容。",
+      "选择输出格式（摘要、要点列表或完整简报）。",
+      "复制生成的简报内容用于分享或存档。"
+    ],
+    examples: ["把研究报告提炼为一页摘要。", "从会议记录中提取关键决策和行动项。"]
+  },
 
   "ai-chat": {
     name: "AI 聊天工作台",
@@ -864,7 +897,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
   },
 
   "color-palette-generator": {
-    name: "配色方案生成器",
+    name: "色阶生成器",
     description: "基于一个 HEX 颜色生成浅色、深色和强调色阶。",
     intro: "输入一个品牌主色，自动生成完整的浅色和深色色阶，适合设计系统和主题开发。",
     steps: [
@@ -1028,6 +1061,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["计算单品在扣除广告费后的净利。", "根据目标利润率反推建议售价。"]
   },
+  "email-template-sandbox-preview": {
+    name: "邮件模板沙箱预览",
+    description: "编辑 HTML 邮件模板并在沙盒 iframe 中实时预览渲染效果，支持变量替换和响应式预览。",
+    intro: "在沙箱环境中编辑和预览 HTML 邮件模板，支持变量替换和移动端响应式效果。",
+    steps: [
+      "输入或粘贴 HTML 邮件模板代码。",
+      "设置模板变量值查看替换效果。",
+      "在桌面和移动端视图之间切换预览。"
+    ],
+    examples: ["调试邮件模板在不同客户端的渲染效果。", "预览变量替换后的个性化邮件内容。"]
+  },
   "env-diff-merge-sanitizer": {
     name: ".env 对比合并脱敏工具",
     description: "对比、合并并脱敏 .env 文件，生成安全的示例配置。",
@@ -1072,6 +1116,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "复制生成的 FFmpeg 命令到终端执行。"
     ],
     examples: ["生成视频转 GIF 的命令。", "生成批量缩放图片的 FFmpeg 命令。"]
+  },
+  "file-manifest-generator": {
+    name: "文件清单生成器",
+    description: "从目录结构文本生成文件清单（manifest），支持 JSON / YAML / Markdown 输出格式。",
+    intro: "粘贴目录结构或文件列表，自动生成格式化的文件清单。",
+    steps: [
+      "输入目录结构文本或文件路径列表。",
+      "选择输出格式（JSON、YAML 或 Markdown）。",
+      "复制生成的文件清单用于文档或配置。"
+    ],
+    examples: ["为项目生成文件清单用于文档。", "把目录树转换为配置文件清单。"]
   },
   "flashcard-cloze-builder": {
     name: "闪卡填空题生成器",
@@ -1293,6 +1348,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["整理研究资料链接收藏。", "为团队导出带分类的文档链接清单。"]
   },
+  "live-event-countdown": {
+    name: "活动倒计时器",
+    description: "创建实时倒计时，支持多个事件、自定义标签和时间到期提醒。",
+    intro: "添加多个事件时间点，实时查看倒计时，支持自定义标签和到期状态提醒。",
+    steps: [
+      "添加事件名称和目标日期时间。",
+      "查看每个事件的实时倒计时。",
+      "事件到期后自动标记为已过期。"
+    ],
+    examples: ["为产品发布设置倒计时。", "跟踪多个截止日期。"]
+  },
 
 
   "lorem-ipsum-generator": {
@@ -1461,6 +1527,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为 SaaS 产品生成隐私政策初稿。", "生成 Cookie 同意弹窗的文案内容。"]
   },
+  "python-playground": {
+    name: "Python Playground",
+    description: "通过 Pyodide (WASM) 在浏览器中运行 Python 代码，支持 pip 包安装和实时输出。",
+    intro: "在浏览器中直接运行 Python 代码，无需任何服务端。支持 pip 安装包、标准输出和错误提示。",
+    steps: [
+      "在代码编辑器中输入 Python 代码。",
+      "需要时使用 %pip install 安装第三方包。",
+      "点击运行查看 stdout 和 stderr 输出。"
+    ],
+    examples: ["运行数据处理脚本查看结果。", "测试 Python 代码片段是否正确。"]
+  },
 
   "qr-barcode-tool": {
     name: "二维码 / 条形码工具",
@@ -1507,6 +1584,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["把 512Mi 换算为字节数。", "将 0.5 CPU 换算为 millicores。"]
   },
+  "ruby-playground": {
+    name: "Ruby Playground",
+    description: "通过 ruby.wasm 在浏览器中运行 Ruby 代码，并查看标准输出结果。",
+    intro: "在浏览器中直接运行 Ruby 代码，无需安装环境，实时查看执行结果。",
+    steps: [
+      "在编辑器中编写 Ruby 代码。",
+      "点击运行按钮执行代码。",
+      "查看标准输出和控制台结果。"
+    ],
+    examples: ["快速验证 Ruby 代码逻辑。", "测试 Ruby 内置方法的返回值。"]
+  },
   "sbom-viewer": {
     name: "SBOM 查看器",
     description: "解析 CycloneDX / SPDX SBOM，查看组件、许可证、依赖和漏洞摘要。",
@@ -1551,6 +1639,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["编写检测硬编码密钥的 Semgrep 规则。", "测试 SQL 注入检测规则的效果。"]
   },
+  "sitemap-xml-generator": {
+    name: "Sitemap XML 生成器",
+    description: "根据 URL 列表生成标准 sitemap.xml 文件，支持设置优先级、更新频率和最后修改时间。",
+    intro: "输入网站 URL 列表，自动生成标准格式的 sitemap.xml，可设置优先级和更新频率。",
+    steps: [
+      "输入网站 URL 列表（每行一个）。",
+      "设置可选的优先级、更新频率和最后修改时间。",
+      "复制生成的 sitemap.xml 内容。"
+    ],
+    examples: ["为新站点生成 sitemap。", "更新现有站点的 sitemap 配置。"]
+  },
   "slo-error-budget-calculator": {
     name: "SLO 错误预算计算器",
     description: "按 SLO、周期、请求量和事故分钟数计算错误预算、消耗率、剩余预算和发布风险。",
@@ -1594,6 +1693,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "输入生成代码的行列号反查原始位置。"
     ],
     examples: ["从生产环境错误堆栈定位到源码。", "分析打包后的源码文件大小分布。"]
+  },
+  "spaced-repetition-planner": {
+    name: "间隔重复学习计划器",
+    description: "基于间隔重复算法生成学习计划，支持 SM-2 算法和自定义复习间隔。",
+    intro: "设置学习内容，使用间隔重复算法生成最佳复习计划，提高长期记忆效率。",
+    steps: [
+      "输入要学习的内容主题和数量。",
+      "选择复习算法（SM-2 或自定义间隔）。",
+      "查看生成的复习时间表和提醒。"
+    ],
+    examples: ["为考试科目制定复习计划。", "规划语言学习单词的复习节奏。"]
   },
   "sql-explain-visualizer": {
     name: "SQL 执行步骤可视化器",
@@ -1740,6 +1850,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为 Web 应用进行 STRIDE 威胁建模。", "评估微服务架构的信任边界风险。"]
   },
+  "typescript-playground": {
+    name: "TypeScript Playground",
+    description: "在浏览器中编译并运行 TypeScript 代码，支持现代语法、async/await 和 console 输出。",
+    intro: "在浏览器中直接编写和运行 TypeScript 代码，查看编译后的 JS 和执行结果。",
+    steps: [
+      "在编辑器中编写 TypeScript 代码。",
+      "点击运行，自动编译为 JavaScript 并执行。",
+      "查看编译输出和执行结果。"
+    ],
+    examples: ["验证 TypeScript 类型推断结果。", "测试最新的 TypeScript 语法特性。"]
+  },
 
   "unit-converter": {
     name: "单位换算器",
@@ -1774,6 +1895,28 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["检查 WASM 模块的导入函数和依赖。", "分析 WASM 文件的大小和各 section 占比。"]
   },
+  "wasm-integer-math-lab": {
+    name: "WASM 整数运算实验室",
+    description: "实验整数运算的溢出、截断和位操作行为，可视化不同位宽下的计算结果。",
+    intro: "选择不同位宽（u8/i32/i64 等）执行整数运算，观察溢出和截断效果。",
+    steps: [
+      "选择整型类型和位宽。",
+      "输入运算表达式。",
+      "查看实际计算结果和位表示。"
+    ],
+    examples: ["演示 u8 加法溢出如何回绕。", "对比 i32 和 u32 的右移行为差异。"]
+  },
+  "wav-audio-inspector": {
+    name: "WAV 音频检测器",
+    description: "解析 WAV 音频文件的头部信息，显示采样率、位深度、声道数、时长等元数据。",
+    intro: "上传 WAV 文件，自动解析并显示音频文件的详细元数据信息。",
+    steps: [
+      "上传 WAV 音频文件。",
+      "查看音频格式、采样率、位深度和声道数。",
+      "检查文件大小和预估时长。"
+    ],
+    examples: ["检查 WAV 文件的采样率和位深度。", "验证音频文件格式是否满足要求。"]
+  },
   "webgpu-capability-reporter": {
     name: "WebGPU 能力报告器",
     description: "查询浏览器 WebGPU adapter、features、limits 和 device 创建结果，便于定位图形/计算能力差异。",
@@ -1806,6 +1949,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "复制转换后的配置内容。"
     ],
     examples: ["把 YAML 配置转换为 JSON 格式。", "将 JSON 格式的应用配置转为 TOML。"]
+  },
+  "color-extractor": {
+    name: "颜色提取器",
+    description: "从图片中提取主色和配色方案，支持识别颜色占比和色值复制。",
+    intro: "上传图片，自动提取其中的主色和配色方案，查看颜色占比并复制色值。",
+    steps: [
+      "上传或拖入包含颜色的图片。",
+      "查看提取出的主色和配色方案及占比。",
+      "点击色块复制 HEX 或 RGB 色值。"
+    ],
+    examples: ["从品牌 Logo 中提取主色与辅助色。", "从设计稿截图中提取配色方案。"]
   },
   "color-harmonies-generator": {
     name: "配色方案生成器",
@@ -1846,7 +2000,9 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
 };
 
 const zhToolNameOverrides: Record<string, string> = {
+  "access-log-parser": "访问日志解析器",
   "adr-generator": "ADR 生成器",
+  "ai-brief-synthesizer": "AI 简报合成器",
   "ai-chat": "AI 聊天工作台",
   "ai-sandbox-lab": "AI 沙箱实验室",
   "ai-trust-analyzer": "AI Trust Analyzer",
@@ -1856,32 +2012,55 @@ const zhToolNameOverrides: Record<string, string> = {
   "archive-structure-viewer": "归档结构查看器",
   "aspect-ratio-calculator": "宽高比计算器",
   "audio-tone-generator": "音频测试音生成器",
+  "base64-studio": "Base64 工具",
+  "basic-auth-generator": "Basic Auth 生成器",
   "batch-file-hash-calculator": "批量文件哈希计算器",
   "border-radius-generator": "圆角生成器",
   "box-shadow-generator": "CSS 效果工作台",
   "browser-sandbox-console": "浏览器沙箱控制台",
+  "case-converter": "命名风格转换器",
   "changelog-generator": "Changelog 生成器",
-  "color-palette-generator": "配色方案生成器",
+  "chmod-calculator": "Chmod 计算器",
+  "color-blindness-simulator": "色盲模拟器",
+  "color-contrast-checker": "色彩对比度检查器",
+  "color-converter": "颜色格式转换器",
+  "color-extractor": "颜色提取器",
+  "color-harmonies-generator": "配色方案生成器",
+  "color-palette-generator": "色阶生成器",
+  "conventional-commit-helper": "Conventional Commit 助手",
+  "cookie-parser": "Cookie 解析器",
+  "cors-diagnostics": "CORS 诊断工具",
   "cron-helper": "Cron 表达式助手",
-  "css-color-picker": "CSS 颜色拾取器",
+  "csp-generator": "CSP 生成器",
   "css-clamp-generator": "响应式字号 Scale 生成器",
+  "css-color-picker": "CSS 颜色拾取器",
   "css-grid-generator": "CSS Grid 生成器",
   "css-specificity-calculator": "CSS 权重计算器",
   "csv-cleaner": "CSV 清洗器",
   "csv-json-ndjson-converter": "CSV / JSON / NDJSON 转换器",
+  "csv-profile-worker": "CSV 数据画像工具",
+  "curl-builder": "cURL 生成器",
+  "cvss-calculator": "CVSS 计算器",
+  "data-url-generator": "Data URL 生成器",
   "db-connection-string-workbench": "数据库连接串工作台",
   "decision-wheel": "随机决策转盘",
   "dependency-risk-explainer": "依赖风险解释器",
   "discount-stack-calculator": "叠加优惠计算器",
+  "dns-inspector": "DNS 检查器",
   "docker-compose-validator": "Docker Compose 校验器",
   "docker-run-to-compose": "Docker Run 转 Compose",
   "dockerfile-linter": "Dockerfile 检查器",
+  "documentation-toc-anchor-generator": "文档目录锚点生成器",
   "easing-cubic-bezier-debugger": "Easing / Cubic Bezier 调试器",
   "ecommerce-margin-calculator": "电商利润计算器",
+  "email-template-sandbox-preview": "邮件模板沙箱预览",
   "env-diff-merge-sanitizer": ".env 对比合并脱敏工具",
+  "env-parser": "环境变量解析器",
   "exif-metadata-tool": "EXIF 元数据工具",
   "favicon-app-icon-generator": "Favicon / App Icon 生成器",
   "ffmpeg-editor": "FFmpeg 命令编辑器",
+  "file-manifest-generator": "文件清单生成器",
+  "file-name-batch-renamer": "批量文件名重命名器",
   "flashcard-cloze-builder": "闪卡填空题生成器",
   "flexbox-generator": "Flexbox 生成器",
   "font-scale-generator": "字号比例生成器",
@@ -1890,46 +2069,86 @@ const zhToolNameOverrides: Record<string, string> = {
   "gitignore-generator": ".gitignore 生成器",
   "grade-weight-calculator": "成绩权重计算器",
   "gradient-generator": "渐变主题 Token 生成器",
+  "grafana-dashboard-formatter": "Grafana Dashboard 格式化器",
   "graphql-workbench": "GraphQL 工作台",
+  "har-viewer": "HAR 查看器",
+  "hash-generator": "哈希生成器",
   "helm-values-diff": "Helm Values 差异对比",
   "html-css-js-playground": "HTML / CSS / JS Playground",
+  "html-entity-codec": "HTML 实体编解码",
+  "http-header-parser": "HTTP 头解析器",
+  "http-security-headers-checker": "HTTP 安全头检查器",
+  "http-status-reference": "HTTP 状态码参考",
   "image-compressor": "图片压缩器",
   "image-ocr-preprocessor": "图片 OCR 预处理器",
+  "incident-timeline-generator": "事件时间线生成器",
   "ipv4-cidr-calculator": "IPv4 CIDR 计算器",
+  "json-formatter": "JSON 格式化器",
   "json-schema-studio": "JSON Schema 工作台",
+  "json-to-ts": "JSON 转 TypeScript",
+  "jwt-decoder": "JWT 解码器",
+  "jwt-jwk-verifier": "JWT / JWK 验证器",
   "kubernetes-probe-builder": "Kubernetes Probe 生成器",
   "kubernetes-yaml-validator": "Kubernetes YAML 校验器",
   "large-text-tools": "大文本处理工具",
   "license-compatibility-checker": "许可证兼容性检查器",
+  "line-tools": "行处理工具",
   "link-collection-curator": "链接收藏整理器",
+  "live-event-countdown": "活动倒计时器",
+  "log-file-analyzer": "日志文件分析器",
   "lorem-ipsum-generator": "占位文本生成器",
+  "markdown-linter": "Markdown 检查器",
+  "markdown-preview": "Markdown 预览器",
+  "markdown-table-generator": "Markdown 表格生成器",
   "media-device-permission-lab": "媒体设备权限实验室",
+  "mermaid-preview-formatter": "Mermaid 预览格式化器",
   "meta-tags-seo-preview": "Meta Tags SEO 预览器",
+  "mime-type-lookup": "MIME 类型查询",
   "mock-data-generator": "Mock 数据生成器",
   "notification-payload-tester": "通知 Payload 测试器",
+  "number-base-converter": "进制转换器",
   "oauth-oidc-debugger": "OAuth / OIDC 调试器",
+  "open-graph-preview": "Open Graph 预览器",
   "openapi-workbench": "OpenAPI 工作台",
+  "opentelemetry-trace-viewer": "OpenTelemetry Trace 查看器",
   "parquet-arrow-preview": "Parquet / Arrow 预览器",
+  "password-generator": "密码生成器",
   "pdf-metadata-tool": "PDF 元数据工具",
   "pdf-tools": "PDF 工具",
   "pem-jwk-toolkit": "PEM / JWK / CSR 工具箱",
   "percentage-calculator": "百分比计算器",
   "pii-detector": "PII 检测器",
   "pomodoro-focus-timer": "番茄专注计时器",
+  "port-reference": "端口服务速查",
   "privacy-cookie-copy-generator": "隐私 / Cookie 文案生成器",
+  "prometheus-query-helper": "Prometheus 查询助手",
+  "python-playground": "Python Playground",
   "qr-barcode-tool": "二维码 / 条形码工具",
+  "query-param-builder": "查询参数构建器",
   "random-team-generator": "随机分队生成器",
+  "readme-badge-generator": "README Badge 生成器",
+  "readme-quality-checker": "README 质量检查器",
+  "regex-batch-extractor": "正则批量提取器",
+  "regex-tester": "正则表达式测试器",
   "release-notes-builder": "发布说明生成器",
   "resource-unit-converter": "资源单位换算器",
+  "reverse-proxy-header-analyzer": "反向代理头分析器",
+  "robots-txt-generator": "robots.txt 生成器",
+  "ruby-playground": "Ruby Playground",
   "sbom-viewer": "SBOM 查看器",
   "scientific-calculator": "科学计算器",
   "secrets-scanner": "密钥扫描器",
   "semgrep-rule-playground": "Semgrep 规则 Playground",
+  "sitemap-xml-generator": "Sitemap XML 生成器",
+  "sku-generator": "SKU 生成器",
   "slo-error-budget-calculator": "SLO 错误预算计算器",
+  "slug-generator": "Slug 生成器",
   "social-caption-hashtag-formatter": "社媒文案与话题标签格式化器",
   "social-post-scheduler": "社媒发布排期器",
   "source-map-explorer": "Source Map 分析器",
+  "spaced-repetition-planner": "间隔重复学习计划器",
   "sql-explain-visualizer": "SQL 执行步骤可视化器",
+  "sql-formatter": "SQL 格式化器",
   "sql-index-advisor": "SQL 索引顾问",
   "sql-playground": "SQL Playground",
   "sri-hash-generator": "SRI 哈希生成器",
@@ -1937,19 +2156,29 @@ const zhToolNameOverrides: Record<string, string> = {
   "svg-optimizer-viewbox-editor": "SVG 优化与 ViewBox 编辑器",
   "systemd-unit-analyzer": "systemd Unit 分析器",
   "tailwind-class-lab": "Tailwind Class 实验室",
-  "transform-generator": "CSS Transform 生成器",
   "task-priority-matrix": "任务优先级矩阵",
   "terraform-plan-formatter": "Terraform Plan 格式化器",
+  "text-diff": "文本差异对比",
   "text-inspector": "文本检查器",
   "threat-model-canvas": "威胁建模画布",
+  "timestamp-converter": "时间戳转换器",
+  "tls-certificate-parser": "TLS 证书解析器",
+  "transform-generator": "CSS Transform 生成器",
+  "typescript-playground": "TypeScript Playground",
+  "unicode-inspector": "Unicode 检查器",
   "unit-converter": "单位换算器",
+  "url-codec": "URL 编解码",
   "url-safety-checker": "URL 安全检查器",
+  "user-agent-parser": "User-Agent 解析器",
+  "utm-builder": "UTM 构建器",
+  "uuid-generator": "UUID 生成器",
   "wasm-binary-inspector": "WASM 二进制检查器",
+  "wasm-integer-math-lab": "WASM 整数运算实验室",
+  "wav-audio-inspector": "WAV 音频检测器",
   "webgpu-capability-reporter": "WebGPU 能力报告器",
+  "webhook-signature-verifier": "Webhook 签名验证器",
   "websocket-client": "WebSocket 客户端",
-  "yaml-json-toml-converter": "YAML / JSON / TOML 转换器",
-  "color-harmonies-generator": "配色方案生成器",
-  "color-blindness-simulator": "色盲模拟器"
+  "yaml-json-toml-converter": "YAML / JSON / TOML 转换器"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {
