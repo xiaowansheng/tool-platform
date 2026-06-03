@@ -1,0 +1,17 @@
+{
+  "name": "@tool-platform/text-encoding-converter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manifest": "./manifest.ts",
+    "./app": "./app.tsx"
+  },
+  "dependencies": {
+    "@tool-platform/tool-contracts": "workspace:*",
+    "@kayahr/text-encoding": "^1.2.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

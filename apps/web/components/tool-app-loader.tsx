@@ -1,6 +1,6 @@
 "use client";
 
-import { lazy, Suspense, useMemo } from "react";
+import { ComponentType, lazy, Suspense, useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import { usePathname } from "@/i18n/navigation";
@@ -70,9 +70,12 @@ export function ToolAppLoader({ manifest, locale }: { manifest: ToolManifest; lo
   const appLocation = useMemo(() => getToolAppLocation(pathname, manifest.id), [pathname, manifest.id]);
   const ToolComponent = useMemo(
     () =>
-      lazy(async () => ({
-        default: (await loadToolApp(manifest.id)) ?? MissingTool
-      })),
+      lazy(async () => {
+        const comp = await loadToolApp(manifest.id);
+        return {
+          default: (comp as ComponentType<ToolAppProps>) ?? MissingTool
+        };
+      }),
     [manifest.id]
   );
 

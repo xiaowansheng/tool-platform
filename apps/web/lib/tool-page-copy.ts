@@ -2298,7 +2298,20 @@ const zhToolNameOverrides: Record<string, string> = {
   "webgpu-capability-reporter": "WebGPU 能力报告器",
   "webhook-signature-verifier": "Webhook 签名验证器",
   "websocket-client": "WebSocket 客户端",
-  "yaml-json-toml-converter": "YAML / JSON / TOML / Properties 转换器"
+  "yaml-json-toml-converter": "YAML / JSON / TOML / Properties 转换器",
+  "morse-code": "摩尔斯电码转换器",
+  "ascii-art": "ASCII 艺术字生成器",
+  "code-to-image": "代码美化图片生成器",
+  "markdown-html-converter": "Markdown HTML 互转工具",
+  "image-watermark": "图片防盗水印生成器",
+  "code-beautifier": "代码美化与压缩工具",
+  "json-to-go": "JSON 转 Go Struct 工具",
+  "htaccess-to-nginx": "htaccess 转 Nginx 规则工具",
+  "unicode-converter": "Unicode 编码转换器",
+  "sql-to-go": "SQL 转 Go Struct 工具",
+  "chinese-converter": "中文简繁体转换",
+  "loan-calculator": "房贷与贷款计算器",
+  "text-encoding-converter": "文字编码转换与乱码修复"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {
