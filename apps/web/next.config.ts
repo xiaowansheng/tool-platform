@@ -42,7 +42,8 @@ function getInternalPackages() {
 }
 
 const nextConfig: NextConfig = {
-  transpilePackages: getInternalPackages()
+  transpilePackages: getInternalPackages(),
+  serverExternalPackages: ["@formatjs/icu-messageformat-parser"]
 };
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");

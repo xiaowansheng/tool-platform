@@ -84,7 +84,37 @@ function pickOptionIndex(options: WheelOption[], seed: string): number {
   return options.length - 1;
 }
 
+const themes = [
+  { id: "classic", name: "经典", primary: "#ffe066", secondary: "#ff9f43" },
+  { id: "cyberpunk", name: "赛博霓虹", primary: "#00f0ff", secondary: "#ff007f" },
+  { id: "retro", name: "复古像素", primary: "#ff6b6b", secondary: "#4ecdc4" },
+  { id: "forest", name: "绿野仙踪", primary: "#a3e635", secondary: "#10b981" },
+  { id: "sunset", name: "落日金辉", primary: "#f97316", secondary: "#facc15" },
+  { id: "cosmic", name: "极光魅影", primary: "#a855f7", secondary: "#ec4899" }
+];
+
+const themeConfig: Record<string, { primary: string; secondary: string; bgPanel: string; bgCard: string; textColor: string; buttonText: string; accentDim: string }> = {
+  classic: { primary: "#ffe066", secondary: "#ff9f43", bgPanel: "#080f19", bgCard: "rgba(13, 24, 38, 0.78)", textColor: "#ffe066", buttonText: "#121214", accentDim: "rgba(255, 224, 102, 0.05)" },
+  cyberpunk: { primary: "#00f0ff", secondary: "#ff007f", bgPanel: "#0d0015", bgCard: "rgba(24, 0, 42, 0.8)", textColor: "#00f0ff", buttonText: "#0d0015", accentDim: "rgba(0, 240, 255, 0.1)" },
+  retro: { primary: "#ff6b6b", secondary: "#4ecdc4", bgPanel: "#1a1c1e", bgCard: "#2d3135", textColor: "#ff6b6b", buttonText: "#1a1c1e", accentDim: "rgba(255, 107, 107, 0.1)" },
+  forest: { primary: "#a3e635", secondary: "#10b981", bgPanel: "#0f1e16", bgCard: "#172e22", textColor: "#a3e635", buttonText: "#0f1e16", accentDim: "rgba(163, 230, 53, 0.1)" },
+  sunset: { primary: "#f97316", secondary: "#facc15", bgPanel: "#251410", bgCard: "#38201a", textColor: "#f97316", buttonText: "#251410", accentDim: "rgba(249, 115, 22, 0.1)" },
+  cosmic: { primary: "#a855f7", secondary: "#ec4899", bgPanel: "#0b0914", bgCard: "#161226", textColor: "#c084fc", buttonText: "#0b0914", accentDim: "rgba(168, 85, 247, 0.1)" }
+};
+
 export default function DecisionWheelTool({ manifest }: ToolAppProps) {
+  const [theme, setTheme] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("entertainment_theme") || "classic";
+    }
+    return "classic";
+  });
+
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme);
+    localStorage.setItem("entertainment_theme", newTheme);
+  };
+
   const [input, setInput] = useState(presets.lunch);
   const [seed, setSeed] = useState("lucky-spin");
   const [spinCount, setSpinCount] = useState(0);
@@ -139,8 +169,22 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
     }
   };
 
-  // Generate stable HSL color based on index
+  // Generate stable color based on index and theme
   const getSectorColor = (index: number, total: number) => {
+    const themeColors: Record<string, string[]> = {
+      cyberpunk: ["#00f0ff", "#ff007f", "#9d00ff", "#fffb00", "#00ff66", "#ff5500"],
+      retro: ["#ff6b6b", "#4ecdc4", "#ffe66d", "#1a535c", "#f7fff7", "#ff9f1c"],
+      forest: ["#2d5a27", "#606c38", "#283618", "#dda15e", "#bc6c25", "#588157"],
+      sunset: ["#d62828", "#f77f00", "#fcbf49", "#eae2b7", "#457b9d", "#f15bb5"],
+      cosmic: ["#1e1a3c", "#3c1b5b", "#6b11b7", "#b100e8", "#00e8e8", "#ec4899"]
+    };
+
+    const colors = themeColors[theme];
+    if (colors) {
+      return colors[index % colors.length];
+    }
+    
+    // Default classic HSL color
     const h = (360 / total) * index;
     return `hsl(${h}, 70%, 62%)`;
   };
@@ -171,14 +215,14 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
       // Draw placeholder
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
-      ctx.fillStyle = "#2d2d30";
+      ctx.fillStyle = theme === "retro" ? "#1a1c1e" : "#2d2d30";
       ctx.fill();
-      ctx.strokeStyle = "#3f3f46";
+      ctx.strokeStyle = theme === "retro" ? "#000000" : "#3f3f46";
       ctx.lineWidth = 4;
       ctx.stroke();
 
       ctx.fillStyle = "#8e8e93";
-      ctx.font = "16px Inter, sans-serif";
+      ctx.font = theme === "retro" ? "16px monospace" : "16px Inter, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText("请在左侧输入候选项", cx, cy);
@@ -203,8 +247,8 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
       ctx.fillStyle = getSectorColor(idx, options.length);
       ctx.fill();
 
-      ctx.strokeStyle = "#121214";
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = theme === "retro" ? "#000000" : "#121214";
+      ctx.lineWidth = theme === "retro" ? 3 : 1.5;
       ctx.stroke();
 
       // Label Text
@@ -213,11 +257,14 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
       ctx.rotate(start + sectorSize / 2);
       ctx.textAlign = "right";
       ctx.textBaseline = "middle";
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 13px sans-serif";
-      // Shadow for text readability
-      ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
-      ctx.shadowBlur = 4;
+      ctx.fillStyle = theme === "retro" ? "#000000" : "#ffffff";
+      ctx.font = theme === "retro" ? "bold 13px monospace" : "bold 13px sans-serif";
+      
+      // Shadow for text readability (only if not retro)
+      if (theme !== "retro") {
+        ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
+        ctx.shadowBlur = 4;
+      }
 
       const displayText = option.label.length > 10 ? option.label.slice(0, 9) + "…" : option.label;
       ctx.fillText(displayText, radius - 15, 0);
@@ -229,25 +276,29 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
     // Draw outer boundary ring
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
-    ctx.strokeStyle = "#ffe066";
-    ctx.lineWidth = 4;
+    ctx.strokeStyle = themeConfig[theme]?.primary || "#ffe066";
+    ctx.lineWidth = theme === "retro" ? 5 : 4;
     ctx.stroke();
 
     // Draw center hub / SPIN button background
     ctx.beginPath();
     ctx.arc(cx, cy, 32, 0, 2 * Math.PI);
-    ctx.fillStyle = "#1e1e24";
-    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-    ctx.shadowBlur = 8;
+    ctx.fillStyle = themeConfig[theme]?.bgCard.startsWith("rgba") ? themeConfig[theme]?.bgPanel : themeConfig[theme]?.bgCard || "#1e1e24";
+    
+    if (theme !== "retro") {
+      ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+      ctx.shadowBlur = 8;
+    }
     ctx.fill();
     ctx.shadowBlur = 0; // Reset
-    ctx.strokeStyle = "#ffe066";
-    ctx.lineWidth = 3;
+    
+    ctx.strokeStyle = themeConfig[theme]?.primary || "#ffe066";
+    ctx.lineWidth = theme === "retro" ? 4 : 3;
     ctx.stroke();
 
     // Draw SPIN text inside hub
-    ctx.fillStyle = "#ffe066";
-    ctx.font = "bold 12px sans-serif";
+    ctx.fillStyle = themeConfig[theme]?.primary || "#ffe066";
+    ctx.font = theme === "retro" ? "bold 12px monospace" : "bold 12px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("SPIN", cx, cy);
@@ -258,12 +309,14 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
     ctx.lineTo(cx + 10, cy - radius - 12);
     ctx.lineTo(cx, cy - radius + 8);
     ctx.closePath();
-    ctx.fillStyle = "#ff4d4f";
-    ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
-    ctx.shadowBlur = 3;
+    ctx.fillStyle = themeConfig[theme]?.secondary || "#ff4d4f";
+    if (theme !== "retro") {
+      ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
+      ctx.shadowBlur = 3;
+    }
     ctx.fill();
-    ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = theme === "retro" ? "#000000" : "#ffffff";
+    ctx.lineWidth = theme === "retro" ? 2.5 : 1.5;
     ctx.stroke();
   };
 
@@ -295,10 +348,10 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
     return () => observer.disconnect();
   }, []);
 
-  // Re-draw wheel when options, currentAngle, or canvas size changes
+  // Re-draw wheel when options, currentAngle, theme, or canvas size changes
   useEffect(() => {
     drawWheel(currentAngle);
-  }, [options, currentAngle, totalWeight, canvasResizeTick]);
+  }, [options, currentAngle, totalWeight, canvasResizeTick, theme]);
 
   // Handle spin logic
   const startSpin = () => {
@@ -409,13 +462,137 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
   };
 
   return (
-    <section className="tool-panel">
-      <div className="tool-panel__header">
-        <div>
-          <p className="eyebrow">游戏娱乐工具</p>
-          <h2>{manifest.name}</h2>
+    <section className={`tool-panel theme-${theme}`}>
+      <style>{`
+        .tool-panel.theme-cyberpunk {
+          --bg-base: #0d0015;
+          --bg-subtle: #18002a;
+          --bg-muted: #24003d;
+          --border-default: rgba(0, 240, 255, 0.15);
+          --border-subtle: rgba(0, 240, 255, 0.08);
+          --border-strong: rgba(0, 240, 255, 0.3);
+          --accent-primary: #00f0ff;
+          --accent-primary-dim: rgba(0, 240, 255, 0.1);
+          --text-primary: #e2d5f0;
+          --text-secondary: #a894c0;
+          --card-bg: rgba(24, 0, 42, 0.8);
+          --card-border: rgba(0, 240, 255, 0.15);
+          --card-hover-bg: rgba(36, 0, 61, 0.9);
+          --card-hover-border: rgba(255, 0, 127, 0.4);
+          --input-bg: rgba(13, 0, 21, 0.9);
+          --input-border: rgba(0, 240, 255, 0.2);
+        }
+        .tool-panel.theme-retro {
+          --bg-base: #1a1c1e;
+          --bg-subtle: #2d3135;
+          --bg-muted: #3d4349;
+          --border-default: #000000;
+          --border-subtle: #1a1c1e;
+          --border-strong: #000000;
+          --accent-primary: #ff6b6b;
+          --accent-primary-dim: rgba(255, 107, 107, 0.1);
+          --text-primary: #f7f7f7;
+          --text-secondary: #a0aab5;
+          --card-bg: #2d3135;
+          --card-border: #000000;
+          --card-hover-bg: #3d4349;
+          --card-hover-border: #ff6b6b;
+          --input-bg: #1a1c1e;
+          --input-border: #000000;
+          font-family: monospace, Courier, sans-serif;
+        }
+        .tool-panel.theme-forest {
+          --bg-base: #0f1e16;
+          --bg-subtle: #172e22;
+          --bg-muted: #1e3c2c;
+          --border-default: rgba(163, 230, 53, 0.12);
+          --border-subtle: rgba(163, 230, 53, 0.06);
+          --border-strong: rgba(163, 230, 53, 0.22);
+          --accent-primary: #a3e635;
+          --accent-primary-dim: rgba(163, 230, 53, 0.1);
+          --text-primary: #e1efe6;
+          --text-secondary: #8da596;
+          --card-bg: rgba(23, 46, 34, 0.78);
+          --card-border: rgba(163, 230, 53, 0.09);
+          --card-hover-bg: rgba(30, 60, 44, 0.92);
+          --card-hover-border: rgba(16, 185, 129, 0.22);
+          --input-bg: rgba(15, 30, 22, 0.82);
+          --input-border: rgba(163, 230, 53, 0.14);
+        }
+        .tool-panel.theme-sunset {
+          --bg-base: #251410;
+          --bg-subtle: #38201a;
+          --bg-muted: #4b2a22;
+          --border-default: rgba(249, 115, 22, 0.12);
+          --border-subtle: rgba(249, 115, 22, 0.06);
+          --border-strong: rgba(249, 115, 22, 0.22);
+          --accent-primary: #f97316;
+          --accent-primary-dim: rgba(249, 115, 22, 0.1);
+          --text-primary: #faeae6;
+          --text-secondary: #bc9e96;
+          --card-bg: rgba(56, 32, 26, 0.78);
+          --card-border: rgba(249, 115, 22, 0.09);
+          --card-hover-bg: rgba(75, 42, 34, 0.92);
+          --card-hover-border: rgba(250, 204, 21, 0.22);
+          --input-bg: rgba(37, 20, 16, 0.82);
+          --input-border: rgba(249, 115, 22, 0.14);
+        }
+        .tool-panel.theme-cosmic {
+          --bg-base: #0b0914;
+          --bg-subtle: #161226;
+          --bg-muted: #211c38;
+          --border-default: rgba(168, 85, 247, 0.12);
+          --border-subtle: rgba(168, 85, 247, 0.06);
+          --border-strong: rgba(168, 85, 247, 0.22);
+          --accent-primary: #a855f7;
+          --accent-primary-dim: rgba(168, 85, 247, 0.1);
+          --text-primary: #f3e8ff;
+          --text-secondary: #bca0db;
+          --card-bg: rgba(22, 18, 38, 0.78);
+          --card-border: rgba(168, 85, 247, 0.09);
+          --card-hover-bg: rgba(33, 28, 56, 0.92);
+          --card-hover-border: rgba(236, 72, 153, 0.22);
+          --input-bg: rgba(11, 9, 20, 0.82);
+          --input-border: rgba(168, 85, 247, 0.14);
+        }
+      `}</style>
+
+      <div className="tool-panel__header" style={{ marginBottom: "1rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem" }}>
+          <div>
+            <p className="eyebrow">游戏娱乐工具</p>
+            <h2>{manifest.name}</h2>
+          </div>
+          {/* Theme selector UI */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", flexWrap: "wrap", background: "rgba(255,255,255,0.03)", padding: "0.35rem 0.6rem", borderRadius: "20px", border: "1px solid var(--border-default)" }}>
+            <span style={{ fontSize: "0.75rem", opacity: 0.7, marginRight: "0.2rem" }}>🎨 主题：</span>
+            {themes.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => handleThemeChange(t.id)}
+                style={{
+                  padding: "0.2rem 0.5rem",
+                  fontSize: "0.75rem",
+                  borderRadius: "12px",
+                  background: theme === t.id ? t.primary : "transparent",
+                  color: theme === t.id ? "#121214" : "var(--text-secondary)",
+                  border: "none",
+                  cursor: "pointer",
+                  fontWeight: theme === t.id ? "bold" : "normal",
+                  transition: "all 0.15s",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "3px"
+                }}
+              >
+                <span style={{ display: "inline-block", width: "6px", height: "6px", borderRadius: "50%", background: theme === t.id ? "#121214" : t.primary }} />
+                {t.name}
+              </button>
+            ))}
+          </div>
         </div>
-        <p>自定义候选项和权重，伴随逼真的旋转减速和咔哒声效，帮你轻松做出随机选择。</p>
+        <p style={{ marginTop: "0.5rem" }}>自定义候选项和权重，伴随逼真的旋转减速和咔哒声效，帮你轻松做出随机选择。</p>
       </div>
 
       <div className="tool-toolbar" style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1rem" }}>
@@ -440,7 +617,17 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
           <input value={seed} disabled={isSpinning} onChange={(e) => setSeed(e.target.value)} />
         </label>
         <button type="button" disabled={isSpinning} onClick={() => setSeed(String(Date.now()).slice(-6))}>随机生成种子</button>
-        <button type="button" className="btn-primary" disabled={isSpinning || options.length === 0} onClick={startSpin} style={{ backgroundColor: "#ffe066", color: "#121214", fontWeight: "bold" }}>
+        <button
+          type="button"
+          className="btn-primary"
+          disabled={isSpinning || options.length === 0}
+          onClick={startSpin}
+          style={{
+            backgroundColor: themeConfig[theme]?.primary || "#ffe066",
+            color: themeConfig[theme]?.buttonText || "#121214",
+            fontWeight: "bold"
+          }}
+        >
           {isSpinning ? "旋转中..." : "开始旋转 (SPIN)"}
         </button>
         <button type="button" disabled={history.length === 0} onClick={copyHistory}>{copied ? "已复制" : "复制历史"}</button>
@@ -450,15 +637,24 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
         <article className="detail-card"><h3>候选项个数</h3><p>{options.length}</p></article>
         <article className="detail-card"><h3>总权重</h3><p>{totalWeight}</p></article>
         <article className="detail-card"><h3>累计抽取</h3><p>{spinCount} 次</p></article>
-        <article className="detail-card" style={{ borderColor: result ? "#ffe066" : "transparent" }}>
+        <article className="detail-card" style={{ borderColor: result ? (themeConfig[theme]?.primary || "#ffe066") : "transparent" }}>
           <h3>最近结果</h3>
-          <p style={{ color: result ? "#ffe066" : "inherit", transition: "color 0.3s" }}>{result?.label ?? "-"}</p>
+          <p style={{ color: result ? (themeConfig[theme]?.primary || "#ffe066") : "inherit", transition: "color 0.3s" }}>{result?.label ?? "-"}</p>
         </article>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.5rem", alignItems: "start" }}>
         {/* Left column: Wheel canvas */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", background: "#1e1e24", padding: "1.5rem", borderRadius: "8px", border: "1px solid #2d2d30" }}>
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: themeConfig[theme]?.bgCard || "#1e1e24",
+          padding: "1.5rem",
+          borderRadius: "8px",
+          border: `1px solid ${themeConfig[theme]?.primary}22` || "1px solid #2d2d30",
+          boxShadow: theme === "retro" ? "none" : `0 4px 20px ${themeConfig[theme]?.primary}0d`
+        }}>
           <div style={{ position: "relative", width: "100%", maxWidth: "340px", aspectRatio: "1 / 1" }}>
             <canvas
               ref={canvasRef}
@@ -474,11 +670,11 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
           </div>
           <div style={{ marginTop: "1rem", textAlign: "center" }}>
             {isSpinning ? (
-              <p style={{ color: "#ffe066", fontStyle: "italic", animation: "pulse 1s infinite" }}>命运的指针正在转动...</p>
+              <p style={{ color: themeConfig[theme]?.primary || "#ffe066", fontStyle: "italic", animation: "pulse 1s infinite" }}>命运的指针正在转动...</p>
             ) : result ? (
               <div>
                 <p style={{ fontSize: "0.85rem", opacity: 0.6 }}>抽取结果：</p>
-                <p style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#ffe066", margin: "0.25rem 0" }}>🎉 {result.label} 🎉</p>
+                <p style={{ fontSize: "1.5rem", fontWeight: "bold", color: themeConfig[theme]?.primary || "#ffe066", margin: "0.25rem 0" }}>🎉 {result.label} 🎉</p>
                 <p style={{ fontSize: "0.8rem", opacity: 0.5 }}>（权重：{result.weight}，占比：{((result.weight / totalWeight) * 100).toFixed(1)}%）</p>
               </div>
             ) : (
@@ -492,7 +688,7 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
           <label className="tool-field">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.25rem" }}>
               <span>配置选项 (格式: 名称 | 权重)</span>
-              <button type="button" disabled={isSpinning} onClick={addOption} style={{ padding: "2px 8px", fontSize: "0.8rem", background: "#333", border: "1px solid #444", borderRadius: "4px" }}>+ 增加候选项</button>
+              <button type="button" disabled={isSpinning} onClick={addOption} style={{ padding: "2px 8px", fontSize: "0.8rem", background: "var(--bg-muted)", border: "1px solid var(--border-default)", borderRadius: "4px" }}>+ 增加候选项</button>
             </div>
             <textarea
               value={input}
@@ -520,9 +716,15 @@ export default function DecisionWheelTool({ manifest }: ToolAppProps) {
 
       {error ? <p className="tool-error" style={{ marginTop: "1rem" }}>{error}</p> : null}
       
-      <div style={{ marginTop: "1.5rem", padding: "1rem", background: "rgba(255, 224, 102, 0.05)", border: "1px dashed rgba(255, 224, 102, 0.2)", borderRadius: "6px" }}>
+      <div style={{
+        marginTop: "1.5rem",
+        padding: "1rem",
+        background: themeConfig[theme]?.accentDim || "rgba(255, 224, 102, 0.05)",
+        border: `1px dashed ${themeConfig[theme]?.primary}44` || "1px dashed rgba(255, 224, 102, 0.2)",
+        borderRadius: "6px"
+      }}>
         <p className="tool-note" style={{ margin: 0 }}>
-          💡 <strong>提示：</strong>转盘扇区大小与权重成正比。若使用固定随机种子，每一次旋转的顺序和结果都完全相同（可复现），常用于教学或需要公平验证的抽签场景。
+          💡 <strong>提示：</strong>转盘扇区大小与权重成正比。若使用固定随机种子，每一次旋转的顺序 and 结果都完全相同（可复现），常用于教学或需要公平验证的抽签场景。
         </p>
       </div>
     </section>
