@@ -55,14 +55,14 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
   },
   "hash-generator": {
     name: "哈希生成器",
-    description: "为文本生成常用摘要，便于校验内容、生成标识和比对变更。",
-    intro: "输入任意文本后生成摘要值，适合检查内容是否变更、生成短标识或辅助排查缓存命中问题。",
+    description: "为文本生成常用摘要或 SRI integrity，便于校验内容、脚本和配置变更。",
+    intro: "输入任意文本后生成十六进制摘要或 SRI integrity，适合检查内容是否变更、为静态资源生成完整性校验值。",
     steps: [
       "粘贴需要摘要的文本内容。",
-      "选择或查看目标哈希算法的输出。",
-      "把摘要值用于比对，不要把普通哈希当作密码存储方案。"
+      "选择十六进制摘要或 SRI integrity 输出格式，并确认哈希算法。",
+      "把摘要值用于比对或资源完整性校验，不要把普通哈希当作密码存储方案。"
     ],
-    examples: ["对配置片段生成摘要，确认两份配置是否一致。", "为文档内容生成可追踪的短指纹。"]
+    examples: ["对配置片段生成摘要，确认两份配置是否一致。", "为 CDN 脚本生成 integrity 属性。"]
   },
   "timestamp-converter": {
     name: "时间戳转换器",
@@ -515,17 +515,6 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
       "复制 CSS 前根据 AA/AAA 结果调整色值，确保关键文本可读。"
     ],
     examples: ["检查按钮文字和背景是否满足 AA 正文标准。", "为设计 token 复核深色模式下的文本对比度。"]
-  },
-  "open-graph-preview": {
-    name: "Open Graph 预览器",
-    description: "预览链接在 Facebook、LinkedIn、X 等平台中的 Open Graph 和 Twitter Card 展示效果。",
-    intro: "填写标题、描述、URL、站点名和图片地址后，生成社交平台预览卡片和可复制的 meta 标签。",
-    steps: [
-      "填写页面标题、描述、站点名、URL 和图片 alt 文案。",
-      "查看不同平台卡片中的标题截断、描述长度和图片比例。",
-      "复制 Open Graph / Twitter 标签后放入页面 head，并用真实平台调试器复核。"
-    ],
-    examples: ["为产品发布页预览分享卡片效果。", "为博客文章生成 og:title、og:image 和 twitter:card 标签。"]
   },
   "readme-badge-generator": {
     name: "README Badge 生成器",
@@ -1432,14 +1421,14 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
   },
   "meta-tags-seo-preview": {
     name: "Meta Tags SEO 预览器",
-    description: "检查 title、description、canonical、robots 和社交 meta 标签的搜索结果预览。",
-    intro: "填写网页的 meta 标签，预览在搜索引擎结果中的展示效果。",
+    description: "检查 title、description、canonical、robots，并预览搜索结果、Open Graph 和 Twitter Card。",
+    intro: "填写网页的 meta 标签，同时查看搜索结果、Facebook、LinkedIn 和 X 卡片预览。",
     steps: [
       "填写 title、description 和 canonical URL。",
-      "设置 robots 指令和社交分享标签。",
-      "查看 Google 搜索结果片段预览。"
+      "设置 robots、图片、图片替代文本和社交分享标签。",
+      "查看 Google 搜索结果片段以及不同平台的分享卡片预览。"
     ],
-    examples: ["优化博客文章的搜索引擎展示标题。", "检查 meta description 长度是否合适。"]
+    examples: ["优化博客文章的搜索引擎展示标题。", "为活动页同时检查 OG 图和 Twitter Card。"]
   },
   "mock-data-generator": {
     name: "Mock 数据生成器",
@@ -1785,18 +1774,6 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["先建表，再多次初始化和清除测试数据，最后连续执行查询。", "验证外键关系、样例数据和 UPDATE 后的数据库状态。"]
   },
-  "sri-hash-generator": {
-    name: "SRI 哈希生成器",
-    description: "为脚本或样式内容生成 Subresource Integrity sha256/384/512。",
-    intro: "输入脚本或样式内容，生成 SRI 哈希值用于完整性校验。",
-    steps: [
-      "粘贴 JavaScript 或 CSS 内容。",
-      "选择哈希算法。",
-      "复制生成的 SRI 完整属性值。"
-    ],
-    examples: ["为 CDN 加载的 JS 生成 integrity 属性。", "为第三方样式生成 SRI 哈希。"]
-  },
-
   "study-plan-scheduler": {
     name: "学习计划排期器",
     description: "根据主题、预计时长、优先级和每日可用时间生成学习排期与复习清单。",
@@ -2159,7 +2136,6 @@ const zhToolNameOverrides: Record<string, string> = {
   "notification-payload-tester": "通知 Payload 测试器",
   "number-base-converter": "进制转换器",
   "oauth-oidc-debugger": "OAuth / OIDC 调试器",
-  "open-graph-preview": "Open Graph 预览器",
   "openapi-workbench": "OpenAPI 工作台",
   "opentelemetry-trace-viewer": "OpenTelemetry Trace 查看器",
   "parquet-arrow-preview": "Parquet / Arrow 预览器",
@@ -2202,7 +2178,6 @@ const zhToolNameOverrides: Record<string, string> = {
   "sql-formatter": "SQL 格式化器",
   "sql-index-advisor": "SQL 索引顾问",
   "sql-playground": "SQL Playground",
-  "sri-hash-generator": "SRI 哈希生成器",
   "study-plan-scheduler": "学习计划排期器",
   "svg-optimizer-viewbox-editor": "SVG 优化与 ViewBox 编辑器",
   "systemd-unit-analyzer": "systemd Unit 分析器",

@@ -1,6 +1,6 @@
 # Hash Generator
 
-使用 Web Crypto 生成 SHA 摘要，适合校验文本与配置片段。
+使用 Web Crypto 生成 SHA 摘要或 SRI integrity，适合校验文本、脚本与配置片段。
 
 ## 概述
 
@@ -8,7 +8,7 @@
 |------|-----|
 | 分类 | 文本工具 |
 | 运行环境 | 轻量（主线程） |
-| 标签 | hash、sha、digest、checksum |
+| 标签 | hash、sha、digest、checksum、sri、integrity |
 | 权限 | clipboard |
 | 能力 | crypto |
 

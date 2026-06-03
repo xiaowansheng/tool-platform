@@ -109,7 +109,6 @@ import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manife
 import NotificationPayloadTesterManifest from "@tool-platform/notification-payload-tester/manifest";
 import NumberBaseConverterManifest from "@tool-platform/number-base-converter/manifest";
 import OauthOidcDebuggerManifest from "@tool-platform/oauth-oidc-debugger/manifest";
-import OpenGraphPreviewManifest from "@tool-platform/open-graph-preview/manifest";
 import OpenapiWorkbenchManifest from "@tool-platform/openapi-workbench/manifest";
 import OpentelemetryTraceViewerManifest from "@tool-platform/opentelemetry-trace-viewer/manifest";
 import ParquetArrowPreviewManifest from "@tool-platform/parquet-arrow-preview/manifest";
@@ -153,7 +152,6 @@ import SqlExplainVisualizerManifest from "@tool-platform/sql-explain-visualizer/
 import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
 import SqlIndexAdvisorManifest from "@tool-platform/sql-index-advisor/manifest";
 import SqlPlaygroundManifest from "@tool-platform/sql-playground/manifest";
-import SriHashGeneratorManifest from "@tool-platform/sri-hash-generator/manifest";
 import StudyPlanSchedulerManifest from "@tool-platform/study-plan-scheduler/manifest";
 import SvgOptimizerViewboxEditorManifest from "@tool-platform/svg-optimizer-viewbox-editor/manifest";
 import SystemdUnitAnalyzerManifest from "@tool-platform/systemd-unit-analyzer/manifest";
@@ -296,7 +294,6 @@ export const toolManifests: ToolManifest[] = [
   NotificationPayloadTesterManifest,
   NumberBaseConverterManifest,
   OauthOidcDebuggerManifest,
-  OpenGraphPreviewManifest,
   OpenapiWorkbenchManifest,
   OpentelemetryTraceViewerManifest,
   ParquetArrowPreviewManifest,
@@ -340,7 +337,6 @@ export const toolManifests: ToolManifest[] = [
   SqlFormatterManifest,
   SqlIndexAdvisorManifest,
   SqlPlaygroundManifest,
-  SriHashGeneratorManifest,
   StudyPlanSchedulerManifest,
   SvgOptimizerViewboxEditorManifest,
   SystemdUnitAnalyzerManifest,

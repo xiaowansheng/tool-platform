@@ -24,6 +24,7 @@ function buildMetaTags(values: {
   robots: string;
   siteName: string;
   image: string;
+  imageAlt: string;
   keywords: string;
   author: string;
 }) {
@@ -40,9 +41,14 @@ function buildMetaTags(values: {
     `<meta property="og:description" content="${escapeAttribute(values.description)}">`,
     `<meta property="og:url" content="${escapeAttribute(values.url)}">`,
     values.image ? `<meta property="og:image" content="${escapeAttribute(values.image)}">` : "",
+    values.image ? `<meta property="og:image:width" content="1200">` : "",
+    values.image ? `<meta property="og:image:height" content="630">` : "",
+    values.image ? `<meta property="og:image:alt" content="${escapeAttribute(values.imageAlt)}">` : "",
     `<meta name="twitter:card" content="${values.image ? "summary_large_image" : "summary"}">`,
     `<meta name="twitter:title" content="${escapeAttribute(values.title)}">`,
-    `<meta name="twitter:description" content="${escapeAttribute(values.description)}">`
+    `<meta name="twitter:description" content="${escapeAttribute(values.description)}">`,
+    values.image ? `<meta name="twitter:image" content="${escapeAttribute(values.image)}">` : "",
+    values.image ? `<meta name="twitter:image:alt" content="${escapeAttribute(values.imageAlt)}">` : ""
   ].filter(Boolean).join("\n");
 }
 
@@ -66,14 +72,33 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolAppProps) {
   const [siteName, setSiteName] = useState("Tool Platform");
   const [robots, setRobots] = useState("index, follow");
   const [image, setImage] = useState("https://tool-platform.local/og.png");
+  const [imageAlt, setImageAlt] = useState("Tool Platform preview image");
+  const [accent, setAccent] = useState("#0f766e");
   const [keywords, setKeywords] = useState("developer tools, design tools, utilities");
   const [author, setAuthor] = useState("");
   const [copied, setCopied] = useState(false);
 
+  const trimmedImage = image.trim();
+  const tagImage = useMemo(() => {
+    if (trimmedImage) {
+      return trimmedImage;
+    }
+
+    const base = url.trim().replace(/\/$/, "");
+    return base ? `${base}/og.png` : "";
+  }, [trimmedImage, url]);
+
   const meta = useMemo(
-    () => buildMetaTags({ title, description, url, canonical, robots, siteName, image, keywords, author }),
-    [author, canonical, description, image, keywords, robots, siteName, title, url]
+    () => buildMetaTags({ title, description, url, canonical, robots, siteName, image: tagImage, imageAlt, keywords, author }),
+    [author, canonical, description, imageAlt, keywords, robots, siteName, tagImage, title, url]
   );
+
+  const previewImageStyle = trimmedImage
+    ? { backgroundImage: `url("${trimmedImage}")` }
+    : {
+        background:
+          `linear-gradient(135deg, ${accent}, #101827), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.24), transparent 30%)`
+      };
 
   async function copyMeta() {
     await navigator.clipboard.writeText(meta);
@@ -121,6 +146,14 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolAppProps) {
           <input value={image} onChange={(event) => setImage(event.target.value)} />
         </label>
         <label className="tool-field tool-field--compact">
+          <span>图片替代文本</span>
+          <input value={imageAlt} onChange={(event) => setImageAlt(event.target.value)} />
+        </label>
+        <label className="tool-field tool-field--compact">
+          <span>兜底强调色</span>
+          <input type="color" value={accent} onChange={(event) => setAccent(event.target.value)} />
+        </label>
+        <label className="tool-field tool-field--compact">
           <span>关键词</span>
           <input value={keywords} onChange={(event) => setKeywords(event.target.value)} />
         </label>
@@ -156,16 +189,19 @@ export default function MetaTagsSeoPreviewTool({ manifest }: ToolAppProps) {
           <h3>{title}</h3>
           <p>{description}</p>
         </article>
-        <article className="og-card">
-          <div className="og-card__image" style={{ backgroundImage: image ? `url("${image}")` : undefined }}>
-            {!image ? <strong>{siteName}</strong> : null}
-          </div>
-          <div className="og-card__body">
-            <span>{hostFromUrl(url)}</span>
-            <h3>{title}</h3>
-            <p>{description}</p>
-          </div>
-        </article>
+        {["Facebook", "LinkedIn", "X Large Image"].map((platform) => (
+          <article key={platform} className="og-card">
+            <div className="og-card__image" style={previewImageStyle}>
+              {!trimmedImage ? <strong>{siteName}</strong> : null}
+            </div>
+            <div className="og-card__body">
+              <span>{hostFromUrl(url)}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <small>{platform}</small>
+            </div>
+          </article>
+        ))}
       </div>
 
       <label className="tool-field">

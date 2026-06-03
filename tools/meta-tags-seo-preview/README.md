@@ -1,6 +1,6 @@
 # Meta Tags / SEO Preview
 
-检查 title、description、canonical、robots 和社交 meta 标签的搜索结果预览。
+检查 title、description、canonical、robots，并预览搜索结果、Open Graph 和 Twitter Card。
 
 ## 概述
 

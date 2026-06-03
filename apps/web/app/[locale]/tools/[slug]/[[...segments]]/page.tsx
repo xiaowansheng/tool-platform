@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { FavoriteToolButton, ToolUsageTracker } from "@/components/common-tools";
@@ -21,13 +21,22 @@ interface ToolRouteParams {
   segments?: string[];
 }
 
+const TOOL_ROUTE_ALIASES: Record<string, string> = {
+  "open-graph-preview": "meta-tags-seo-preview",
+  "sri-hash-generator": "hash-generator"
+};
+
+function resolveToolSlug(slug: string) {
+  return TOOL_ROUTE_ALIASES[slug] ?? slug;
+}
+
 export async function generateMetadata({
   params
 }: {
   params: Promise<ToolRouteParams>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const manifest = getToolManifest(slug);
+  const manifest = getToolManifest(resolveToolSlug(slug));
 
   if (!manifest) {
     return {
@@ -48,8 +57,15 @@ export default async function ToolPage({
 }: {
   params: Promise<ToolRouteParams>;
 }) {
-  const { locale, slug } = await params;
-  const manifest = getToolManifest(slug);
+  const { locale, slug, segments } = await params;
+  const resolvedSlug = resolveToolSlug(slug);
+
+  if (resolvedSlug !== slug) {
+    const suffix = segments?.length ? `/${segments.join("/")}` : "";
+    redirect(`/${locale}/tools/${resolvedSlug}${suffix}`);
+  }
+
+  const manifest = getToolManifest(resolvedSlug);
 
   if (!manifest) {
     notFound();
