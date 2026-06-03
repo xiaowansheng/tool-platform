@@ -434,6 +434,9 @@ importers:
       '@tool-platform/media-device-permission-lab':
         specifier: workspace:*
         version: link:../../tools/media-device-permission-lab
+      '@tool-platform/memory-match':
+        specifier: workspace:*
+        version: link:../../tools/memory-match
       '@tool-platform/mermaid-preview-formatter':
         specifier: workspace:*
         version: link:../../tools/mermaid-preview-formatter
@@ -1629,6 +1632,15 @@ importers:
         version: 19.2.6
 
   tools/media-device-permission-lab:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/memory-match:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

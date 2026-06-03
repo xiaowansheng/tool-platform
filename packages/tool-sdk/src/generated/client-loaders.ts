@@ -112,6 +112,7 @@ export const toolAppLoaders = {
   "markdown-preview": () => import("@tool-platform/markdown-preview/app"),
   "markdown-table-generator": () => import("@tool-platform/markdown-table-generator/app"),
   "media-device-permission-lab": () => import("@tool-platform/media-device-permission-lab/app"),
+  "memory-match": () => import("@tool-platform/memory-match/app"),
   "mermaid-preview-formatter": () => import("@tool-platform/mermaid-preview-formatter/app"),
   "meta-tags-seo-preview": () => import("@tool-platform/meta-tags-seo-preview/app"),
   "mime-type-lookup": () => import("@tool-platform/mime-type-lookup/app"),

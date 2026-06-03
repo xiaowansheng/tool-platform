@@ -101,6 +101,7 @@ import MarkdownLinterManifest from "@tool-platform/markdown-linter/manifest";
 import MarkdownPreviewManifest from "@tool-platform/markdown-preview/manifest";
 import MarkdownTableGeneratorManifest from "@tool-platform/markdown-table-generator/manifest";
 import MediaDevicePermissionLabManifest from "@tool-platform/media-device-permission-lab/manifest";
+import MemoryMatchManifest from "@tool-platform/memory-match/manifest";
 import MermaidPreviewFormatterManifest from "@tool-platform/mermaid-preview-formatter/manifest";
 import MetaTagsSeoPreviewManifest from "@tool-platform/meta-tags-seo-preview/manifest";
 import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
@@ -290,6 +291,7 @@ export const toolManifests: ToolManifest[] = [
   MarkdownPreviewManifest,
   MarkdownTableGeneratorManifest,
   MediaDevicePermissionLabManifest,
+  MemoryMatchManifest,
   MermaidPreviewFormatterManifest,
   MetaTagsSeoPreviewManifest,
   MimeTypeLookupManifest,

@@ -115,6 +115,7 @@
     "@tool-platform/markdown-preview": "workspace:*",
     "@tool-platform/markdown-table-generator": "workspace:*",
     "@tool-platform/media-device-permission-lab": "workspace:*",
+    "@tool-platform/memory-match": "workspace:*",
     "@tool-platform/mermaid-preview-formatter": "workspace:*",
     "@tool-platform/meta-tags-seo-preview": "workspace:*",
     "@tool-platform/mime-type-lookup": "workspace:*",

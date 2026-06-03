@@ -1455,6 +1455,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["调试 WebRTC 应用前的设备检测。", "排查浏览器媒体权限配置问题。"]
   },
+  "memory-match": {
+    name: "记忆翻牌",
+    description: "精美 3D 翻牌记忆力训练游戏，拥有丝滑的翻转动画、多种卡片主题（技术图标、趣味表情、赛博霓虹）、连消得分加成及合成器轻快音效，支持不同棋盘大小与最高分纪录保存。",
+    intro: "翻开卡片寻找配对，在限定步骤和时间内匹配所有图案，并在连续配对中达成 Combo 获得和弦音效加成。",
+    steps: [
+      "选择卡片难度（简单 4x4、中等 6x6 或困难 6x8）与水果/动物/赛博主题。",
+      "点击卡片，卡片会以 3D 效果翻转，展示背面的图案内容。",
+      "依次翻开第二张卡片。若两张图案相同则完成配对消除，否则会重新翻转盖回。",
+      "在 3.5 秒内连续配对可以激活 Combos 连消，发出上升的和弦声效。"
+    ],
+    examples: ["在困难 6x8 极速配对中挑战最少步数通关记录。", "通过和弦 Combo 连击音效体验记忆消除的解压快感。"]
+  },
   "meta-tags-seo-preview": {
     name: "Meta Tags SEO 预览器",
     description: "检查 title、description、canonical、robots，并预览搜索结果、Open Graph 和 Twitter Card。",
@@ -2180,6 +2192,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "markdown-preview": "Markdown 预览器",
   "markdown-table-generator": "Markdown 表格生成器",
   "media-device-permission-lab": "媒体设备权限实验室",
+  "memory-match": "记忆翻牌",
   "mermaid-preview-formatter": "Mermaid 预览格式化器",
   "meta-tags-seo-preview": "Meta Tags SEO 预览器",
   "mime-type-lookup": "MIME 类型查询",
