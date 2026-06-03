@@ -9,11 +9,13 @@ import ApiErrorCodeDocGeneratorManifest from "@tool-platform/api-error-code-doc-
 import ApiRateLimitCalculatorManifest from "@tool-platform/api-rate-limit-calculator/manifest";
 import ArchiveStructureViewerManifest from "@tool-platform/archive-structure-viewer/manifest";
 import AsciiArtManifest from "@tool-platform/ascii-art/manifest";
+import AsciiBinaryConverterManifest from "@tool-platform/ascii-binary-converter/manifest";
 import AspectRatioCalculatorManifest from "@tool-platform/aspect-ratio-calculator/manifest";
 import AudioToneGeneratorManifest from "@tool-platform/audio-tone-generator/manifest";
 import Base64StudioManifest from "@tool-platform/base64-studio/manifest";
 import BasicAuthGeneratorManifest from "@tool-platform/basic-auth-generator/manifest";
 import BatchFileHashCalculatorManifest from "@tool-platform/batch-file-hash-calculator/manifest";
+import BenchmarkBuilderManifest from "@tool-platform/benchmark-builder/manifest";
 import BorderRadiusGeneratorManifest from "@tool-platform/border-radius-generator/manifest";
 import BoxShadowGeneratorManifest from "@tool-platform/box-shadow-generator/manifest";
 import BrickBreakerManifest from "@tool-platform/brick-breaker/manifest";
@@ -21,6 +23,7 @@ import BrowserSandboxConsoleManifest from "@tool-platform/browser-sandbox-consol
 import CaseConverterManifest from "@tool-platform/case-converter/manifest";
 import ChangelogGeneratorManifest from "@tool-platform/changelog-generator/manifest";
 import ChineseConverterManifest from "@tool-platform/chinese-converter/manifest";
+import ChineseZodiacManifest from "@tool-platform/chinese-zodiac/manifest";
 import ChmodCalculatorManifest from "@tool-platform/chmod-calculator/manifest";
 import CodeBeautifierManifest from "@tool-platform/code-beautifier/manifest";
 import CodeToImageManifest from "@tool-platform/code-to-image/manifest";
@@ -56,6 +59,7 @@ import DockerfileLinterManifest from "@tool-platform/dockerfile-linter/manifest"
 import DocumentationTocAnchorGeneratorManifest from "@tool-platform/documentation-toc-anchor-generator/manifest";
 import EasingCubicBezierDebuggerManifest from "@tool-platform/easing-cubic-bezier-debugger/manifest";
 import EcommerceMarginCalculatorManifest from "@tool-platform/ecommerce-margin-calculator/manifest";
+import EmailNormalizerManifest from "@tool-platform/email-normalizer/manifest";
 import EmailTemplateSandboxPreviewManifest from "@tool-platform/email-template-sandbox-preview/manifest";
 import EnvDiffMergeSanitizerManifest from "@tool-platform/env-diff-merge-sanitizer/manifest";
 import EnvParserManifest from "@tool-platform/env-parser/manifest";
@@ -79,6 +83,8 @@ import GraphqlWorkbenchManifest from "@tool-platform/graphql-workbench/manifest"
 import HarViewerManifest from "@tool-platform/har-viewer/manifest";
 import HashGeneratorManifest from "@tool-platform/hash-generator/manifest";
 import HelmValuesDiffManifest from "@tool-platform/helm-values-diff/manifest";
+import HmacGeneratorManifest from "@tool-platform/hmac-generator/manifest";
+import HoroscopeCalculatorManifest from "@tool-platform/horoscope-calculator/manifest";
 import HtaccessToNginxManifest from "@tool-platform/htaccess-to-nginx/manifest";
 import HtmlCssJsPlaygroundManifest from "@tool-platform/html-css-js-playground/manifest";
 import HtmlEntityCodecManifest from "@tool-platform/html-entity-codec/manifest";
@@ -105,6 +111,7 @@ import LargeTextToolsManifest from "@tool-platform/large-text-tools/manifest";
 import LicenseCompatibilityCheckerManifest from "@tool-platform/license-compatibility-checker/manifest";
 import LineToolsManifest from "@tool-platform/line-tools/manifest";
 import LinkCollectionCuratorManifest from "@tool-platform/link-collection-curator/manifest";
+import ListConverterManifest from "@tool-platform/list-converter/manifest";
 import LiveEventCountdownManifest from "@tool-platform/live-event-countdown/manifest";
 import LoanCalculatorManifest from "@tool-platform/loan-calculator/manifest";
 import LogFileAnalyzerManifest from "@tool-platform/log-file-analyzer/manifest";
@@ -121,15 +128,19 @@ import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
 import MinesweeperManifest from "@tool-platform/minesweeper/manifest";
 import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manifest";
 import MorseCodeManifest from "@tool-platform/morse-code/manifest";
+import NatoAlphabetConverterManifest from "@tool-platform/nato-alphabet-converter/manifest";
 import NeonSnakeManifest from "@tool-platform/neon-snake/manifest";
 import NeonTetrisManifest from "@tool-platform/neon-tetris/manifest";
 import NotificationPayloadTesterManifest from "@tool-platform/notification-payload-tester/manifest";
 import NumberBaseConverterManifest from "@tool-platform/number-base-converter/manifest";
+import NumeronymGeneratorManifest from "@tool-platform/numeronym-generator/manifest";
 import OauthOidcDebuggerManifest from "@tool-platform/oauth-oidc-debugger/manifest";
 import OpenapiWorkbenchManifest from "@tool-platform/openapi-workbench/manifest";
 import OpentelemetryTraceViewerManifest from "@tool-platform/opentelemetry-trace-viewer/manifest";
+import OtpGeneratorManifest from "@tool-platform/otp-generator/manifest";
 import ParquetArrowPreviewManifest from "@tool-platform/parquet-arrow-preview/manifest";
 import PasswordGeneratorManifest from "@tool-platform/password-generator/manifest";
+import PasswordStrengthAnalyzerManifest from "@tool-platform/password-strength-analyzer/manifest";
 import PdfMetadataToolManifest from "@tool-platform/pdf-metadata-tool/manifest";
 import PdfToolsManifest from "@tool-platform/pdf-tools/manifest";
 import PemJwkToolkitManifest from "@tool-platform/pem-jwk-toolkit/manifest";
@@ -155,6 +166,7 @@ import ResourceUnitConverterManifest from "@tool-platform/resource-unit-converte
 import ReverseProxyHeaderAnalyzerManifest from "@tool-platform/reverse-proxy-header-analyzer/manifest";
 import ReversiManifest from "@tool-platform/reversi/manifest";
 import RobotsTxtGeneratorManifest from "@tool-platform/robots-txt-generator/manifest";
+import RomanNumeralConverterManifest from "@tool-platform/roman-numeral-converter/manifest";
 import RubyPlaygroundManifest from "@tool-platform/ruby-playground/manifest";
 import SbomViewerManifest from "@tool-platform/sbom-viewer/manifest";
 import ScientificCalculatorManifest from "@tool-platform/scientific-calculator/manifest";
@@ -173,21 +185,26 @@ import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
 import SqlIndexAdvisorManifest from "@tool-platform/sql-index-advisor/manifest";
 import SqlPlaygroundManifest from "@tool-platform/sql-playground/manifest";
 import SqlToGoManifest from "@tool-platform/sql-to-go/manifest";
+import StringObfuscatorManifest from "@tool-platform/string-obfuscator/manifest";
 import StudyPlanSchedulerManifest from "@tool-platform/study-plan-scheduler/manifest";
 import SudokuGameManifest from "@tool-platform/sudoku-game/manifest";
 import SvgOptimizerViewboxEditorManifest from "@tool-platform/svg-optimizer-viewbox-editor/manifest";
+import SvgToJsxManifest from "@tool-platform/svg-to-jsx/manifest";
 import SystemdUnitAnalyzerManifest from "@tool-platform/systemd-unit-analyzer/manifest";
 import TailwindClassLabManifest from "@tool-platform/tailwind-class-lab/manifest";
 import TaskPriorityMatrixManifest from "@tool-platform/task-priority-matrix/manifest";
 import TerraformPlanFormatterManifest from "@tool-platform/terraform-plan-formatter/manifest";
+import TextCipherManifest from "@tool-platform/text-cipher/manifest";
 import TextDiffManifest from "@tool-platform/text-diff/manifest";
 import TextEncodingConverterManifest from "@tool-platform/text-encoding-converter/manifest";
 import TextInspectorManifest from "@tool-platform/text-inspector/manifest";
 import ThreatModelCanvasManifest from "@tool-platform/threat-model-canvas/manifest";
+import TimeCalculatorManifest from "@tool-platform/time-calculator/manifest";
 import TimestampConverterManifest from "@tool-platform/timestamp-converter/manifest";
 import TlsCertificateParserManifest from "@tool-platform/tls-certificate-parser/manifest";
 import TransformGeneratorManifest from "@tool-platform/transform-generator/manifest";
 import TypescriptPlaygroundManifest from "@tool-platform/typescript-playground/manifest";
+import UlidGeneratorManifest from "@tool-platform/ulid-generator/manifest";
 import UnicodeConverterManifest from "@tool-platform/unicode-converter/manifest";
 import UnicodeInspectorManifest from "@tool-platform/unicode-inspector/manifest";
 import UnitConverterManifest from "@tool-platform/unit-converter/manifest";
@@ -218,11 +235,13 @@ export const toolManifests: ToolManifest[] = [
   ApiRateLimitCalculatorManifest,
   ArchiveStructureViewerManifest,
   AsciiArtManifest,
+  AsciiBinaryConverterManifest,
   AspectRatioCalculatorManifest,
   AudioToneGeneratorManifest,
   Base64StudioManifest,
   BasicAuthGeneratorManifest,
   BatchFileHashCalculatorManifest,
+  BenchmarkBuilderManifest,
   BorderRadiusGeneratorManifest,
   BoxShadowGeneratorManifest,
   BrickBreakerManifest,
@@ -230,6 +249,7 @@ export const toolManifests: ToolManifest[] = [
   CaseConverterManifest,
   ChangelogGeneratorManifest,
   ChineseConverterManifest,
+  ChineseZodiacManifest,
   ChmodCalculatorManifest,
   CodeBeautifierManifest,
   CodeToImageManifest,
@@ -265,6 +285,7 @@ export const toolManifests: ToolManifest[] = [
   DocumentationTocAnchorGeneratorManifest,
   EasingCubicBezierDebuggerManifest,
   EcommerceMarginCalculatorManifest,
+  EmailNormalizerManifest,
   EmailTemplateSandboxPreviewManifest,
   EnvDiffMergeSanitizerManifest,
   EnvParserManifest,
@@ -288,6 +309,8 @@ export const toolManifests: ToolManifest[] = [
   HarViewerManifest,
   HashGeneratorManifest,
   HelmValuesDiffManifest,
+  HmacGeneratorManifest,
+  HoroscopeCalculatorManifest,
   HtaccessToNginxManifest,
   HtmlCssJsPlaygroundManifest,
   HtmlEntityCodecManifest,
@@ -314,6 +337,7 @@ export const toolManifests: ToolManifest[] = [
   LicenseCompatibilityCheckerManifest,
   LineToolsManifest,
   LinkCollectionCuratorManifest,
+  ListConverterManifest,
   LiveEventCountdownManifest,
   LoanCalculatorManifest,
   LogFileAnalyzerManifest,
@@ -330,15 +354,19 @@ export const toolManifests: ToolManifest[] = [
   MinesweeperManifest,
   MockDataGeneratorManifest,
   MorseCodeManifest,
+  NatoAlphabetConverterManifest,
   NeonSnakeManifest,
   NeonTetrisManifest,
   NotificationPayloadTesterManifest,
   NumberBaseConverterManifest,
+  NumeronymGeneratorManifest,
   OauthOidcDebuggerManifest,
   OpenapiWorkbenchManifest,
   OpentelemetryTraceViewerManifest,
+  OtpGeneratorManifest,
   ParquetArrowPreviewManifest,
   PasswordGeneratorManifest,
+  PasswordStrengthAnalyzerManifest,
   PdfMetadataToolManifest,
   PdfToolsManifest,
   PemJwkToolkitManifest,
@@ -364,6 +392,7 @@ export const toolManifests: ToolManifest[] = [
   ReverseProxyHeaderAnalyzerManifest,
   ReversiManifest,
   RobotsTxtGeneratorManifest,
+  RomanNumeralConverterManifest,
   RubyPlaygroundManifest,
   SbomViewerManifest,
   ScientificCalculatorManifest,
@@ -382,21 +411,26 @@ export const toolManifests: ToolManifest[] = [
   SqlIndexAdvisorManifest,
   SqlPlaygroundManifest,
   SqlToGoManifest,
+  StringObfuscatorManifest,
   StudyPlanSchedulerManifest,
   SudokuGameManifest,
   SvgOptimizerViewboxEditorManifest,
+  SvgToJsxManifest,
   SystemdUnitAnalyzerManifest,
   TailwindClassLabManifest,
   TaskPriorityMatrixManifest,
   TerraformPlanFormatterManifest,
+  TextCipherManifest,
   TextDiffManifest,
   TextEncodingConverterManifest,
   TextInspectorManifest,
   ThreatModelCanvasManifest,
+  TimeCalculatorManifest,
   TimestampConverterManifest,
   TlsCertificateParserManifest,
   TransformGeneratorManifest,
   TypescriptPlaygroundManifest,
+  UlidGeneratorManifest,
   UnicodeConverterManifest,
   UnicodeInspectorManifest,
   UnitConverterManifest,

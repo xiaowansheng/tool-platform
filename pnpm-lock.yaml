@@ -158,6 +158,9 @@ importers:
       '@tool-platform/ascii-art':
         specifier: workspace:*
         version: link:../../tools/ascii-art
+      '@tool-platform/ascii-binary-converter':
+        specifier: workspace:*
+        version: link:../../tools/ascii-binary-converter
       '@tool-platform/aspect-ratio-calculator':
         specifier: workspace:*
         version: link:../../tools/aspect-ratio-calculator
@@ -173,6 +176,9 @@ importers:
       '@tool-platform/batch-file-hash-calculator':
         specifier: workspace:*
         version: link:../../tools/batch-file-hash-calculator
+      '@tool-platform/benchmark-builder':
+        specifier: workspace:*
+        version: link:../../tools/benchmark-builder
       '@tool-platform/border-radius-generator':
         specifier: workspace:*
         version: link:../../tools/border-radius-generator
@@ -194,6 +200,9 @@ importers:
       '@tool-platform/chinese-converter':
         specifier: workspace:*
         version: link:../../tools/chinese-converter
+      '@tool-platform/chinese-zodiac':
+        specifier: workspace:*
+        version: link:../../tools/chinese-zodiac
       '@tool-platform/chmod-calculator':
         specifier: workspace:*
         version: link:../../tools/chmod-calculator
@@ -299,6 +308,9 @@ importers:
       '@tool-platform/ecommerce-margin-calculator':
         specifier: workspace:*
         version: link:../../tools/ecommerce-margin-calculator
+      '@tool-platform/email-normalizer':
+        specifier: workspace:*
+        version: link:../../tools/email-normalizer
       '@tool-platform/email-template-sandbox-preview':
         specifier: workspace:*
         version: link:../../tools/email-template-sandbox-preview
@@ -368,6 +380,12 @@ importers:
       '@tool-platform/helm-values-diff':
         specifier: workspace:*
         version: link:../../tools/helm-values-diff
+      '@tool-platform/hmac-generator':
+        specifier: workspace:*
+        version: link:../../tools/hmac-generator
+      '@tool-platform/horoscope-calculator':
+        specifier: workspace:*
+        version: link:../../tools/horoscope-calculator
       '@tool-platform/htaccess-to-nginx':
         specifier: workspace:*
         version: link:../../tools/htaccess-to-nginx
@@ -446,6 +464,9 @@ importers:
       '@tool-platform/link-collection-curator':
         specifier: workspace:*
         version: link:../../tools/link-collection-curator
+      '@tool-platform/list-converter':
+        specifier: workspace:*
+        version: link:../../tools/list-converter
       '@tool-platform/live-event-countdown':
         specifier: workspace:*
         version: link:../../tools/live-event-countdown
@@ -494,6 +515,9 @@ importers:
       '@tool-platform/morse-code':
         specifier: workspace:*
         version: link:../../tools/morse-code
+      '@tool-platform/nato-alphabet-converter':
+        specifier: workspace:*
+        version: link:../../tools/nato-alphabet-converter
       '@tool-platform/neon-snake':
         specifier: workspace:*
         version: link:../../tools/neon-snake
@@ -506,6 +530,9 @@ importers:
       '@tool-platform/number-base-converter':
         specifier: workspace:*
         version: link:../../tools/number-base-converter
+      '@tool-platform/numeronym-generator':
+        specifier: workspace:*
+        version: link:../../tools/numeronym-generator
       '@tool-platform/oauth-oidc-debugger':
         specifier: workspace:*
         version: link:../../tools/oauth-oidc-debugger
@@ -515,12 +542,18 @@ importers:
       '@tool-platform/opentelemetry-trace-viewer':
         specifier: workspace:*
         version: link:../../tools/opentelemetry-trace-viewer
+      '@tool-platform/otp-generator':
+        specifier: workspace:*
+        version: link:../../tools/otp-generator
       '@tool-platform/parquet-arrow-preview':
         specifier: workspace:*
         version: link:../../tools/parquet-arrow-preview
       '@tool-platform/password-generator':
         specifier: workspace:*
         version: link:../../tools/password-generator
+      '@tool-platform/password-strength-analyzer':
+        specifier: workspace:*
+        version: link:../../tools/password-strength-analyzer
       '@tool-platform/pdf-metadata-tool':
         specifier: workspace:*
         version: link:../../tools/pdf-metadata-tool
@@ -596,6 +629,9 @@ importers:
       '@tool-platform/robots-txt-generator':
         specifier: workspace:*
         version: link:../../tools/robots-txt-generator
+      '@tool-platform/roman-numeral-converter':
+        specifier: workspace:*
+        version: link:../../tools/roman-numeral-converter
       '@tool-platform/ruby-playground':
         specifier: workspace:*
         version: link:../../tools/ruby-playground
@@ -650,6 +686,9 @@ importers:
       '@tool-platform/sql-to-go':
         specifier: workspace:*
         version: link:../../tools/sql-to-go
+      '@tool-platform/string-obfuscator':
+        specifier: workspace:*
+        version: link:../../tools/string-obfuscator
       '@tool-platform/study-plan-scheduler':
         specifier: workspace:*
         version: link:../../tools/study-plan-scheduler
@@ -659,6 +698,9 @@ importers:
       '@tool-platform/svg-optimizer-viewbox-editor':
         specifier: workspace:*
         version: link:../../tools/svg-optimizer-viewbox-editor
+      '@tool-platform/svg-to-jsx':
+        specifier: workspace:*
+        version: link:../../tools/svg-to-jsx
       '@tool-platform/systemd-unit-analyzer':
         specifier: workspace:*
         version: link:../../tools/systemd-unit-analyzer
@@ -671,6 +713,9 @@ importers:
       '@tool-platform/terraform-plan-formatter':
         specifier: workspace:*
         version: link:../../tools/terraform-plan-formatter
+      '@tool-platform/text-cipher':
+        specifier: workspace:*
+        version: link:../../tools/text-cipher
       '@tool-platform/text-diff':
         specifier: workspace:*
         version: link:../../tools/text-diff
@@ -683,6 +728,9 @@ importers:
       '@tool-platform/threat-model-canvas':
         specifier: workspace:*
         version: link:../../tools/threat-model-canvas
+      '@tool-platform/time-calculator':
+        specifier: workspace:*
+        version: link:../../tools/time-calculator
       '@tool-platform/timestamp-converter':
         specifier: workspace:*
         version: link:../../tools/timestamp-converter
@@ -698,6 +746,9 @@ importers:
       '@tool-platform/typescript-playground':
         specifier: workspace:*
         version: link:../../tools/typescript-playground
+      '@tool-platform/ulid-generator':
+        specifier: workspace:*
+        version: link:../../tools/ulid-generator
       '@tool-platform/unicode-converter':
         specifier: workspace:*
         version: link:../../tools/unicode-converter
@@ -866,6 +917,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/ascii-binary-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/aspect-ratio-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -903,6 +963,15 @@ importers:
         version: 19.2.6
 
   tools/batch-file-hash-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/benchmark-builder:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -976,6 +1045,15 @@ importers:
       opencc-js:
         specifier: ^1.0.5
         version: 1.3.1
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/chinese-zodiac:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
       react:
         specifier: ^19.0.0
         version: 19.2.6
@@ -1295,6 +1373,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/email-normalizer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/email-template-sandbox-preview:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1494,6 +1581,24 @@ importers:
         version: 19.2.6
 
   tools/helm-values-diff:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/hmac-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/horoscope-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1736,6 +1841,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/list-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/live-event-countdown:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1880,6 +1994,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/nato-alphabet-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/neon-snake:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1916,6 +2039,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/numeronym-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/oauth-oidc-debugger:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1943,6 +2075,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/otp-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/parquet-arrow-preview:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1953,6 +2094,15 @@ importers:
         version: 19.2.6
 
   tools/password-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/password-strength-analyzer:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2189,6 +2339,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/roman-numeral-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/ruby-playground:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2357,6 +2516,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/string-obfuscator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/study-plan-scheduler:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2376,6 +2544,15 @@ importers:
         version: 19.2.6
 
   tools/svg-optimizer-viewbox-editor:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/svg-to-jsx:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2412,6 +2589,15 @@ importers:
         version: 19.2.6
 
   tools/terraform-plan-formatter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/text-cipher:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2462,6 +2648,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/time-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/timestamp-converter:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2497,6 +2692,15 @@ importers:
       '@tool-platform/worker-runtime':
         specifier: workspace:*
         version: link:../../packages/worker-runtime
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/ulid-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
       react:
         specifier: ^19.0.0
         version: 19.2.6
