@@ -26,6 +26,7 @@ export const toolAppLoaders = {
   "batch-file-hash-calculator": () => import("@tool-platform/batch-file-hash-calculator/app"),
   "border-radius-generator": () => import("@tool-platform/border-radius-generator/app"),
   "box-shadow-generator": () => import("@tool-platform/box-shadow-generator/app"),
+  "brick-breaker": () => import("@tool-platform/brick-breaker/app"),
   "browser-sandbox-console": () => import("@tool-platform/browser-sandbox-console/app"),
   "case-converter": () => import("@tool-platform/case-converter/app"),
   "changelog-generator": () => import("@tool-platform/changelog-generator/app"),

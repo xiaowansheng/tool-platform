@@ -29,6 +29,7 @@
     "@tool-platform/batch-file-hash-calculator": "workspace:*",
     "@tool-platform/border-radius-generator": "workspace:*",
     "@tool-platform/box-shadow-generator": "workspace:*",
+    "@tool-platform/brick-breaker": "workspace:*",
     "@tool-platform/browser-sandbox-console": "workspace:*",
     "@tool-platform/case-converter": "workspace:*",
     "@tool-platform/changelog-generator": "workspace:*",

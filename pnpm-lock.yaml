@@ -176,6 +176,9 @@ importers:
       '@tool-platform/box-shadow-generator':
         specifier: workspace:*
         version: link:../../tools/box-shadow-generator
+      '@tool-platform/brick-breaker':
+        specifier: workspace:*
+        version: link:../../tools/brick-breaker
       '@tool-platform/browser-sandbox-console':
         specifier: workspace:*
         version: link:../../tools/browser-sandbox-console
@@ -855,6 +858,15 @@ importers:
         version: 19.2.6
 
   tools/box-shadow-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/brick-breaker:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

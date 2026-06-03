@@ -15,6 +15,7 @@ import BasicAuthGeneratorManifest from "@tool-platform/basic-auth-generator/mani
 import BatchFileHashCalculatorManifest from "@tool-platform/batch-file-hash-calculator/manifest";
 import BorderRadiusGeneratorManifest from "@tool-platform/border-radius-generator/manifest";
 import BoxShadowGeneratorManifest from "@tool-platform/box-shadow-generator/manifest";
+import BrickBreakerManifest from "@tool-platform/brick-breaker/manifest";
 import BrowserSandboxConsoleManifest from "@tool-platform/browser-sandbox-console/manifest";
 import CaseConverterManifest from "@tool-platform/case-converter/manifest";
 import ChangelogGeneratorManifest from "@tool-platform/changelog-generator/manifest";
@@ -205,6 +206,7 @@ export const toolManifests: ToolManifest[] = [
   BatchFileHashCalculatorManifest,
   BorderRadiusGeneratorManifest,
   BoxShadowGeneratorManifest,
+  BrickBreakerManifest,
   BrowserSandboxConsoleManifest,
   CaseConverterManifest,
   ChangelogGeneratorManifest,

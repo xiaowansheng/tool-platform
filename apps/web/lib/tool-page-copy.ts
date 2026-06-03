@@ -932,6 +932,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["设计卡片悬浮阴影效果。", "生成毛玻璃背景的 backdrop-filter 代码。"]
   },
+  "brick-breaker": {
+    name: "霓虹打砖块",
+    description: "炫彩霓虹打砖块游戏。拥有流畅的 Canvas 粒子动画、多种增益道具（多球分裂、挡板加长、磁力吸附、激光射击、保护盾）、多种关卡设计与物理碰撞音效合成器，支持键盘/鼠标/触屏控制与视觉特效配置。",
+    intro: "控制挡板接住弹球，击碎所有彩色霓虹砖块。拾取掉落的道具获得多球分裂、激光武器等赛博加成，并在高连击中挑战更高得分记录。",
+    steps: [
+      "拖动鼠标、滑动手指或使用 A/D 键控制底部发光挡板左右移动。",
+      "按空格键或点击屏幕将球向斜上方发射，球在碰撞砖块、墙壁和挡板时会自动弹起。",
+      "当砖块被粉碎时，有几率掉落发光道具。用挡板接住道具即可激活如加长挡板、多球分裂或激光武器等强力增益。",
+      "如果在激光道具生效期间，按空格键或点击屏幕可向正上方发射激光，直接摧毁路径上的砖块。"
+    ],
+    examples: ["在第三关“心动霓虹”中挑战高 Combo 得分倍增。", "利用多球分裂和激光枪迅速打破坚固的防守砖块。"]
+  },
   "browser-sandbox-console": {
     name: "浏览器沙箱控制台",
     description: "在隔离 iframe 中运行 HTML/CSS/JS 片段，捕获 console 输出并生成可复制的 srcdoc。",
@@ -2105,6 +2117,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "batch-file-hash-calculator": "批量文件哈希计算器",
   "border-radius-generator": "圆角生成器",
   "box-shadow-generator": "CSS 效果工作台",
+  "brick-breaker": "霓虹打砖块",
   "browser-sandbox-console": "浏览器沙箱控制台",
   "case-converter": "命名风格转换器",
   "changelog-generator": "Changelog 生成器",
