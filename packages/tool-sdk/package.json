@@ -51,6 +51,7 @@
     "@tool-platform/cron-helper": "workspace:*",
     "@tool-platform/csp-generator": "workspace:*",
     "@tool-platform/css-clamp-generator": "workspace:*",
+    "@tool-platform/css-color-picker": "workspace:*",
     "@tool-platform/css-grid-generator": "workspace:*",
     "@tool-platform/css-named-colors": "workspace:*",
     "@tool-platform/css-specificity-calculator": "workspace:*",
