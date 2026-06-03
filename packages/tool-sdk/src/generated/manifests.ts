@@ -27,6 +27,7 @@ import CodeSnippetSecurityReviewManifest from "@tool-platform/code-snippet-secur
 import ColorBlindnessSimulatorManifest from "@tool-platform/color-blindness-simulator/manifest";
 import ColorContrastCheckerManifest from "@tool-platform/color-contrast-checker/manifest";
 import ColorConverterManifest from "@tool-platform/color-converter/manifest";
+import ColorExtractorManifest from "@tool-platform/color-extractor/manifest";
 import ColorHarmoniesGeneratorManifest from "@tool-platform/color-harmonies-generator/manifest";
 import ColorPaletteGeneratorManifest from "@tool-platform/color-palette-generator/manifest";
 import ColorPickerManifest from "@tool-platform/color-picker/manifest";
@@ -225,6 +226,7 @@ export const toolManifests: ToolManifest[] = [
   ColorBlindnessSimulatorManifest,
   ColorContrastCheckerManifest,
   ColorConverterManifest,
+  ColorExtractorManifest,
   ColorHarmoniesGeneratorManifest,
   ColorPaletteGeneratorManifest,
   ColorPickerManifest,

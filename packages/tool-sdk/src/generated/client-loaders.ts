@@ -38,6 +38,7 @@ export const toolAppLoaders = {
   "color-blindness-simulator": () => import("@tool-platform/color-blindness-simulator/app"),
   "color-contrast-checker": () => import("@tool-platform/color-contrast-checker/app"),
   "color-converter": () => import("@tool-platform/color-converter/app"),
+  "color-extractor": () => import("@tool-platform/color-extractor/app"),
   "color-harmonies-generator": () => import("@tool-platform/color-harmonies-generator/app"),
   "color-palette-generator": () => import("@tool-platform/color-palette-generator/app"),
   "color-picker": () => import("@tool-platform/color-picker/app"),

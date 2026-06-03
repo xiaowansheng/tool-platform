@@ -41,6 +41,7 @@
     "@tool-platform/color-blindness-simulator": "workspace:*",
     "@tool-platform/color-contrast-checker": "workspace:*",
     "@tool-platform/color-converter": "workspace:*",
+    "@tool-platform/color-extractor": "workspace:*",
     "@tool-platform/color-harmonies-generator": "workspace:*",
     "@tool-platform/color-palette-generator": "workspace:*",
     "@tool-platform/color-picker": "workspace:*",

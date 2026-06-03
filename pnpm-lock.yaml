@@ -212,6 +212,9 @@ importers:
       '@tool-platform/color-converter':
         specifier: workspace:*
         version: link:../../tools/color-converter
+      '@tool-platform/color-extractor':
+        specifier: workspace:*
+        version: link:../../tools/color-extractor
       '@tool-platform/color-harmonies-generator':
         specifier: workspace:*
         version: link:../../tools/color-harmonies-generator
@@ -1002,6 +1005,15 @@ importers:
         version: 19.2.6
 
   tools/color-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/color-extractor:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
