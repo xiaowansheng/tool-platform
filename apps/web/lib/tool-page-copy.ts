@@ -1953,15 +1953,18 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     examples: ["调试 WebSocket 实时通信服务。", "测试 WebSocket 重连和心跳机制。"]
   },
   "yaml-json-toml-converter": {
-    name: "YAML / JSON / TOML 转换器",
-    description: "在 JSON、轻量 YAML 和轻量 TOML 配置片段之间互转。",
-    intro: "在 JSON、YAML 和 TOML 配置格式之间相互转换，适合配置迁移和格式适配。",
+    name: "YAML / JSON / TOML / Properties 转换器",
+    description: "在 JSON、轻量 YAML、轻量 TOML 和 Properties 配置片段之间互转。",
+    intro: "在 JSON、YAML、TOML 和 Properties 配置格式之间相互转换，适合配置迁移和格式适配。",
     steps: [
       "粘贴源格式的配置内容。",
       "选择源格式和目标格式。",
       "复制转换后的配置内容。"
     ],
-    examples: ["把 YAML 配置转换为 JSON 格式。", "将 JSON 格式的应用配置转为 TOML。"]
+    examples: [
+      "把 YAML 配置转换为 Properties 格式（支持树状到 dot 路径转换）。",
+      "将 Java Properties 格式转换为 YAML 配置（支持 dot 路径展开）。"
+    ]
   },
   "color-extractor": {
     name: "颜色提取器",
@@ -2192,7 +2195,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "webgpu-capability-reporter": "WebGPU 能力报告器",
   "webhook-signature-verifier": "Webhook 签名验证器",
   "websocket-client": "WebSocket 客户端",
-  "yaml-json-toml-converter": "YAML / JSON / TOML 转换器"
+  "yaml-json-toml-converter": "YAML / JSON / TOML / Properties 转换器"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {

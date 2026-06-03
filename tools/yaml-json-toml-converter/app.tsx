@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
-type Format = "json" | "yaml" | "toml";
+type Format = "json" | "yaml" | "toml" | "properties";
 type ConfigValue = string | number | boolean | null | ConfigValue[] | { [key: string]: ConfigValue };
 
 function parseScalar(value: string): ConfigValue {
@@ -25,29 +25,32 @@ function parseScalar(value: string): ConfigValue {
 }
 
 function parseYaml(input: string): Record<string, ConfigValue> {
-  const root: Record<string, ConfigValue> = {};
-  let currentObject = root;
+  const root: Record<string, any> = {};
+  const stack: { indent: number; obj: Record<string, any> }[] = [{ indent: -1, obj: root }];
 
   for (const line of input.split(/\r?\n/)) {
-    if (!line.trim() || line.trim().startsWith("#")) continue;
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#") || trimmed.startsWith("---")) continue;
 
     const indent = line.match(/^\s*/)?.[0].length ?? 0;
-    const [key = "", ...rest] = line.trim().split(":");
-    const value = rest.join(":").trim();
+    const colonIndex = trimmed.indexOf(":");
+    if (colonIndex === -1) continue;
 
-    if (!key) continue;
+    const key = trimmed.slice(0, colonIndex).trim();
+    const value = trimmed.slice(colonIndex + 1).trim();
 
-    if (indent === 0) {
-      if (!value) {
-        const nested: Record<string, ConfigValue> = {};
-        root[key.trim()] = nested;
-        currentObject = nested;
-      } else {
-        root[key.trim()] = parseScalar(value);
-        currentObject = root;
-      }
+    while (stack.length > 1 && stack[stack.length - 1].indent >= indent) {
+      stack.pop();
+    }
+
+    const parent = stack[stack.length - 1].obj;
+
+    if (!value) {
+      const newObj = {};
+      parent[key] = newObj;
+      stack.push({ indent, obj: newObj });
     } else {
-      currentObject[key.trim()] = parseScalar(value);
+      parent[key] = parseScalar(value);
     }
   }
 
@@ -73,6 +76,70 @@ function parseToml(input: string): Record<string, ConfigValue> {
     const index = trimmed.indexOf("=");
     if (index !== -1) {
       section[trimmed.slice(0, index).trim()] = parseScalar(trimmed.slice(index + 1));
+    }
+  }
+
+  return root;
+}
+
+function parseProperties(input: string): Record<string, ConfigValue> {
+  const root: Record<string, ConfigValue> = {};
+
+  for (let line of input.split(/\r?\n/)) {
+    line = line.trim();
+    if (!line || line.startsWith("#") || line.startsWith("!")) {
+      continue;
+    }
+
+    let splitIndex = -1;
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if ((char === "=" || char === ":") && (i === 0 || line[i - 1] !== "\\")) {
+        splitIndex = i;
+        break;
+      }
+    }
+
+    let rawKey = "";
+    let rawValue = "";
+    if (splitIndex !== -1) {
+      rawKey = line.slice(0, splitIndex).trim();
+      rawValue = line.slice(splitIndex + 1).trim();
+    } else {
+      const spaceIndex = line.search(/\s/);
+      if (spaceIndex !== -1) {
+        rawKey = line.slice(0, spaceIndex).trim();
+        rawValue = line.slice(spaceIndex + 1).trim();
+      } else {
+        rawKey = line;
+        rawValue = "";
+      }
+    }
+
+    const unescape = (str: string) => {
+      return str.replace(/\\(.)/g, (_, c) => {
+        if (c === "n") return "\n";
+        if (c === "t") return "\t";
+        if (c === "r") return "\r";
+        return c;
+      });
+    };
+
+    const key = unescape(rawKey);
+    const value = parseScalar(unescape(rawValue));
+
+    const parts = key.split(".");
+    let current: any = root;
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i];
+      if (i === parts.length - 1) {
+        current[part] = value;
+      } else {
+        if (!(part in current) || typeof current[part] !== "object" || current[part] === null) {
+          current[part] = {};
+        }
+        current = current[part];
+      }
     }
   }
 
@@ -113,16 +180,46 @@ function toToml(value: ConfigValue) {
   return [...top, ...sections].join("\n\n");
 }
 
+function toProperties(value: ConfigValue, prefix = ""): string {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    const escapeVal = (v: any) => {
+      const s = String(v);
+      return s
+        .replace(/\\/g, "\\\\")
+        .replace(/\n/g, "\\n")
+        .replace(/\t/g, "\\t")
+        .replace(/\r/g, "\\r");
+    };
+    return prefix ? `${prefix}=${escapeVal(value)}` : escapeVal(value);
+  }
+
+  const lines: string[] = [];
+  for (const [key, item] of Object.entries(value)) {
+    const escapeKey = (k: string) => {
+      return k
+        .replace(/\\/g, "\\\\")
+        .replace(/=/g, "\\=")
+        .replace(/:/g, "\\:")
+        .replace(/ /g, "\\ ");
+    };
+    const nextPrefix = prefix ? `${prefix}.${escapeKey(key)}` : escapeKey(key);
+    lines.push(toProperties(item, nextPrefix));
+  }
+  return lines.filter(Boolean).join("\n");
+}
+
 function parseByFormat(input: string, format: Format): ConfigValue {
   if (format === "json") return JSON.parse(input) as ConfigValue;
   if (format === "yaml") return parseYaml(input);
-  return parseToml(input);
+  if (format === "toml") return parseToml(input);
+  return parseProperties(input);
 }
 
 function serializeByFormat(value: ConfigValue, format: Format) {
   if (format === "json") return JSON.stringify(value, null, 2);
   if (format === "yaml") return toYaml(value);
-  return toToml(value);
+  if (format === "toml") return toToml(value);
+  return toProperties(value);
 }
 
 export default function YamlJsonTomlConverterTool({ manifest }: ToolAppProps) {
@@ -134,6 +231,11 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolAppProps) {
   const [copied, setCopied] = useState(false);
 
   function convert() {
+    if (!input.trim()) {
+      setOutput("");
+      setError("");
+      return;
+    }
     try {
       setOutput(serializeByFormat(parseByFormat(input, source), target));
       setError("");
@@ -142,6 +244,11 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolAppProps) {
       setError(convertError instanceof Error ? convertError.message : "配置转换失败");
     }
   }
+
+  // Auto-convert on input/source/target changes
+  useEffect(() => {
+    convert();
+  }, [input, source, target]);
 
   async function copyOutput() {
     await navigator.clipboard.writeText(output);
@@ -164,6 +271,7 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolAppProps) {
             <option value="json">JSON</option>
             <option value="yaml">YAML</option>
             <option value="toml">TOML</option>
+            <option value="properties">Properties</option>
           </select>
         </label>
         <label className="tool-field tool-field--compact">
@@ -172,6 +280,7 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolAppProps) {
             <option value="json">JSON</option>
             <option value="yaml">YAML</option>
             <option value="toml">TOML</option>
+            <option value="properties">Properties</option>
           </select>
         </label>
         <button type="button" onClick={convert}>转换</button>
@@ -187,7 +296,7 @@ export default function YamlJsonTomlConverterTool({ manifest }: ToolAppProps) {
           <textarea value={output} onChange={(event) => setOutput(event.target.value)} spellCheck={false} />
         </label>
       </div>
-      <p className="tool-note">当前实现覆盖常见扁平配置和一级 section，不尝试完整替代 YAML/TOML 标准解析器。</p>
+      <p className="tool-note">当前实现覆盖常见扁平配置、嵌套路径和一级 section，不尝试完整替代 YAML/TOML 标准解析器。</p>
       {error ? <p className="tool-error">{error}</p> : null}
     </section>
   );
