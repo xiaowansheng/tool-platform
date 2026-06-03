@@ -131,6 +131,9 @@ importers:
       '@tool-platform/adr-generator':
         specifier: workspace:*
         version: link:../../tools/adr-generator
+      '@tool-platform/age-calculator':
+        specifier: workspace:*
+        version: link:../../tools/age-calculator
       '@tool-platform/ai-brief-synthesizer':
         specifier: workspace:*
         version: link:../../tools/ai-brief-synthesizer
@@ -167,6 +170,9 @@ importers:
       '@tool-platform/audio-tone-generator':
         specifier: workspace:*
         version: link:../../tools/audio-tone-generator
+      '@tool-platform/audio-waveform-visualizer':
+        specifier: workspace:*
+        version: link:../../tools/audio-waveform-visualizer
       '@tool-platform/base64-studio':
         specifier: workspace:*
         version: link:../../tools/base64-studio
@@ -236,6 +242,9 @@ importers:
       '@tool-platform/cookie-parser':
         specifier: workspace:*
         version: link:../../tools/cookie-parser
+      '@tool-platform/coordinate-converter':
+        specifier: workspace:*
+        version: link:../../tools/coordinate-converter
       '@tool-platform/cors-diagnostics':
         specifier: workspace:*
         version: link:../../tools/cors-diagnostics
@@ -245,9 +254,15 @@ importers:
       '@tool-platform/csp-generator':
         specifier: workspace:*
         version: link:../../tools/csp-generator
+      '@tool-platform/csr-generator':
+        specifier: workspace:*
+        version: link:../../tools/csr-generator
       '@tool-platform/css-color-picker':
         specifier: workspace:*
         version: link:../../tools/css-color-picker
+      '@tool-platform/css-gradient-generator':
+        specifier: workspace:*
+        version: link:../../tools/css-gradient-generator
       '@tool-platform/css-grid-generator':
         specifier: workspace:*
         version: link:../../tools/css-grid-generator
@@ -272,6 +287,9 @@ importers:
       '@tool-platform/data-url-generator':
         specifier: workspace:*
         version: link:../../tools/data-url-generator
+      '@tool-platform/date-difference-calculator':
+        specifier: workspace:*
+        version: link:../../tools/date-difference-calculator
       '@tool-platform/db-connection-string-workbench':
         specifier: workspace:*
         version: link:../../tools/db-connection-string-workbench
@@ -335,6 +353,9 @@ importers:
       '@tool-platform/file-name-batch-renamer':
         specifier: workspace:*
         version: link:../../tools/file-name-batch-renamer
+      '@tool-platform/file-size-converter':
+        specifier: workspace:*
+        version: link:../../tools/file-size-converter
       '@tool-platform/flashcard-cloze-builder':
         specifier: workspace:*
         version: link:../../tools/flashcard-cloze-builder
@@ -344,9 +365,15 @@ importers:
       '@tool-platform/font-scale-generator':
         specifier: workspace:*
         version: link:../../tools/font-scale-generator
+      '@tool-platform/fraction-calculator':
+        specifier: workspace:*
+        version: link:../../tools/fraction-calculator
       '@tool-platform/game-2048':
         specifier: workspace:*
         version: link:../../tools/game-2048
+      '@tool-platform/gif-splitter':
+        specifier: workspace:*
+        version: link:../../tools/gif-splitter
       '@tool-platform/git-bisect-planner':
         specifier: workspace:*
         version: link:../../tools/git-bisect-planner
@@ -380,6 +407,9 @@ importers:
       '@tool-platform/helm-values-diff':
         specifier: workspace:*
         version: link:../../tools/helm-values-diff
+      '@tool-platform/hex-string-converter':
+        specifier: workspace:*
+        version: link:../../tools/hex-string-converter
       '@tool-platform/hmac-generator':
         specifier: workspace:*
         version: link:../../tools/hmac-generator
@@ -404,15 +434,30 @@ importers:
       '@tool-platform/http-status-reference':
         specifier: workspace:*
         version: link:../../tools/http-status-reference
+      '@tool-platform/image-base64':
+        specifier: workspace:*
+        version: link:../../tools/image-base64
       '@tool-platform/image-compressor':
         specifier: workspace:*
         version: link:../../tools/image-compressor
+      '@tool-platform/image-cropper':
+        specifier: workspace:*
+        version: link:../../tools/image-cropper
+      '@tool-platform/image-format-converter':
+        specifier: workspace:*
+        version: link:../../tools/image-format-converter
       '@tool-platform/image-ocr-preprocessor':
         specifier: workspace:*
         version: link:../../tools/image-ocr-preprocessor
+      '@tool-platform/image-spec-viewer':
+        specifier: workspace:*
+        version: link:../../tools/image-spec-viewer
       '@tool-platform/image-splitter':
         specifier: workspace:*
         version: link:../../tools/image-splitter
+      '@tool-platform/image-stitcher':
+        specifier: workspace:*
+        version: link:../../tools/image-stitcher
       '@tool-platform/image-watermark':
         specifier: workspace:*
         version: link:../../tools/image-watermark
@@ -494,6 +539,9 @@ importers:
       '@tool-platform/media-device-permission-lab':
         specifier: workspace:*
         version: link:../../tools/media-device-permission-lab
+      '@tool-platform/meeting-cost-calculator':
+        specifier: workspace:*
+        version: link:../../tools/meeting-cost-calculator
       '@tool-platform/memory-match':
         specifier: workspace:*
         version: link:../../tools/memory-match
@@ -545,6 +593,9 @@ importers:
       '@tool-platform/otp-generator':
         specifier: workspace:*
         version: link:../../tools/otp-generator
+      '@tool-platform/paper-size-reference':
+        specifier: workspace:*
+        version: link:../../tools/paper-size-reference
       '@tool-platform/parquet-arrow-preview':
         specifier: workspace:*
         version: link:../../tools/parquet-arrow-preview
@@ -587,6 +638,9 @@ importers:
       '@tool-platform/prometheus-query-helper':
         specifier: workspace:*
         version: link:../../tools/prometheus-query-helper
+      '@tool-platform/punycode-converter':
+        specifier: workspace:*
+        version: link:../../tools/punycode-converter
       '@tool-platform/python-playground':
         specifier: workspace:*
         version: link:../../tools/python-playground
@@ -662,6 +716,9 @@ importers:
       '@tool-platform/social-caption-hashtag-formatter':
         specifier: workspace:*
         version: link:../../tools/social-caption-hashtag-formatter
+      '@tool-platform/social-character-counter':
+        specifier: workspace:*
+        version: link:../../tools/social-character-counter
       '@tool-platform/social-post-scheduler':
         specifier: workspace:*
         version: link:../../tools/social-post-scheduler
@@ -791,6 +848,15 @@ importers:
       '@tool-platform/websocket-client':
         specifier: workspace:*
         version: link:../../tools/websocket-client
+      '@tool-platform/word-counter':
+        specifier: workspace:*
+        version: link:../../tools/word-counter
+      '@tool-platform/world-clock':
+        specifier: workspace:*
+        version: link:../../tools/world-clock
+      '@tool-platform/xml-formatter':
+        specifier: workspace:*
+        version: link:../../tools/xml-formatter
       '@tool-platform/yaml-json-toml-converter':
         specifier: workspace:*
         version: link:../../tools/yaml-json-toml-converter
@@ -816,6 +882,15 @@ importers:
         version: 19.2.6
 
   tools/adr-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/age-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -936,6 +1011,15 @@ importers:
         version: 19.2.6
 
   tools/audio-tone-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/audio-waveform-visualizer:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1157,6 +1241,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/coordinate-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/cors-diagnostics:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1184,7 +1277,25 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/csr-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/css-color-picker:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/css-gradient-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1257,6 +1368,15 @@ importers:
         version: 19.2.6
 
   tools/data-url-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/date-difference-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1454,6 +1574,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/file-size-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/flashcard-cloze-builder:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1481,7 +1610,25 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/fraction-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/game-2048:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/gif-splitter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1589,6 +1736,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/hex-string-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/hmac-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1661,7 +1817,34 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/image-base64:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/image-compressor:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/image-cropper:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/image-format-converter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1679,7 +1862,25 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/image-spec-viewer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/image-splitter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/image-stitcher:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1931,6 +2132,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/meeting-cost-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/memory-match:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2084,6 +2294,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/paper-size-reference:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/parquet-arrow-preview:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2202,6 +2421,15 @@ importers:
         version: 19.2.6
 
   tools/prometheus-query-helper:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/punycode-converter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2433,6 +2661,15 @@ importers:
         version: 19.2.6
 
   tools/social-caption-hashtag-formatter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/social-character-counter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2826,6 +3063,33 @@ importers:
         version: 19.2.6
 
   tools/websocket-client:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/word-counter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/world-clock:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/xml-formatter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

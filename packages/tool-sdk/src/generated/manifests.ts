@@ -1,5 +1,6 @@
 import AccessLogParserManifest from "@tool-platform/access-log-parser/manifest";
 import AdrGeneratorManifest from "@tool-platform/adr-generator/manifest";
+import AgeCalculatorManifest from "@tool-platform/age-calculator/manifest";
 import AiBriefSynthesizerManifest from "@tool-platform/ai-brief-synthesizer/manifest";
 import AiChatManifest from "@tool-platform/ai-chat/manifest";
 import AiSandboxLabManifest from "@tool-platform/ai-sandbox-lab/manifest";
@@ -12,6 +13,7 @@ import AsciiArtManifest from "@tool-platform/ascii-art/manifest";
 import AsciiBinaryConverterManifest from "@tool-platform/ascii-binary-converter/manifest";
 import AspectRatioCalculatorManifest from "@tool-platform/aspect-ratio-calculator/manifest";
 import AudioToneGeneratorManifest from "@tool-platform/audio-tone-generator/manifest";
+import AudioWaveformVisualizerManifest from "@tool-platform/audio-waveform-visualizer/manifest";
 import Base64StudioManifest from "@tool-platform/base64-studio/manifest";
 import BasicAuthGeneratorManifest from "@tool-platform/basic-auth-generator/manifest";
 import BatchFileHashCalculatorManifest from "@tool-platform/batch-file-hash-calculator/manifest";
@@ -35,10 +37,13 @@ import ColorHarmoniesGeneratorManifest from "@tool-platform/color-harmonies-gene
 import ColorPaletteGeneratorManifest from "@tool-platform/color-palette-generator/manifest";
 import ConventionalCommitHelperManifest from "@tool-platform/conventional-commit-helper/manifest";
 import CookieParserManifest from "@tool-platform/cookie-parser/manifest";
+import CoordinateConverterManifest from "@tool-platform/coordinate-converter/manifest";
 import CorsDiagnosticsManifest from "@tool-platform/cors-diagnostics/manifest";
 import CronHelperManifest from "@tool-platform/cron-helper/manifest";
 import CspGeneratorManifest from "@tool-platform/csp-generator/manifest";
+import CsrGeneratorManifest from "@tool-platform/csr-generator/manifest";
 import CssColorPickerManifest from "@tool-platform/css-color-picker/manifest";
+import CssGradientGeneratorManifest from "@tool-platform/css-gradient-generator/manifest";
 import CssGridGeneratorManifest from "@tool-platform/css-grid-generator/manifest";
 import CssSpecificityCalculatorManifest from "@tool-platform/css-specificity-calculator/manifest";
 import CsvCleanerManifest from "@tool-platform/csv-cleaner/manifest";
@@ -47,6 +52,7 @@ import CsvProfileWorkerManifest from "@tool-platform/csv-profile-worker/manifest
 import CurlBuilderManifest from "@tool-platform/curl-builder/manifest";
 import CvssCalculatorManifest from "@tool-platform/cvss-calculator/manifest";
 import DataUrlGeneratorManifest from "@tool-platform/data-url-generator/manifest";
+import DateDifferenceCalculatorManifest from "@tool-platform/date-difference-calculator/manifest";
 import DbConnectionStringWorkbenchManifest from "@tool-platform/db-connection-string-workbench/manifest";
 import DecisionWheelManifest from "@tool-platform/decision-wheel/manifest";
 import DependencyRiskExplainerManifest from "@tool-platform/dependency-risk-explainer/manifest";
@@ -68,10 +74,13 @@ import FaviconAppIconGeneratorManifest from "@tool-platform/favicon-app-icon-gen
 import FfmpegEditorManifest from "@tool-platform/ffmpeg-editor/manifest";
 import FileManifestGeneratorManifest from "@tool-platform/file-manifest-generator/manifest";
 import FileNameBatchRenamerManifest from "@tool-platform/file-name-batch-renamer/manifest";
+import FileSizeConverterManifest from "@tool-platform/file-size-converter/manifest";
 import FlashcardClozeBuilderManifest from "@tool-platform/flashcard-cloze-builder/manifest";
 import FlexboxGeneratorManifest from "@tool-platform/flexbox-generator/manifest";
 import FontScaleGeneratorManifest from "@tool-platform/font-scale-generator/manifest";
+import FractionCalculatorManifest from "@tool-platform/fraction-calculator/manifest";
 import Game2048Manifest from "@tool-platform/game-2048/manifest";
+import GifSplitterManifest from "@tool-platform/gif-splitter/manifest";
 import GitBisectPlannerManifest from "@tool-platform/git-bisect-planner/manifest";
 import GitPatchSecurityReviewerManifest from "@tool-platform/git-patch-security-reviewer/manifest";
 import GitignoreGeneratorManifest from "@tool-platform/gitignore-generator/manifest";
@@ -83,6 +92,7 @@ import GraphqlWorkbenchManifest from "@tool-platform/graphql-workbench/manifest"
 import HarViewerManifest from "@tool-platform/har-viewer/manifest";
 import HashGeneratorManifest from "@tool-platform/hash-generator/manifest";
 import HelmValuesDiffManifest from "@tool-platform/helm-values-diff/manifest";
+import HexStringConverterManifest from "@tool-platform/hex-string-converter/manifest";
 import HmacGeneratorManifest from "@tool-platform/hmac-generator/manifest";
 import HoroscopeCalculatorManifest from "@tool-platform/horoscope-calculator/manifest";
 import HtaccessToNginxManifest from "@tool-platform/htaccess-to-nginx/manifest";
@@ -91,9 +101,14 @@ import HtmlEntityCodecManifest from "@tool-platform/html-entity-codec/manifest";
 import HttpHeaderParserManifest from "@tool-platform/http-header-parser/manifest";
 import HttpSecurityHeadersCheckerManifest from "@tool-platform/http-security-headers-checker/manifest";
 import HttpStatusReferenceManifest from "@tool-platform/http-status-reference/manifest";
+import ImageBase64Manifest from "@tool-platform/image-base64/manifest";
 import ImageCompressorManifest from "@tool-platform/image-compressor/manifest";
+import ImageCropperManifest from "@tool-platform/image-cropper/manifest";
+import ImageFormatConverterManifest from "@tool-platform/image-format-converter/manifest";
 import ImageOcrPreprocessorManifest from "@tool-platform/image-ocr-preprocessor/manifest";
+import ImageSpecViewerManifest from "@tool-platform/image-spec-viewer/manifest";
 import ImageSplitterManifest from "@tool-platform/image-splitter/manifest";
+import ImageStitcherManifest from "@tool-platform/image-stitcher/manifest";
 import ImageWatermarkManifest from "@tool-platform/image-watermark/manifest";
 import IncidentTimelineGeneratorManifest from "@tool-platform/incident-timeline-generator/manifest";
 import Ipv4CidrCalculatorManifest from "@tool-platform/ipv4-cidr-calculator/manifest";
@@ -121,6 +136,7 @@ import MarkdownLinterManifest from "@tool-platform/markdown-linter/manifest";
 import MarkdownPreviewManifest from "@tool-platform/markdown-preview/manifest";
 import MarkdownTableGeneratorManifest from "@tool-platform/markdown-table-generator/manifest";
 import MediaDevicePermissionLabManifest from "@tool-platform/media-device-permission-lab/manifest";
+import MeetingCostCalculatorManifest from "@tool-platform/meeting-cost-calculator/manifest";
 import MemoryMatchManifest from "@tool-platform/memory-match/manifest";
 import MermaidPreviewFormatterManifest from "@tool-platform/mermaid-preview-formatter/manifest";
 import MetaTagsSeoPreviewManifest from "@tool-platform/meta-tags-seo-preview/manifest";
@@ -138,6 +154,7 @@ import OauthOidcDebuggerManifest from "@tool-platform/oauth-oidc-debugger/manife
 import OpenapiWorkbenchManifest from "@tool-platform/openapi-workbench/manifest";
 import OpentelemetryTraceViewerManifest from "@tool-platform/opentelemetry-trace-viewer/manifest";
 import OtpGeneratorManifest from "@tool-platform/otp-generator/manifest";
+import PaperSizeReferenceManifest from "@tool-platform/paper-size-reference/manifest";
 import ParquetArrowPreviewManifest from "@tool-platform/parquet-arrow-preview/manifest";
 import PasswordGeneratorManifest from "@tool-platform/password-generator/manifest";
 import PasswordStrengthAnalyzerManifest from "@tool-platform/password-strength-analyzer/manifest";
@@ -152,6 +169,7 @@ import PomodoroFocusTimerManifest from "@tool-platform/pomodoro-focus-timer/mani
 import PortReferenceManifest from "@tool-platform/port-reference/manifest";
 import PrivacyCookieCopyGeneratorManifest from "@tool-platform/privacy-cookie-copy-generator/manifest";
 import PrometheusQueryHelperManifest from "@tool-platform/prometheus-query-helper/manifest";
+import PunycodeConverterManifest from "@tool-platform/punycode-converter/manifest";
 import PythonPlaygroundManifest from "@tool-platform/python-playground/manifest";
 import QrBarcodeToolManifest from "@tool-platform/qr-barcode-tool/manifest";
 import QueryParamBuilderManifest from "@tool-platform/query-param-builder/manifest";
@@ -177,6 +195,7 @@ import SkuGeneratorManifest from "@tool-platform/sku-generator/manifest";
 import SloErrorBudgetCalculatorManifest from "@tool-platform/slo-error-budget-calculator/manifest";
 import SlugGeneratorManifest from "@tool-platform/slug-generator/manifest";
 import SocialCaptionHashtagFormatterManifest from "@tool-platform/social-caption-hashtag-formatter/manifest";
+import SocialCharacterCounterManifest from "@tool-platform/social-character-counter/manifest";
 import SocialPostSchedulerManifest from "@tool-platform/social-post-scheduler/manifest";
 import SourceMapExplorerManifest from "@tool-platform/source-map-explorer/manifest";
 import SpacedRepetitionPlannerManifest from "@tool-platform/spaced-repetition-planner/manifest";
@@ -219,6 +238,9 @@ import WavAudioInspectorManifest from "@tool-platform/wav-audio-inspector/manife
 import WebgpuCapabilityReporterManifest from "@tool-platform/webgpu-capability-reporter/manifest";
 import WebhookSignatureVerifierManifest from "@tool-platform/webhook-signature-verifier/manifest";
 import WebsocketClientManifest from "@tool-platform/websocket-client/manifest";
+import WordCounterManifest from "@tool-platform/word-counter/manifest";
+import WorldClockManifest from "@tool-platform/world-clock/manifest";
+import XmlFormatterManifest from "@tool-platform/xml-formatter/manifest";
 import YamlJsonTomlConverterManifest from "@tool-platform/yaml-json-toml-converter/manifest";
 
 import type { ToolManifest } from "../types";
@@ -226,6 +248,7 @@ import type { ToolManifest } from "../types";
 export const toolManifests: ToolManifest[] = [
   AccessLogParserManifest,
   AdrGeneratorManifest,
+  AgeCalculatorManifest,
   AiBriefSynthesizerManifest,
   AiChatManifest,
   AiSandboxLabManifest,
@@ -238,6 +261,7 @@ export const toolManifests: ToolManifest[] = [
   AsciiBinaryConverterManifest,
   AspectRatioCalculatorManifest,
   AudioToneGeneratorManifest,
+  AudioWaveformVisualizerManifest,
   Base64StudioManifest,
   BasicAuthGeneratorManifest,
   BatchFileHashCalculatorManifest,
@@ -261,10 +285,13 @@ export const toolManifests: ToolManifest[] = [
   ColorPaletteGeneratorManifest,
   ConventionalCommitHelperManifest,
   CookieParserManifest,
+  CoordinateConverterManifest,
   CorsDiagnosticsManifest,
   CronHelperManifest,
   CspGeneratorManifest,
+  CsrGeneratorManifest,
   CssColorPickerManifest,
+  CssGradientGeneratorManifest,
   CssGridGeneratorManifest,
   CssSpecificityCalculatorManifest,
   CsvCleanerManifest,
@@ -273,6 +300,7 @@ export const toolManifests: ToolManifest[] = [
   CurlBuilderManifest,
   CvssCalculatorManifest,
   DataUrlGeneratorManifest,
+  DateDifferenceCalculatorManifest,
   DbConnectionStringWorkbenchManifest,
   DecisionWheelManifest,
   DependencyRiskExplainerManifest,
@@ -294,10 +322,13 @@ export const toolManifests: ToolManifest[] = [
   FfmpegEditorManifest,
   FileManifestGeneratorManifest,
   FileNameBatchRenamerManifest,
+  FileSizeConverterManifest,
   FlashcardClozeBuilderManifest,
   FlexboxGeneratorManifest,
   FontScaleGeneratorManifest,
+  FractionCalculatorManifest,
   Game2048Manifest,
+  GifSplitterManifest,
   GitBisectPlannerManifest,
   GitPatchSecurityReviewerManifest,
   GitignoreGeneratorManifest,
@@ -309,6 +340,7 @@ export const toolManifests: ToolManifest[] = [
   HarViewerManifest,
   HashGeneratorManifest,
   HelmValuesDiffManifest,
+  HexStringConverterManifest,
   HmacGeneratorManifest,
   HoroscopeCalculatorManifest,
   HtaccessToNginxManifest,
@@ -317,9 +349,14 @@ export const toolManifests: ToolManifest[] = [
   HttpHeaderParserManifest,
   HttpSecurityHeadersCheckerManifest,
   HttpStatusReferenceManifest,
+  ImageBase64Manifest,
   ImageCompressorManifest,
+  ImageCropperManifest,
+  ImageFormatConverterManifest,
   ImageOcrPreprocessorManifest,
+  ImageSpecViewerManifest,
   ImageSplitterManifest,
+  ImageStitcherManifest,
   ImageWatermarkManifest,
   IncidentTimelineGeneratorManifest,
   Ipv4CidrCalculatorManifest,
@@ -347,6 +384,7 @@ export const toolManifests: ToolManifest[] = [
   MarkdownPreviewManifest,
   MarkdownTableGeneratorManifest,
   MediaDevicePermissionLabManifest,
+  MeetingCostCalculatorManifest,
   MemoryMatchManifest,
   MermaidPreviewFormatterManifest,
   MetaTagsSeoPreviewManifest,
@@ -364,6 +402,7 @@ export const toolManifests: ToolManifest[] = [
   OpenapiWorkbenchManifest,
   OpentelemetryTraceViewerManifest,
   OtpGeneratorManifest,
+  PaperSizeReferenceManifest,
   ParquetArrowPreviewManifest,
   PasswordGeneratorManifest,
   PasswordStrengthAnalyzerManifest,
@@ -378,6 +417,7 @@ export const toolManifests: ToolManifest[] = [
   PortReferenceManifest,
   PrivacyCookieCopyGeneratorManifest,
   PrometheusQueryHelperManifest,
+  PunycodeConverterManifest,
   PythonPlaygroundManifest,
   QrBarcodeToolManifest,
   QueryParamBuilderManifest,
@@ -403,6 +443,7 @@ export const toolManifests: ToolManifest[] = [
   SloErrorBudgetCalculatorManifest,
   SlugGeneratorManifest,
   SocialCaptionHashtagFormatterManifest,
+  SocialCharacterCounterManifest,
   SocialPostSchedulerManifest,
   SourceMapExplorerManifest,
   SpacedRepetitionPlannerManifest,
@@ -445,5 +486,8 @@ export const toolManifests: ToolManifest[] = [
   WebgpuCapabilityReporterManifest,
   WebhookSignatureVerifierManifest,
   WebsocketClientManifest,
+  WordCounterManifest,
+  WorldClockManifest,
+  XmlFormatterManifest,
   YamlJsonTomlConverterManifest
 ];

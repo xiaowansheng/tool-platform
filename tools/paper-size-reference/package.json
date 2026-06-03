@@ -1,0 +1,16 @@
+{
+  "name": "@tool-platform/paper-size-reference",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manifest": "./manifest.ts",
+    "./app": "./app.tsx"
+  },
+  "dependencies": {
+    "@tool-platform/tool-contracts": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}
