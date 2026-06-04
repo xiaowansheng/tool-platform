@@ -51,6 +51,8 @@ import CsvJsonNdjsonConverterManifest from "@tool-platform/csv-json-ndjson-conve
 import CsvProfileWorkerManifest from "@tool-platform/csv-profile-worker/manifest";
 import CurlBuilderManifest from "@tool-platform/curl-builder/manifest";
 import CvssCalculatorManifest from "@tool-platform/cvss-calculator/manifest";
+import CyberFlyerManifest from "@tool-platform/cyber-flyer/manifest";
+import CyberSynthMatrixManifest from "@tool-platform/cyber-synth-matrix/manifest";
 import DataUrlGeneratorManifest from "@tool-platform/data-url-generator/manifest";
 import DateDifferenceCalculatorManifest from "@tool-platform/date-difference-calculator/manifest";
 import DbConnectionStringWorkbenchManifest from "@tool-platform/db-connection-string-workbench/manifest";
@@ -138,6 +140,7 @@ import MeetingCostCalculatorManifest from "@tool-platform/meeting-cost-calculato
 import MemoryMatchManifest from "@tool-platform/memory-match/manifest";
 import MermaidPreviewFormatterManifest from "@tool-platform/mermaid-preview-formatter/manifest";
 import MetaTagsSeoPreviewManifest from "@tool-platform/meta-tags-seo-preview/manifest";
+import MetronomeManifest from "@tool-platform/metronome/manifest";
 import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
 import MinesweeperManifest from "@tool-platform/minesweeper/manifest";
 import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manifest";
@@ -291,6 +294,8 @@ export const toolManifests: ToolManifest[] = [
   CsvProfileWorkerManifest,
   CurlBuilderManifest,
   CvssCalculatorManifest,
+  CyberFlyerManifest,
+  CyberSynthMatrixManifest,
   DataUrlGeneratorManifest,
   DateDifferenceCalculatorManifest,
   DbConnectionStringWorkbenchManifest,
@@ -378,6 +383,7 @@ export const toolManifests: ToolManifest[] = [
   MemoryMatchManifest,
   MermaidPreviewFormatterManifest,
   MetaTagsSeoPreviewManifest,
+  MetronomeManifest,
   MimeTypeLookupManifest,
   MinesweeperManifest,
   MockDataGeneratorManifest,
