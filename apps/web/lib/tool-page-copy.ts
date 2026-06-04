@@ -196,6 +196,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["为测试 JSON 数组生成一批唯一 id。", "给本地 demo 数据快速补齐对象主键。"]
   },
+  "color-studio": {
+    name: "色彩工坊",
+    description: "一站式色彩工具箱，提供颜色转换、取色、色盘/配色生成、图片颜色提取与渐变色工具。",
+    intro: "集成式的色彩工坊，支持在取色器、格式转换、对比度检查、配色方案等多个选项卡之间共享当前的活跃颜色，提供无缝的设计工作流。",
+    steps: [
+      "在取色器或格式转换中选定一个颜色，作为活跃颜色。",
+      "切换至色阶、配色或色盲模拟，可看到基于该基色自动计算出的所有相关颜色。",
+      "在对比度或图片颜色提取中，可进一步设计对比度和提取图片色，点击色块即可复制 HEX 色值并将其设为当前活跃颜色。"
+    ],
+    examples: ["为设计系统生成一组和谐 of 品牌配色方案。", "校验文字与背景色在 WCAG 标准下的对比度是否达标。", "从产品实物图中提取主色作为主题色彩。"]
+  },
   "color-converter": {
     name: "颜色转换器",
     description: "转换 HEX、RGB 和 HSL 表示，并实时预览颜色。",
@@ -218,16 +229,16 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["把 `user profile URL` 转成 `userProfileUrl`。", "把接口字段名快速转成 CONSTANT_CASE 环境变量名。"]
   },
-  "csv-json-ndjson-converter": {
-    name: "CSV / JSON / NDJSON 转换器",
-    description: "在 CSV、JSON 数组和 NDJSON 流之间互转，保留列名和对象字段，支持统计数据实时预览。",
-    intro: "支持 CSV、JSON 和 NDJSON 三种格式互转。CSV 解析支持引号和换行，JSON 支持对象数组和嵌套对象，NDJSON 支持逐行流式数据。",
+  "converter-studio": {
+    name: "转换工坊",
+    description: "一站式代码与数据格式转换工坊，支持 YAML/JSON/TOML 互转、CSV/JSON/NDJSON 互转、JSON 转 TS/Go/SQL、SQL 转 Go Struct、SVG 转 JSX、Markdown 互转 HTML 以及 htaccess 转 Nginx 重写规则。",
+    intro: "集成式的代码与数据转换工坊，支持在多个选项卡（如 YAML/JSON/TOML、CSV/JSON/NDJSON、JSON/SQL 互转等）之间共享当前的输入文本，实现高效无缝的开发与格式转换流。",
     steps: [
-      "在输入区域粘贴源数据，选择输入格式。",
-      "选择目标格式。",
-      "点击转换按钮，检查行数列数统计和转换结果，再复制输出。"
+      "在一个选项卡中粘贴您的源数据（如 JSON 结构），它将自动保存为当前活跃文本。",
+      "切换到其它相关的转换选项卡，直接查看在该活跃文本下自动计算/生成的数据或代码定义。",
+      "点击复制按钮可以一键获取转换结果。在特定选项卡中加载示例可以快速体验其转换能力。"
     ],
-    examples: ["把产品清单 CSV 转成前端 mock JSON。", "把日志 NDJSON 流转成 CSV 便于分析。", "在 JSON 和 NDJSON 之间互转。"]
+    examples: ["将一段 API 响应 JSON 数据无缝转换为 TS 接口和 Go Struct 结构体。", "将 CSV 数据表格转换为 JSON 数组，然后快速导出为 YAML 配置文件。", "将 Apache 重写配置转换为 Nginx 等效规则，或将 SVG 矢量图直接转化为 React SVG 组件。"]
   },
   "csv-profile-worker": {
     name: "CSV 数据画像工具",
@@ -1239,16 +1250,16 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     examples: ["部署前合并多个环境配置。", "从生产 .env 生成不含值的示例配置。"]
   },
 
-  "exif-metadata-tool": {
-    name: "EXIF 元数据工具",
-    description: "查看 JPEG EXIF 和 PNG 文本元数据，并生成移除元数据后的图片文件。",
-    intro: "上传图片查看 EXIF 元数据，包括相机、GPS、日期等信息，并生成清理后的版本。",
+  "image-studio": {
+    name: "图片工坊",
+    description: "一站式图片处理工坊，提供规格参数查看、EXIF元数据清理、自由裁剪、水印防盗、尺寸压缩、格式转换、九宫格切图与多图拼接。",
+    intro: "集成式的图片处理工坊，支持在裁剪、水印、压缩、格式转换、网格切图等多个选项卡之间共享当前的活跃图片，提供无缝的设计与优化工作流。",
     steps: [
-      "上传 JPEG 或 PNG 图片。",
-      "查看 EXIF 和元数据信息。",
-      "下载移除元数据后的图片文件。"
+      "在任何选项卡中上传一张图片，它将自动作为当前活跃图片。",
+      "切换至信息、裁剪、水印、压缩或格式转换选项卡，可直接处理该活跃图片而无需重复上传。",
+      "在长图拼接或GIF拆帧等特化选项卡中，您也可以一键导入活跃图片，或单独上传其他图片进行处理。"
     ],
-    examples: ["上传前检查图片是否包含 GPS 位置。", "批量清理图片中的拍摄信息。"]
+    examples: ["快速压缩网页图片大小并转换为 WebP 格式。", "为图片添加防盗水印，并清除包含隐私的 GPS EXIF 信息。", "裁剪正方形图片并进行九宫格切片，用于社交媒体发布。"]
   },
   "favicon-app-icon-generator": {
     name: "Favicon / App Icon 生成器",
@@ -1404,17 +1415,7 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["快速验证组件布局和样式效果。", "测试 JavaScript 交互逻辑的运行时行为。"]
   },
-  "image-compressor": {
-    name: "图片压缩器",
-    description: "在浏览器本地压缩图片，支持尺寸限制、JPEG/WebP/PNG 输出和压缩率预览。",
-    intro: "上传图片，在浏览器中本地压缩，选择输出格式和质量，实时查看压缩效果。",
-    steps: [
-      "上传需要压缩的图片。",
-      "调整质量参数和输出格式（JPEG/WebP/PNG）。",
-      "对比压缩前后大小，下载压缩后的图片。"
-    ],
-    examples: ["为网页优化 JPEG 图片大小。", "将图片转为 WebP 格式提升加载速度。"]
-  },
+
   "image-ocr-preprocessor": {
     name: "图片 OCR 预处理器",
     description: "在本地用 canvas 对图片做灰度、阈值、对比度、反色和缩放预处理，导出更适合 OCR 的 PNG。",
@@ -2211,6 +2212,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "chmod-calculator": "Chmod 计算器",
   "color-blindness-simulator": "色盲模拟器",
   "color-contrast-checker": "色彩对比度检查器",
+  "color-studio": "色彩工坊",
   "color-converter": "颜色格式转换器",
   "color-extractor": "颜色提取器",
   "color-harmonies-generator": "配色方案生成器",
@@ -2224,7 +2226,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "css-grid-generator": "CSS Grid 生成器",
   "css-specificity-calculator": "CSS 权重计算器",
   "csv-cleaner": "CSV 清洗器",
-  "csv-json-ndjson-converter": "CSV / JSON / NDJSON 转换器",
+
   "csv-profile-worker": "CSV 数据画像工具",
   "curl-builder": "cURL 生成器",
   "cvss-calculator": "CVSS 计算器",
@@ -2245,7 +2247,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "email-template-sandbox-preview": "邮件模板沙箱预览",
   "env-diff-merge-sanitizer": ".env 对比合并脱敏工具",
   "env-parser": "环境变量解析器",
-  "exif-metadata-tool": "EXIF 元数据工具",
+
   "favicon-app-icon-generator": "Favicon / App Icon 生成器",
   "ffmpeg-editor": "FFmpeg 命令编辑器",
   "file-manifest-generator": "文件清单生成器",
@@ -2270,13 +2272,13 @@ const zhToolNameOverrides: Record<string, string> = {
   "http-header-parser": "HTTP 头解析器",
   "http-security-headers-checker": "HTTP 安全头检查器",
   "http-status-reference": "HTTP 状态码参考",
-  "image-compressor": "图片压缩器",
+  "image-studio": "图片工坊",
   "image-ocr-preprocessor": "图片 OCR 预处理器",
   "incident-timeline-generator": "事件时间线生成器",
   "ipv4-cidr-calculator": "IPv4 CIDR 计算器",
   "json-formatter": "JSON 格式化器",
   "json-schema-studio": "JSON Schema 工作台",
-  "json-to-ts": "JSON 转 TypeScript",
+  "converter-studio": "转换工坊",
   "jwt-decoder": "JWT 解码器",
   "jwt-jwk-verifier": "JWT / JWK 验证器",
   "kubernetes-probe-builder": "Kubernetes Probe 生成器",
@@ -2375,22 +2377,17 @@ const zhToolNameOverrides: Record<string, string> = {
   "webgpu-capability-reporter": "WebGPU 能力报告器",
   "webhook-signature-verifier": "Webhook 签名验证器",
   "websocket-client": "WebSocket 客户端",
-  "yaml-json-toml-converter": "YAML / JSON / TOML / Properties 转换器",
+
   "morse-code": "摩尔斯电码转换器",
   "ascii-art": "ASCII 艺术字生成器",
   "code-to-image": "代码美化图片生成器",
-  "markdown-html-converter": "Markdown HTML 互转工具",
-  "image-watermark": "图片防盗水印生成器",
-  "code-beautifier": "代码美化与压缩工具",
-  "json-to-go": "JSON 转 Go Struct 工具",
-  "htaccess-to-nginx": "htaccess 转 Nginx 规则工具",
+
+
   "unicode-converter": "Unicode 编码转换器",
-  "sql-to-go": "SQL 转 Go Struct 工具",
   "chinese-converter": "中文简繁体转换",
   "loan-calculator": "房贷与贷款计算器",
   "text-encoding-converter": "文字编码转换与乱码修复",
-  "placeholder-generator": "占位图片生成器",
-  "image-splitter": "图片九宫格切图工具"
+  "placeholder-generator": "占位图片生成器"
 };
 
 const zhRuntimeLabels: Record<ToolRuntime, string> = {

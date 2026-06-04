@@ -221,27 +221,15 @@ importers:
       '@tool-platform/code-to-image':
         specifier: workspace:*
         version: link:../../tools/code-to-image
-      '@tool-platform/color-blindness-simulator':
+      '@tool-platform/color-studio':
         specifier: workspace:*
-        version: link:../../tools/color-blindness-simulator
-      '@tool-platform/color-contrast-checker':
-        specifier: workspace:*
-        version: link:../../tools/color-contrast-checker
-      '@tool-platform/color-converter':
-        specifier: workspace:*
-        version: link:../../tools/color-converter
-      '@tool-platform/color-extractor':
-        specifier: workspace:*
-        version: link:../../tools/color-extractor
-      '@tool-platform/color-harmonies-generator':
-        specifier: workspace:*
-        version: link:../../tools/color-harmonies-generator
-      '@tool-platform/color-palette-generator':
-        specifier: workspace:*
-        version: link:../../tools/color-palette-generator
+        version: link:../../tools/color-studio
       '@tool-platform/conventional-commit-helper':
         specifier: workspace:*
         version: link:../../tools/conventional-commit-helper
+      '@tool-platform/converter-studio':
+        specifier: workspace:*
+        version: link:../../tools/converter-studio
       '@tool-platform/cookie-parser':
         specifier: workspace:*
         version: link:../../tools/cookie-parser
@@ -260,12 +248,6 @@ importers:
       '@tool-platform/csr-generator':
         specifier: workspace:*
         version: link:../../tools/csr-generator
-      '@tool-platform/css-color-picker':
-        specifier: workspace:*
-        version: link:../../tools/css-color-picker
-      '@tool-platform/css-gradient-generator':
-        specifier: workspace:*
-        version: link:../../tools/css-gradient-generator
       '@tool-platform/css-grid-generator':
         specifier: workspace:*
         version: link:../../tools/css-grid-generator
@@ -275,9 +257,6 @@ importers:
       '@tool-platform/csv-cleaner':
         specifier: workspace:*
         version: link:../../tools/csv-cleaner
-      '@tool-platform/csv-json-ndjson-converter':
-        specifier: workspace:*
-        version: link:../../tools/csv-json-ndjson-converter
       '@tool-platform/csv-profile-worker':
         specifier: workspace:*
         version: link:../../tools/csv-profile-worker
@@ -311,6 +290,9 @@ importers:
       '@tool-platform/dice-roller':
         specifier: workspace:*
         version: link:../../tools/dice-roller
+      '@tool-platform/diff-studio':
+        specifier: workspace:*
+        version: link:../../tools/diff-studio
       '@tool-platform/digital-muyu':
         specifier: workspace:*
         version: link:../../tools/digital-muyu
@@ -350,9 +332,6 @@ importers:
       '@tool-platform/env-parser':
         specifier: workspace:*
         version: link:../../tools/env-parser
-      '@tool-platform/exif-metadata-tool':
-        specifier: workspace:*
-        version: link:../../tools/exif-metadata-tool
       '@tool-platform/favicon-app-icon-generator':
         specifier: workspace:*
         version: link:../../tools/favicon-app-icon-generator
@@ -383,9 +362,6 @@ importers:
       '@tool-platform/game-2048':
         specifier: workspace:*
         version: link:../../tools/game-2048
-      '@tool-platform/gif-splitter':
-        specifier: workspace:*
-        version: link:../../tools/gif-splitter
       '@tool-platform/git-bisect-planner':
         specifier: workspace:*
         version: link:../../tools/git-bisect-planner
@@ -401,9 +377,6 @@ importers:
       '@tool-platform/grade-weight-calculator':
         specifier: workspace:*
         version: link:../../tools/grade-weight-calculator
-      '@tool-platform/gradient-generator':
-        specifier: workspace:*
-        version: link:../../tools/gradient-generator
       '@tool-platform/grafana-dashboard-formatter':
         specifier: workspace:*
         version: link:../../tools/grafana-dashboard-formatter
@@ -428,9 +401,6 @@ importers:
       '@tool-platform/horoscope-calculator':
         specifier: workspace:*
         version: link:../../tools/horoscope-calculator
-      '@tool-platform/htaccess-to-nginx':
-        specifier: workspace:*
-        version: link:../../tools/htaccess-to-nginx
       '@tool-platform/html-css-js-playground':
         specifier: workspace:*
         version: link:../../tools/html-css-js-playground
@@ -449,30 +419,12 @@ importers:
       '@tool-platform/image-base64':
         specifier: workspace:*
         version: link:../../tools/image-base64
-      '@tool-platform/image-compressor':
-        specifier: workspace:*
-        version: link:../../tools/image-compressor
-      '@tool-platform/image-cropper':
-        specifier: workspace:*
-        version: link:../../tools/image-cropper
-      '@tool-platform/image-format-converter':
-        specifier: workspace:*
-        version: link:../../tools/image-format-converter
       '@tool-platform/image-ocr-preprocessor':
         specifier: workspace:*
         version: link:../../tools/image-ocr-preprocessor
-      '@tool-platform/image-spec-viewer':
+      '@tool-platform/image-studio':
         specifier: workspace:*
-        version: link:../../tools/image-spec-viewer
-      '@tool-platform/image-splitter':
-        specifier: workspace:*
-        version: link:../../tools/image-splitter
-      '@tool-platform/image-stitcher':
-        specifier: workspace:*
-        version: link:../../tools/image-stitcher
-      '@tool-platform/image-watermark':
-        specifier: workspace:*
-        version: link:../../tools/image-watermark
+        version: link:../../tools/image-studio
       '@tool-platform/incident-timeline-generator':
         specifier: workspace:*
         version: link:../../tools/incident-timeline-generator
@@ -488,15 +440,6 @@ importers:
       '@tool-platform/json-schema-studio':
         specifier: workspace:*
         version: link:../../tools/json-schema-studio
-      '@tool-platform/json-to-go':
-        specifier: workspace:*
-        version: link:../../tools/json-to-go
-      '@tool-platform/json-to-sql':
-        specifier: workspace:*
-        version: link:../../tools/json-to-sql
-      '@tool-platform/json-to-ts':
-        specifier: workspace:*
-        version: link:../../tools/json-to-ts
       '@tool-platform/jwt-decoder':
         specifier: workspace:*
         version: link:../../tools/jwt-decoder
@@ -536,9 +479,6 @@ importers:
       '@tool-platform/lorem-ipsum-generator':
         specifier: workspace:*
         version: link:../../tools/lorem-ipsum-generator
-      '@tool-platform/markdown-html-converter':
-        specifier: workspace:*
-        version: link:../../tools/markdown-html-converter
       '@tool-platform/markdown-linter':
         specifier: workspace:*
         version: link:../../tools/markdown-linter
@@ -758,9 +698,6 @@ importers:
       '@tool-platform/sql-playground':
         specifier: workspace:*
         version: link:../../tools/sql-playground
-      '@tool-platform/sql-to-go':
-        specifier: workspace:*
-        version: link:../../tools/sql-to-go
       '@tool-platform/stress-relief-box':
         specifier: workspace:*
         version: link:../../tools/stress-relief-box
@@ -776,9 +713,6 @@ importers:
       '@tool-platform/svg-optimizer-viewbox-editor':
         specifier: workspace:*
         version: link:../../tools/svg-optimizer-viewbox-editor
-      '@tool-platform/svg-to-jsx':
-        specifier: workspace:*
-        version: link:../../tools/svg-to-jsx
       '@tool-platform/systemd-unit-analyzer':
         specifier: workspace:*
         version: link:../../tools/systemd-unit-analyzer
@@ -875,9 +809,6 @@ importers:
       '@tool-platform/xml-formatter':
         specifier: workspace:*
         version: link:../../tools/xml-formatter
-      '@tool-platform/yaml-json-toml-converter':
-        specifier: workspace:*
-        version: link:../../tools/yaml-json-toml-converter
       react:
         specifier: ^19.0.0
         version: 19.2.6
@@ -1196,52 +1127,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/color-blindness-simulator:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/color-contrast-checker:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/color-converter:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/color-extractor:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/color-harmonies-generator:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/color-palette-generator:
+  tools/color-studio:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1251,6 +1137,15 @@ importers:
         version: 19.2.6
 
   tools/conventional-commit-helper:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/converter-studio:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1313,24 +1208,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/css-color-picker:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/css-gradient-generator:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/css-grid-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1350,15 +1227,6 @@ importers:
         version: 19.2.6
 
   tools/csv-cleaner:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/csv-json-ndjson-converter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1458,6 +1326,15 @@ importers:
         version: 19.2.6
 
   tools/dice-roller:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/diff-studio:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1583,15 +1460,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/exif-metadata-tool:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/favicon-app-icon-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1682,15 +1550,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/gif-splitter:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/git-bisect-planner:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1728,15 +1587,6 @@ importers:
         version: 19.2.6
 
   tools/grade-weight-calculator:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/gradient-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1817,15 +1667,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/htaccess-to-nginx:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/html-css-js-playground:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1880,33 +1721,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/image-compressor:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/image-cropper:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/image-format-converter:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/image-ocr-preprocessor:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1916,34 +1730,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/image-spec-viewer:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/image-splitter:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/image-stitcher:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/image-watermark:
+  tools/image-studio:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1989,33 +1776,6 @@ importers:
         version: 19.2.6
 
   tools/json-schema-studio:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/json-to-go:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/json-to-sql:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/json-to-ts:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2133,15 +1893,6 @@ importers:
         version: 19.2.6
 
   tools/lorem-ipsum-generator:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/markdown-html-converter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2816,15 +2567,6 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
-  tools/sql-to-go:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
   tools/stress-relief-box:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2862,15 +2604,6 @@ importers:
         version: 19.2.6
 
   tools/svg-optimizer-viewbox-editor:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/svg-to-jsx:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -3162,15 +2895,6 @@ importers:
         version: 19.2.6
 
   tools/xml-formatter:
-    dependencies:
-      '@tool-platform/tool-contracts':
-        specifier: workspace:*
-        version: link:../../packages/tool-contracts
-      react:
-        specifier: ^19.0.0
-        version: 19.2.6
-
-  tools/yaml-json-toml-converter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
