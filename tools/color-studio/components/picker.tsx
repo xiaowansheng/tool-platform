@@ -458,7 +458,7 @@ export default function ColorPickerTab({ activeColor, onChangeColor }: PickerPro
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 20 }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: paletteTab === "css-named" ? "1fr 1fr" : "1fr", gap: "1rem" }}>
               <label className="tool-field">
                 <span>复制格式</span>
                 <select value={format} onChange={(e) => setFormat(e.target.value as ColorFormat)}>

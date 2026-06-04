@@ -70,21 +70,13 @@ export default function ColorStudioTool({ manifest }: ToolAppProps) {
         <span style={{ fontFamily: "monospace", fontWeight: "bold", fontSize: "0.95rem" }}>{activeColor}</span>
       </div>
 
-      <div className="segmented-control" style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "24px", background: "none", padding: 0 }}>
+      <div className="segmented-control">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             type="button"
             className={activeTab === tab.id ? "active" : ""}
             onClick={() => setActiveTab(tab.id)}
-            style={{
-              padding: "8px 16px",
-              borderRadius: "var(--radius-md)",
-              fontSize: "0.85rem",
-              fontWeight: 500,
-              flex: "1 0 auto",
-              textAlign: "center"
-            }}
           >
             {tab.label}
           </button>
