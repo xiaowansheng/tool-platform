@@ -533,12 +533,18 @@ importers:
       '@tool-platform/log-file-analyzer':
         specifier: workspace:*
         version: link:../../tools/log-file-analyzer
+      '@tool-platform/lorem-ipsum-generator':
+        specifier: workspace:*
+        version: link:../../tools/lorem-ipsum-generator
       '@tool-platform/markdown-html-converter':
         specifier: workspace:*
         version: link:../../tools/markdown-html-converter
       '@tool-platform/markdown-linter':
         specifier: workspace:*
         version: link:../../tools/markdown-linter
+      '@tool-platform/markdown-preview':
+        specifier: workspace:*
+        version: link:../../tools/markdown-preview
       '@tool-platform/markdown-table-generator':
         specifier: workspace:*
         version: link:../../tools/markdown-table-generator
@@ -614,6 +620,9 @@ importers:
       '@tool-platform/password-strength-analyzer':
         specifier: workspace:*
         version: link:../../tools/password-strength-analyzer
+      '@tool-platform/pdf-metadata-tool':
+        specifier: workspace:*
+        version: link:../../tools/pdf-metadata-tool
       '@tool-platform/pdf-tools':
         specifier: workspace:*
         version: link:../../tools/pdf-tools
@@ -659,6 +668,12 @@ importers:
       '@tool-platform/random-picker':
         specifier: workspace:*
         version: link:../../tools/random-picker
+      '@tool-platform/random-team-generator':
+        specifier: workspace:*
+        version: link:../../tools/random-team-generator
+      '@tool-platform/readme-badge-generator':
+        specifier: workspace:*
+        version: link:../../tools/readme-badge-generator
       '@tool-platform/readme-quality-checker':
         specifier: workspace:*
         version: link:../../tools/readme-quality-checker
@@ -698,6 +713,9 @@ importers:
       '@tool-platform/scientific-calculator':
         specifier: workspace:*
         version: link:../../tools/scientific-calculator
+      '@tool-platform/secrets-scanner':
+        specifier: workspace:*
+        version: link:../../tools/secrets-scanner
       '@tool-platform/semgrep-rule-playground':
         specifier: workspace:*
         version: link:../../tools/semgrep-rule-playground
@@ -725,6 +743,9 @@ importers:
       '@tool-platform/source-map-explorer':
         specifier: workspace:*
         version: link:../../tools/source-map-explorer
+      '@tool-platform/spaced-repetition-planner':
+        specifier: workspace:*
+        version: link:../../tools/spaced-repetition-planner
       '@tool-platform/sql-explain-visualizer':
         specifier: workspace:*
         version: link:../../tools/sql-explain-visualizer
@@ -2111,6 +2132,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/lorem-ipsum-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/markdown-html-converter:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2121,6 +2151,15 @@ importers:
         version: 19.2.6
 
   tools/markdown-linter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/markdown-preview:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2354,6 +2393,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/pdf-metadata-tool:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/pdf-tools:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2492,6 +2540,24 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/random-team-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/readme-badge-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/readme-quality-checker:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2612,6 +2678,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/secrets-scanner:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/semgrep-rule-playground:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2685,6 +2760,15 @@ importers:
         version: 19.2.6
 
   tools/source-map-explorer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/spaced-repetition-planner:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

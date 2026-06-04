@@ -134,8 +134,10 @@ import ListConverterManifest from "@tool-platform/list-converter/manifest";
 import LiveEventCountdownManifest from "@tool-platform/live-event-countdown/manifest";
 import LoanCalculatorManifest from "@tool-platform/loan-calculator/manifest";
 import LogFileAnalyzerManifest from "@tool-platform/log-file-analyzer/manifest";
+import LoremIpsumGeneratorManifest from "@tool-platform/lorem-ipsum-generator/manifest";
 import MarkdownHtmlConverterManifest from "@tool-platform/markdown-html-converter/manifest";
 import MarkdownLinterManifest from "@tool-platform/markdown-linter/manifest";
+import MarkdownPreviewManifest from "@tool-platform/markdown-preview/manifest";
 import MarkdownTableGeneratorManifest from "@tool-platform/markdown-table-generator/manifest";
 import MediaDevicePermissionLabManifest from "@tool-platform/media-device-permission-lab/manifest";
 import MeetingCostCalculatorManifest from "@tool-platform/meeting-cost-calculator/manifest";
@@ -161,6 +163,7 @@ import PaperSizeReferenceManifest from "@tool-platform/paper-size-reference/mani
 import ParquetArrowPreviewManifest from "@tool-platform/parquet-arrow-preview/manifest";
 import PasswordGeneratorManifest from "@tool-platform/password-generator/manifest";
 import PasswordStrengthAnalyzerManifest from "@tool-platform/password-strength-analyzer/manifest";
+import PdfMetadataToolManifest from "@tool-platform/pdf-metadata-tool/manifest";
 import PdfToolsManifest from "@tool-platform/pdf-tools/manifest";
 import PemJwkToolkitManifest from "@tool-platform/pem-jwk-toolkit/manifest";
 import PercentageCalculatorManifest from "@tool-platform/percentage-calculator/manifest";
@@ -176,6 +179,8 @@ import PythonPlaygroundManifest from "@tool-platform/python-playground/manifest"
 import QrBarcodeToolManifest from "@tool-platform/qr-barcode-tool/manifest";
 import QueryParamBuilderManifest from "@tool-platform/query-param-builder/manifest";
 import RandomPickerManifest from "@tool-platform/random-picker/manifest";
+import RandomTeamGeneratorManifest from "@tool-platform/random-team-generator/manifest";
+import ReadmeBadgeGeneratorManifest from "@tool-platform/readme-badge-generator/manifest";
 import ReadmeQualityCheckerManifest from "@tool-platform/readme-quality-checker/manifest";
 import RegexBatchExtractorManifest from "@tool-platform/regex-batch-extractor/manifest";
 import RegexTesterManifest from "@tool-platform/regex-tester/manifest";
@@ -189,6 +194,7 @@ import RomanNumeralConverterManifest from "@tool-platform/roman-numeral-converte
 import RubyPlaygroundManifest from "@tool-platform/ruby-playground/manifest";
 import SbomViewerManifest from "@tool-platform/sbom-viewer/manifest";
 import ScientificCalculatorManifest from "@tool-platform/scientific-calculator/manifest";
+import SecretsScannerManifest from "@tool-platform/secrets-scanner/manifest";
 import SemgrepRulePlaygroundManifest from "@tool-platform/semgrep-rule-playground/manifest";
 import SitemapXmlGeneratorManifest from "@tool-platform/sitemap-xml-generator/manifest";
 import SkuGeneratorManifest from "@tool-platform/sku-generator/manifest";
@@ -198,6 +204,7 @@ import SocialCaptionHashtagFormatterManifest from "@tool-platform/social-caption
 import SocialCharacterCounterManifest from "@tool-platform/social-character-counter/manifest";
 import SocialPostSchedulerManifest from "@tool-platform/social-post-scheduler/manifest";
 import SourceMapExplorerManifest from "@tool-platform/source-map-explorer/manifest";
+import SpacedRepetitionPlannerManifest from "@tool-platform/spaced-repetition-planner/manifest";
 import SqlExplainVisualizerManifest from "@tool-platform/sql-explain-visualizer/manifest";
 import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
 import SqlIndexAdvisorManifest from "@tool-platform/sql-index-advisor/manifest";
@@ -381,8 +388,10 @@ export const toolManifests: ToolManifest[] = [
   LiveEventCountdownManifest,
   LoanCalculatorManifest,
   LogFileAnalyzerManifest,
+  LoremIpsumGeneratorManifest,
   MarkdownHtmlConverterManifest,
   MarkdownLinterManifest,
+  MarkdownPreviewManifest,
   MarkdownTableGeneratorManifest,
   MediaDevicePermissionLabManifest,
   MeetingCostCalculatorManifest,
@@ -408,6 +417,7 @@ export const toolManifests: ToolManifest[] = [
   ParquetArrowPreviewManifest,
   PasswordGeneratorManifest,
   PasswordStrengthAnalyzerManifest,
+  PdfMetadataToolManifest,
   PdfToolsManifest,
   PemJwkToolkitManifest,
   PercentageCalculatorManifest,
@@ -423,6 +433,8 @@ export const toolManifests: ToolManifest[] = [
   QrBarcodeToolManifest,
   QueryParamBuilderManifest,
   RandomPickerManifest,
+  RandomTeamGeneratorManifest,
+  ReadmeBadgeGeneratorManifest,
   ReadmeQualityCheckerManifest,
   RegexBatchExtractorManifest,
   RegexTesterManifest,
@@ -436,6 +448,7 @@ export const toolManifests: ToolManifest[] = [
   RubyPlaygroundManifest,
   SbomViewerManifest,
   ScientificCalculatorManifest,
+  SecretsScannerManifest,
   SemgrepRulePlaygroundManifest,
   SitemapXmlGeneratorManifest,
   SkuGeneratorManifest,
@@ -445,6 +458,7 @@ export const toolManifests: ToolManifest[] = [
   SocialCharacterCounterManifest,
   SocialPostSchedulerManifest,
   SourceMapExplorerManifest,
+  SpacedRepetitionPlannerManifest,
   SqlExplainVisualizerManifest,
   SqlFormatterManifest,
   SqlIndexAdvisorManifest,
