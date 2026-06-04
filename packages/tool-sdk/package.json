@@ -31,6 +31,7 @@
     "@tool-platform/base64-studio": "workspace:*",
     "@tool-platform/basic-auth-generator": "workspace:*",
     "@tool-platform/batch-file-hash-calculator": "workspace:*",
+    "@tool-platform/beat-analyzer": "workspace:*",
     "@tool-platform/benchmark-builder": "workspace:*",
     "@tool-platform/border-radius-generator": "workspace:*",
     "@tool-platform/box-shadow-generator": "workspace:*",

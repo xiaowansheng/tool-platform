@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "port-reference",
   name: "Port Reference",
   description: "查询常见服务端口，辅助排查网络和部署问题。",
-  category: "discovery-tools",
+  category: "webmaster-tools",
   subCategory: "reference",
   tags: ["port", "network", "tcp", "reference"],
   icon: "ethernet-port",

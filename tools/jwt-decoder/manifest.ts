@@ -4,7 +4,7 @@ const manifest: ToolManifest = {
   id: "jwt-decoder",
   name: "JWT Decoder",
   description: "本地解码 JWT header 与 payload，并标记常见时间声明。",
-  category: "developer-tools",
+  category: "security-tools",
   subCategory: "security",
   tags: ["jwt", "token", "auth", "base64url"],
   icon: "key-round",

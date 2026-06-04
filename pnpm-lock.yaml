@@ -182,6 +182,9 @@ importers:
       '@tool-platform/batch-file-hash-calculator':
         specifier: workspace:*
         version: link:../../tools/batch-file-hash-calculator
+      '@tool-platform/beat-analyzer':
+        specifier: workspace:*
+        version: link:../../tools/beat-analyzer
       '@tool-platform/benchmark-builder':
         specifier: workspace:*
         version: link:../../tools/benchmark-builder
@@ -1032,6 +1035,15 @@ importers:
         version: 19.2.6
 
   tools/batch-file-hash-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/beat-analyzer:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

@@ -28,6 +28,7 @@ export const toolAppLoaders = {
   "base64-studio": () => import("@tool-platform/base64-studio/app"),
   "basic-auth-generator": () => import("@tool-platform/basic-auth-generator/app"),
   "batch-file-hash-calculator": () => import("@tool-platform/batch-file-hash-calculator/app"),
+  "beat-analyzer": () => import("@tool-platform/beat-analyzer/app"),
   "benchmark-builder": () => import("@tool-platform/benchmark-builder/app"),
   "border-radius-generator": () => import("@tool-platform/border-radius-generator/app"),
   "box-shadow-generator": () => import("@tool-platform/box-shadow-generator/app"),

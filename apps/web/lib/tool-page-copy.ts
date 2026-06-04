@@ -923,6 +923,17 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["生成 440Hz 基准音用于音响校准。", "生成 20Hz-20kHz 扫频测试扬声器频响。"]
   },
+  "beat-analyzer": {
+    name: "节拍记录分析器",
+    description: "通过键盘空格键或鼠标点击记录您的敲击节拍，分析节拍间隔与稳定性，并生成节拍分布图表。",
+    intro: "点击记录按钮或按下空格键开始敲击，连续敲击记录多组节拍，结束后系统会生成间隔变化曲线、速度直方图、BPM走势，并多维度分析节拍的规律性与稳定性。",
+    steps: [
+      "点击「开始记录」按钮，或者按下键盘的「空格键」激活记录。",
+      "以你想要的节奏，连续敲击「空格键」或点击「敲击区」。",
+      "敲击完成后点击「停止并分析」，系统将自动计算 BPM 并绘制图表分析规律性。"
+    ],
+    examples: ["测试自己敲击固定节奏（如 120 BPM）的稳定性与误差。", "分析心跳或脉搏的敲击规律性。", "测算歌曲的实际 BPM。"]
+  },
   "batch-file-hash-calculator": {
     name: "批量文件哈希计算器",
     description: "批量计算文件 SHA 摘要，生成校验清单并导出 CSV。",
@@ -2148,6 +2159,7 @@ const zhToolNameOverrides: Record<string, string> = {
   "physical-fitness-calculator": "体测分数计算器",
   "aspect-ratio-calculator": "宽高比计算器",
   "audio-tone-generator": "音频测试音生成器",
+  "beat-analyzer": "节拍记录分析器",
   "base64-studio": "Base64 工具",
   "basic-auth-generator": "Basic Auth 生成器",
   "batch-file-hash-calculator": "批量文件哈希计算器",

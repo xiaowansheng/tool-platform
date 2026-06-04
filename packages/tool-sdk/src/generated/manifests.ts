@@ -17,6 +17,7 @@ import AudioWaveformVisualizerManifest from "@tool-platform/audio-waveform-visua
 import Base64StudioManifest from "@tool-platform/base64-studio/manifest";
 import BasicAuthGeneratorManifest from "@tool-platform/basic-auth-generator/manifest";
 import BatchFileHashCalculatorManifest from "@tool-platform/batch-file-hash-calculator/manifest";
+import BeatAnalyzerManifest from "@tool-platform/beat-analyzer/manifest";
 import BenchmarkBuilderManifest from "@tool-platform/benchmark-builder/manifest";
 import BorderRadiusGeneratorManifest from "@tool-platform/border-radius-generator/manifest";
 import BoxShadowGeneratorManifest from "@tool-platform/box-shadow-generator/manifest";
@@ -260,6 +261,7 @@ export const toolManifests: ToolManifest[] = [
   Base64StudioManifest,
   BasicAuthGeneratorManifest,
   BatchFileHashCalculatorManifest,
+  BeatAnalyzerManifest,
   BenchmarkBuilderManifest,
   BorderRadiusGeneratorManifest,
   BoxShadowGeneratorManifest,
