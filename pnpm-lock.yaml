@@ -311,6 +311,9 @@ importers:
       '@tool-platform/dice-roller':
         specifier: workspace:*
         version: link:../../tools/dice-roller
+      '@tool-platform/digital-muyu':
+        specifier: workspace:*
+        version: link:../../tools/digital-muyu
       '@tool-platform/discount-stack-calculator':
         specifier: workspace:*
         version: link:../../tools/discount-stack-calculator
@@ -671,6 +674,9 @@ importers:
       '@tool-platform/resource-unit-converter':
         specifier: workspace:*
         version: link:../../tools/resource-unit-converter
+      '@tool-platform/retro-arcade':
+        specifier: workspace:*
+        version: link:../../tools/retro-arcade
       '@tool-platform/reverse-proxy-header-analyzer':
         specifier: workspace:*
         version: link:../../tools/reverse-proxy-header-analyzer
@@ -734,6 +740,9 @@ importers:
       '@tool-platform/sql-to-go':
         specifier: workspace:*
         version: link:../../tools/sql-to-go
+      '@tool-platform/stress-relief-box':
+        specifier: workspace:*
+        version: link:../../tools/stress-relief-box
       '@tool-platform/string-obfuscator':
         specifier: workspace:*
         version: link:../../tools/string-obfuscator
@@ -1428,6 +1437,15 @@ importers:
         version: 19.2.6
 
   tools/dice-roller:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/digital-muyu:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2519,6 +2537,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/retro-arcade:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/reverse-proxy-header-analyzer:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2706,6 +2733,15 @@ importers:
         version: 19.2.6
 
   tools/sql-to-go:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/stress-relief-box:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*

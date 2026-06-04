@@ -60,6 +60,7 @@ import DbConnectionStringWorkbenchManifest from "@tool-platform/db-connection-st
 import DecisionWheelManifest from "@tool-platform/decision-wheel/manifest";
 import DependencyRiskExplainerManifest from "@tool-platform/dependency-risk-explainer/manifest";
 import DiceRollerManifest from "@tool-platform/dice-roller/manifest";
+import DigitalMuyuManifest from "@tool-platform/digital-muyu/manifest";
 import DiscountStackCalculatorManifest from "@tool-platform/discount-stack-calculator/manifest";
 import DnsInspectorManifest from "@tool-platform/dns-inspector/manifest";
 import DockerComposeValidatorManifest from "@tool-platform/docker-compose-validator/manifest";
@@ -180,6 +181,7 @@ import RegexBatchExtractorManifest from "@tool-platform/regex-batch-extractor/ma
 import RegexTesterManifest from "@tool-platform/regex-tester/manifest";
 import ReleaseNotesBuilderManifest from "@tool-platform/release-notes-builder/manifest";
 import ResourceUnitConverterManifest from "@tool-platform/resource-unit-converter/manifest";
+import RetroArcadeManifest from "@tool-platform/retro-arcade/manifest";
 import ReverseProxyHeaderAnalyzerManifest from "@tool-platform/reverse-proxy-header-analyzer/manifest";
 import ReversiManifest from "@tool-platform/reversi/manifest";
 import RobotsTxtGeneratorManifest from "@tool-platform/robots-txt-generator/manifest";
@@ -201,6 +203,7 @@ import SqlFormatterManifest from "@tool-platform/sql-formatter/manifest";
 import SqlIndexAdvisorManifest from "@tool-platform/sql-index-advisor/manifest";
 import SqlPlaygroundManifest from "@tool-platform/sql-playground/manifest";
 import SqlToGoManifest from "@tool-platform/sql-to-go/manifest";
+import StressReliefBoxManifest from "@tool-platform/stress-relief-box/manifest";
 import StringObfuscatorManifest from "@tool-platform/string-obfuscator/manifest";
 import StudyPlanSchedulerManifest from "@tool-platform/study-plan-scheduler/manifest";
 import SudokuGameManifest from "@tool-platform/sudoku-game/manifest";
@@ -304,6 +307,7 @@ export const toolManifests: ToolManifest[] = [
   DecisionWheelManifest,
   DependencyRiskExplainerManifest,
   DiceRollerManifest,
+  DigitalMuyuManifest,
   DiscountStackCalculatorManifest,
   DnsInspectorManifest,
   DockerComposeValidatorManifest,
@@ -424,6 +428,7 @@ export const toolManifests: ToolManifest[] = [
   RegexTesterManifest,
   ReleaseNotesBuilderManifest,
   ResourceUnitConverterManifest,
+  RetroArcadeManifest,
   ReverseProxyHeaderAnalyzerManifest,
   ReversiManifest,
   RobotsTxtGeneratorManifest,
@@ -445,6 +450,7 @@ export const toolManifests: ToolManifest[] = [
   SqlIndexAdvisorManifest,
   SqlPlaygroundManifest,
   SqlToGoManifest,
+  StressReliefBoxManifest,
   StringObfuscatorManifest,
   StudyPlanSchedulerManifest,
   SudokuGameManifest,
