@@ -8,8 +8,12 @@ interface ContrastProps {
   onChangeColor: (hex: string) => void;
 }
 
-function passLabel(pass: boolean) {
-  return pass ? "通过" : "未通过";
+function PassBadge({ pass }: { pass: boolean }) {
+  return (
+    <span className={`status-label ${pass ? "status-label--on" : "status-label--off"}`}>
+      {pass ? "通过" : "未通过"}
+    </span>
+  );
 }
 
 export default function ColorContrastTab({ activeColor, onChangeColor }: ContrastProps) {
@@ -76,6 +80,8 @@ export default function ColorContrastTab({ activeColor, onChangeColor }: Contras
     }
   }
 
+  const ratioFill = Math.min(result.ratio / 21, 1) * 100;
+
   return (
     <div>
       <div className="tool-toolbar tool-toolbar--grid">
@@ -107,30 +113,42 @@ export default function ColorContrastTab({ activeColor, onChangeColor }: Contras
         <p style={{ margin: 0 }}>对比度 {result.ratioText}。WCAG 大字号通常从 18pt 常规字或 14pt 粗体字开始计算。</p>
       </div>
 
+      {/* Contrast ratio gauge */}
+      <div style={{ margin: "0 0 20px 0", padding: "16px", background: "var(--bg-subtle)", borderRadius: "var(--radius-lg)", border: "1px solid var(--border-default)" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "12px" }}>
+          <span style={{ fontSize: "1.8rem", fontWeight: "bold", color: "var(--accent-primary)", fontFamily: "monospace" }}>{result.ratioText}</span>
+          <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>对比度</span>
+        </div>
+        <div style={{ position: "relative", height: "8px", background: "var(--bg-muted)", borderRadius: "4px", overflow: "hidden" }}>
+          <div style={{ height: "100%", width: `${ratioFill}%`, background: "var(--accent-primary)", borderRadius: "4px", transition: "width 0.3s ease" }} />
+        </div>
+        <div style={{ display: "flex", position: "relative", marginTop: "4px" }}>
+          <span style={{ position: "absolute", left: `${(3 / 21) * 100}%`, transform: "translateX(-50%)", fontSize: "0.65rem", color: "var(--text-tertiary)", fontFamily: "monospace" }}>3:1</span>
+          <span style={{ position: "absolute", left: `${(4.5 / 21) * 100}%`, transform: "translateX(-50%)", fontSize: "0.65rem", color: "var(--text-tertiary)", fontFamily: "monospace" }}>4.5:1</span>
+          <span style={{ position: "absolute", left: `${(7 / 21) * 100}%`, transform: "translateX(-50%)", fontSize: "0.65rem", color: "var(--text-tertiary)", fontFamily: "monospace" }}>7:1</span>
+        </div>
+      </div>
+
       <div className="detail-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "1rem" }}>
         <article className="detail-card">
-          <h3>对比度</h3>
-          <p style={{ fontSize: "1.2rem", fontWeight: "bold" }}>{result.ratioText}</p>
-        </article>
-        <article className="detail-card">
           <h3>AA 正文</h3>
-          <p>{passLabel(result.aaNormal)}</p>
+          <PassBadge pass={result.aaNormal} />
         </article>
         <article className="detail-card">
           <h3>AAA 正文</h3>
-          <p>{passLabel(result.aaaNormal)}</p>
+          <PassBadge pass={result.aaaNormal} />
         </article>
         <article className="detail-card">
           <h3>AA 大字号</h3>
-          <p>{passLabel(result.aaLarge)}</p>
+          <PassBadge pass={result.aaLarge} />
         </article>
         <article className="detail-card">
           <h3>AAA 大字号</h3>
-          <p>{passLabel(result.aaaLarge)}</p>
+          <PassBadge pass={result.aaaLarge} />
         </article>
         <article className="detail-card">
           <h3>UI 图形</h3>
-          <p>{passLabel(result.ui)}</p>
+          <PassBadge pass={result.ui} />
         </article>
       </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getLuminance, parseHex, toHex } from "../utils/color";
+import { swatchTextColor } from "../utils/color";
 
 interface ExtractorProps {
   activeColor: string;
@@ -89,6 +89,8 @@ export default function ColorExtractorTab({ activeColor, onChangeColor }: Extrac
   const [colors, setColors] = useState<ExtractedColor[]>([]);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState("");
+  const [colorCount, setColorCount] = useState(12);
+  const [copiedAll, setCopiedAll] = useState(false);
 
   useEffect(() => () => {
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);
@@ -104,21 +106,33 @@ export default function ColorExtractorTab({ activeColor, onChangeColor }: Extrac
     setSourceUrl(url);
     try {
       const image = await loadImage(nextFile);
-      setColors(extractColors(image));
+      setColors(extractColors(image, 200, colorCount));
     } catch (e) {
       setError(e instanceof Error ? e.message : "颜色提取失败");
     }
   }
 
-  async function copyColor(hex: string) {
+  async function copyColor(hexVal: string) {
     try {
-      await navigator.clipboard.writeText(hex);
-      setCopied(hex);
-      onChangeColor(hex);
+      await navigator.clipboard.writeText(hexVal);
+      setCopied(hexVal);
+      onChangeColor(hexVal);
     } catch {
       setCopied("");
     }
     setTimeout(() => setCopied(""), 2000);
+  }
+
+  async function copyAllColors() {
+    const css = colors.map((c) => `${c.hex}  /* ${c.rgb} — ${c.percent}% */`).join("\n");
+    try {
+      await navigator.clipboard.writeText(css);
+      setCopiedAll(true);
+    } catch {
+      setCopiedAll(false);
+    } finally {
+      setTimeout(() => setCopiedAll(false), 2000);
+    }
   }
 
   return (
@@ -129,12 +143,20 @@ export default function ColorExtractorTab({ activeColor, onChangeColor }: Extrac
           <input type="file" accept="image/png,image/jpeg,image/webp,image/gif"
             onChange={(event) => void handleFile(event.target.files?.[0] ?? null)} />
         </label>
+        <label className="tool-field tool-field--compact">
+          <span style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+            <span>提取数量</span>
+            <span style={{ fontFamily: "monospace", opacity: 0.85 }}>{colorCount}</span>
+          </span>
+          <input type="range" min={3} max={24} value={colorCount} onChange={(e) => setColorCount(Number(e.target.value))} />
+        </label>
       </div>
 
       {!file && (
-        <div className="empty-state" style={{ padding: "40px 20px", border: "2px dashed var(--border-default)", borderRadius: "var(--radius-lg)", textAlign: "center" }}>
-          <strong>等待图片上传</strong>
-          <p className="tool-note" style={{ margin: "8px 0 0 0" }}>选择一张本地图片后将自动提取其中的主色和配色方案。</p>
+        <div className="empty-state" style={{ padding: "48px 20px", border: "2px dashed var(--border-default)", borderRadius: "var(--radius-lg)", textAlign: "center" }}>
+          <div style={{ fontSize: "2rem", marginBottom: "8px" }}>🎨</div>
+          <strong style={{ display: "block", fontSize: "1.05rem" }}>等待图片上传</strong>
+          <p className="tool-note" style={{ margin: "8px 0 0 0" }}>选择一张本地图片（PNG、JPG、WebP、GIF），自动提取其中的主色和配色方案。</p>
         </div>
       )}
 
@@ -148,10 +170,17 @@ export default function ColorExtractorTab({ activeColor, onChangeColor }: Extrac
               style={{ maxHeight: 320, objectFit: "contain", borderRadius: "var(--radius-md)", width: "100%" }} />
           </article>
           <div>
-            <p className="eyebrow" style={{ margin: "0 0 12px 0" }}>提取的颜色（{colors.length}）</p>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 0 12px 0" }}>
+              <p className="eyebrow" style={{ margin: 0 }}>提取的颜色（{colors.length}）</p>
+              {colors.length > 0 && (
+                <button type="button" onClick={() => void copyAllColors()} style={{ fontSize: "0.8rem" }}>
+                  {copiedAll ? "已复制全部" : "复制全部"}
+                </button>
+              )}
+            </div>
             <div className="palette-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: "0.75rem" }}>
               {colors.map((c) => {
-                const textColorVal = getLuminance({ r: c.r, g: c.g, b: c.b }) > 0.55 ? "#111" : "#fff";
+                const textColorVal = swatchTextColor({ r: c.r, g: c.g, b: c.b });
                 const isSelected = activeColor === c.hex;
                 return (
                   <button key={c.hex} type="button"

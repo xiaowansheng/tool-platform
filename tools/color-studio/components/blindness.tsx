@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { parseHex, toHex, getLuminance, type Rgb } from "../utils/color";
+import { parseHex, toHex, swatchTextColor, type Rgb } from "../utils/color";
 
 interface BlindnessProps {
   activeColor: string;
@@ -11,15 +11,16 @@ interface BlindnessProps {
 interface Simulation {
   id: string;
   label: string;
+  shortLabel: string;
   description: string;
 }
 
 const SIMULATIONS: Simulation[] = [
-  { id: "normal", label: "正常视觉", description: "标准 RGB 显示" },
-  { id: "protanopia", label: "红色盲 (Protanopia)", description: "L 锥体缺失，约 1% 男性" },
-  { id: "deuteranopia", label: "绿色盲 (Deuteranopia)", description: "M 锥体缺失，约 1% 男性" },
-  { id: "tritanopia", label: "蓝色盲 (Tritanopia)", description: "S 锥体缺失，罕见" },
-  { id: "achromatopsia", label: "全色盲 (Achromatopsia)", description: "完全无法感知颜色" }
+  { id: "normal", label: "正常视觉", shortLabel: "正常", description: "标准 RGB 显示" },
+  { id: "protanopia", label: "红色盲 (Protanopia)", shortLabel: "红色盲", description: "L 锥体缺失，约 1% 男性" },
+  { id: "deuteranopia", label: "绿色盲 (Deuteranopia)", shortLabel: "绿色盲", description: "M 锥体缺失，约 1% 男性" },
+  { id: "tritanopia", label: "蓝色盲 (Tritanopia)", shortLabel: "蓝色盲", description: "S 锥体缺失，罕见" },
+  { id: "achromatopsia", label: "全色盲 (Achromatopsia)", shortLabel: "全色盲", description: "完全无法感知颜色" }
 ];
 
 function clamp(val: number): number {
@@ -107,14 +108,56 @@ export default function ColorBlindnessTab({ activeColor, onChangeColor }: Blindn
         </label>
       </div>
 
-      <div className="simulation-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "1.25rem", marginTop: "20px" }}>
+      {/* Quick comparison strip */}
+      {!error && (
+        <div style={{ margin: "16px 0", borderRadius: "var(--radius-lg)", overflow: "hidden", border: "1px solid var(--border-default)" }}>
+          <div style={{ display: "flex" }}>
+            {SIMULATIONS.map((sim) => {
+              const result = simulate(base, sim.id);
+              const hexVal = toHex(result);
+              const textClr = swatchTextColor(result);
+              return (
+                <div
+                  key={sim.id}
+                  style={{
+                    flex: 1,
+                    background: hexVal,
+                    color: textClr,
+                    padding: "12px 4px",
+                    textAlign: "center",
+                    fontSize: "0.7rem",
+                    fontWeight: 500,
+                    borderRight: sim.id !== "achromatopsia" ? "1px solid rgba(0,0,0,0.06)" : "none"
+                  }}
+                >
+                  {sim.shortLabel}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      <div className="simulation-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "1.25rem" }}>
         {SIMULATIONS.map((sim) => {
           const result = simulate(base, sim.id);
           const hexVal = toHex(result);
-          const textClr = getLuminance(result) > 0.55 ? "#081018" : "#f8fafc";
+          const textClr = swatchTextColor(result);
+          const isOriginal = sim.id === "normal";
           return (
-            <article key={sim.id} className="simulation-card" style={{ background: "var(--bg-card)", border: "1px solid var(--border-default)", borderRadius: "var(--radius-lg)", padding: "12px", display: "flex", flexDirection: "column", gap: "10px" }}>
+            <article key={sim.id} className="simulation-card" style={{
+              background: "var(--bg-card)",
+              border: isOriginal ? "2px solid var(--accent-primary)" : "1px solid var(--border-default)",
+              borderRadius: "var(--radius-lg)",
+              padding: "12px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px"
+            }}>
               <div className="simulation-preview" style={{ background: hexVal, color: textClr, height: "100px", borderRadius: "var(--radius-md)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "6px", position: "relative" }}>
+                {isOriginal && (
+                  <span style={{ position: "absolute", top: "6px", right: "6px", fontSize: "0.6rem", background: "rgba(0,0,0,0.4)", color: "#fff", padding: "2px 6px", borderRadius: "var(--radius-sm)" }}>原始色</span>
+                )}
                 <span className="simulation-hex" style={{ fontFamily: "monospace", fontWeight: "bold", fontSize: "1.1rem" }}>{hexVal}</span>
                 <button
                   type="button"

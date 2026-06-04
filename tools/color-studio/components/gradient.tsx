@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { parseHex, toHex, normalizeHexInput, type Rgb } from "../utils/color";
+import { parseHex, toHex, normalizeHexInput, swatchTextColor, buildScale } from "../utils/color";
 
 interface GradientProps {
   activeColor: string;
@@ -13,33 +13,6 @@ type GradientType = "linear" | "radial" | "conic";
 interface ColorStop {
   color: string;
   position: number;
-}
-
-function mix(color: Rgb, target: Rgb, weight: number): Rgb {
-  return {
-    r: color.r + (target.r - color.r) * weight,
-    g: color.g + (target.g - color.g) * weight,
-    b: color.b + (target.b - color.b) * weight
-  };
-}
-
-function buildScale(hex: string) {
-  const base = parseHex(hex);
-  const white = { r: 255, g: 255, b: 255 };
-  const black = { r: 0, g: 0, b: 0 };
-
-  return [
-    ["50", toHex(mix(base, white, 0.88))],
-    ["100", toHex(mix(base, white, 0.74))],
-    ["200", toHex(mix(base, white, 0.58))],
-    ["300", toHex(mix(base, white, 0.38))],
-    ["400", toHex(mix(base, white, 0.18))],
-    ["500", toHex(base)],
-    ["600", toHex(mix(base, black, 0.16))],
-    ["700", toHex(mix(base, black, 0.28))],
-    ["800", toHex(mix(base, black, 0.42))],
-    ["900", toHex(mix(base, black, 0.56))]
-  ] as Array<[string, string]>;
 }
 
 export default function ColorGradientTab({ activeColor, onChangeColor }: GradientProps) {
@@ -98,7 +71,7 @@ export default function ColorGradientTab({ activeColor, onChangeColor }: Gradien
   function copyCode() {
     void navigator.clipboard.writeText(fullCss).then(() => {
       setGradientCopied(true);
-      setTimeout(() => setGradientCopied(false), 1500);
+      setTimeout(() => setGradientCopied(false), 2000);
     });
   }
 
@@ -183,12 +156,6 @@ export default function ColorGradientTab({ activeColor, onChangeColor }: Gradien
                 <option value="conic">锥形 (Conic)</option>
               </select>
             </label>
-            {(type === "linear" || type === "conic") && (
-              <label className="tool-field tool-field--compact">
-                <span>角度 ({angle}°)</span>
-                <input type="range" min={0} max={360} value={angle} onChange={(e) => setAngle(Number(e.target.value))} />
-              </label>
-            )}
             {type === "radial" && (
               <label className="tool-field tool-field--compact">
                 <span>形状</span>
@@ -200,15 +167,27 @@ export default function ColorGradientTab({ activeColor, onChangeColor }: Gradien
             )}
           </div>
 
+          {(type === "linear" || type === "conic") && (
+            <label className="tool-field tool-field--compact" style={{ marginBottom: "16px" }}>
+              <span style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                <span>角度</span>
+                <span style={{ fontFamily: "monospace", opacity: 0.85 }}>{angle}°</span>
+              </span>
+              <input type="range" min={0} max={360} value={angle} onChange={(e) => setAngle(Number(e.target.value))} />
+            </label>
+          )}
+
           <div
             style={{
               background: cssCode,
               width: "100%",
-              height: 180,
+              height: 120,
               borderRadius: "var(--radius-lg)",
               border: "1px solid var(--border-default)",
               marginBottom: "20px",
-              boxShadow: "inset 0 2px 4px rgba(0,0,0,0.06)"
+              boxShadow: "inset 0 2px 4px rgba(0,0,0,0.06)",
+              overflow: "hidden",
+              flexShrink: 0
             }}
           />
 
@@ -220,9 +199,9 @@ export default function ColorGradientTab({ activeColor, onChangeColor }: Gradien
                   type="color"
                   value={normalizeHexInput(stop.color)}
                   onChange={(e) => updateStop(i, "color", e.target.value)}
-                  style={{ width: 36, height: 36, border: "none", cursor: "pointer", borderRadius: "50%", padding: 0 }}
+                  style={{ width: 36, height: 36, border: "none", cursor: "pointer", borderRadius: "50%", padding: 0, flexShrink: 0 }}
                 />
-                <label className="tool-field tool-field--compact" style={{ flex: 1 }}>
+                <label className="tool-field tool-field--compact" style={{ flex: 1, minWidth: 0 }}>
                   <span>位置 ({stop.position}%)</span>
                   <input
                     type="range"
@@ -236,7 +215,7 @@ export default function ColorGradientTab({ activeColor, onChangeColor }: Gradien
                   type="button"
                   onClick={() => removeStop(i)}
                   disabled={stops.length <= 2}
-                  style={{ padding: "4px 10px", opacity: stops.length <= 2 ? 0.3 : 1 }}
+                  style={{ padding: "4px 10px", opacity: stops.length <= 2 ? 0.3 : 1, flexShrink: 0 }}
                 >
                   ✕
                 </button>
@@ -303,18 +282,21 @@ export default function ColorGradientTab({ activeColor, onChangeColor }: Gradien
             <button type="button" onClick={() => void copyTokens()}>{tokenCopied ? "已复制" : "复制 CSS Tokens"}</button>
           </div>
 
-          <div className="theme-preview" style={{ background: `linear-gradient(135deg, ${from}, ${to})`, color: text, padding: "24px", borderRadius: "var(--radius-lg)", border: "1px solid var(--border-default)", margin: "20px 0" }}>
-            <strong style={{ fontSize: "1.1rem" }}>主题预览 Theme Preview</strong>
-            <p style={{ color: text, margin: "8px 0 0 0", fontSize: "0.85rem" }}>由主色、辅助色、强调色、背景表面色和文本色自动生成的 CSS Custom Properties 色阶。</p>
+          <div className="theme-preview" style={{ background: `linear-gradient(135deg, ${from}, ${to})`, color: text, padding: "20px", borderRadius: "var(--radius-lg)", border: "1px solid var(--border-default)", margin: "20px 0", overflow: "hidden" }}>
+            <strong style={{ fontSize: "1.05rem" }}>主题预览 Theme Preview</strong>
+            <p style={{ color: text, margin: "6px 0 0 0", fontSize: "0.85rem" }}>由主色、辅助色、强调色、背景表面色和文本色自动生成的 CSS Custom Properties 色阶。</p>
           </div>
 
-          <div className="palette-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))", gap: "0.5rem", marginBottom: "20px" }}>
-            {tokenResult.swatches.map((item, idx) => (
-              <div key={idx} style={{ background: item.color, border: "1px solid rgba(0,0,0,0.06)", height: "60px", borderRadius: "var(--radius-md)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer" }} onClick={() => handleFromChange(item.color)}>
-                <span style={{ fontSize: "0.7rem", opacity: 0.8, fontWeight: "bold" }}>{item.label}</span>
-                <span style={{ fontSize: "0.65rem", fontFamily: "monospace" }}>{item.color}</span>
-              </div>
-            ))}
+          <div className="palette-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(72px, 1fr))", gap: "0.5rem", marginBottom: "20px" }}>
+            {tokenResult.swatches.map((item, idx) => {
+              const itemText = swatchTextColor(parseHex(item.color));
+              return (
+                <div key={idx} style={{ background: item.color, color: itemText, border: "1px solid rgba(0,0,0,0.06)", height: "56px", borderRadius: "var(--radius-md)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer" }} onClick={() => handleFromChange(item.color)}>
+                  <span style={{ fontSize: "0.65rem", fontWeight: "bold" }}>{item.label}</span>
+                  <span style={{ fontSize: "0.6rem", fontFamily: "monospace" }}>{item.color}</span>
+                </div>
+              );
+            })}
           </div>
 
           <label className="tool-field">

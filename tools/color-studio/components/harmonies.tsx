@@ -6,7 +6,7 @@ import {
   toHex,
   toHsl,
   hslToRgb,
-  getLuminance,
+  swatchTextColor,
   type Rgb
 } from "../utils/color";
 
@@ -72,10 +72,6 @@ function generateHarmonies(base: Rgb): HarmonyGroup[] {
   ];
 }
 
-function textColor(rgb: Rgb): string {
-  return getLuminance(rgb) > 0.55 ? "#081018" : "#f8fafc";
-}
-
 export default function ColorHarmoniesTab({ activeColor, onChangeColor }: HarmoniesProps) {
   const [hex, setHex] = useState(activeColor);
   const [copied, setCopied] = useState("");
@@ -127,7 +123,7 @@ export default function ColorHarmoniesTab({ activeColor, onChangeColor }: Harmon
           <span>颜色选择器</span>
           <input type="color" value={toHex(base)} onChange={(e) => handleHexChange(e.target.value)} />
         </label>
-        <div className="detail-card" style={{ background: toHex(base), color: textColor(base), justifyContent: "center", textAlign: "center", minHeight: "auto", padding: "10px" }}>
+        <div className="detail-card" style={{ background: toHex(base), color: swatchTextColor(base), justifyContent: "center", textAlign: "center", minHeight: "auto", padding: "10px" }}>
           <strong>基色: {toHex(base)}</strong>
         </div>
       </div>
@@ -149,7 +145,7 @@ export default function ColorHarmoniesTab({ activeColor, onChangeColor }: Harmon
                     className="harmony-swatch"
                     style={{
                       background: hexVal,
-                      color: textColor(clr),
+                      color: swatchTextColor(clr),
                       border: "1px solid rgba(0,0,0,0.08)",
                       cursor: "pointer",
                       padding: "16px 12px",

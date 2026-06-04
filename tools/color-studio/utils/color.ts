@@ -183,3 +183,37 @@ export function normalizeHexInput(value: string) {
     return "#000000";
   }
 }
+
+/** Linearly mix two RGB colors toward a target. */
+export function mix(color: Rgb, target: Rgb, weight: number): Rgb {
+  return {
+    r: color.r + (target.r - color.r) * weight,
+    g: color.g + (target.g - color.g) * weight,
+    b: color.b + (target.b - color.b) * weight
+  };
+}
+
+/** Return a readable text color for a given background RGB. */
+export function swatchTextColor(rgb: Rgb): string {
+  return getLuminance(rgb) > 0.55 ? "#081018" : "#f8fafc";
+}
+
+/** Build a 50→900 color scale from a base hex. Returns `[label, hex][]`. */
+export function buildScale(hex: string): Array<[string, string]> {
+  const base = parseHex(hex);
+  const white = { r: 255, g: 255, b: 255 };
+  const black = { r: 0, g: 0, b: 0 };
+
+  return [
+    ["50", toHex(mix(base, white, 0.88))],
+    ["100", toHex(mix(base, white, 0.74))],
+    ["200", toHex(mix(base, white, 0.58))],
+    ["300", toHex(mix(base, white, 0.38))],
+    ["400", toHex(mix(base, white, 0.18))],
+    ["500", toHex(base)],
+    ["600", toHex(mix(base, black, 0.16))],
+    ["700", toHex(mix(base, black, 0.28))],
+    ["800", toHex(mix(base, black, 0.42))],
+    ["900", toHex(mix(base, black, 0.56))]
+  ];
+}

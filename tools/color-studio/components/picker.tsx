@@ -7,7 +7,7 @@ import {
   hslToHsv,
   hsvToHsl,
   formatColor,
-  getLuminance,
+  swatchTextColor,
   parseHex,
   toHex,
   type Hsl,
@@ -138,7 +138,7 @@ export default function ColorPickerTab({ activeColor, onChangeColor }: PickerPro
   const [paletteTab, setPaletteTab] = useState<PaletteTab>("css-named");
   const [hexInput, setHexInput] = useState("");
   const [query, setQuery] = useState("");
-  const svRef = useRef<SVGSVGElement>(null);
+  const svRef = useRef<HTMLDivElement>(null);
   const hueRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState<"sv" | "hue" | null>(null);
 
@@ -154,7 +154,7 @@ export default function ColorPickerTab({ activeColor, onChangeColor }: PickerPro
 
   const hex = hslToHex(hsl);
   const { h, s, l } = hsl;
-  const textClr = getLuminance(parseHex(hex)) > 0.55 ? "#081018" : "#f8fafc";
+  const textClr = swatchTextColor(parseHex(hex));
   const formatted = formatColor(hex, format, alpha);
 
   const hsv = useMemo(() => hslToHsv(hsl), [hsl]);
@@ -316,29 +316,31 @@ export default function ColorPickerTab({ activeColor, onChangeColor }: PickerPro
         <>
           <div className="picker-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
             <div className="picker-canvas-area" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <div className="picker-sv-container"
-                style={{ position: "relative", width: "100%", height: "260px", borderRadius: "var(--radius-lg)", overflow: "hidden" }}
+              <div ref={svRef} className="picker-sv-container"
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "260px",
+                  borderRadius: "var(--radius-lg)",
+                  overflow: "hidden",
+                  cursor: "crosshair",
+                  background: `linear-gradient(to bottom, transparent, #000), linear-gradient(to right, #fff, hsl(${h}, 100%, 50%))`
+                }}
+                onMouseDown={(e) => { setDragging("sv"); updateFromSv(e.clientX, e.clientY); }}
                 onTouchStart={(e) => { setDragging("sv"); updateFromSv(e.touches[0].clientX, e.touches[0].clientY); }}>
-                <svg ref={svRef} className="picker-sv-canvas" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width: "100%", height: "100%", display: "block" }}
-                  onMouseDown={(e) => { setDragging("sv"); updateFromSv(e.clientX, e.clientY); }}>
-                  <defs>
-                    <linearGradient id="sv-white" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="white" />
-                      <stop offset="100%" stopColor={`hsl(${h}, 100%, 50%)`} />
-                    </linearGradient>
-                    <linearGradient id="sv-black" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="transparent" />
-                      <stop offset="100%" stopColor="black" />
-                    </linearGradient>
-                  </defs>
-                  <rect x="0" y="0" width="100" height="100" fill="url(#sv-white)" />
-                  <rect x="0" y="0" width="100" height="100" fill="url(#sv-black)" />
-                  <g transform={`translate(${hsv.s}, ${100 - hsv.v})`}>
-                    <circle cx="0" cy="0" r="5.5" fill="none" stroke="rgba(0,0,0,0.6)" strokeWidth="2.5" />
-                    <circle cx="0" cy="0" r="5.5" fill="none" stroke="white" strokeWidth="1.5" />
-                    <circle cx="0" cy="0" r="1.5" fill="white" />
-                  </g>
-                </svg>
+                <div style={{
+                  position: "absolute",
+                  width: "18px",
+                  height: "18px",
+                  borderRadius: "50%",
+                  border: "2.5px solid #fff",
+                  boxShadow: "0 0 0 1.5px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3)",
+                  top: `${(1 - hsv.v / 100) * 100}%`,
+                  left: `${(hsv.s / 100) * 100}%`,
+                  transform: "translate(-50%, -50%)",
+                  pointerEvents: "none",
+                  zIndex: 2
+                }} />
               </div>
               <div ref={hueRef} className="picker-hue-slider"
                 style={{ position: "relative", height: "16px", borderRadius: "8px", cursor: "pointer", background: "linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)" }}

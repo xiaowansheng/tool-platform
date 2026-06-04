@@ -1,66 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { parseHex, toHex, type Rgb } from "../utils/color";
+import { useState, useEffect, useMemo } from "react";
+import { parseHex, toHex, swatchTextColor, buildScale } from "../utils/color";
 
 interface PaletteProps {
   activeColor: string;
   onChangeColor: (hex: string) => void;
 }
 
-function mix(color: Rgb, target: Rgb, weight: number): Rgb {
-  return {
-    r: color.r + (target.r - color.r) * weight,
-    g: color.g + (target.g - color.g) * weight,
-    b: color.b + (target.b - color.b) * weight
-  };
-}
-
-function luminance({ r, g, b }: Rgb) {
-  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-}
-
-function swatchTextColor(rgb: Rgb) {
-  return luminance(rgb) > 0.55 ? "#111" : "#fff";
-}
-
-function buildPalette(input: string) {
-  const base = parseHex(input);
-  const white = { r: 255, g: 255, b: 255 };
-  const black = { r: 0, g: 0, b: 0 };
-
-  return [
-    { label: "50", color: toHex(mix(base, white, 0.88)) },
-    { label: "100", color: toHex(mix(base, white, 0.74)) },
-    { label: "200", color: toHex(mix(base, white, 0.58)) },
-    { label: "300", color: toHex(mix(base, white, 0.38)) },
-    { label: "400", color: toHex(mix(base, white, 0.18)) },
-    { label: "500", color: toHex(base) },
-    { label: "600", color: toHex(mix(base, black, 0.16)) },
-    { label: "700", color: toHex(mix(base, black, 0.28)) },
-    { label: "800", color: toHex(mix(base, black, 0.42)) },
-    { label: "900", color: toHex(mix(base, black, 0.56)) }
-  ];
-}
-
 export default function ColorPaletteTab({ activeColor, onChangeColor }: PaletteProps) {
   const [hex, setHex] = useState(activeColor);
   const [copied, setCopied] = useState("");
+  const [cssPrefix, setCssPrefix] = useState("color");
+  const [cssCopied, setCssCopied] = useState(false);
 
   useEffect(() => {
     setHex(activeColor);
   }, [activeColor]);
 
-  let baseRgb: Rgb = { r: 0, g: 0, b: 0 };
-  let palette: Array<{ label: string; color: string }> = [];
-  let error = "";
+  const palette = useMemo(() => {
+    try {
+      return { items: buildScale(hex).map(([label, color]) => ({ label, color })), error: "" };
+    } catch (e) {
+      return { items: [] as Array<{ label: string; color: string }>, error: e instanceof Error ? e.message : "颜色生成失败" };
+    }
+  }, [hex]);
 
-  try {
-    baseRgb = parseHex(hex);
-    palette = buildPalette(hex);
-  } catch (paletteError) {
-    error = paletteError instanceof Error ? paletteError.message : "颜色生成失败";
-  }
+  const cssVars = useMemo(() => {
+    if (palette.error) return "";
+    return `:root {\n${palette.items.map(({ label, color }) => `  --${cssPrefix}-${label}: ${color};`).join("\n")}\n}`;
+  }, [palette, cssPrefix]);
 
   const handleHexChange = (val: string) => {
     setHex(val);
@@ -83,6 +52,17 @@ export default function ColorPaletteTab({ activeColor, onChangeColor }: PaletteP
     }
   }
 
+  async function copyCssVars() {
+    try {
+      await navigator.clipboard.writeText(cssVars);
+      setCssCopied(true);
+    } catch {
+      setCssCopied(false);
+    } finally {
+      setTimeout(() => setCssCopied(false), 2000);
+    }
+  }
+
   return (
     <div>
       <div className="tool-toolbar tool-toolbar--grid">
@@ -92,14 +72,13 @@ export default function ColorPaletteTab({ activeColor, onChangeColor }: PaletteP
         </label>
         <label className="tool-field tool-field--compact">
           <span>选择基础色</span>
-          <input type="color" value={error ? "#000000" : hex} onChange={(event) => handleHexChange(event.target.value)} />
+          <input type="color" value={palette.error ? "#000000" : hex} onChange={(event) => handleHexChange(event.target.value)} />
         </label>
       </div>
       <div className="palette-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", gap: "0.75rem", margin: "20px 0" }}>
-        {palette.map((item) => {
+        {palette.items.map((item) => {
           const isBase = item.label === "500";
-          const rgb = parseHex(item.color);
-          const textClr = swatchTextColor(rgb);
+          const textClr = swatchTextColor(parseHex(item.color));
           return (
             <button
               key={item.label}
@@ -131,7 +110,27 @@ export default function ColorPaletteTab({ activeColor, onChangeColor }: PaletteP
           );
         })}
       </div>
-      {error ? <p className="tool-error">{error}</p> : null}
+
+      {/* CSS Variables export */}
+      {!palette.error && (
+        <div style={{ marginTop: "16px" }}>
+          <div style={{ display: "flex", gap: "0.75rem", alignItems: "end", marginBottom: "12px" }}>
+            <label className="tool-field tool-field--compact" style={{ flex: 1 }}>
+              <span>CSS 变量前缀</span>
+              <input value={cssPrefix} onChange={(e) => setCssPrefix(e.target.value.replace(/[^a-z0-9-]/gi, "").toLowerCase())} placeholder="color" />
+            </label>
+            <button type="button" className="button--primary" onClick={() => void copyCssVars()} style={{ flexShrink: 0 }}>
+              {cssCopied ? "已复制" : "复制 CSS 变量"}
+            </button>
+          </div>
+          <label className="tool-field">
+            <span>CSS 变量代码</span>
+            <textarea value={cssVars} readOnly spellCheck={false} />
+          </label>
+        </div>
+      )}
+
+      {palette.error ? <p className="tool-error">{palette.error}</p> : null}
       <p className="tool-note">输入基础颜色，自动生成从 50 到 900 的完整色阶。点击色块即可将其设为当前基础色并复制其 HEX 值。</p>
     </div>
   );
