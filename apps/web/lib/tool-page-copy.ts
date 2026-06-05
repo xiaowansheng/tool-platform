@@ -2179,6 +2179,83 @@ const zhToolPageGuides: Record<string, ToolPageGuide> = {
     ],
     examples: ["测试品牌色 #6366f1 在红色盲下的表现。", "检查 #22c55e 是否在各类色盲下都能辨识。"]
   },
+  "ip-geolocation": {
+    name: "IP 地理位置查询",
+    description: "通过 IP 地址查询地理位置、ISP 和时区等信息。",
+    intro: "输入一个或多个 IP 地址，快速查询其国家、地区、城市、坐标、ISP、AS 号和时区等地理网络信息。",
+    steps: [
+      "输入 IP 地址，多个可用逗号或换行分隔。",
+      "点击查询，查看每个 IP 的地理位置详情。",
+      "根据返回的 ISP 和组织信息判断网络归属。"
+    ],
+    examples: ["查询 8.8.8.8 的地理位置和 ISP。", "批量查询多个 IP 的归属地信息。"]
+  },
+  "mac-address-lookup": {
+    name: "MAC 地址厂商查询",
+    description: "查询 MAC 地址前缀（OUI）对应的设备厂商信息。",
+    intro: "输入一个或多个 MAC 地址，通过 OUI 数据库快速查询对应的硬件厂商或设备品牌。",
+    steps: [
+      "输入 MAC 地址，支持冒号、连字符或无分隔符格式。",
+      "点击查询，查看 OUI 前缀匹配的厂商信息。",
+      "根据厂商信息判断设备类型和来源。"
+    ],
+    examples: ["查询 00:1A:11:00:00:00 对应哪个厂商。", "排查局域网设备列表的 MAC 地址归属。"]
+  },
+  "http-request-inspector": {
+    name: "HTTP 请求检查器",
+    description: "发送自定义 HTTP 请求并查看完整的响应详情。",
+    intro: "选择 HTTP 方法、填写 URL 和请求头，发送请求后查看状态码、响应头和响应体的详细信息。",
+    steps: [
+      "选择 HTTP 方法（GET/POST/PUT 等）。",
+      "填写 URL 和可选的请求头、请求体。",
+      "发送请求后查看状态、Headers 和响应体。"
+    ],
+    examples: ["测试 API 接口的响应头和状态码。", "调试 POST 请求的请求体和响应。"]
+  },
+  "http-redirect-tracker": {
+    name: "HTTP 重定向追踪",
+    description: "追踪 HTTP 重定向链，查看每一步的跳转详情。",
+    intro: "输入 URL 后自动追踪重定向链，显示每一步的状态码、Location 头和最终到达地址。",
+    steps: [
+      "输入需要追踪的起始 URL。",
+      "点击追踪，工具自动跟随重定向链。",
+      "查看每一步的跳转状态和最终目标 URL。"
+    ],
+    examples: ["检查短链接的真实跳转目标。", "排查 URL 重定向链中的异常跳转。"]
+  },
+  "network-bandwidth-calculator": {
+    name: "带宽计算器",
+    description: "计算网络带宽、数据大小与传输时间之间的换算。",
+    intro: "输入带宽和数据大小，自动计算理论传输时间，支持多种单位的自由换算。",
+    steps: [
+      "输入带宽值和单位（Mbps/Gbps 等）。",
+      "输入数据大小和单位（MB/GB 等）。",
+      "查看理论传输时间和吞吐量换算结果。"
+    ],
+    examples: ["计算 100Mbps 网络下载 500MB 文件需要多久。", "估算 1Gbps 链路传输 10GB 数据的时间。"]
+  },
+  "ipv6-subnet-calculator": {
+    name: "IPv6 子网计算器",
+    description: "计算 IPv6 网段信息：前缀、子网掩码、地址总数。",
+    intro: "输入 IPv6 网络地址和前缀长度，自动计算展开地址、子网掩码和地址总数。",
+    steps: [
+      "输入 IPv6 网络地址（支持缩写格式如 2001:db8::）。",
+      "设置前缀长度（0-128）。",
+      "查看展开地址、子网掩码和地址范围。"
+    ],
+    examples: ["计算 2001:db8::/32 的子网掩码和地址总数。", "展开缩写 IPv6 地址并查看网络边界。"]
+  },
+  "network-connection-info": {
+    name: "网络连接信息",
+    description: "查看浏览器 Network Information API 提供的实时网络状态。",
+    intro: "实时显示当前浏览器的网络连接类型、有效类型、下行速度、RTT 和省流模式等信息。",
+    steps: [
+      "打开工具自动读取网络信息。",
+      "当网络状态变化时自动更新显示。",
+      "根据 RTT 和连接类型判断当前网络质量。"
+    ],
+    examples: ["查看当前网络是 4G 还是 WiFi。", "检测网络延迟（RTT）和下行带宽。"]
+  },
 
 };
 
