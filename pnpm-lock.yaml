@@ -416,6 +416,9 @@ importers:
       '@tool-platform/game-2048':
         specifier: workspace:*
         version: link:../../tools/game-2048
+      '@tool-platform/gamepad-tester':
+        specifier: workspace:*
+        version: link:../../tools/gamepad-tester
       '@tool-platform/git-bisect-planner':
         specifier: workspace:*
         version: link:../../tools/git-bisect-planner
@@ -536,6 +539,9 @@ importers:
       '@tool-platform/k8s-pod-troubleshooter':
         specifier: workspace:*
         version: link:../../tools/k8s-pod-troubleshooter
+      '@tool-platform/keyboard-tester':
+        specifier: workspace:*
+        version: link:../../tools/keyboard-tester
       '@tool-platform/kubernetes-probe-builder':
         specifier: workspace:*
         version: link:../../tools/kubernetes-probe-builder
@@ -611,6 +617,9 @@ importers:
       '@tool-platform/morse-code':
         specifier: workspace:*
         version: link:../../tools/morse-code
+      '@tool-platform/mouse-tester':
+        specifier: workspace:*
+        version: link:../../tools/mouse-tester
       '@tool-platform/my-device-info':
         specifier: workspace:*
         version: link:../../tools/my-device-info
@@ -788,6 +797,9 @@ importers:
       '@tool-platform/scientific-calculator':
         specifier: workspace:*
         version: link:../../tools/scientific-calculator
+      '@tool-platform/screen-tester':
+        specifier: workspace:*
+        version: link:../../tools/screen-tester
       '@tool-platform/secrets-scanner':
         specifier: workspace:*
         version: link:../../tools/secrets-scanner
@@ -1898,6 +1910,18 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/gamepad-tester:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/git-bisect-planner:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2273,6 +2297,18 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/keyboard-tester:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/kubernetes-probe-builder:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2494,6 +2530,18 @@ importers:
 
   tools/morse-code:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/mouse-tester:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -3046,6 +3094,18 @@ importers:
 
   tools/scientific-calculator:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/screen-tester:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts

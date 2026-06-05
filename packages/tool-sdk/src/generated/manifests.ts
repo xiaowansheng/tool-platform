@@ -95,6 +95,7 @@ import FlexboxGeneratorManifest from "@tool-platform/flexbox-generator/manifest"
 import FontScaleGeneratorManifest from "@tool-platform/font-scale-generator/manifest";
 import FractionCalculatorManifest from "@tool-platform/fraction-calculator/manifest";
 import Game2048Manifest from "@tool-platform/game-2048/manifest";
+import GamepadTesterManifest from "@tool-platform/gamepad-tester/manifest";
 import GitBisectPlannerManifest from "@tool-platform/git-bisect-planner/manifest";
 import GitPatchSecurityReviewerManifest from "@tool-platform/git-patch-security-reviewer/manifest";
 import GitignoreGeneratorManifest from "@tool-platform/gitignore-generator/manifest";
@@ -135,6 +136,7 @@ import JwtDecoderManifest from "@tool-platform/jwt-decoder/manifest";
 import JwtJwkVerifierManifest from "@tool-platform/jwt-jwk-verifier/manifest";
 import K8sNamespaceDesignerManifest from "@tool-platform/k8s-namespace-designer/manifest";
 import K8sPodTroubleshooterManifest from "@tool-platform/k8s-pod-troubleshooter/manifest";
+import KeyboardTesterManifest from "@tool-platform/keyboard-tester/manifest";
 import KubernetesProbeBuilderManifest from "@tool-platform/kubernetes-probe-builder/manifest";
 import KubernetesYamlValidatorManifest from "@tool-platform/kubernetes-yaml-validator/manifest";
 import LargeTextToolsManifest from "@tool-platform/large-text-tools/manifest";
@@ -160,6 +162,7 @@ import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
 import MinesweeperManifest from "@tool-platform/minesweeper/manifest";
 import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manifest";
 import MorseCodeManifest from "@tool-platform/morse-code/manifest";
+import MouseTesterManifest from "@tool-platform/mouse-tester/manifest";
 import MyDeviceInfoManifest from "@tool-platform/my-device-info/manifest";
 import NamingConventionConverterManifest from "@tool-platform/naming-convention-converter/manifest";
 import NatoAlphabetConverterManifest from "@tool-platform/nato-alphabet-converter/manifest";
@@ -219,6 +222,7 @@ import RubyPlaygroundManifest from "@tool-platform/ruby-playground/manifest";
 import SamlDecoderManifest from "@tool-platform/saml-decoder/manifest";
 import SbomViewerManifest from "@tool-platform/sbom-viewer/manifest";
 import ScientificCalculatorManifest from "@tool-platform/scientific-calculator/manifest";
+import ScreenTesterManifest from "@tool-platform/screen-tester/manifest";
 import SecretsScannerManifest from "@tool-platform/secrets-scanner/manifest";
 import SemgrepRulePlaygroundManifest from "@tool-platform/semgrep-rule-playground/manifest";
 import SemverCalculatorManifest from "@tool-platform/semver-calculator/manifest";
@@ -386,6 +390,7 @@ export const toolManifests: ToolManifest[] = [
   FontScaleGeneratorManifest,
   FractionCalculatorManifest,
   Game2048Manifest,
+  GamepadTesterManifest,
   GitBisectPlannerManifest,
   GitPatchSecurityReviewerManifest,
   GitignoreGeneratorManifest,
@@ -426,6 +431,7 @@ export const toolManifests: ToolManifest[] = [
   JwtJwkVerifierManifest,
   K8sNamespaceDesignerManifest,
   K8sPodTroubleshooterManifest,
+  KeyboardTesterManifest,
   KubernetesProbeBuilderManifest,
   KubernetesYamlValidatorManifest,
   LargeTextToolsManifest,
@@ -451,6 +457,7 @@ export const toolManifests: ToolManifest[] = [
   MinesweeperManifest,
   MockDataGeneratorManifest,
   MorseCodeManifest,
+  MouseTesterManifest,
   MyDeviceInfoManifest,
   NamingConventionConverterManifest,
   NatoAlphabetConverterManifest,
@@ -510,6 +517,7 @@ export const toolManifests: ToolManifest[] = [
   SamlDecoderManifest,
   SbomViewerManifest,
   ScientificCalculatorManifest,
+  ScreenTesterManifest,
   SecretsScannerManifest,
   SemgrepRulePlaygroundManifest,
   SemverCalculatorManifest,
