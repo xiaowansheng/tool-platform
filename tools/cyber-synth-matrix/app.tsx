@@ -132,7 +132,6 @@ export default function CyberSynthMatrix({ locale }: ToolAppProps) {
 
   // Sync ref values for the timer thread
   isPlayingRef.current = isPlaying;
-  stepRef.current = currentStep;
 
   // Waveform Visualizer Canvas Ref
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -361,6 +360,7 @@ export default function CyberSynthMatrix({ locale }: ToolAppProps) {
     
     // Set note scheduler starting pointer
     nextNoteTimeRef.current = audioCtxRef.current.currentTime + 0.05;
+    stepRef.current = currentStep;
     
     // Start interval loop (polls every 25ms to load sounds in advance)
     schedulerTimerRef.current = setInterval(schedulerLoop, 25);
@@ -397,6 +397,7 @@ export default function CyberSynthMatrix({ locale }: ToolAppProps) {
       // 1. Schedule notes for current step
       const stepToPlay = (stepRef.current + 1) % STEPS;
       scheduleStepNotes(stepToPlay, nextNoteTimeRef.current);
+      stepRef.current = stepToPlay;
 
       // 2. Advance time based on BPM
       const secondsPerBeat = 60.0 / bpm;

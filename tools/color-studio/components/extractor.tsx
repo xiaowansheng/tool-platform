@@ -86,6 +86,7 @@ function extractColors(image: HTMLImageElement, maxSize = 200, colorCount = 12) 
 export default function ColorExtractorTab({ activeColor, onChangeColor }: ExtractorProps) {
   const [file, setFile] = useState<File | null>(null);
   const [sourceUrl, setSourceUrl] = useState("");
+  const [imageElement, setImageElement] = useState<HTMLImageElement | null>(null);
   const [colors, setColors] = useState<ExtractedColor[]>([]);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState("");
@@ -96,17 +97,31 @@ export default function ColorExtractorTab({ activeColor, onChangeColor }: Extrac
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);
   }, [sourceUrl]);
 
+  // Extract colors reactively when image or count changes
+  useEffect(() => {
+    if (!imageElement) {
+      setColors([]);
+      return;
+    }
+    try {
+      setColors(extractColors(imageElement, 200, colorCount));
+      setError("");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "颜色提取失败");
+    }
+  }, [imageElement, colorCount]);
+
   async function handleFile(nextFile: File | null) {
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);
     setFile(nextFile);
-    setColors([]);
+    setImageElement(null);
     setError("");
     if (!nextFile) { setSourceUrl(""); return; }
     const url = URL.createObjectURL(nextFile);
     setSourceUrl(url);
     try {
       const image = await loadImage(nextFile);
-      setColors(extractColors(image, 200, colorCount));
+      setImageElement(image);
     } catch (e) {
       setError(e instanceof Error ? e.message : "颜色提取失败");
     }

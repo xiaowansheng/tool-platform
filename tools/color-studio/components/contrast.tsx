@@ -122,7 +122,7 @@ export default function ColorContrastTab({ activeColor, onChangeColor }: Contras
         <div style={{ position: "relative", height: "8px", background: "var(--bg-muted)", borderRadius: "4px", overflow: "hidden" }}>
           <div style={{ height: "100%", width: `${ratioFill}%`, background: "var(--accent-primary)", borderRadius: "4px", transition: "width 0.3s ease" }} />
         </div>
-        <div style={{ display: "flex", position: "relative", marginTop: "4px" }}>
+        <div style={{ display: "flex", position: "relative", marginTop: "4px", height: "16px" }}>
           <span style={{ position: "absolute", left: `${(3 / 21) * 100}%`, transform: "translateX(-50%)", fontSize: "0.65rem", color: "var(--text-tertiary)", fontFamily: "monospace" }}>3:1</span>
           <span style={{ position: "absolute", left: `${(4.5 / 21) * 100}%`, transform: "translateX(-50%)", fontSize: "0.65rem", color: "var(--text-tertiary)", fontFamily: "monospace" }}>4.5:1</span>
           <span style={{ position: "absolute", left: `${(7 / 21) * 100}%`, transform: "translateX(-50%)", fontSize: "0.65rem", color: "var(--text-tertiary)", fontFamily: "monospace" }}>7:1</span>
