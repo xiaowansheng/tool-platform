@@ -140,6 +140,12 @@ importers:
       '@tool-platform/ai-chat':
         specifier: workspace:*
         version: link:../../tools/ai-chat
+      '@tool-platform/ai-model-benchmark':
+        specifier: workspace:*
+        version: link:../../tools/ai-model-benchmark
+      '@tool-platform/ai-response-comparator':
+        specifier: workspace:*
+        version: link:../../tools/ai-response-comparator
       '@tool-platform/ai-sandbox-lab':
         specifier: workspace:*
         version: link:../../tools/ai-sandbox-lab
@@ -149,12 +155,21 @@ importers:
       '@tool-platform/animation-keyframes-generator':
         specifier: workspace:*
         version: link:../../tools/animation-keyframes-generator
+      '@tool-platform/anki-card-exporter':
+        specifier: workspace:*
+        version: link:../../tools/anki-card-exporter
       '@tool-platform/api-error-code-doc-generator':
         specifier: workspace:*
         version: link:../../tools/api-error-code-doc-generator
+      '@tool-platform/api-key-generator':
+        specifier: workspace:*
+        version: link:../../tools/api-key-generator
       '@tool-platform/api-rate-limit-calculator':
         specifier: workspace:*
         version: link:../../tools/api-rate-limit-calculator
+      '@tool-platform/api-route-designer':
+        specifier: workspace:*
+        version: link:../../tools/api-route-designer
       '@tool-platform/archive-structure-viewer':
         specifier: workspace:*
         version: link:../../tools/archive-structure-viewer
@@ -218,9 +233,15 @@ importers:
       '@tool-platform/code-beautifier':
         specifier: workspace:*
         version: link:../../tools/code-beautifier
+      '@tool-platform/code-complexity-analyzer':
+        specifier: workspace:*
+        version: link:../../tools/code-complexity-analyzer
       '@tool-platform/code-to-image':
         specifier: workspace:*
         version: link:../../tools/code-to-image
+      '@tool-platform/color-palette-extractor':
+        specifier: workspace:*
+        version: link:../../tools/color-palette-extractor
       '@tool-platform/color-studio':
         specifier: workspace:*
         version: link:../../tools/color-studio
@@ -242,6 +263,9 @@ importers:
       '@tool-platform/cron-helper':
         specifier: workspace:*
         version: link:../../tools/cron-helper
+      '@tool-platform/csp-evaluator':
+        specifier: workspace:*
+        version: link:../../tools/csp-evaluator
       '@tool-platform/csp-generator':
         specifier: workspace:*
         version: link:../../tools/csp-generator
@@ -257,6 +281,12 @@ importers:
       '@tool-platform/csv-cleaner':
         specifier: workspace:*
         version: link:../../tools/csv-cleaner
+      '@tool-platform/csv-json-converter':
+        specifier: workspace:*
+        version: link:../../tools/csv-json-converter
+      '@tool-platform/csv-markdown-table':
+        specifier: workspace:*
+        version: link:../../tools/csv-markdown-table
       '@tool-platform/csv-profile-worker':
         specifier: workspace:*
         version: link:../../tools/csv-profile-worker
@@ -272,6 +302,12 @@ importers:
       '@tool-platform/cyber-synth-matrix':
         specifier: workspace:*
         version: link:../../tools/cyber-synth-matrix
+      '@tool-platform/daily-standup-generator':
+        specifier: workspace:*
+        version: link:../../tools/daily-standup-generator
+      '@tool-platform/data-schema-generator':
+        specifier: workspace:*
+        version: link:../../tools/data-schema-generator
       '@tool-platform/data-url-generator':
         specifier: workspace:*
         version: link:../../tools/data-url-generator
@@ -287,6 +323,9 @@ importers:
       '@tool-platform/dependency-risk-explainer':
         specifier: workspace:*
         version: link:../../tools/dependency-risk-explainer
+      '@tool-platform/design-token-generator':
+        specifier: workspace:*
+        version: link:../../tools/design-token-generator
       '@tool-platform/dice-roller':
         specifier: workspace:*
         version: link:../../tools/dice-roller
@@ -332,9 +371,18 @@ importers:
       '@tool-platform/env-parser':
         specifier: workspace:*
         version: link:../../tools/env-parser
+      '@tool-platform/excel-formula-builder':
+        specifier: workspace:*
+        version: link:../../tools/excel-formula-builder
+      '@tool-platform/exif-data-viewer':
+        specifier: workspace:*
+        version: link:../../tools/exif-data-viewer
       '@tool-platform/favicon-app-icon-generator':
         specifier: workspace:*
         version: link:../../tools/favicon-app-icon-generator
+      '@tool-platform/feature-flag-manager':
+        specifier: workspace:*
+        version: link:../../tools/feature-flag-manager
       '@tool-platform/ffmpeg-editor':
         specifier: workspace:*
         version: link:../../tools/ffmpeg-editor
@@ -383,12 +431,18 @@ importers:
       '@tool-platform/graphql-workbench':
         specifier: workspace:*
         version: link:../../tools/graphql-workbench
+      '@tool-platform/habit-tracker':
+        specifier: workspace:*
+        version: link:../../tools/habit-tracker
       '@tool-platform/har-viewer':
         specifier: workspace:*
         version: link:../../tools/har-viewer
       '@tool-platform/hash-generator':
         specifier: workspace:*
         version: link:../../tools/hash-generator
+      '@tool-platform/hashtag-generator':
+        specifier: workspace:*
+        version: link:../../tools/hashtag-generator
       '@tool-platform/helm-values-diff':
         specifier: workspace:*
         version: link:../../tools/helm-values-diff
@@ -416,9 +470,18 @@ importers:
       '@tool-platform/http-status-reference':
         specifier: workspace:*
         version: link:../../tools/http-status-reference
+      '@tool-platform/icon-resizer':
+        specifier: workspace:*
+        version: link:../../tools/icon-resizer
       '@tool-platform/image-base64':
         specifier: workspace:*
         version: link:../../tools/image-base64
+      '@tool-platform/image-compressor':
+        specifier: workspace:*
+        version: link:../../tools/image-compressor
+      '@tool-platform/image-cropper':
+        specifier: workspace:*
+        version: link:../../tools/image-cropper
       '@tool-platform/image-ocr-preprocessor':
         specifier: workspace:*
         version: link:../../tools/image-ocr-preprocessor
@@ -446,6 +509,12 @@ importers:
       '@tool-platform/jwt-jwk-verifier':
         specifier: workspace:*
         version: link:../../tools/jwt-jwk-verifier
+      '@tool-platform/k8s-namespace-designer':
+        specifier: workspace:*
+        version: link:../../tools/k8s-namespace-designer
+      '@tool-platform/k8s-pod-troubleshooter':
+        specifier: workspace:*
+        version: link:../../tools/k8s-pod-troubleshooter
       '@tool-platform/kubernetes-probe-builder':
         specifier: workspace:*
         version: link:../../tools/kubernetes-probe-builder
@@ -518,6 +587,9 @@ importers:
       '@tool-platform/morse-code':
         specifier: workspace:*
         version: link:../../tools/morse-code
+      '@tool-platform/naming-convention-converter':
+        specifier: workspace:*
+        version: link:../../tools/naming-convention-converter
       '@tool-platform/nato-alphabet-converter':
         specifier: workspace:*
         version: link:../../tools/nato-alphabet-converter
@@ -527,6 +599,9 @@ importers:
       '@tool-platform/neon-tetris':
         specifier: workspace:*
         version: link:../../tools/neon-tetris
+      '@tool-platform/nginx-config-generator':
+        specifier: workspace:*
+        version: link:../../tools/nginx-config-generator
       '@tool-platform/notification-payload-tester':
         specifier: workspace:*
         version: link:../../tools/notification-payload-tester
@@ -554,6 +629,9 @@ importers:
       '@tool-platform/parquet-arrow-preview':
         specifier: workspace:*
         version: link:../../tools/parquet-arrow-preview
+      '@tool-platform/parquet-schema-viewer':
+        specifier: workspace:*
+        version: link:../../tools/parquet-schema-viewer
       '@tool-platform/password-generator':
         specifier: workspace:*
         version: link:../../tools/password-generator
@@ -581,6 +659,9 @@ importers:
       '@tool-platform/placeholder-generator':
         specifier: workspace:*
         version: link:../../tools/placeholder-generator
+      '@tool-platform/polyfill-finder':
+        specifier: workspace:*
+        version: link:../../tools/polyfill-finder
       '@tool-platform/pomodoro-focus-timer':
         specifier: workspace:*
         version: link:../../tools/pomodoro-focus-timer
@@ -593,6 +674,9 @@ importers:
       '@tool-platform/prometheus-query-helper':
         specifier: workspace:*
         version: link:../../tools/prometheus-query-helper
+      '@tool-platform/prompt-template-builder':
+        specifier: workspace:*
+        version: link:../../tools/prompt-template-builder
       '@tool-platform/punycode-converter':
         specifier: workspace:*
         version: link:../../tools/punycode-converter
@@ -605,6 +689,9 @@ importers:
       '@tool-platform/query-param-builder':
         specifier: workspace:*
         version: link:../../tools/query-param-builder
+      '@tool-platform/quiz-generator':
+        specifier: workspace:*
+        version: link:../../tools/quiz-generator
       '@tool-platform/random-picker':
         specifier: workspace:*
         version: link:../../tools/random-picker
@@ -629,6 +716,9 @@ importers:
       '@tool-platform/resource-unit-converter':
         specifier: workspace:*
         version: link:../../tools/resource-unit-converter
+      '@tool-platform/resume-builder':
+        specifier: workspace:*
+        version: link:../../tools/resume-builder
       '@tool-platform/retro-arcade':
         specifier: workspace:*
         version: link:../../tools/retro-arcade
@@ -644,9 +734,15 @@ importers:
       '@tool-platform/roman-numeral-converter':
         specifier: workspace:*
         version: link:../../tools/roman-numeral-converter
+      '@tool-platform/rsa-key-pair-generator':
+        specifier: workspace:*
+        version: link:../../tools/rsa-key-pair-generator
       '@tool-platform/ruby-playground':
         specifier: workspace:*
         version: link:../../tools/ruby-playground
+      '@tool-platform/saml-decoder':
+        specifier: workspace:*
+        version: link:../../tools/saml-decoder
       '@tool-platform/sbom-viewer':
         specifier: workspace:*
         version: link:../../tools/sbom-viewer
@@ -659,6 +755,15 @@ importers:
       '@tool-platform/semgrep-rule-playground':
         specifier: workspace:*
         version: link:../../tools/semgrep-rule-playground
+      '@tool-platform/semver-calculator':
+        specifier: workspace:*
+        version: link:../../tools/semver-calculator
+      '@tool-platform/shell-formatter':
+        specifier: workspace:*
+        version: link:../../tools/shell-formatter
+      '@tool-platform/shipping-cost-calculator':
+        specifier: workspace:*
+        version: link:../../tools/shipping-cost-calculator
       '@tool-platform/sitemap-xml-generator':
         specifier: workspace:*
         version: link:../../tools/sitemap-xml-generator
@@ -698,6 +803,9 @@ importers:
       '@tool-platform/sql-playground':
         specifier: workspace:*
         version: link:../../tools/sql-playground
+      '@tool-platform/ssh-key-inspector':
+        specifier: workspace:*
+        version: link:../../tools/ssh-key-inspector
       '@tool-platform/stress-relief-box':
         specifier: workspace:*
         version: link:../../tools/stress-relief-box
@@ -737,6 +845,9 @@ importers:
       '@tool-platform/text-inspector':
         specifier: workspace:*
         version: link:../../tools/text-inspector
+      '@tool-platform/text-replacer':
+        specifier: workspace:*
+        version: link:../../tools/text-replacer
       '@tool-platform/threat-model-canvas':
         specifier: workspace:*
         version: link:../../tools/threat-model-canvas
@@ -749,6 +860,12 @@ importers:
       '@tool-platform/tls-certificate-parser':
         specifier: workspace:*
         version: link:../../tools/tls-certificate-parser
+      '@tool-platform/token-counter':
+        specifier: workspace:*
+        version: link:../../tools/token-counter
+      '@tool-platform/toml-formatter':
+        specifier: workspace:*
+        version: link:../../tools/toml-formatter
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../tool-contracts
@@ -794,6 +911,9 @@ importers:
       '@tool-platform/wav-audio-inspector':
         specifier: workspace:*
         version: link:../../tools/wav-audio-inspector
+      '@tool-platform/wcag-contrast-checker':
+        specifier: workspace:*
+        version: link:../../tools/wcag-contrast-checker
       '@tool-platform/webgpu-capability-reporter':
         specifier: workspace:*
         version: link:../../tools/webgpu-capability-reporter
@@ -803,6 +923,9 @@ importers:
       '@tool-platform/websocket-client':
         specifier: workspace:*
         version: link:../../tools/websocket-client
+      '@tool-platform/word-counter-pro':
+        specifier: workspace:*
+        version: link:../../tools/word-counter-pro
       '@tool-platform/world-clock':
         specifier: workspace:*
         version: link:../../tools/world-clock
@@ -872,6 +995,24 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/ai-model-benchmark:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/ai-response-comparator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/ai-sandbox-lab:
     dependencies:
       '@tool-platform/tool-browser-sdk':
@@ -905,6 +1046,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/anki-card-exporter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/api-error-code-doc-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -914,7 +1064,25 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/api-key-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/api-rate-limit-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/api-route-designer:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1118,7 +1286,25 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/code-complexity-analyzer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/code-to-image:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/color-palette-extractor:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1190,6 +1376,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/csp-evaluator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/csp-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1227,6 +1422,24 @@ importers:
         version: 19.2.6
 
   tools/csv-cleaner:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/csv-json-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/csv-markdown-table:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1280,6 +1493,24 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/daily-standup-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/data-schema-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/data-url-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1317,6 +1548,15 @@ importers:
         version: 19.2.6
 
   tools/dependency-risk-explainer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/design-token-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1460,7 +1700,34 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/excel-formula-builder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/exif-data-viewer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/favicon-app-icon-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/feature-flag-manager:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1613,6 +1880,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/habit-tracker:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/har-viewer:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1623,6 +1899,15 @@ importers:
         version: 19.2.6
 
   tools/hash-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/hashtag-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1712,7 +1997,34 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/icon-resizer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/image-base64:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/image-compressor:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/image-cropper:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -1794,6 +2106,24 @@ importers:
         version: 19.2.6
 
   tools/jwt-jwk-verifier:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/k8s-namespace-designer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/k8s-pod-troubleshooter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2018,6 +2348,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/naming-convention-converter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/nato-alphabet-converter:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2037,6 +2376,15 @@ importers:
         version: 19.2.6
 
   tools/neon-tetris:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/nginx-config-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2126,6 +2474,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/parquet-schema-viewer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/password-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2207,6 +2564,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/polyfill-finder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/pomodoro-focus-timer:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2235,6 +2601,15 @@ importers:
         version: 19.2.6
 
   tools/prometheus-query-helper:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/prompt-template-builder:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2274,6 +2649,15 @@ importers:
         version: 19.2.6
 
   tools/query-param-builder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/quiz-generator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2354,6 +2738,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/resume-builder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/retro-arcade:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2399,6 +2792,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/rsa-key-pair-generator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/ruby-playground:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2407,6 +2809,15 @@ importers:
       '@tool-platform/worker-runtime':
         specifier: workspace:*
         version: link:../../packages/worker-runtime
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/saml-decoder:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
       react:
         specifier: ^19.0.0
         version: 19.2.6
@@ -2439,6 +2850,33 @@ importers:
         version: 19.2.6
 
   tools/semgrep-rule-playground:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/semver-calculator:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/shell-formatter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/shipping-cost-calculator:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2560,6 +2998,15 @@ importers:
       '@tool-platform/tool-browser-sdk':
         specifier: workspace:*
         version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/ssh-key-inspector:
+    dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2690,6 +3137,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/text-replacer:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/threat-model-canvas:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2718,6 +3174,24 @@ importers:
         version: 19.2.6
 
   tools/tls-certificate-parser:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/token-counter:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/toml-formatter:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
@@ -2858,6 +3332,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/wcag-contrast-checker:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/webgpu-capability-reporter:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2877,6 +3360,15 @@ importers:
         version: 19.2.6
 
   tools/websocket-client:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/word-counter-pro:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
