@@ -113,7 +113,7 @@ export default function JsonpathTesterTool({ manifest }: ToolAppProps) {
           {parseError ? <p className="tool-error">{parseError}</p> : null}
         </div>
       </div>
-      <p className="tool-note">支持 JSONPath 点号语法、数组索引 `[n]` 和过滤表达式 `[?(@.price > 10)]`。</p>
+      <p className="tool-note">支持 JSONPath 点号语法、数组索引 `[n]` 和过滤表达式 `[?(@.price &gt; 10)]`。</p>
     </section>
   );
 }

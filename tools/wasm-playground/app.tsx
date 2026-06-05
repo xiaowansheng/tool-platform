@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
-import { createToolSdk, loadWasm } from "@tool-platform/tool-browser-sdk";
+import { createToolSdk } from "@tool-platform/tool-browser-sdk";
 
 interface WasmSection {
   name: string;
@@ -123,7 +123,7 @@ export default function WasmPlaygroundTool({ manifest }: ToolAppProps) {
     setStatus("编译中...");
     try {
       const sections = parseSections(bytes);
-      const { instance } = await loadWasm({ source: bytes.buffer as ArrayBuffer, key: "playground-${Date.now()}" });
+      const { instance } = await sdk.loadWasm({ source: bytes.buffer as ArrayBuffer, key: "playground-${Date.now()}" });
       instanceRef.current = instance;
       const exports = inspectExports(instance);
       setModule({ sections, exports, imports: [], size: bytes.length });

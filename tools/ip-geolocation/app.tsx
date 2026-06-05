@@ -4,12 +4,11 @@ import { useRef, useState } from "react";
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 import { createToolSdk } from "@tool-platform/tool-browser-sdk";
 
-interface GeoIPResult {
+interface GeoResult {
   ip: string;
   country: string;
   countryCode: string;
   region: string;
-  regionName: string;
   city: string;
   zip: string;
   lat: number;
@@ -18,12 +17,11 @@ interface GeoIPResult {
   isp: string;
   org: string;
   as: string;
-  query: string;
 }
 
 interface QueryRecord {
   ip: string;
-  result: GeoIPResult | null;
+  result: GeoResult | null;
   error: string;
   time: string;
 }
@@ -43,14 +41,13 @@ export default function IpGeolocationTool({ manifest }: ToolAppProps) {
     const records: QueryRecord[] = [];
     for (const ip of ips) {
       try {
-        const res = await fetch(`https://ip-api.com/json/${encodeURIComponent(ip)}?fields=query,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as`);
-        const data = await res.json() as GeoIPResult & { status?: string };
-        records.push({
-          ip: data.query || ip,
-          result: data.status === "success" ? data : null,
-          error: data.status === "fail" ? "查询失败" : "",
-          time: new Date().toLocaleTimeString(),
-        });
+        const res = await fetch(`https://api.techniknews.net/ipgeo/${encodeURIComponent(ip)}`);
+        const data = await res.json() as GeoResult & { status?: string; message?: string };
+        if (data.status === "fail") {
+          records.push({ ip, result: null, error: data.message ?? "查询失败", time: new Date().toLocaleTimeString() });
+        } else {
+          records.push({ ip, result: data, error: "", time: new Date().toLocaleTimeString() });
+        }
       } catch (e) {
         records.push({ ip, result: null, error: e instanceof Error ? e.message : "请求失败", time: new Date().toLocaleTimeString() });
       }
@@ -79,7 +76,7 @@ export default function IpGeolocationTool({ manifest }: ToolAppProps) {
           {r.result ? (
             <div className="detail-grid">
               <article><h4>国家</h4><p>{r.result.country} ({r.result.countryCode})</p></article>
-              <article><h4>地区/城市</h4><p>{r.result.regionName} / {r.result.city}</p></article>
+              <article><h4>地区/城市</h4><p>{r.result.region} / {r.result.city}</p></article>
               <article><h4>坐标</h4><p>{r.result.lat}, {r.result.lon}</p></article>
               <article><h4>时区</h4><p>{r.result.timezone}</p></article>
               <article><h4>ISP</h4><p>{r.result.isp}</p></article>

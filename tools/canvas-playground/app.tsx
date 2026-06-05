@@ -21,7 +21,7 @@ for (let i = 0; i < 12; i++) {
   const y = cy + Math.sin(angle) * r;
   ctx.beginPath();
   ctx.arc(x, y, 24, 0, Math.PI * 2);
-  ctx.fillStyle = `hsl(${i * 30}, 80%, 60%)`;
+  ctx.fillStyle = "hsl(" + (i * 30) + ", 80%, 60%)";
   ctx.fill();
 }
 

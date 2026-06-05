@@ -203,6 +203,9 @@ importers:
       '@tool-platform/benchmark-builder':
         specifier: workspace:*
         version: link:../../tools/benchmark-builder
+      '@tool-platform/binaural-beats':
+        specifier: workspace:*
+        version: link:../../tools/binaural-beats
       '@tool-platform/border-radius-generator':
         specifier: workspace:*
         version: link:../../tools/border-radius-generator
@@ -215,6 +218,9 @@ importers:
       '@tool-platform/browser-sandbox-console':
         specifier: workspace:*
         version: link:../../tools/browser-sandbox-console
+      '@tool-platform/canvas-playground':
+        specifier: workspace:*
+        version: link:../../tools/canvas-playground
       '@tool-platform/case-converter':
         specifier: workspace:*
         version: link:../../tools/case-converter
@@ -464,6 +470,12 @@ importers:
       '@tool-platform/http-header-parser':
         specifier: workspace:*
         version: link:../../tools/http-header-parser
+      '@tool-platform/http-redirect-tracker':
+        specifier: workspace:*
+        version: link:../../tools/http-redirect-tracker
+      '@tool-platform/http-request-inspector':
+        specifier: workspace:*
+        version: link:../../tools/http-request-inspector
       '@tool-platform/http-security-headers-checker':
         specifier: workspace:*
         version: link:../../tools/http-security-headers-checker
@@ -491,9 +503,15 @@ importers:
       '@tool-platform/incident-timeline-generator':
         specifier: workspace:*
         version: link:../../tools/incident-timeline-generator
+      '@tool-platform/ip-geolocation':
+        specifier: workspace:*
+        version: link:../../tools/ip-geolocation
       '@tool-platform/ipv4-cidr-calculator':
         specifier: workspace:*
         version: link:../../tools/ipv4-cidr-calculator
+      '@tool-platform/ipv6-subnet-calculator':
+        specifier: workspace:*
+        version: link:../../tools/ipv6-subnet-calculator
       '@tool-platform/json-diff':
         specifier: workspace:*
         version: link:../../tools/json-diff
@@ -503,6 +521,9 @@ importers:
       '@tool-platform/json-schema-studio':
         specifier: workspace:*
         version: link:../../tools/json-schema-studio
+      '@tool-platform/jsonpath-tester':
+        specifier: workspace:*
+        version: link:../../tools/jsonpath-tester
       '@tool-platform/jwt-decoder':
         specifier: workspace:*
         version: link:../../tools/jwt-decoder
@@ -548,6 +569,9 @@ importers:
       '@tool-platform/lorem-ipsum-generator':
         specifier: workspace:*
         version: link:../../tools/lorem-ipsum-generator
+      '@tool-platform/mac-address-lookup':
+        specifier: workspace:*
+        version: link:../../tools/mac-address-lookup
       '@tool-platform/markdown-linter':
         specifier: workspace:*
         version: link:../../tools/markdown-linter
@@ -599,6 +623,12 @@ importers:
       '@tool-platform/neon-tetris':
         specifier: workspace:*
         version: link:../../tools/neon-tetris
+      '@tool-platform/network-bandwidth-calculator':
+        specifier: workspace:*
+        version: link:../../tools/network-bandwidth-calculator
+      '@tool-platform/network-connection-info':
+        specifier: workspace:*
+        version: link:../../tools/network-connection-info
       '@tool-platform/nginx-config-generator':
         specifier: workspace:*
         version: link:../../tools/nginx-config-generator
@@ -704,12 +734,18 @@ importers:
       '@tool-platform/readme-quality-checker':
         specifier: workspace:*
         version: link:../../tools/readme-quality-checker
+      '@tool-platform/realtime-ping-monitor':
+        specifier: workspace:*
+        version: link:../../tools/realtime-ping-monitor
       '@tool-platform/regex-batch-extractor':
         specifier: workspace:*
         version: link:../../tools/regex-batch-extractor
       '@tool-platform/regex-tester':
         specifier: workspace:*
         version: link:../../tools/regex-tester
+      '@tool-platform/regex-wasm-engine':
+        specifier: workspace:*
+        version: link:../../tools/regex-wasm-engine
       '@tool-platform/release-notes-builder':
         specifier: workspace:*
         version: link:../../tools/release-notes-builder
@@ -791,6 +827,9 @@ importers:
       '@tool-platform/spaced-repetition-planner':
         specifier: workspace:*
         version: link:../../tools/spaced-repetition-planner
+      '@tool-platform/spectrum-analyzer':
+        specifier: workspace:*
+        version: link:../../tools/spectrum-analyzer
       '@tool-platform/sql-explain-visualizer':
         specifier: workspace:*
         version: link:../../tools/sql-explain-visualizer
@@ -821,6 +860,9 @@ importers:
       '@tool-platform/svg-optimizer-viewbox-editor':
         specifier: workspace:*
         version: link:../../tools/svg-optimizer-viewbox-editor
+      '@tool-platform/svg-playground':
+        specifier: workspace:*
+        version: link:../../tools/svg-playground
       '@tool-platform/systemd-unit-analyzer':
         specifier: workspace:*
         version: link:../../tools/systemd-unit-analyzer
@@ -902,18 +944,30 @@ importers:
       '@tool-platform/uuid-generator':
         specifier: workspace:*
         version: link:../../tools/uuid-generator
+      '@tool-platform/visual-metronome':
+        specifier: workspace:*
+        version: link:../../tools/visual-metronome
       '@tool-platform/wasm-binary-inspector':
         specifier: workspace:*
         version: link:../../tools/wasm-binary-inspector
       '@tool-platform/wasm-integer-math-lab':
         specifier: workspace:*
         version: link:../../tools/wasm-integer-math-lab
+      '@tool-platform/wasm-module-diff':
+        specifier: workspace:*
+        version: link:../../tools/wasm-module-diff
+      '@tool-platform/wasm-playground':
+        specifier: workspace:*
+        version: link:../../tools/wasm-playground
       '@tool-platform/wav-audio-inspector':
         specifier: workspace:*
         version: link:../../tools/wav-audio-inspector
       '@tool-platform/wcag-contrast-checker':
         specifier: workspace:*
         version: link:../../tools/wcag-contrast-checker
+      '@tool-platform/web-component-lab':
+        specifier: workspace:*
+        version: link:../../tools/web-component-lab
       '@tool-platform/webgpu-capability-reporter':
         specifier: workspace:*
         version: link:../../tools/webgpu-capability-reporter
@@ -1190,6 +1244,18 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/binaural-beats:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/border-radius-generator:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -1218,6 +1284,18 @@ importers:
         version: 19.2.6
 
   tools/browser-sandbox-console:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/canvas-playground:
     dependencies:
       '@tool-platform/tool-browser-sdk':
         specifier: workspace:*
@@ -1979,6 +2057,30 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/http-redirect-tracker:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/http-request-inspector:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/http-security-headers-checker:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2060,8 +2162,32 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/ip-geolocation:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/ipv4-cidr-calculator:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/ipv6-subnet-calculator:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2089,6 +2215,18 @@ importers:
 
   tools/json-schema-studio:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/jsonpath-tester:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2224,6 +2362,18 @@ importers:
 
   tools/lorem-ipsum-generator:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/mac-address-lookup:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2377,6 +2527,30 @@ importers:
 
   tools/neon-tetris:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/network-bandwidth-calculator:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/network-connection-info:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2702,6 +2876,18 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/realtime-ping-monitor:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/regex-batch-extractor:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -2713,6 +2899,18 @@ importers:
 
   tools/regex-tester:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/regex-wasm-engine:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -2966,6 +3164,18 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/spectrum-analyzer:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/sql-explain-visualizer:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -3052,6 +3262,18 @@ importers:
 
   tools/svg-optimizer-viewbox-editor:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/svg-playground:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts
@@ -3302,6 +3524,18 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/visual-metronome:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/wasm-binary-inspector:
     dependencies:
       '@tool-platform/tool-browser-sdk':
@@ -3323,6 +3557,30 @@ importers:
         specifier: ^19.0.0
         version: 19.2.6
 
+  tools/wasm-module-diff:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/wasm-playground:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
   tools/wav-audio-inspector:
     dependencies:
       '@tool-platform/tool-contracts':
@@ -3334,6 +3592,18 @@ importers:
 
   tools/wcag-contrast-checker:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/web-component-lab:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts

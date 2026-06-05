@@ -122,7 +122,7 @@ export default function RegexWasmEngineTool({ manifest }: ToolAppProps) {
         </div>
       </div>
       {error ? <p className="tool-error">{error}</p> : null}
-      <p className="tool-note">WASM 引擎使用浏览器原生 WebAssembly.RegExp 加速路径；加速比 > 1 表示 WASM 更快。</p>
+      <p className="tool-note">WASM 引擎使用浏览器原生 WebAssembly.RegExp 加速路径；加速比 &gt; 1 表示 WASM 更快。</p>
     </section>
   );
 }

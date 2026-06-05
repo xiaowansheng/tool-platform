@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
-import { createToolSdk, loadWasm } from "@tool-platform/tool-browser-sdk";
+import { createToolSdk } from "@tool-platform/tool-browser-sdk";
 
 interface SectionInfo { name: string; offset: number; size: number }
 interface ExportInfo { name: string; kind: string }
