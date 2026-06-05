@@ -174,6 +174,7 @@
     "@tool-platform/minesweeper": "workspace:*",
     "@tool-platform/mock-data-generator": "workspace:*",
     "@tool-platform/morse-code": "workspace:*",
+    "@tool-platform/my-device-info": "workspace:*",
     "@tool-platform/naming-convention-converter": "workspace:*",
     "@tool-platform/nato-alphabet-converter": "workspace:*",
     "@tool-platform/neon-snake": "workspace:*",

@@ -611,6 +611,9 @@ importers:
       '@tool-platform/morse-code':
         specifier: workspace:*
         version: link:../../tools/morse-code
+      '@tool-platform/my-device-info':
+        specifier: workspace:*
+        version: link:../../tools/my-device-info
       '@tool-platform/naming-convention-converter':
         specifier: workspace:*
         version: link:../../tools/naming-convention-converter
@@ -2491,6 +2494,18 @@ importers:
 
   tools/morse-code:
     dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/my-device-info:
+    dependencies:
+      '@tool-platform/tool-browser-sdk':
+        specifier: workspace:*
+        version: link:../../packages/tool-browser-sdk
       '@tool-platform/tool-contracts':
         specifier: workspace:*
         version: link:../../packages/tool-contracts

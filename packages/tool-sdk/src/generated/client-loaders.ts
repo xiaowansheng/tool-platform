@@ -171,6 +171,7 @@ export const toolAppLoaders = {
   "minesweeper": () => import("@tool-platform/minesweeper/app"),
   "mock-data-generator": () => import("@tool-platform/mock-data-generator/app"),
   "morse-code": () => import("@tool-platform/morse-code/app"),
+  "my-device-info": () => import("@tool-platform/my-device-info/app"),
   "naming-convention-converter": () => import("@tool-platform/naming-convention-converter/app"),
   "nato-alphabet-converter": () => import("@tool-platform/nato-alphabet-converter/app"),
   "neon-snake": () => import("@tool-platform/neon-snake/app"),

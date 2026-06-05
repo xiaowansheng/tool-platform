@@ -160,6 +160,7 @@ import MimeTypeLookupManifest from "@tool-platform/mime-type-lookup/manifest";
 import MinesweeperManifest from "@tool-platform/minesweeper/manifest";
 import MockDataGeneratorManifest from "@tool-platform/mock-data-generator/manifest";
 import MorseCodeManifest from "@tool-platform/morse-code/manifest";
+import MyDeviceInfoManifest from "@tool-platform/my-device-info/manifest";
 import NamingConventionConverterManifest from "@tool-platform/naming-convention-converter/manifest";
 import NatoAlphabetConverterManifest from "@tool-platform/nato-alphabet-converter/manifest";
 import NeonSnakeManifest from "@tool-platform/neon-snake/manifest";
@@ -450,6 +451,7 @@ export const toolManifests: ToolManifest[] = [
   MinesweeperManifest,
   MockDataGeneratorManifest,
   MorseCodeManifest,
+  MyDeviceInfoManifest,
   NamingConventionConverterManifest,
   NatoAlphabetConverterManifest,
   NeonSnakeManifest,
