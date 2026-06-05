@@ -13,6 +13,11 @@
   background: color-mix(in srgb, var(--sidebar-bg) 94%, transparent);
   backdrop-filter: blur(18px) saturate(1.15);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  transition: left var(--duration-normal) var(--ease-out);
+}
+
+.app-shell--sidebar-collapsed .workspace-tabs {
+  left: 0;
 }
 
 .main__content {

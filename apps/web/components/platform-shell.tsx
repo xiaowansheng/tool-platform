@@ -1,5 +1,8 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
 import { categories, getAllTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
@@ -81,6 +84,7 @@ export function PlatformShell({ children }: { children: ReactNode }) {
   const commonToolsT = useTranslations("commonTools");
   const favoriteToolsT = useTranslations("favoriteTools");
   const tools = getAllTools();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const workspaceTabs: WorkspaceTabDefinition[] = [
     { id: "/", name: t("home"), kind: "home" },
     { id: "/search", name: t("search"), kind: "search" },
@@ -107,10 +111,18 @@ export function PlatformShell({ children }: { children: ReactNode }) {
   ];
 
   return (
-    <div className="app-shell">
-      <aside className="sidebar sidebar--desktop">
+    <div className={`app-shell${sidebarCollapsed ? " app-shell--sidebar-collapsed" : ""}`}>
+      <aside className={`sidebar sidebar--desktop${sidebarCollapsed ? " sidebar--collapsed" : ""}`}>
         <SidebarContent tools={tools} />
       </aside>
+
+      <button
+        className="sidebar-toggle"
+        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+        aria-label={sidebarCollapsed ? "展开侧边栏" : "收起侧边栏"}
+      >
+        {sidebarCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
+      </button>
 
       <MobileNavigation>
         <SidebarContent tools={tools} />

@@ -329,6 +329,11 @@ textarea {
   display: grid;
   grid-template-columns: 17rem 1fr;
   min-height: 100vh;
+  transition: grid-template-columns var(--duration-normal) var(--ease-out);
+}
+
+.app-shell--sidebar-collapsed {
+  grid-template-columns: 0 1fr;
 }
 
 /* ---------- Sidebar ---------- */
@@ -344,6 +349,19 @@ textarea {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  transition:
+    padding var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
+}
+
+.sidebar--collapsed {
+  padding: 1.25rem 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
 }
 
 .sidebar__brand {
@@ -420,6 +438,50 @@ textarea {
 .sidebar__footer p {
   font-size: 0.78rem;
   line-height: 1.6;
+}
+
+/* ---------- Sidebar Toggle Button ---------- */
+
+.sidebar-toggle {
+  position: fixed;
+  top: 0.65rem;
+  left: 17rem;
+  z-index: 75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-left: none;
+  background: var(--sidebar-bg);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition:
+    left var(--duration-normal) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.sidebar-toggle:hover {
+  background: var(--sidebar-link-hover);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+  transform: none;
+  box-shadow: none;
+}
+
+.sidebar-toggle:active {
+  transform: none;
+}
+
+.app-shell--sidebar-collapsed .sidebar-toggle {
+  left: 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-left: 1px solid var(--border-subtle);
 }
 
 .sidebar__link {
@@ -3129,6 +3191,10 @@ a.category-card:hover .category-card__tooltip {
   }
 
   .sidebar--desktop {
+    display: none;
+  }
+
+  .sidebar-toggle {
     display: none;
   }
 
