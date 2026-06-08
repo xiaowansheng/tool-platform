@@ -85,7 +85,8 @@
     "emptyFiltered": "没有命中当前筛选",
     "emptyCategory": "这个分类还没有落地工具",
     "emptyFilteredDescription": "换一个关键词试试，例如工具名称、标签或运行时类型。",
-    "emptyCategoryDescription": "分类体系已经建立，后续工具接入后会自动进入当前目录和搜索索引。"
+    "emptyCategoryDescription": "分类体系已经建立，后续工具接入后会自动进入当前目录和搜索索引。",
+    "visitCount": "累计访问 %c 次"
   },
   "commonTools": {
     "title": "常用工具",

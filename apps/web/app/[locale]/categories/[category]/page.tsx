@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { CommonToolsPage, FavoriteToolsPage } from "@/components/common-tools";
 import { SearchSurface } from "@/components/search-surface";
 import { Topbar } from "@/components/topbar";
+import { CategoryVisitCount } from "@/components/category-visit-count";
 import { COMMON_TOOLS_CATEGORY_ID, FAVORITE_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
 import { categories, getToolsByCategory, getAllTools, type ToolCategory, type ToolManifest } from "@tool-platform/tool-sdk";
 
@@ -44,6 +45,10 @@ function CategoryPageContent({ category, tools }: { category: ToolCategory; tool
     <>
       <Topbar title={label} subtitle={description} />
       <div className="content-stack">
+        <CategoryVisitCount
+          categoryId={category}
+          label={t("visitCount")}
+        />
         <SearchSurface
           tools={tools}
           title={t("filterTitle", { category: label })}

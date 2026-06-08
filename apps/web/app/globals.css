@@ -829,6 +829,18 @@ textarea {
   margin: 0 0 0.25rem;
 }
 
+.category-visit-count {
+  display: block;
+  color: var(--accent-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--accent-primary-dim);
+  border-radius: 8px;
+  width: fit-content;
+}
+
 .tool-card .tag-list {
   min-height: 2rem;
   overflow: hidden;

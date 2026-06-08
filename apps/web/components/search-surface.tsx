@@ -8,6 +8,7 @@ import { searchTools, type ToolManifest } from "@tool-platform/tool-sdk";
 import { getToolPageManifest } from "@/lib/tool-page-copy";
 
 import { ToolCard } from "./tool-card";
+import { ToolCardsWithVisits } from "./tool-visits";
 
 export function SearchSurface({
   tools,
@@ -61,9 +62,13 @@ export function SearchSurface({
       </div>
       {filteredTools.length > 0 ? (
         <div className="card-grid">
-          {filteredTools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
+          <ToolCardsWithVisits>
+            {(visits) =>
+              filteredTools.map((tool) => (
+                <ToolCard key={tool.id} tool={tool} visitCount={visits.get(tool.id) ?? 0} />
+              ))
+            }
+          </ToolCardsWithVisits>
         </div>
       ) : (
         <div className="empty-state">

@@ -85,7 +85,8 @@
     "emptyFiltered": "No matches for current filter",
     "emptyCategory": "No tools in this category yet",
     "emptyFilteredDescription": "Try a different keyword, such as tool name, tag, or runtime type.",
-    "emptyCategoryDescription": "The category system is in place — tools will appear here as they are registered."
+    "emptyCategoryDescription": "The category system is in place — tools will appear here as they are registered.",
+    "visitCount": "%c total visits"
   },
   "commonTools": {
     "title": "Common Tools",
