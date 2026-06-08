@@ -7,7 +7,7 @@ export function Topbar({
   subtitle
 }: {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }) {
   const t = useTranslations("topbar");
 
@@ -16,7 +16,7 @@ export function Topbar({
       <div className="topbar__title">
         <span className="pill">Workspace</span>
         <h1>{title}</h1>
-        <p className="topbar__subtext">{subtitle}</p>
+        {subtitle && <p className="topbar__subtext">{subtitle}</p>}
       </div>
       <div className="topbar__actions">
         <Link className="button-link" href="/search">

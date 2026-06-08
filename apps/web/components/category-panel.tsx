@@ -17,7 +17,6 @@ export function CategoryPanel() {
       <div className="section-header">
         <div>
           <h2>{t("title")}</h2>
-          <p>{t("description")}</p>
         </div>
       </div>
       <div className="category-grid">

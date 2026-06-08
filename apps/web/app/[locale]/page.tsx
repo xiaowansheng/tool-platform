@@ -14,12 +14,11 @@ export default function HomePage() {
 
   return (
     <>
-      <Topbar title="Tool Platform" subtitle={t("subtitle")} />
+      <Topbar title="Tool Platform" />
       <div className="content-stack">
         <section className="hero">
           <span className="pill">Phase One</span>
           <h2>{t("heroTitle")}</h2>
-          <p>{t("heroDescription")}</p>
           <div className="hero__stats">
             <article className="stat-card">
               <strong>{allTools.length}</strong>

@@ -14,7 +14,6 @@ export function FeaturedToolsSection() {
       <div className="section-header">
         <div>
           <h2>{t("quickTools")}</h2>
-          <p>{t("quickToolsDescription")}</p>
         </div>
       </div>
       <div className="card-grid">
