@@ -35,7 +35,7 @@ export function CategoryPanel() {
                   <span className="category-card__count">{toolCount}</span>
                   {visitCount > 0 && (
                     <span className="category-card__visits">
-                      {t("categoryPanel.visitCount", { count: visitCount >= 1000 ? (visitCount / 1000).toFixed(1) + "k" : String(visitCount) })}
+                      {t("visitCount", { count: visitCount >= 1000 ? (visitCount / 1000).toFixed(1) + "k" : String(visitCount) })}
                     </span>
                   )}
                   <span className="category-card__tooltip">{ct(`${category.id}.description`)}</span>
