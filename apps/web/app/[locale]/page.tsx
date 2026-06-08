@@ -1,9 +1,8 @@
 import { useTranslations } from "next-intl";
 
 import { CategoryPanel } from "@/components/category-panel";
+import { FeaturedToolsSection } from "@/components/featured-tools-section";
 import { RankingPanel } from "@/components/ranking-panel";
-import { ToolCard } from "@/components/tool-card";
-import { ToolCardsWithVisits } from "@/components/tool-visits";
 import { Topbar } from "@/components/topbar";
 import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
 import { categories, getAllTools, getFeaturedTools } from "@tool-platform/tool-sdk";
@@ -39,23 +38,7 @@ export default function HomePage() {
 
         <CategoryPanel />
 
-        <section className="stat-card">
-          <div className="section-header">
-            <div>
-              <h2>{t("quickTools")}</h2>
-              <p>{t("quickToolsDescription")}</p>
-            </div>
-          </div>
-          <div className="card-grid">
-            <ToolCardsWithVisits>
-              {(visits) =>
-                featuredTools.map((tool) => (
-                  <ToolCard key={tool.id} tool={tool} visitCount={visits.get(tool.id)} />
-                ))
-              }
-            </ToolCardsWithVisits>
-          </div>
-        </section>
+        <FeaturedToolsSection />
 
         <RankingPanel
           toolTitle={t("topTools")}
