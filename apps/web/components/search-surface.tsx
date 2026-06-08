@@ -35,6 +35,13 @@ export function SearchSurface({
   const filteredTools = searchTools(localizedTools, deferredQuery);
   const [visitMap, setVisitMap] = useState<Map<string, number>>(new Map());
 
+  const sortedTools = useMemo(() => {
+    if (deferredQuery) return filteredTools;
+    return [...filteredTools].sort(
+      (a, b) => (visitMap.get(b.id) ?? 0) - (visitMap.get(a.id) ?? 0)
+    );
+  }, [filteredTools, deferredQuery, visitMap]);
+
   useEffect(() => {
     let mounted = true;
     fetchToolRanking(100).then((items) => {
@@ -55,7 +62,7 @@ export function SearchSurface({
           <h2>{title ?? t("title")}</h2>
           <p>{subtitle ?? t("subtitle")}</p>
         </div>
-        <span className="pill">{t("results", { count: filteredTools.length })}</span>
+        <span className="pill">{t("results", { count: sortedTools.length })}</span>
       </div>
       <div className="search-row">
         <input
@@ -74,9 +81,9 @@ export function SearchSurface({
           </button>
         )}
       </div>
-      {filteredTools.length > 0 ? (
+      {sortedTools.length > 0 ? (
         <div className="card-grid">
-          {filteredTools.map((tool) => (
+          {sortedTools.map((tool) => (
             <ToolCard key={tool.id} tool={tool} visitCount={visitMap.get(tool.id) ?? 0} />
           ))}
         </div>
