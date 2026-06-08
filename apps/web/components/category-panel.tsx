@@ -33,11 +33,9 @@ export function CategoryPanel() {
                   <h3>{ct(`${category.id}.label`)}</h3>
                   <p title={ct(`${category.id}.description`)}>{ct(`${category.id}.description`)}</p>
                   <span className="category-card__count">{toolCount}</span>
-                  {visitCount > 0 && (
-                    <span className="category-card__visits">
-                      {t("visitCount", { count: visitCount >= 1000 ? (visitCount / 1000).toFixed(1) + "k" : String(visitCount) })}
-                    </span>
-                  )}
+                  <span className="category-card__visits">
+                    {t("visitCount", { count: visitCount >= 1000 ? (visitCount / 1000).toFixed(1) + "k" : String(visitCount) })}
+                  </span>
                   <span className="category-card__tooltip">{ct(`${category.id}.description`)}</span>
                 </Link>
               );

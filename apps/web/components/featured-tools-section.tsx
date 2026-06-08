@@ -21,7 +21,7 @@ export function FeaturedToolsSection() {
         <ToolCardsWithVisits>
           {(visits) =>
             featuredTools.map((tool) => (
-              <ToolCard key={tool.id} tool={tool} visitCount={visits.get(tool.id)} />
+              <ToolCard key={tool.id} tool={tool} visitCount={visits.get(tool.id) ?? 0} />
             ))
           }
         </ToolCardsWithVisits>

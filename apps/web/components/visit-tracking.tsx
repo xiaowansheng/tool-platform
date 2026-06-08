@@ -10,7 +10,7 @@ export function SiteVisitTracker() {
     if (tracked.current) return;
     tracked.current = true;
     const doTrack = trackSiteVisit();
-    const timer = setTimeout(doTrack, 800);
+    const timer = setTimeout(doTrack, 300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -24,7 +24,7 @@ export function ToolVisitTracker({ toolId }: { toolId: string }) {
     if (tracked.current) return;
     tracked.current = true;
     const doTrack = trackToolVisit(toolId);
-    const timer = setTimeout(doTrack, 800);
+    const timer = setTimeout(doTrack, 300);
     return () => clearTimeout(timer);
   }, [toolId]);
 

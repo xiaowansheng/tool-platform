@@ -45,7 +45,7 @@ export function ToolCard({ tool, visitCount }: { tool: ToolManifest; visitCount?
           </span>
         ) : null}
       </div>
-      {visitCount != null && visitCount > 0 && (
+      {visitCount != null && (
         <p className="tool-card__visits">
           {t("visits", { count: visitCount >= 1000 ? (visitCount / 1000).toFixed(1) + "k" : String(visitCount) })}
         </p>
