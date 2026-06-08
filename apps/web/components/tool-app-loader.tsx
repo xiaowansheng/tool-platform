@@ -4,51 +4,9 @@ import { ComponentType, lazy, Suspense, useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import { usePathname } from "@/i18n/navigation";
+import { getToolAppLocation } from "@/lib/tool-app-location";
 import { loadToolApp } from "@tool-platform/tool-sdk/client";
 import type { ToolAppProps, ToolManifest } from "@tool-platform/tool-sdk";
-
-function normalizePathname(pathname: string) {
-  return pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
-}
-
-function stripLocalePrefix(pathname: string, locale: string) {
-  const normalizedPathname = normalizePathname(pathname);
-  const localePrefix = `/${locale}`;
-
-  if (normalizedPathname === localePrefix) {
-    return "/";
-  }
-
-  if (normalizedPathname.startsWith(`${localePrefix}/`)) {
-    return normalizedPathname.slice(localePrefix.length);
-  }
-
-  return normalizedPathname;
-}
-
-function getToolAppLocation(pathname: string, locale: string, toolId: string) {
-  const normalizedPathname = stripLocalePrefix(pathname, locale);
-  const toolRootPath = `/tools/${toolId}`;
-
-  if (normalizedPathname === toolRootPath) {
-    return {
-      path: toolRootPath,
-      segments: []
-    };
-  }
-
-  if (normalizedPathname.startsWith(`${toolRootPath}/`)) {
-    return {
-      path: normalizedPathname,
-      segments: normalizedPathname.slice(toolRootPath.length + 1).split("/").filter(Boolean)
-    };
-  }
-
-  return {
-    path: toolRootPath,
-    segments: []
-  };
-}
 
 function MissingTool({ manifest }: ToolAppProps) {
   const t = useTranslations("toolLoader");
