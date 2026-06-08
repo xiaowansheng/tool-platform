@@ -10,6 +10,13 @@ RUN corepack enable && corepack prepare pnpm@10.28.1 --activate
 
 FROM base AS build
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    make \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY . .
 
 RUN pnpm install --frozen-lockfile
