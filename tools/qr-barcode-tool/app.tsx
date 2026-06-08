@@ -386,6 +386,10 @@ function renderCode128Svg(text: string) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${x + 10} 96" role="img"><rect width="${x + 10}" height="96" fill="#fff"/><g fill="#081018">${bars.join("")}</g></svg>`;
 }
 
+function svgToDataUrl(svg: string) {
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
 export default function QrBarcodeTool({ manifest }: ToolAppProps) {
   const [mode, setMode] = useState<CodeMode>("qr");
   const [value, setValue] = useState("https://tool-platform.local/tools/qr-barcode-tool");
@@ -393,13 +397,16 @@ export default function QrBarcodeTool({ manifest }: ToolAppProps) {
   const [scanError, setScanError] = useState("");
   const generated = useMemo(() => {
     try {
+      const svg = mode === "qr" ? renderQrSvg(value) : renderCode128Svg(value);
       return {
-        svg: mode === "qr" ? renderQrSvg(value) : renderCode128Svg(value),
+        svg,
+        previewUrl: svgToDataUrl(svg),
         error: ""
       };
     } catch (error) {
       return {
         svg: "",
+        previewUrl: "",
         error: error instanceof Error ? error.message : "编码失败"
       };
     }
@@ -425,15 +432,18 @@ export default function QrBarcodeTool({ manifest }: ToolAppProps) {
       return;
     }
 
+    let bitmap: ImageBitmap | null = null;
+
     try {
-      const bitmap = await createImageBitmap(file);
+      bitmap = await createImageBitmap(file);
       const detector = new Detector({ formats: ["qr_code", "code_128", "ean_13", "ean_8", "upc_a", "upc_e"] });
       const results = await detector.detect(bitmap);
-      bitmap.close();
       setDetected(results);
       setScanError("");
     } catch (error) {
       setScanError(error instanceof Error ? error.message : "图片解析失败");
+    } finally {
+      bitmap?.close();
     }
   }
 
@@ -467,7 +477,15 @@ export default function QrBarcodeTool({ manifest }: ToolAppProps) {
           <span>内容</span>
           <textarea value={value} onChange={(event) => setValue(event.target.value)} spellCheck={false} />
         </label>
-        <div className="visual-preview code-preview" dangerouslySetInnerHTML={{ __html: generated.svg }} />
+        <div className="visual-preview code-preview">
+          {generated.previewUrl ? (
+            <img
+              alt={`${mode === "qr" ? "QR Code" : "Code 128"} 预览`}
+              src={generated.previewUrl}
+              style={{ display: "block", maxHeight: "100%", maxWidth: "100%" }}
+            />
+          ) : null}
+        </div>
       </div>
       <div className="tool-table">
         <div className="tool-table__row tool-table__row--head">

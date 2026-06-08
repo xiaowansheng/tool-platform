@@ -38,6 +38,40 @@ const LOREM_WORDS = [
   "workflow", "platform", "runtime", "canvas", "system", "module", "signal", "studio"
 ];
 
+const MIN_PLACEHOLDER_SIZE = 10;
+const MAX_PLACEHOLDER_SIZE = 4000;
+const HEX_COLOR_PATTERN = /^#[0-9a-fA-F]{6}$/;
+const DEFAULT_FONT_FAMILY = FONT_PRESETS[0]?.value ?? "system-ui, -apple-system, sans-serif";
+
+function clampNumber(value: number, min: number, max: number, fallback: number) {
+  if (!Number.isFinite(value)) {
+    return fallback;
+  }
+
+  return Math.min(max, Math.max(min, value));
+}
+
+function normalizeDimension(value: number, fallback: number) {
+  return Math.round(clampNumber(value, MIN_PLACEHOLDER_SIZE, MAX_PLACEHOLDER_SIZE, fallback));
+}
+
+function normalizePercent(value: number, fallback: number) {
+  return clampNumber(value, 3, 30, fallback);
+}
+
+function normalizeColor(value: string, fallback: string) {
+  const trimmed = value.trim();
+  return HEX_COLOR_PATTERN.test(trimmed) ? trimmed : fallback;
+}
+
+function normalizeFontFamily(value: string) {
+  return FONT_PRESETS.some((font) => font.value === value) ? value : DEFAULT_FONT_FAMILY;
+}
+
+function svgToDataUrl(svg: string) {
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
 function generateLoremSentence(seed: number, length: number) {
   const selected = Array.from({ length }, (_, index) => LOREM_WORDS[(seed + index * 5) % LOREM_WORDS.length] ?? "lorem");
   const text = selected.join(" ");
@@ -71,12 +105,19 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
   const [sentences, setSentences] = useState(4);
   const [copiedLorem, setCopiedLorem] = useState(false);
 
+  const safeWidth = normalizeDimension(width, 300);
+  const safeHeight = normalizeDimension(height, 250);
+  const safeBgColor = normalizeColor(bgColor, "#eeeeee");
+  const safeTextColor = normalizeColor(textColor, "#666666");
+  const safeFontFamily = normalizeFontFamily(fontFamily);
+  const safeFontSizePercent = normalizePercent(fontSizePercent, 10);
+
   // Image Placeholder computed values
-  const displayText = customText.trim() !== "" ? customText : `${width} x ${height}`;
+  const displayText = customText.trim() !== "" ? customText : `${safeWidth} x ${safeHeight}`;
   const computedFontSize = useMemo(() => {
-    const minDim = Math.min(width, height);
-    return Math.max(10, Math.round(minDim * (fontSizePercent / 100)));
-  }, [width, height, fontSizePercent]);
+    const minDim = Math.min(safeWidth, safeHeight);
+    return Math.max(10, Math.round(minDim * (safeFontSizePercent / 100)));
+  }, [safeWidth, safeHeight, safeFontSizePercent]);
 
   const svgString = useMemo(() => {
     const escapedText = displayText
@@ -86,11 +127,13 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&apos;");
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-  <rect width="100%" height="100%" fill="${bgColor}" />
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="${fontFamily}" font-size="${computedFontSize}" font-weight="bold" fill="${textColor}">${escapedText}</text>
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}" viewBox="0 0 ${safeWidth} ${safeHeight}">
+  <rect width="100%" height="100%" fill="${safeBgColor}" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="${safeFontFamily}" font-size="${computedFontSize}" font-weight="bold" fill="${safeTextColor}">${escapedText}</text>
 </svg>`;
-  }, [width, height, bgColor, textColor, fontFamily, computedFontSize, displayText]);
+  }, [safeWidth, safeHeight, safeBgColor, safeTextColor, safeFontFamily, computedFontSize, displayText]);
+
+  const previewUrl = useMemo(() => svgToDataUrl(svgString), [svgString]);
 
   const handleCopySvg = async () => {
     try {
@@ -119,7 +162,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `placeholder-${width}x${height}.svg`;
+    link.download = `placeholder-${safeWidth}x${safeHeight}.svg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -132,8 +175,8 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
     const img = new Image();
     img.onload = () => {
       const canvas = document.createElement("canvas");
-      canvas.width = width;
-      canvas.height = height;
+      canvas.width = safeWidth;
+      canvas.height = safeHeight;
       const ctx = canvas.getContext("2d");
       if (ctx) {
         ctx.drawImage(img, 0, 0);
@@ -141,7 +184,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
           const pngUrl = canvas.toDataURL("image/png");
           const link = document.createElement("a");
           link.href = pngUrl;
-          link.download = `placeholder-${width}x${height}.png`;
+          link.download = `placeholder-${safeWidth}x${safeHeight}.png`;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -288,10 +331,10 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                     <span>宽度 (Width px)</span>
                     <input
                       type="number"
-                      min={10}
-                      max={4000}
-                      value={width}
-                      onChange={(e) => setWidth(Math.max(10, Number(e.target.value)))}
+                      min={MIN_PLACEHOLDER_SIZE}
+                      max={MAX_PLACEHOLDER_SIZE}
+                      value={safeWidth}
+                      onChange={(e) => setWidth(normalizeDimension(Number(e.target.value), safeWidth))}
                       style={{ width: "100%", background: "var(--bg-base)" }}
                     />
                   </div>
@@ -299,10 +342,10 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                     <span>高度 (Height px)</span>
                     <input
                       type="number"
-                      min={10}
-                      max={4000}
-                      value={height}
-                      onChange={(e) => setHeight(Math.max(10, Number(e.target.value)))}
+                      min={MIN_PLACEHOLDER_SIZE}
+                      max={MAX_PLACEHOLDER_SIZE}
+                      value={safeHeight}
+                      onChange={(e) => setHeight(normalizeDimension(Number(e.target.value), safeHeight))}
                       style={{ width: "100%", background: "var(--bg-base)" }}
                     />
                   </div>
@@ -314,7 +357,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                     type="text"
                     value={customText}
                     onChange={(e) => setCustomText(e.target.value)}
-                    placeholder={`默认显示尺寸（${width} x ${height}）`}
+                    placeholder={`默认显示尺寸（${safeWidth} x ${safeHeight}）`}
                     style={{ width: "100%", background: "var(--bg-base)" }}
                   />
                 </div>
@@ -325,7 +368,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                     <div style={{ display: "flex", gap: "0.4rem" }}>
                       <input
                         type="color"
-                        value={bgColor}
+                        value={safeBgColor}
                         onChange={(e) => setBgColor(e.target.value)}
                         style={{ width: "36px", height: "36px", padding: 0 }}
                       />
@@ -333,6 +376,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                         type="text"
                         value={bgColor}
                         onChange={(e) => setBgColor(e.target.value)}
+                        onBlur={() => setBgColor(safeBgColor)}
                         style={{ flex: 1, background: "var(--bg-base)" }}
                       />
                     </div>
@@ -342,7 +386,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                     <div style={{ display: "flex", gap: "0.4rem" }}>
                       <input
                         type="color"
-                        value={textColor}
+                        value={safeTextColor}
                         onChange={(e) => setTextColor(e.target.value)}
                         style={{ width: "36px", height: "36px", padding: 0 }}
                       />
@@ -350,6 +394,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                         type="text"
                         value={textColor}
                         onChange={(e) => setTextColor(e.target.value)}
+                        onBlur={() => setTextColor(safeTextColor)}
                         style={{ flex: 1, background: "var(--bg-base)" }}
                       />
                     </div>
@@ -359,7 +404,7 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                 <div className="tool-field" style={{ gap: "0.25rem" }}>
                   <span>文字字体</span>
                   <select
-                    value={fontFamily}
+                    value={safeFontFamily}
                     onChange={(e) => setFontFamily(e.target.value)}
                     style={{ width: "100%", background: "var(--bg-base)" }}
                   >
@@ -372,15 +417,15 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                 <div className="tool-field" style={{ gap: "0.25rem" }}>
                   <span style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>字体大小比例</span>
-                    <strong>{computedFontSize}px ({fontSizePercent}%)</strong>
+                    <strong>{computedFontSize}px ({safeFontSizePercent}%)</strong>
                   </span>
                   <input
                     type="range"
                     min={3}
                     max={30}
                     step={0.5}
-                    value={fontSizePercent}
-                    onChange={(e) => setFontSizePercent(Number(e.target.value))}
+                    value={safeFontSizePercent}
+                    onChange={(e) => setFontSizePercent(normalizePercent(Number(e.target.value), safeFontSizePercent))}
                     style={{ width: "100%" }}
                   />
                 </div>
@@ -406,17 +451,18 @@ export default function PlaceholderGeneratorTool({ manifest }: ToolAppProps) {
                     overflow: "auto"
                   }}
                 >
-                  <div
+                  <img
+                    alt="占位图效果实时预览"
+                    src={previewUrl}
+                    width={safeWidth}
+                    height={safeHeight}
                     style={{
-                      maxWidth: "100%",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                      display: "block",
+                      height: "auto",
                       maxHeight: "360px",
-                      overflow: "hidden",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      boxShadow: "0 4px 16px rgba(0,0,0,0.1)"
+                      maxWidth: "100%"
                     }}
-                    dangerouslySetInnerHTML={{ __html: svgString }}
                   />
                 </div>
               </div>

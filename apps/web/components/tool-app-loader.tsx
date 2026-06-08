@@ -11,8 +11,23 @@ function normalizePathname(pathname: string) {
   return pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
 }
 
-function getToolAppLocation(pathname: string, toolId: string) {
+function stripLocalePrefix(pathname: string, locale: string) {
   const normalizedPathname = normalizePathname(pathname);
+  const localePrefix = `/${locale}`;
+
+  if (normalizedPathname === localePrefix) {
+    return "/";
+  }
+
+  if (normalizedPathname.startsWith(`${localePrefix}/`)) {
+    return normalizedPathname.slice(localePrefix.length);
+  }
+
+  return normalizedPathname;
+}
+
+function getToolAppLocation(pathname: string, locale: string, toolId: string) {
+  const normalizedPathname = stripLocalePrefix(pathname, locale);
   const toolRootPath = `/tools/${toolId}`;
 
   if (normalizedPathname === toolRootPath) {
@@ -67,7 +82,7 @@ function ToolLoadingPanel({ manifest }: { manifest: ToolManifest }) {
 
 export function ToolAppLoader({ manifest, locale }: { manifest: ToolManifest; locale: string }) {
   const pathname = usePathname();
-  const appLocation = useMemo(() => getToolAppLocation(pathname, manifest.id), [pathname, manifest.id]);
+  const appLocation = useMemo(() => getToolAppLocation(pathname, locale, manifest.id), [pathname, locale, manifest.id]);
   const ToolComponent = useMemo(
     () =>
       lazy(async () => {
