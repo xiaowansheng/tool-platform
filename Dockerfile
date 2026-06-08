@@ -23,12 +23,25 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm generate:tools
 RUN pnpm build
 
-FROM base AS runtime
+FROM node:20-bookworm-slim AS runtime
 
 ENV NODE_ENV="production"
+ENV NEXT_TELEMETRY_DISABLED="1"
+ENV TOOL_PLATFORM_DATA_DIR="/app/data"
 
-COPY --from=build /app /app
+WORKDIR /app
+
+RUN groupadd --system --gid 1001 nodejs \
+    && useradd --system --uid 1001 --gid nodejs nextjs \
+    && mkdir -p /app/data \
+    && chown -R nextjs:nodejs /app/data
+
+COPY --from=build --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=build --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=build --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
+
+USER nextjs
 
 EXPOSE 3000
 
-CMD ["pnpm", "--filter", "@tool-platform/web", "exec", "next", "start", "--hostname", "0.0.0.0", "--port", "3000"]
+CMD ["node", "apps/web/server.js"]

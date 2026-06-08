@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "pnpm generate:tools && turbo run dev --parallel",
     "build": "pnpm generate:tools && turbo run build",
+    "build:ci": "turbo run build",
     "lint": "pnpm generate:tools && turbo run lint",
+    "lint:ci": "turbo run lint",
     "test": "pnpm generate:tools && turbo run test",
+    "test:ci": "turbo run test",
     "generate:tools": "node ./scripts/generate-tool-registry.mjs",
     "create-tool": "node ./scripts/create-tool/index.mjs"
   },

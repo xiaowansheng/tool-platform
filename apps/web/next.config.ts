@@ -41,9 +41,33 @@ function getInternalPackages() {
   return names;
 }
 
+const securityHeaders = [
+  {
+    key: "X-Content-Type-Options",
+    value: "nosniff"
+  },
+  {
+    key: "Referrer-Policy",
+    value: "strict-origin-when-cross-origin"
+  },
+  {
+    key: "Permissions-Policy",
+    value: "geolocation=(), payment=(), usb=(), serial=()"
+  }
+];
+
 const nextConfig: NextConfig = {
+  output: "standalone",
   transpilePackages: getInternalPackages(),
-  serverExternalPackages: ["@formatjs/icu-messageformat-parser", "better-sqlite3"]
+  serverExternalPackages: ["@formatjs/icu-messageformat-parser", "better-sqlite3"],
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders
+      }
+    ];
+  }
 };
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");

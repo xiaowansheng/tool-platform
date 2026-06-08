@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTopTools, getAllToolVisits } from "@/lib/stats-db";
+import { getTopTools, getAllToolVisits, getAllCategoryVisits } from "@/lib/stats-db";
 import { getAllTools, categories } from "@tool-platform/tool-sdk";
 
 export async function GET(request: NextRequest) {
@@ -31,9 +31,16 @@ export async function GET(request: NextRequest) {
 
     if (type === "category") {
       const allToolVisits = getAllToolVisits();
+      const directCategoryVisits = getAllCategoryVisits();
       const allTools = getAllTools();
       const toolMap = new Map(allTools.map((t) => [t.id, t]));
       const categorySums = new Map<string, number>();
+
+      for (const { categoryId, visitCount } of directCategoryVisits) {
+        if (categories.some((category) => category.id === categoryId)) {
+          categorySums.set(categoryId, visitCount);
+        }
+      }
 
       for (const { toolId, visitCount } of allToolVisits) {
         const tool = toolMap.get(toolId);
@@ -62,7 +69,10 @@ export async function GET(request: NextRequest) {
       { error: "type must be one of: tool, category" },
       { status: 400 }
     );
-  } catch (e) {
-    return NextResponse.json({ items: [] });
+  } catch {
+    return NextResponse.json(
+      { error: "failed to load ranking" },
+      { status: 500 }
+    );
   }
 }

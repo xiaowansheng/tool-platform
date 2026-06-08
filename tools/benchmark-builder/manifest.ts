@@ -8,7 +8,9 @@ const manifest: ToolManifest = {
   subCategory: "testing",
   tags: ["benchmark", "performance", "timing", "speed-test", "compare"],
   icon: "gauge",
-  runtime: "simple",
+  runtime: "sandbox",
+  isolation: "iframe",
+  sandbox: true,
   featured: false,
   permissions: []
 };

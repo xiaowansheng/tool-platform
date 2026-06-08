@@ -24,6 +24,7 @@ const WORKSPACE_TABS_STORAGE_KEY = "tool-platform:workspace-tabs:v2";
 const CONTEXT_MENU_WIDTH = 192;
 const CONTEXT_MENU_HEIGHT = 176;
 const CONTEXT_MENU_EDGE_GAP = 8;
+const MAX_CACHED_PAGES = 8;
 
 function normalizePathname(pathname: string) {
   return pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
@@ -95,7 +96,8 @@ export function WorkspaceTabs({
   const currentTab = tabById.get(activeTabId);
   const currentTabForCache = currentTab && currentTab.id !== suppressedTabId ? currentTab : null;
 
-  if (currentTabForCache && !pageCacheRef.current.has(currentTabForCache.id)) {
+  if (currentTabForCache) {
+    pageCacheRef.current.delete(currentTabForCache.id);
     pageCacheRef.current.set(currentTabForCache.id, children);
   }
 
@@ -139,6 +141,26 @@ export function WorkspaceTabs({
       if (!tabs.some((tab) => tab.id === tabId) && tabId !== activeTabId) {
         pageCacheRef.current.delete(tabId);
       }
+    }
+
+    while (pageCacheRef.current.size > MAX_CACHED_PAGES) {
+      const oldestTabId = pageCacheRef.current.keys().next().value as string | undefined;
+
+      if (!oldestTabId) {
+        break;
+      }
+
+      if (oldestTabId === activeTabId && pageCacheRef.current.size > 1) {
+        const activePage = pageCacheRef.current.get(oldestTabId);
+        pageCacheRef.current.delete(oldestTabId);
+
+        if (activePage) {
+          pageCacheRef.current.set(oldestTabId, activePage);
+        }
+        continue;
+      }
+
+      pageCacheRef.current.delete(oldestTabId);
     }
 
     if (suppressedTabId && activeTabId !== suppressedTabId) {

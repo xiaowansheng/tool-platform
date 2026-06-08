@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchCategoryRanking } from "@/lib/stats-client";
+import { fetchCategoryVisits } from "@/lib/stats-client";
 
 function formatCount(n: number): string {
   if (n < 1000) return String(n);
@@ -15,15 +15,9 @@ export function CategoryVisitCount({ categoryId, label }: { categoryId: string; 
 
   useEffect(() => {
     let mounted = true;
-    fetchCategoryRanking(100).then((items) => {
+    fetchCategoryVisits(categoryId).then((visitCount) => {
       if (!mounted) return;
-      for (const item of items) {
-        if (item.categoryId === categoryId) {
-          setCount(item.visitCount);
-          return;
-        }
-      }
-      setCount(0);
+      setCount(visitCount);
     });
     return () => { mounted = false; };
   }, [categoryId]);

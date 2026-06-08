@@ -36,20 +36,38 @@ async function loadToolPackages() {
       const appEntryPath = path.join(toolDir, "app.tsx");
       const manifestExists = await fileExists(manifestPath);
       const appEntryExists = await fileExists(appEntryPath);
+      const directoryName = path.basename(toolDir);
+
+      if (typeof packageJson.name !== "string" || !packageJson.name) {
+        throw new Error(`${directoryName}/package.json must define a package name`);
+      }
 
       return {
-        directoryName: path.basename(toolDir),
+        directoryName,
         packageName: packageJson.name,
         manifestExists,
         appEntryExists,
-        toolId: manifestExists ? await readManifestId(manifestPath, path.basename(toolDir)) : path.basename(toolDir)
+        toolId: manifestExists ? await readManifestId(manifestPath, directoryName) : directoryName
       };
     })
   );
 
-  return tools
+  const skippedTools = tools.filter((tool) => !tool.manifestExists || !tool.appEntryExists);
+
+  for (const tool of skippedTools) {
+    const missing = [
+      tool.manifestExists ? null : "manifest.ts",
+      tool.appEntryExists ? null : "app.tsx"
+    ].filter(Boolean);
+    console.warn(`skipping ${tool.directoryName}: missing ${missing.join(" and ")}`);
+  }
+
+  const registeredTools = tools
     .filter((tool) => tool.manifestExists && tool.appEntryExists)
     .sort((left, right) => left.directoryName.localeCompare(right.directoryName));
+
+  validateToolRegistrations(registeredTools);
+  return registeredTools;
 }
 
 async function readManifestId(manifestPath, fallback) {
@@ -57,6 +75,28 @@ async function readManifestId(manifestPath, fallback) {
   const match = source.match(/\bid:\s*["']([^"']+)["']/);
 
   return match?.[1] ?? fallback;
+}
+
+function validateToolRegistrations(tools) {
+  const toolIds = new Set();
+  const packageNames = new Set();
+
+  for (const tool of tools) {
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(tool.toolId)) {
+      throw new Error(`${tool.directoryName} has invalid manifest id "${tool.toolId}"`);
+    }
+
+    if (toolIds.has(tool.toolId)) {
+      throw new Error(`duplicate tool manifest id "${tool.toolId}"`);
+    }
+
+    if (packageNames.has(tool.packageName)) {
+      throw new Error(`duplicate tool package name "${tool.packageName}"`);
+    }
+
+    toolIds.add(tool.toolId);
+    packageNames.add(tool.packageName);
+  }
 }
 
 async function fileExists(targetPath) {

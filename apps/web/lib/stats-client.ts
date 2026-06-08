@@ -35,6 +35,17 @@ export async function fetchToolVisits(toolId: string): Promise<number> {
   }
 }
 
+export async function fetchCategoryVisits(categoryId: string): Promise<number> {
+  try {
+    const res = await fetch(`/api/stats?type=category&categoryId=${encodeURIComponent(categoryId)}`);
+    if (!res.ok) return 0;
+    const data = await res.json();
+    return data.visitCount ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 export interface RankingItem {
   toolId: string;
   name: string;

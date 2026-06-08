@@ -1,14 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
+
+interface BenchmarkResult {
+  avg: number;
+  min: number;
+  max: number;
+  runs: number;
+}
 
 interface BenchmarkCase {
   id: number;
   name: string;
   code: string;
-  results: { avg: number; min: number; max: number; runs: number } | null;
+  results: BenchmarkResult | null;
 }
 
 const defaultCases: BenchmarkCase[] = [
@@ -26,31 +33,124 @@ const defaultCases: BenchmarkCase[] = [
   }
 ];
 
-async function runBenchmark(code: string, iterations: number, warmup: number): Promise<{ avg: number; min: number; max: number; runs: number }> {
-  // Warmup
-  const fn = new Function(code);
-  for (let i = 0; i < warmup; i++) fn();
+const BENCHMARK_CHANNEL = "tool-platform:benchmark";
+const BENCHMARK_SANDBOX = "allow-scripts";
 
-  const times: number[] = [];
-  for (let i = 0; i < iterations; i++) {
-    const start = performance.now();
-    fn();
-    const end = performance.now();
-    times.push(end - start);
+function createBenchmarkSandboxDocument() {
+  return `<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /></head>
+<body>
+<script>
+  const channel = ${JSON.stringify(BENCHMARK_CHANNEL)};
+
+  function respond(id, success, data, error) {
+    parent.postMessage({ channel, id, type: "response", success, data, error }, "*");
   }
 
-  times.sort((a, b) => a - b);
-  // Remove outliers (top/bottom 5%)
-  const trimCount = Math.max(1, Math.floor(times.length * 0.05));
-  const trimmed = times.slice(trimCount, -trimCount);
+  function runBenchmark(code, iterations, warmup) {
+    const fn = new Function(code);
 
-  const avg = trimmed.reduce((a, b) => a + b, 0) / trimmed.length;
-  return {
-    avg: Math.round(avg * 1000) / 1000,
-    min: Math.round(trimmed[0]! * 1000) / 1000,
-    max: Math.round(trimmed[trimmed.length - 1]! * 1000) / 1000,
-    runs: trimmed.length
-  };
+    for (let index = 0; index < warmup; index += 1) {
+      fn();
+    }
+
+    const times = [];
+
+    for (let index = 0; index < iterations; index += 1) {
+      const start = performance.now();
+      fn();
+      times.push(performance.now() - start);
+    }
+
+    times.sort((left, right) => left - right);
+    const trimCount = Math.max(1, Math.floor(times.length * 0.05));
+    const trimmed = times.length > trimCount * 2 ? times.slice(trimCount, -trimCount) : times;
+    const avg = trimmed.reduce((sum, value) => sum + value, 0) / trimmed.length;
+
+    return {
+      avg: Math.round(avg * 1000) / 1000,
+      min: Math.round(trimmed[0] * 1000) / 1000,
+      max: Math.round(trimmed[trimmed.length - 1] * 1000) / 1000,
+      runs: trimmed.length
+    };
+  }
+
+  window.addEventListener("message", (event) => {
+    const message = event.data;
+
+    if (!message || message.channel !== channel || message.type !== "call") {
+      return;
+    }
+
+    try {
+      if (message.action !== "runBenchmark") {
+        throw new Error("Unknown benchmark action: " + message.action);
+      }
+
+      const payload = message.payload || {};
+      respond(message.id, true, runBenchmark(
+        String(payload.code || ""),
+        Number(payload.iterations || 1000),
+        Number(payload.warmup || 0)
+      ));
+    } catch (error) {
+      respond(message.id, false, undefined, error instanceof Error ? error.message : "执行出错");
+    }
+  });
+</script>
+</body>
+</html>`;
+}
+
+function createMessageId() {
+  return crypto.randomUUID?.() ?? `benchmark-${Math.random().toString(36).slice(2)}`;
+}
+
+function runBenchmarkInSandbox(
+  iframe: HTMLIFrameElement,
+  code: string,
+  iterations: number,
+  warmup: number
+): Promise<BenchmarkResult> {
+  const id = createMessageId();
+
+  return new Promise((resolve, reject) => {
+    const timer = window.setTimeout(() => {
+      window.removeEventListener("message", onMessage);
+      reject(new Error("沙箱执行超时"));
+    }, 10000);
+
+    function onMessage(event: MessageEvent) {
+      if (event.source !== iframe.contentWindow) {
+        return;
+      }
+
+      const message = event.data;
+
+      if (!message || message.channel !== BENCHMARK_CHANNEL || message.id !== id || message.type !== "response") {
+        return;
+      }
+
+      window.clearTimeout(timer);
+      window.removeEventListener("message", onMessage);
+
+      if (message.success) {
+        resolve(message.data as BenchmarkResult);
+      } else {
+        reject(new Error(message.error || "执行出错"));
+      }
+    }
+
+    window.addEventListener("message", onMessage);
+    iframe.contentWindow?.postMessage({
+      channel: BENCHMARK_CHANNEL,
+      id,
+      type: "call",
+      action: "runBenchmark",
+      payload: { code, iterations, warmup }
+    }, "*");
+  });
 }
 
 function formatMs(ms: number): string {
@@ -60,6 +160,8 @@ function formatMs(ms: number): string {
 }
 
 export default function BenchmarkBuilderTool({ manifest }: ToolAppProps) {
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const sandboxDocument = useMemo(() => createBenchmarkSandboxDocument(), []);
   const [cases, setCases] = useState<BenchmarkCase[]>(defaultCases);
   const [iterations, setIterations] = useState(1000);
   const [warmup, setWarmup] = useState(10);
@@ -87,7 +189,13 @@ export default function BenchmarkBuilderTool({ manifest }: ToolAppProps) {
       const results: BenchmarkCase[] = [];
       for (const testCase of cases) {
         try {
-          const result = await runBenchmark(testCase.code, iterations, warmup);
+          const iframe = iframeRef.current;
+
+          if (!iframe) {
+            throw new Error("沙箱尚未准备好");
+          }
+
+          const result = await runBenchmarkInSandbox(iframe, testCase.code, iterations, warmup);
           results.push({ ...testCase, results: result });
         } catch (e) {
           setError(`${testCase.name}: ${e instanceof Error ? e.message : "执行出错"}`);
@@ -217,6 +325,14 @@ export default function BenchmarkBuilderTool({ manifest }: ToolAppProps) {
           </div>
         </label>
       ) : null}
+
+      <iframe
+        ref={iframeRef}
+        sandbox={BENCHMARK_SANDBOX}
+        srcDoc={sandboxDocument}
+        title="benchmark sandbox"
+        style={{ display: "none" }}
+      />
 
       {error ? <p className="tool-error">{error}</p> : null}
       <p className="tool-note">

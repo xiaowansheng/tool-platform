@@ -24,7 +24,9 @@ const manifest: ToolManifest = {
     "nginx"
   ],
   icon: "code",
-  runtime: "simple",
+  runtime: "sandbox",
+  isolation: "iframe",
+  sandbox: true,
   featured: true,
   permissions: []
 };

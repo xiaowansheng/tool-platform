@@ -9,7 +9,7 @@ services:
     ports:
       - "${TOOL_PLATFORM_PORT:-3000}:3000"
     volumes:
-      - tool_platform_data:/app/apps/web/data
+      - tool_platform_data:/app/data
 
 volumes:
   tool_platform_data:

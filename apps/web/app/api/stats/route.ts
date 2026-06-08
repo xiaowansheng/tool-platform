@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   incrementVisit,
   getVisitCount,
-  getAllToolVisits
+  getVisitCountForTargets
 } from "@/lib/stats-db";
+import { categories, getAllTools, getToolManifest } from "@tool-platform/tool-sdk";
 
 const DEDUP_WINDOW_MS = 5 * 60 * 1000;
+const TARGET_ID_PATTERN = /^[a-z0-9][a-z0-9-]{0,79}$/;
 
 const sessionDedup = new Map<string, Map<string, number>>();
 
@@ -32,9 +34,20 @@ function getSessionId(request: NextRequest): string {
 function isDupInWindow(sessionId: string, targetId: string): boolean {
   const targets = sessionDedup.get(sessionId);
   if (!targets) return false;
+  pruneExpiredTargets(targets);
   const lastHit = targets.get(targetId);
   if (!lastHit) return false;
   return Date.now() - lastHit < DEDUP_WINDOW_MS;
+}
+
+function pruneExpiredTargets(targets: Map<string, number>) {
+  const now = Date.now();
+
+  for (const [targetId, lastHit] of targets) {
+    if (now - lastHit >= DEDUP_WINDOW_MS) {
+      targets.delete(targetId);
+    }
+  }
 }
 
 function markVisit(sessionId: string, targetId: string) {
@@ -44,7 +57,40 @@ function markVisit(sessionId: string, targetId: string) {
     sessionDedup.set(sessionId, targets);
     pruneDedupCache();
   }
+  pruneExpiredTargets(targets);
   targets.set(targetId, Date.now());
+}
+
+function isKnownCategory(categoryId: string) {
+  return TARGET_ID_PATTERN.test(categoryId) && categories.some((category) => category.id === categoryId);
+}
+
+function isKnownTool(toolId: string) {
+  return TARGET_ID_PATTERN.test(toolId) && Boolean(getToolManifest(toolId));
+}
+
+function getCategoryVisitCount(categoryId: string) {
+  const toolTargetIds = getAllTools()
+    .filter((tool) => tool.category === categoryId)
+    .map((tool) => `tool:${tool.id}`);
+
+  return getVisitCount(`category:${categoryId}`) + getVisitCountForTargets(toolTargetIds);
+}
+
+function validateTargetId(targetId: string): boolean {
+  if (targetId === "site") {
+    return true;
+  }
+
+  if (targetId.startsWith("tool:")) {
+    return isKnownTool(targetId.slice("tool:".length));
+  }
+
+  if (targetId.startsWith("category:")) {
+    return isKnownCategory(targetId.slice("category:".length));
+  }
+
+  return false;
 }
 
 export async function POST(request: NextRequest) {
@@ -59,11 +105,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (
-      !targetId.startsWith("tool:") &&
-      targetId !== "site" &&
-      !targetId.startsWith("category:")
-    ) {
+    if (!validateTargetId(targetId)) {
       return NextResponse.json(
         { error: "invalid targetId format" },
         { status: 400 }
@@ -85,6 +127,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({ visitCount: count });
     response.cookies.set("_vs_s", sessionId, {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
       maxAge: 60 * 60 * 24
@@ -111,10 +154,10 @@ export async function GET(request: NextRequest) {
 
     case "tool": {
       const toolId = searchParams.get("toolId");
-      if (!toolId) {
+      if (!toolId || !isKnownTool(toolId)) {
         return NextResponse.json(
-          { error: "toolId is required" },
-          { status: 400 }
+          { error: "valid toolId is required" },
+          { status: toolId ? 404 : 400 }
         );
       }
       const count = getVisitCount(`tool:${toolId}`);
@@ -123,13 +166,13 @@ export async function GET(request: NextRequest) {
 
     case "category": {
       const categoryId = searchParams.get("categoryId");
-      if (!categoryId) {
+      if (!categoryId || !isKnownCategory(categoryId)) {
         return NextResponse.json(
-          { error: "categoryId is required" },
-          { status: 400 }
+          { error: "valid categoryId is required" },
+          { status: categoryId ? 404 : 400 }
         );
       }
-      return NextResponse.json({ categoryId, visitCount: 0 });
+      return NextResponse.json({ categoryId, visitCount: getCategoryVisitCount(categoryId) });
     }
 
     default:

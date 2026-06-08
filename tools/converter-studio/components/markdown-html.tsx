@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 
+const HTML_PREVIEW_SANDBOX = "allow-scripts";
+
 interface ComponentProps {
   inputText: string;
   onChangeInputText: (text: string) => void;
@@ -124,6 +126,32 @@ function markdownToHtml(md: string): string {
   }
 
   return html.join("\n");
+}
+
+function createPreviewDocument(html: string): string {
+  return `<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base target="_blank" />
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #dce7f3;
+      background: #101820;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; height: auto; }
+    a { color: #5eead4; }
+    pre { overflow: auto; }
+  </style>
+</head>
+<body>${html}</body>
+</html>`;
 }
 
 function htmlToMarkdown(html: string): string {
@@ -359,17 +387,19 @@ export default function MarkdownHtmlConverterTab({ inputText, onChangeInputText 
           <div style={{ fontSize: "0.85rem", fontWeight: "600", color: "var(--text-primary)", marginBottom: "0.6rem" }}>
             HTML 效果实时渲染预览
           </div>
-          <div
-            className="markdown-body"
+          <iframe
+            className="sandbox-frame markdown-body"
+            sandbox={HTML_PREVIEW_SANDBOX}
+            srcDoc={createPreviewDocument(html)}
+            title="HTML sandbox preview"
             style={{
+              width: "100%",
+              minHeight: "260px",
               background: "var(--bg-muted)",
               border: "1px solid var(--border)",
               borderRadius: "8px",
-              padding: "1.5rem",
-              minHeight: "120px",
               overflow: "auto"
             }}
-            dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>
       )}

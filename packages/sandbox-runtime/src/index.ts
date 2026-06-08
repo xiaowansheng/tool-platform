@@ -102,11 +102,14 @@ export function createSandboxDocument(options: SandboxDocumentOptions = {}) {
     const responseNode = document.getElementById("response");
 
     function respond(id, success, data, error) {
-      parent.postMessage({ channel, id, type: "response", success, data, error }, "*");
+      parent.postMessage({ channel, id, type: "response", success, data, error }, eventOrigin || "*");
     }
+
+    let eventOrigin = "*";
 
     window.addEventListener("message", (event) => {
       const message = event.data;
+      eventOrigin = event.origin || "*";
 
       if (!message || message.channel !== channel || message.type !== "call") {
         return;
