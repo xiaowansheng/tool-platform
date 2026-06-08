@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 
-import { RankingPanel } from "@/components/ranking-panel";
+import { CategoryPanel } from "@/components/category-panel";
+import { FeaturedToolsSection } from "@/components/featured-tools-section";
 import { Topbar } from "@/components/topbar";
 import { categories, getAllTools } from "@tool-platform/tool-sdk";
 
@@ -27,12 +28,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <RankingPanel
-          toolTitle={t("topTools")}
-          categoryTitle={t("topCategories")}
-          toolLimit={20}
-          categoryLimit={10}
-        />
+        <CategoryPanel />
+
+        <FeaturedToolsSection />
       </div>
     </>
   );

@@ -22,7 +22,9 @@ export function CategoryPanel() {
       <div className="category-grid">
         <CategoryCardsWithVisits>
           {(visits) =>
-            categories.map((category) => {
+            [...categories]
+              .sort((a, b) => (visits.get(b.id) ?? 0) - (visits.get(a.id) ?? 0))
+              .map((category) => {
               const toolCount = tools.filter((tool) => tool.category === category.id).length;
               const visitCount = visits.get(category.id) ?? 0;
 
