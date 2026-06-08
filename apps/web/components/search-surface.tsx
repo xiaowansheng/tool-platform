@@ -1,14 +1,14 @@
 "use client";
 
-import { useDeferredValue, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { searchTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
 import { getToolPageManifest } from "@/lib/tool-page-copy";
+import { fetchToolRanking } from "@/lib/stats-client";
 
 import { ToolCard } from "./tool-card";
-import { ToolCardsWithVisits } from "./tool-visits";
 
 export function SearchSurface({
   tools,
@@ -33,6 +33,20 @@ export function SearchSurface({
   const deferredQuery = useDeferredValue(query);
   const localizedTools = useMemo(() => tools.map((tool) => getToolPageManifest(tool, locale)), [tools, locale]);
   const filteredTools = searchTools(localizedTools, deferredQuery);
+  const [visitMap, setVisitMap] = useState<Map<string, number>>(new Map());
+
+  useEffect(() => {
+    let mounted = true;
+    fetchToolRanking(100).then((items) => {
+      if (!mounted) return;
+      const map = new Map<string, number>();
+      for (const item of items) {
+        map.set(item.toolId, item.visitCount);
+      }
+      setVisitMap(map);
+    });
+    return () => { mounted = false; };
+  }, []);
 
   return (
     <section className="search-surface">
@@ -62,13 +76,9 @@ export function SearchSurface({
       </div>
       {filteredTools.length > 0 ? (
         <div className="card-grid">
-          <ToolCardsWithVisits>
-            {(visits) =>
-              filteredTools.map((tool) => (
-                <ToolCard key={tool.id} tool={tool} visitCount={visits.get(tool.id) ?? 0} />
-              ))
-            }
-          </ToolCardsWithVisits>
+          {filteredTools.map((tool) => (
+            <ToolCard key={tool.id} tool={tool} visitCount={visitMap.get(tool.id) ?? 0} />
+          ))}
         </div>
       ) : (
         <div className="empty-state">
