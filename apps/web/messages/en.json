@@ -62,7 +62,8 @@
   },
   "categoryPanel": {
     "title": "Categories",
-    "description": "Tools organized by recommended categories with room for future expansion."
+    "description": "Tools organized by recommended categories with room for future expansion.",
+    "visitCount": "{count} visits"
   },
   "search": {
     "title": "Search Tools",
@@ -131,6 +132,7 @@
   },
   "toolCard": {
     "enterTool": "Open Tool",
+    "visits": "{count} visits",
     "tagsLabel": "Tags: {tags}",
     "moreTags": "{count} more tags"
   },

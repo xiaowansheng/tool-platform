@@ -3,8 +3,7 @@ import { useTranslations } from "next-intl";
 import { categories, getAllTools } from "@tool-platform/tool-sdk";
 
 import { Link } from "@/i18n/navigation";
-import { CommonToolsCategoryCard, FavoriteToolsCategoryCard } from "./common-tools";
-
+import { CategoryCardsWithVisits } from "./category-visits";
 
 export function CategoryPanel() {
   const t = useTranslations("categoryPanel");
@@ -20,21 +19,29 @@ export function CategoryPanel() {
         </div>
       </div>
       <div className="category-grid">
-        <CommonToolsCategoryCard />
-        <FavoriteToolsCategoryCard />
-        {categories.map((category) => {
-          const count = tools.filter((tool) => tool.category === category.id).length;
+        <CategoryCardsWithVisits>
+          {(visits) =>
+            categories.map((category) => {
+              const toolCount = tools.filter((tool) => tool.category === category.id).length;
+              const visitCount = visits.get(category.id) ?? 0;
 
-          return (
-            <Link key={category.id} className="category-card" href={`/categories/${category.id}`}>
-              <span className="category-card__icon">{category.icon ?? "·"}</span>
-              <h3>{ct(`${category.id}.label`)}</h3>
-              <p title={ct(`${category.id}.description`)}>{ct(`${category.id}.description`)}</p>
-              <span className="category-card__count">{count}</span>
-              <span className="category-card__tooltip">{ct(`${category.id}.description`)}</span>
-            </Link>
-          );
-        })}
+              return (
+                <Link key={category.id} className="category-card" href={`/categories/${category.id}`}>
+                  <span className="category-card__icon">{category.icon ?? "·"}</span>
+                  <h3>{ct(`${category.id}.label`)}</h3>
+                  <p title={ct(`${category.id}.description`)}>{ct(`${category.id}.description`)}</p>
+                  <span className="category-card__count">{toolCount}</span>
+                  {visitCount > 0 && (
+                    <span className="category-card__visits">
+                      {t("categoryPanel.visitCount", { count: visitCount >= 1000 ? (visitCount / 1000).toFixed(1) + "k" : String(visitCount) })}
+                    </span>
+                  )}
+                  <span className="category-card__tooltip">{ct(`${category.id}.description`)}</span>
+                </Link>
+              );
+            })
+          }
+        </CategoryCardsWithVisits>
       </div>
     </section>
   );

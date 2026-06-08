@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { CategoryPanel } from "@/components/category-panel";
 import { RankingPanel } from "@/components/ranking-panel";
 import { ToolCard } from "@/components/tool-card";
+import { ToolCardsWithVisits } from "@/components/tool-visits";
 import { Topbar } from "@/components/topbar";
 import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
 import { categories, getAllTools, getFeaturedTools } from "@tool-platform/tool-sdk";
@@ -46,9 +47,13 @@ export default function HomePage() {
             </div>
           </div>
           <div className="card-grid">
-            {featuredTools.map((tool) => (
-              <ToolCard key={tool.id} tool={tool} />
-            ))}
+            <ToolCardsWithVisits>
+              {(visits) =>
+                featuredTools.map((tool) => (
+                  <ToolCard key={tool.id} tool={tool} visitCount={visits.get(tool.id)} />
+                ))
+              }
+            </ToolCardsWithVisits>
           </div>
         </section>
 

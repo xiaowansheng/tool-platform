@@ -8,7 +8,7 @@ import { FavoriteToolButton } from "./common-tools";
 
 const TOOL_CARD_VISIBLE_TAGS = 4;
 
-export function ToolCard({ tool }: { tool: ToolManifest }) {
+export function ToolCard({ tool, visitCount }: { tool: ToolManifest; visitCount?: number }) {
   const t = useTranslations("toolCard");
   const locale = useLocale();
   const displayTool = getToolPageManifest(tool, locale);
@@ -45,6 +45,11 @@ export function ToolCard({ tool }: { tool: ToolManifest }) {
           </span>
         ) : null}
       </div>
+      {visitCount != null && visitCount > 0 && (
+        <p className="tool-card__visits">
+          {t("visits", { count: visitCount >= 1000 ? (visitCount / 1000).toFixed(1) + "k" : String(visitCount) })}
+        </p>
+      )}
       <Link className="button-link button-link--accent" href={"/tools/" + tool.id}>
         {t("enterTool")}
       </Link>

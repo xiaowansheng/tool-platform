@@ -62,7 +62,8 @@
   },
   "categoryPanel": {
     "title": "分类入口",
-    "description": "按文档中的推荐分类组织工具，并保留未来扩展空间。"
+    "description": "按文档中的推荐分类组织工具，并保留未来扩展空间。",
+    "visitCount": "{count} 次访问"
   },
   "search": {
     "title": "搜索工具",
@@ -131,6 +132,7 @@
   },
   "toolCard": {
     "enterTool": "进入工具",
+    "visits": "{count} 次访问",
     "tagsLabel": "标签：{tags}",
     "moreTags": "还有 {count} 个标签"
   },
