@@ -13,6 +13,7 @@ import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigation } from "./mobile-navigation";
 import { SiteFooter } from "./site-footer";
 import { ThemeToggle } from "./theme-toggle";
+import { SiteVisitTracker } from "./visit-tracking";
 import { WorkspaceTabs, type WorkspaceTabDefinition } from "./workspace-tabs";
 
 
@@ -134,6 +135,7 @@ export function PlatformShell({ children }: { children: ReactNode }) {
         </div>
         <SiteFooter />
       </main>
+      <SiteVisitTracker />
     </div>
   );
 }

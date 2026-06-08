@@ -26,6 +26,7 @@
     "feedbackCTAExplain": "Whether it's a tool request, usability complaint, or a bug report, we value your suggestions.",
     "submitFeedback": "Submit Feedback",
     "summary": "{tools} tools · {categories} categories",
+    "totalVisits": "%c total visits",
     "copyright": "© {year} Tool Platform"
   },
   "topbar": {
@@ -55,7 +56,9 @@
     "statCategories": "Categories",
     "statFeatured": "Featured",
     "quickTools": "Quick Access",
-    "quickToolsDescription": "The homepage prioritizes direct tool entries over marketing copy."
+    "quickToolsDescription": "The homepage prioritizes direct tool entries over marketing copy.",
+    "topTools": "Popular Tools",
+    "topCategories": "Popular Categories"
   },
   "categoryPanel": {
     "title": "Categories",

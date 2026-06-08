@@ -43,7 +43,7 @@ function getInternalPackages() {
 
 const nextConfig: NextConfig = {
   transpilePackages: getInternalPackages(),
-  serverExternalPackages: ["@formatjs/icu-messageformat-parser"]
+  serverExternalPackages: ["@formatjs/icu-messageformat-parser", "better-sqlite3"]
 };
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");

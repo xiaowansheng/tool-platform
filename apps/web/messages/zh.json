@@ -26,6 +26,7 @@
     "feedbackCTAExplain": "无论是工具新增建议、使用体验吐槽还是 Bug 反馈，我们都非常看重您的意见。",
     "submitFeedback": "提交功能反馈",
     "summary": "{tools} 个工具 · {categories} 个分类",
+    "totalVisits": "累计访问 %c 次",
     "copyright": "© {year} Tool Platform"
   },
   "topbar": {
@@ -55,7 +56,9 @@
     "statCategories": "推荐分类",
     "statFeatured": "精选入口",
     "quickTools": "快捷工具",
-    "quickToolsDescription": "首页优先给出可直接进入的工具入口，而不是营销文案。"
+    "quickToolsDescription": "首页优先给出可直接进入的工具入口，而不是营销文案。",
+    "topTools": "热门工具",
+    "topCategories": "热门分类"
   },
   "categoryPanel": {
     "title": "分类入口",

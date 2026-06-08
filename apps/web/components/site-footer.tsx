@@ -5,6 +5,7 @@ import { categories, getAllTools, type ToolCategory } from "@tool-platform/tool-
 import { Link } from "@/i18n/navigation";
 import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
 import { FeedbackButton } from "./feedback-button";
+import { SiteVisitCount } from "./visit-counter";
 
 const footerCategoryIds: ToolCategory[] = [
   "developer-tools",
@@ -85,6 +86,7 @@ export function SiteFooter() {
 
       <div className="site-footer__bottom">
         <span>{t("summary", { tools: tools.length, categories: categories.length + LOCAL_TOOL_CATEGORY_COUNT })}</span>
+        <SiteVisitCount label={t("totalVisits")} />
         <span>{t("copyright", { year: new Date().getFullYear() })}</span>
       </div>
     </footer>

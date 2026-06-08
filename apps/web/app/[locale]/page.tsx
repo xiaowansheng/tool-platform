@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { CategoryPanel } from "@/components/category-panel";
+import { RankingPanel } from "@/components/ranking-panel";
 import { ToolCard } from "@/components/tool-card";
 import { Topbar } from "@/components/topbar";
 import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
@@ -50,6 +51,13 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+
+        <RankingPanel
+          toolTitle={t("topTools")}
+          categoryTitle={t("topCategories")}
+          toolLimit={30}
+          categoryLimit={10}
+        />
       </div>
     </>
   );

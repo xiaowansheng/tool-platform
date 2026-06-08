@@ -3634,3 +3634,157 @@ a.category-card:hover .category-card__tooltip {
   box-shadow: 0 0 10px var(--accent-secondary), inset 0 1px 2px rgba(255, 255, 255, 0.3);
   transform: scale(1.08);
 }
+
+/* ── Visit Counter ────────────────────────── */
+
+.visit-count {
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+}
+
+/* ── Ranking Panel ───────────────────────── */
+
+.ranking-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.ranking-panel__col {
+  background: color-mix(in srgb, var(--bg-subtle) 84%, transparent);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.ranking-panel__col h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+}
+
+.ranking-panel__empty {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+
+/* ── Ranking List ────────────────────────── */
+
+.ranking-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ranking-list__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.ranking-list__item:hover {
+  background: var(--bg-muted);
+}
+
+.ranking-list__rank {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: var(--bg-muted);
+}
+
+.ranking-list__rank--top {
+  background: var(--accent-primary-dim);
+  color: var(--accent-primary);
+}
+
+.ranking-list__name {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.ranking-list__name:hover {
+  color: var(--accent-primary);
+}
+
+.ranking-list__count {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Ranking Skeleton ────────────────────── */
+
+.ranking-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ranking-skeleton__row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.5rem;
+}
+
+.ranking-skeleton__rank {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 6px;
+  background: var(--bg-muted);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.ranking-skeleton__name {
+  flex: 1;
+  height: 1rem;
+  border-radius: 4px;
+  background: var(--bg-muted);
+  animation: shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+
+.ranking-skeleton__count {
+  width: 2.5rem;
+  height: 1rem;
+  border-radius: 4px;
+  background: var(--bg-muted);
+  animation: shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* ── Responsive ──────────────────────────── */
+
+@media (max-width: 768px) {
+  .ranking-panel {
+    grid-template-columns: 1fr;
+  }
+}

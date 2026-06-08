@@ -6,6 +6,8 @@ import { FavoriteToolButton, ToolUsageTracker } from "@/components/common-tools"
 import { ToolAppLoader } from "@/components/tool-app-loader";
 import { Topbar } from "@/components/topbar";
 import { ToolRuntimeCard } from "@/components/tool-runtime-card";
+import { ToolVisitCount } from "@/components/visit-counter";
+import { ToolVisitTracker } from "@/components/visit-tracking";
 import {
   getPermissionLabels,
   getRuntimeLabel,
@@ -117,6 +119,7 @@ function ToolPageContent({ manifest, locale }: { manifest: NonNullable<ReturnTyp
   return (
     <>
       <ToolUsageTracker toolId={manifest.id} />
+      <ToolVisitTracker toolId={manifest.id} />
       <Topbar title={manifest.name} subtitle={t("subtitle")} />
       <div className="tool-page">
         <section className="tool-panel tool-panel--info">
@@ -125,6 +128,10 @@ function ToolPageContent({ manifest, locale }: { manifest: NonNullable<ReturnTyp
               <p className="eyebrow">{ct(`${manifest.category}.label`)}</p>
               <h2>{manifest.name}</h2>
               <p className="tool-page__desc">{manifest.description}</p>
+              <ToolVisitCount
+                toolId={manifest.id}
+                label={isZh ? "已使用 %c 次" : "Used %c times"}
+              />
             </div>
             <div className="tool-page__headline-actions">
               <FavoriteToolButton toolId={manifest.id} toolName={manifest.name} showLabel />

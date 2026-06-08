@@ -8,3 +8,8 @@ services:
       NEXT_TELEMETRY_DISABLED: "1"
     ports:
       - "${TOOL_PLATFORM_PORT:-3000}:3000"
+    volumes:
+      - tool_platform_data:/app/apps/web/data
+
+volumes:
+  tool_platform_data:
