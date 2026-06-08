@@ -40,6 +40,9 @@ jobs:
       - name: Generate tool registry
         run: pnpm generate:tools
 
+      - name: Check generated files are committed
+        run: git diff --exit-code -- package.json packages/tool-sdk/src/generated/manifests.ts packages/tool-sdk/src/generated/client-loaders.ts packages/tool-sdk/package.json
+
       - name: Lint
         run: pnpm lint:ci
 
