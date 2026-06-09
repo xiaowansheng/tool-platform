@@ -1,8 +1,9 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { useTransition } from "react";
+import { useLocale, useTranslations } from "next-intl";
+
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 export function LocaleSwitcher() {
   const t = useTranslations("localeSwitcher");
@@ -14,7 +15,9 @@ export function LocaleSwitcher() {
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const next = e.target.value;
     startTransition(() => {
-      router.replace(pathname, { locale: next });
+      const search = window.location.search;
+      const hash = window.location.hash;
+      router.replace(`${pathname}${search}${hash}`, { locale: next });
     });
   }
 

@@ -598,6 +598,11 @@ textarea {
   animation-delay: 100ms;
 }
 
+.hero--search {
+  display: grid;
+  gap: 0.85rem;
+}
+
 [data-theme="light"] .hero {
   border-color: rgba(13, 148, 136, 0.12);
 }
@@ -623,6 +628,64 @@ textarea {
   line-height: 1.75;
   color: var(--text-secondary);
   font-size: 0.95rem;
+}
+
+.hero-search {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+}
+
+.hero-search:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
+}
+
+.hero-search__icon {
+  display: inline-flex;
+  color: var(--text-secondary);
+}
+
+.hero-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.hero-search input:focus {
+  outline: none;
+}
+
+.hero-search input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.hero-search__shortcut {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.24rem 0.55rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+
+.hero-search__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 /* ---------- Stats ---------- */
@@ -995,6 +1058,23 @@ a.detail-card:hover {
   border: 1px solid var(--border-subtle);
   color: var(--text-tertiary);
   font-size: 0.76rem;
+}
+
+button.tag--action {
+  padding: 0.12rem 0.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-tertiary);
+  box-shadow: none;
+  font-size: 0.72rem;
+}
+
+button.tag--action:hover {
+  transform: none;
+  border-color: var(--card-hover-border);
+  background: var(--card-hover-bg);
+  color: var(--text-secondary);
 }
 
 .tag--more {
@@ -3336,7 +3416,16 @@ a.category-card:hover .category-card__tooltip {
     padding: 1.25rem;
   }
 
-  .hero__stats,
+  .hero-search {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .hero-search button,
+  .hero-search__shortcut {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
   .tool-toolbar--grid,
   .param-row,
   .type-scale-preview__row {

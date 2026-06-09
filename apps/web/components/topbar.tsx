@@ -5,11 +5,11 @@ import { Link } from "@/i18n/navigation";
 export function Topbar({
   title,
   subtitle,
-  exampleHref = "/tools/json-formatter"
+  searchHref = "/#search"
 }: {
   title: string;
   subtitle?: string;
-  exampleHref?: string | null;
+  searchHref?: string | null;
 }) {
   const t = useTranslations("topbar");
 
@@ -21,16 +21,13 @@ export function Topbar({
         {subtitle && <p className="topbar__subtext">{subtitle}</p>}
       </div>
       <div className="topbar__actions">
-        <Link className="button-link" href="/search">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          {t("searchTools")}
-        </Link>
-        {exampleHref ? (
-          <Link className="button-link button-link--accent" href={exampleHref}>
-            {t("openExample")}
+        {searchHref ? (
+          <Link className="button-link" href={searchHref}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            {t("searchTools")}
           </Link>
         ) : null}
       </div>

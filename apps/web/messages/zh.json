@@ -30,8 +30,7 @@
     "copyright": "© {year} Tool Platform"
   },
   "topbar": {
-    "searchTools": "搜索工具",
-    "openExample": "打开示例"
+    "searchTools": "搜索工具"
   },
   "workspaceTabs": {
     "ariaLabel": "已打开页面",
@@ -55,7 +54,14 @@
     "statFeatured": "精选入口",
     "quickTools": "快捷工具",
     "topTools": "热门工具",
-    "topCategories": "热门分类"
+    "topCategories": "热门分类",
+    "heroEyebrow": "首页搜索",
+    "heroDescription": "直接在首页按工具名、标签、分类和描述检索，默认保留热门入口和分类目录，输入后即时切换到结果态。",
+    "statShortcut": "快捷搜索",
+    "statResults": "当前结果",
+    "searchSuggestionsLabel": "常搜词",
+    "searchResultsTitle": "搜索结果",
+    "searchResultsDescription": "结果会按名称、标签、分类和描述即时筛选。"
   },
   "categoryPanel": {
     "title": "分类入口",
@@ -125,7 +131,6 @@
     "addAria": "收藏 {name}",
     "removeAria": "取消收藏 {name}"
   },
-
   "toolCard": {
     "enterTool": "进入工具",
     "visits": "{count} 次访问",

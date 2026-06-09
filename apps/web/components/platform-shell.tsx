@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
 import { categories, getAllTools, type ToolManifest } from "@tool-platform/tool-sdk";
 
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { COMMON_TOOLS_CATEGORY_ID, FAVORITE_TOOLS_CATEGORY_ID } from "@/lib/common-tools";
 import { CommonToolsSidebarLink, FavoriteToolsSidebarLink } from "./common-tools";
 import { LocaleSwitcher } from "./locale-switcher";
@@ -16,6 +16,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { SiteVisitTracker } from "./visit-tracking";
 import { WorkspaceTabs, type WorkspaceTabDefinition } from "./workspace-tabs";
 
+const HOME_SEARCH_INPUT_ID = "home-search-input";
 
 function SidebarContent({ tools }: { tools: ToolManifest[] }) {
   const t = useTranslations("layout");
@@ -42,14 +43,6 @@ function SidebarContent({ tools }: { tools: ToolManifest[] }) {
           </svg>
           <span>{t("home")}</span>
           <span className="sidebar__link-count">{tools.length}</span>
-        </Link>
-        <Link className="sidebar__link" href="/search">
-          <svg className="sidebar__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <span>{t("search")}</span>
-          <span className="sidebar__link-count">⌘K</span>
         </Link>
       </nav>
 
@@ -84,11 +77,11 @@ export function PlatformShell({ children }: { children: ReactNode }) {
   const ct = useTranslations("categories");
   const commonToolsT = useTranslations("commonTools");
   const favoriteToolsT = useTranslations("favoriteTools");
+  const router = useRouter();
   const tools = getAllTools();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const workspaceTabs: WorkspaceTabDefinition[] = [
     { id: "/", name: t("home"), kind: "home" },
-    { id: "/search", name: t("search"), kind: "search" },
     {
       id: `/categories/${COMMON_TOOLS_CATEGORY_ID}`,
       name: commonToolsT("title"),
@@ -110,6 +103,43 @@ export function PlatformShell({ children }: { children: ReactNode }) {
       kind: "tool" as const
     }))
   ];
+
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key.toLowerCase() !== "k" || (!event.metaKey && !event.ctrlKey)) {
+        return;
+      }
+
+      const target = event.target;
+      if (target instanceof HTMLElement) {
+        const tagName = target.tagName.toLowerCase();
+        if (target.isContentEditable || tagName === "input" || tagName === "textarea" || tagName === "select") {
+          return;
+        }
+      }
+
+      event.preventDefault();
+
+      const input = document.getElementById(HOME_SEARCH_INPUT_ID);
+      if (input instanceof HTMLInputElement) {
+        if (window.location.hash !== "#search") {
+          window.history.replaceState(
+            window.history.state,
+            "",
+            `${window.location.pathname}${window.location.search}#search`
+          );
+        }
+        input.focus();
+        input.select();
+        return;
+      }
+
+      router.push("/#search");
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [router]);
 
   return (
     <div className={`app-shell${sidebarCollapsed ? " app-shell--sidebar-collapsed" : ""}`}>

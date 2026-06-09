@@ -1,36 +1,29 @@
-import { useTranslations } from "next-intl";
-
-import { CategoryPanel } from "@/components/category-panel";
-import { FeaturedToolsSection } from "@/components/featured-tools-section";
+import { HomeSearchExperience } from "@/components/home-search-experience";
 import { Topbar } from "@/components/topbar";
-import { categories, getAllTools } from "@tool-platform/tool-sdk";
+import { getAllTools } from "@tool-platform/tool-sdk";
 
-export default function HomePage() {
-  const t = useTranslations("home");
+function getInitialQuery(searchParams: Record<string, string | string[] | undefined>) {
+  const value = searchParams.q;
+
+  if (Array.isArray(value)) {
+    return value[0] ?? "";
+  }
+
+  return value ?? "";
+}
+
+export default async function HomePage({
+  searchParams
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const allTools = getAllTools();
+  const resolvedSearchParams = await searchParams;
 
   return (
     <>
-      <Topbar title="Tool Platform" />
-      <div className="content-stack">
-        <section className="hero">
-          <h2>{t("heroTitle")}</h2>
-          <div className="hero__stats">
-            <article className="stat-card">
-              <strong>{allTools.length}</strong>
-              <span>{t("statTools")}</span>
-            </article>
-            <article className="stat-card">
-              <strong>{categories.length}</strong>
-              <span>{t("statCategories")}</span>
-            </article>
-          </div>
-        </section>
-
-        <CategoryPanel />
-
-        <FeaturedToolsSection />
-      </div>
+      <Topbar title="Tool Platform" searchHref={null} />
+      <HomeSearchExperience initialQuery={getInitialQuery(resolvedSearchParams)} tools={allTools} />
     </>
   );
 }

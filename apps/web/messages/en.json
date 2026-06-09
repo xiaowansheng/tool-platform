@@ -30,8 +30,7 @@
     "copyright": "© {year} Tool Platform"
   },
   "topbar": {
-    "searchTools": "Search Tools",
-    "openExample": "Open Example"
+    "searchTools": "Search Tools"
   },
   "workspaceTabs": {
     "ariaLabel": "Open pages",
@@ -55,7 +54,14 @@
     "statFeatured": "Featured",
     "quickTools": "Quick Access",
     "topTools": "Popular Tools",
-    "topCategories": "Popular Categories"
+    "topCategories": "Popular Categories",
+    "heroEyebrow": "Search From Home",
+    "heroDescription": "Search by tool name, tags, category, or description directly from the homepage. Popular entry points and categories stay visible by default and switch to results as soon as you type.",
+    "statShortcut": "Search Shortcut",
+    "statResults": "Live Results",
+    "searchSuggestionsLabel": "Quick searches",
+    "searchResultsTitle": "Search Results",
+    "searchResultsDescription": "Results update instantly across names, tags, categories, and descriptions."
   },
   "categoryPanel": {
     "title": "Categories",
@@ -125,7 +131,6 @@
     "addAria": "Favorite {name}",
     "removeAria": "Unfavorite {name}"
   },
-
   "toolCard": {
     "enterTool": "Open Tool",
     "visits": "{count} visits",

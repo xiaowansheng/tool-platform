@@ -4,6 +4,7 @@ import { categories, getAllTools, type ToolCategory } from "@tool-platform/tool-
 
 import { Link } from "@/i18n/navigation";
 import { LOCAL_TOOL_CATEGORY_COUNT } from "@/lib/common-tools";
+
 import { FeedbackButton } from "./feedback-button";
 import { SiteVisitCount } from "./visit-counter";
 
@@ -59,7 +60,7 @@ export function SiteFooter() {
           <nav className="site-footer__group" aria-label={t("explore")}>
             <h3>{t("explore")}</h3>
             <Link href="/">{t("home")}</Link>
-            <Link href="/search">{t("search")}</Link>
+            <Link href="/">{t("search")}</Link>
           </nav>
 
           <nav className="site-footer__group" aria-label={t("categories")}>
