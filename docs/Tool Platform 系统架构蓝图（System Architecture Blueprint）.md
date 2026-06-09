@@ -112,10 +112,10 @@ Framer Motion
 
 ```text
 app/
-├── page.tsx
+├── page.tsx        # 首页 + 搜索主入口
 ├── tools/
 ├── categories/
-├── search/
+├── search/         # 兼容旧链接，重定向到首页搜索
 ├── dashboard/
 └── settings/
 ```

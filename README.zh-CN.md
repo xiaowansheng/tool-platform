@@ -4,7 +4,7 @@
 
 Tool Platform 是一个面向浏览器的插件化工具平台。它把每个工具视为独立微前端插件，而不是普通页面集合：工具通过 manifest 注册，进入统一的分类、搜索、动态路由和运行时管理体系。
 
-当前仓库处于 Phase One：已经搭好 Next.js 主站、pnpm workspace、manifest 驱动的工具自动注册、动态工具页面、分类搜索以及本地/远程工具运行的基础能力。
+当前仓库处于 Phase One：已经搭好 Next.js 主站、pnpm workspace、manifest 驱动的工具自动注册、动态工具页面、分类入口、首页搜索以及本地/远程工具运行的基础能力。
 
 ## 功能概览
 
@@ -85,7 +85,7 @@ pnpm create-tool vendor-tool --name "Vendor Tool" --category developer-tools --r
 ```text
 tool-platform/
 |-- apps/
-|   `-- web/                  # Next.js 主站、工具页面、分类页、搜索页
+|   `-- web/                  # Next.js 主站、首页搜索、工具页面和分类页
 |-- packages/
 |   |-- tool-contracts/        # ToolManifest、ToolRuntime 等共享类型
 |   |-- tool-sdk/              # 工具 registry、分类、搜索、微前端 adapter 和生成入口
@@ -114,7 +114,7 @@ packages/tool-sdk/src/generated/manifests.ts
 packages/tool-sdk/src/generated/client-loaders.ts  # 仅本地工具
   | apps/web
   v
-首页 / 分类页 / 搜索页 /tools/[slug]/[[...segments]]
+首页（发现 + 搜索） / 分类页 /tools/[slug]/[[...segments]]
   |
   v
 ToolMicroFrontendHost
@@ -123,6 +123,8 @@ ToolMicroFrontendHost
 ```
 
 `ToolMicroFrontendHost` 是工具页面唯一的 host 接口。本地工具解析为 generated dynamic import；远程工具从 `manifest.microFrontend` 解析，并通过 iframe 渲染。host 会把 `toolId`、`locale`、`path`、`segments` 作为查询参数传给远程端。
+
+旧的 `/{locale}/search` 路由仍然保留，但只作为兼容跳转入口，会把搜索词转发到首页搜索状态 `?q=...#search`。
 
 ## 工具目录约定
 

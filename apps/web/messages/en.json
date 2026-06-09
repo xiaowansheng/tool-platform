@@ -80,7 +80,7 @@
     "ariaLabel": "Search tools"
   },
   "searchPage": {
-    "subtitle": "Search is a core entry point — this page provides the full search experience."
+    "subtitle": "Legacy search links redirect to the homepage search view."
   },
   "categoryPage": {
     "filterTitle": "Filter {category}",

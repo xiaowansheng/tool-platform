@@ -80,7 +80,7 @@
     "ariaLabel": "搜索工具"
   },
   "searchPage": {
-    "subtitle": "文档强调搜索是核心入口，这里单独给出完整检索页。"
+    "subtitle": "旧的搜索链接会重定向到首页搜索视图。"
   },
   "categoryPage": {
     "filterTitle": "筛选{category}",

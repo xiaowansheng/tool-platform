@@ -4,7 +4,7 @@
 
 Tool Platform is a browser-first, plugin-oriented tool platform. It treats every tool as an independent micro frontend plugin instead of a regular page: tools register through manifests and are connected to shared category, search, dynamic route, and runtime management systems.
 
-The repository is currently in Phase One. It includes the Next.js web app, pnpm workspace, manifest-driven tool registration, dynamic tool pages, category/search surfaces, and runtime packages for local and remote tool execution.
+The repository is currently in Phase One. It includes the Next.js web app, pnpm workspace, manifest-driven tool registration, dynamic tool pages, category surfaces, a homepage-first search experience, and runtime packages for local and remote tool execution.
 
 ## Features
 
@@ -85,7 +85,7 @@ pnpm create-tool vendor-tool --name "Vendor Tool" --category developer-tools --r
 ```text
 tool-platform/
 |-- apps/
-|   `-- web/                  # Next.js web app, tool pages, category pages, search page
+|   `-- web/                  # Next.js web app, homepage search, tool pages, and category pages
 |-- packages/
 |   |-- tool-contracts/        # Shared ToolManifest, ToolRuntime, and related types
 |   |-- tool-sdk/              # Tool registry, categories, search, micro frontend adapters, generated entry points
@@ -114,7 +114,7 @@ packages/tool-sdk/src/generated/manifests.ts
 packages/tool-sdk/src/generated/client-loaders.ts  # local tools only
   | apps/web
   v
-Home / category pages / search page /tools/[slug]/[[...segments]]
+Home (discovery + search) / category pages /tools/[slug]/[[...segments]]
   |
   v
 ToolMicroFrontendHost
@@ -123,6 +123,8 @@ ToolMicroFrontendHost
 ```
 
 `ToolMicroFrontendHost` is the single host interface used by tool pages. Local tools resolve to generated dynamic imports. Remote tools resolve from `manifest.microFrontend` and are rendered in an iframe with host context query parameters: `toolId`, `locale`, `path`, and `segments`.
+
+The legacy `/{locale}/search` route is retained as a compatibility redirect and forwards to the homepage search state with `?q=...#search`.
 
 ## Tool Directory Convention
 
