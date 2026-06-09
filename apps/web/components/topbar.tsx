@@ -4,10 +4,12 @@ import { Link } from "@/i18n/navigation";
 
 export function Topbar({
   title,
-  subtitle
+  subtitle,
+  exampleHref = "/tools/json-formatter"
 }: {
   title: string;
   subtitle?: string;
+  exampleHref?: string | null;
 }) {
   const t = useTranslations("topbar");
 
@@ -26,9 +28,11 @@ export function Topbar({
           </svg>
           {t("searchTools")}
         </Link>
-        <Link className="button-link button-link--accent" href="/tools/json-formatter">
-          {t("openExample")}
-        </Link>
+        {exampleHref ? (
+          <Link className="button-link button-link--accent" href={exampleHref}>
+            {t("openExample")}
+          </Link>
+        ) : null}
       </div>
     </header>
   );

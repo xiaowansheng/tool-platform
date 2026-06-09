@@ -120,7 +120,7 @@ function ToolPageContent({ manifest, locale }: { manifest: NonNullable<ReturnTyp
     <>
       <ToolUsageTracker toolId={manifest.id} />
       <ToolVisitTracker toolId={manifest.id} />
-      <Topbar title={manifest.name} subtitle={t("subtitle")} />
+      <Topbar title={manifest.name} subtitle={t("subtitle")} exampleHref={null} />
       <div className="tool-page">
         <section className="tool-panel tool-panel--info">
           <div className="tool-page__headline">
