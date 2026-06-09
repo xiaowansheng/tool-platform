@@ -2224,6 +2224,22 @@ a.category-card:hover .category-card__tooltip {
   background: var(--bg-inset);
 }
 
+.tool-micro-frontend-state {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--bg-inset);
+}
+
+.tool-micro-frontend-frame {
+  width: 100%;
+  min-height: min(760px, calc(100vh - 220px));
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--bg-inset);
+}
+
 .color-preview {
   color: #081018;
 }

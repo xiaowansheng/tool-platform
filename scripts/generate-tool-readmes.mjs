@@ -6,6 +6,8 @@ import fg from "fast-glob";
 
 const rootDir = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
 const toolsDir = path.join(rootDir, "tools");
+const tick = String.fromCharCode(96);
+const fence = String.fromCharCode(96, 96, 96);
 
 const categoryLabels = {
   "ai-tools": "AI 工具",
@@ -36,52 +38,51 @@ const runtimeLabels = {
   wasm: "WebAssembly",
   ai: "AI 推理",
   sandbox: "沙箱隔离",
+  remote: "远程 iframe 微前端",
   realtime: "实时通信"
 };
 
+function extractArrayField(source, fieldName) {
+  const match = source.match(new RegExp("\\b" + fieldName + "\\s*:\\s*\\[([^\\]]*)\\]"));
+
+  if (!match) {
+    return [];
+  }
+
+  return match[1]
+    .split(",")
+    .map((value) => value.trim().replace(/["']/g, ""))
+    .filter(Boolean);
+}
+
+function extractStringField(source, fieldName) {
+  const match = source.match(new RegExp("\\b" + fieldName + "\\s*:\\s*[\"']([^\"']+)[\"']"));
+  return match?.[1] ?? "";
+}
+
+function extractMicroFrontendKind(source) {
+  const match = source.match(/\bmicroFrontend\s*:\s*\{[\s\S]*?\bkind\s*:\s*["']([^"']+)["']/);
+  return match?.[1] ?? "";
+}
+
+function extractMicroFrontendUrl(source) {
+  const match = source.match(/\bmicroFrontend\s*:\s*\{[\s\S]*?\burl\s*:\s*["']([^"']+)["']/);
+  return match?.[1] ?? "";
+}
+
 function extractManifestFields(source) {
-  const fields = {};
-
-  const idMatch = source.match(/\bid:\s*["']([^"']+)["']/);
-  if (idMatch) fields.id = idMatch[1];
-
-  const nameMatch = source.match(/\bname:\s*["']([^"']+)["']/);
-  if (nameMatch) fields.name = nameMatch[1];
-
-  const descMatch = source.match(/\bdescription:\s*["']([^"']+)["']/);
-  if (descMatch) fields.description = descMatch[1];
-
-  const categoryMatch = source.match(/\bcategory:\s*["']([^"']+)["']/);
-  if (categoryMatch) fields.category = categoryMatch[1];
-
-  const runtimeMatch = source.match(/\bruntime:\s*["']([^"']+)["']/);
-  if (runtimeMatch) fields.runtime = runtimeMatch[1];
-
-  const tagsMatch = source.match(/\btags:\s*\[([^\]]*)\]/);
-  if (tagsMatch) {
-    fields.tags = tagsMatch[1]
-      .split(",")
-      .map(t => t.trim().replace(/["']/g, ""))
-      .filter(Boolean);
-  }
-
-  const permissionsMatch = source.match(/\bpermissions:\s*\[([^\]]*)\]/);
-  if (permissionsMatch) {
-    fields.permissions = permissionsMatch[1]
-      .split(",")
-      .map(p => p.trim().replace(/["']/g, ""))
-      .filter(Boolean);
-  }
-
-  const capabilitiesMatch = source.match(/\bcapabilities:\s*\[([^\]]*)\]/);
-  if (capabilitiesMatch) {
-    fields.capabilities = capabilitiesMatch[1]
-      .split(",")
-      .map(c => c.trim().replace(/["']/g, ""))
-      .filter(Boolean);
-  }
-
-  return fields;
+  return {
+    id: extractStringField(source, "id"),
+    name: extractStringField(source, "name"),
+    description: extractStringField(source, "description"),
+    category: extractStringField(source, "category"),
+    runtime: extractStringField(source, "runtime"),
+    tags: extractArrayField(source, "tags"),
+    permissions: extractArrayField(source, "permissions"),
+    capabilities: extractArrayField(source, "capabilities"),
+    microFrontendKind: extractMicroFrontendKind(source),
+    microFrontendUrl: extractMicroFrontendUrl(source)
+  };
 }
 
 function generateReadme(fields) {
@@ -94,58 +95,70 @@ function generateReadme(fields) {
   const tags = fields.tags || [];
   const permissions = fields.permissions || [];
   const capabilities = fields.capabilities || [];
+  const isRemoteIframe = runtime === "remote" || fields.microFrontendKind === "iframe";
 
   const lines = [
-    `# ${name}`,
+    "# " + name,
     "",
     description,
     "",
     "## 概述",
     "",
-    `| 属性 | 值 |`,
-    `|------|-----|`,
-    `| 分类 | ${categoryLabel} |`,
-    `| 运行环境 | ${runtimeLabel} |`,
+    "| 属性 | 值 |",
+    "|------|-----|",
+    "| 分类 | " + categoryLabel + " (" + tick + category + tick + ") |",
+    "| 运行环境 | " + runtimeLabel + " (" + tick + runtime + tick + ") |"
   ];
 
+  if (fields.microFrontendUrl) {
+    lines.push("| 远程入口 | " + fields.microFrontendUrl + " |");
+  }
+
   if (tags.length > 0) {
-    lines.push(`| 标签 | ${tags.join("、")} |`);
+    lines.push("| 标签 | " + tags.join("、") + " |");
   }
 
   if (permissions.length > 0) {
-    lines.push(`| 权限 | ${permissions.join("、")} |`);
+    lines.push("| 权限 | " + permissions.join("、") + " |");
   }
 
   if (capabilities.length > 0) {
-    lines.push(`| 能力 | ${capabilities.join("、")} |`);
+    lines.push("| 能力 | " + capabilities.join("、") + " |");
+  }
+
+  lines.push("", "## 目录结构", "", fence, (fields.id || "tool-name") + "/", "├── manifest.ts        # 工具元声明");
+
+  if (!isRemoteIframe) {
+    lines.push("├── app.tsx            # 本地工具 UI 入口");
+  }
+
+  lines.push("├── package.json      # 包配置", "└── README.md         # 本文档", fence, "", "## 开发指引", "");
+
+  if (isRemoteIframe) {
+    lines.push(
+      "1. 确保远程页面可通过 manifest 中的 " + tick + "microFrontend.url" + tick + " 访问。",
+      "2. 远程 iframe 工具不包含 " + tick + "app.tsx" + tick + "，" + tick + "package.json" + tick + " 只导出 " + tick + "./manifest" + tick + "。",
+      "3. 运行 " + tick + "pnpm generate:tools" + tick + " 重新生成工具注册表。",
+      "4. 启动开发服务器：" + tick + "pnpm dev" + tick + "。"
+    );
+  } else {
+    lines.push(
+      "1. 确保已安装依赖：" + tick + "pnpm install" + tick + "。",
+      "2. 修改 " + tick + "app.tsx" + tick + " 实现工具功能。",
+      "3. 运行 " + tick + "pnpm generate:tools" + tick + " 重新生成工具注册表。",
+      "4. 启动开发服务器：" + tick + "pnpm dev" + tick + "。"
+    );
   }
 
   lines.push(
     "",
-    "## 目录结构",
-    "",
-    "```",
-    `${fields.id || "tool-name"}/`,
-    "├── manifest.ts        # 工具元声明",
-    "├── app.tsx     # 工具 UI 组件",
-    "├── package.json      # 包配置",
-    "└── README.md         # 本文档",
-    "```",
-    "",
-    "## 开发指引",
-    "",
-    "1. 确保已安装依赖：\`pnpm install\`",
-    `2. 修改 \`app.tsx\` 实现工具功能`,
-    `3. 运行 \`pnpm generate:tools\` 重新生成工具注册表`,
-    "4. 启动开发服务器：\`pnpm dev\`",
-    "",
     "## 构建与发布",
     "",
-    "```bash",
+    fence + "bash",
     "pnpm build        # 构建所有包",
     "pnpm lint         # 代码检查",
     "pnpm test         # 运行测试",
-    "```",
+    fence,
     ""
   );
 
@@ -158,7 +171,7 @@ async function main() {
     absolute: true
   });
 
-  console.log(`found ${manifestFiles.length} tool manifests`);
+  console.log("found " + manifestFiles.length + " tool manifests");
 
   let generated = 0;
   let skipped = 0;
@@ -170,7 +183,7 @@ async function main() {
     const fields = extractManifestFields(source);
 
     if (!fields.name) {
-      console.warn(`  skip (no name): ${manifestPath}`);
+      console.warn("  skip (no name): " + manifestPath);
       skipped++;
       continue;
     }
@@ -180,7 +193,7 @@ async function main() {
     generated++;
   }
 
-  console.log(`generated: ${generated}, skipped: ${skipped}`);
+  console.log("generated: " + generated + ", skipped: " + skipped);
 }
 
 main().catch((error) => {

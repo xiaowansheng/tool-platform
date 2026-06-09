@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./client": "./src/client.ts"
+    "./client": "./src/client.ts",
+    "./micro-frontend": "./src/micro-frontend.ts"
   },
   "scripts": {
     "test": "tsx --test src/*.test.ts"
@@ -224,6 +225,7 @@
     "@tool-platform/regex-tester": "workspace:*",
     "@tool-platform/regex-wasm-engine": "workspace:*",
     "@tool-platform/release-notes-builder": "workspace:*",
+    "@tool-platform/remote-iframe-demo": "workspace:*",
     "@tool-platform/resource-unit-converter": "workspace:*",
     "@tool-platform/resume-builder": "workspace:*",
     "@tool-platform/retro-arcade": "workspace:*",

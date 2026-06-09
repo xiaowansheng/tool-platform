@@ -767,6 +767,9 @@ importers:
       '@tool-platform/release-notes-builder':
         specifier: workspace:*
         version: link:../../tools/release-notes-builder
+      '@tool-platform/remote-iframe-demo':
+        specifier: workspace:*
+        version: link:../../tools/remote-iframe-demo
       '@tool-platform/resource-unit-converter':
         specifier: workspace:*
         version: link:../../tools/resource-unit-converter
@@ -2995,6 +2998,12 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.2.6
+
+  tools/remote-iframe-demo:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
 
   tools/resource-unit-converter:
     dependencies:

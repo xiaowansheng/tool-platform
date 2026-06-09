@@ -28,7 +28,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Tool Platform",
-  description: "基于 Manifest、分类、搜索与动态路由的工具平台第一阶段实现。",
+  description: "基于 Manifest 的浏览器端插件化工具平台。",
   icons: {
     icon: "/icon.svg",
     apple: "/icon.svg"

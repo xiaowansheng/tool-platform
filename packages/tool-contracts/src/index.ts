@@ -6,6 +6,7 @@ export type ToolRuntime =
   | "wasm"
   | "ai"
   | "sandbox"
+  | "remote"
   | "realtime";
 
 export type ToolPermission =
@@ -15,6 +16,20 @@ export type ToolPermission =
   | "microphone"
   | "webgpu"
   | "notification";
+
+export interface LocalToolMicroFrontend {
+  kind: "local";
+}
+
+export interface IframeToolMicroFrontend {
+  kind: "iframe";
+  url: string;
+  sandbox?: string;
+  allow?: string;
+  title?: string;
+}
+
+export type ToolMicroFrontend = LocalToolMicroFrontend | IframeToolMicroFrontend;
 
 export type ToolCategory =
   | "ai-tools"
@@ -53,6 +68,7 @@ export interface ToolManifest {
   sandbox?: boolean;
   permissions?: ToolPermission[];
   capabilities?: string[];
+  microFrontend?: ToolMicroFrontend;
   preload?: string[];
   memoryLimit?: number;
   worker?: boolean;

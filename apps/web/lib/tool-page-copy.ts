@@ -2473,6 +2473,7 @@ const zhRuntimeLabels: Record<ToolRuntime, string> = {
   wasm: "WASM 运行",
   ai: "AI 运行",
   sandbox: "沙箱隔离运行",
+  remote: "远程微前端",
   realtime: "实时会话"
 };
 
@@ -2482,6 +2483,7 @@ const enRuntimeLabels: Record<ToolRuntime, string> = {
   wasm: "WASM runtime",
   ai: "AI runtime",
   sandbox: "Sandbox runtime",
+  remote: "Remote micro frontend",
   realtime: "Realtime session"
 };
 

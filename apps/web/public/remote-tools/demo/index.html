@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Remote Iframe Demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f7f8fb;
+        color: #1d2433;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        padding: 24px;
+      }
+
+      main {
+        display: grid;
+        gap: 18px;
+        max-width: 920px;
+        margin: 0 auto;
+      }
+
+      header {
+        display: grid;
+        gap: 8px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: #4f46e5;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1.05;
+      }
+
+      p {
+        margin: 0;
+        color: #536078;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .panel {
+        border: 1px solid #d9dfeb;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 16px;
+        box-shadow: 0 10px 30px rgba(29, 36, 51, 0.06);
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 6px;
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      code {
+        color: #111827;
+        overflow-wrap: anywhere;
+      }
+
+      button {
+        inline-size: fit-content;
+        min-height: 38px;
+        border: 1px solid #243047;
+        border-radius: 6px;
+        background: #243047;
+        color: #ffffff;
+        padding: 8px 12px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:focus-visible {
+        outline: 3px solid #93c5fd;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Remote iframe micro frontend demo</p>
+        <h1>Manifest-only remote tool</h1>
+        <p>This page is served outside the tool package and mounted through ToolMicroFrontendHost.</p>
+      </header>
+
+      <section class="grid" aria-label="Host context">
+        <div class="panel">
+          <span class="label">Tool ID</span>
+          <code id="toolId"></code>
+        </div>
+        <div class="panel">
+          <span class="label">Locale</span>
+          <code id="locale"></code>
+        </div>
+        <div class="panel">
+          <span class="label">Path</span>
+          <code id="path"></code>
+        </div>
+        <div class="panel">
+          <span class="label">Segments</span>
+          <code id="segments"></code>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Remote state">
+        <p id="status">The remote iframe is ready.</p>
+        <button type="button" id="ping">Update remote state</button>
+      </section>
+    </main>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const values = {
+        toolId: params.get("toolId") || "missing",
+        locale: params.get("locale") || "missing",
+        path: params.get("path") || "missing",
+        segments: params.get("segments") || "none"
+      };
+
+      for (const [key, value] of Object.entries(values)) {
+        document.getElementById(key).textContent = value;
+      }
+
+      let count = 0;
+      document.getElementById("ping").addEventListener("click", () => {
+        count += 1;
+        document.getElementById("status").textContent = "Remote state updated " + count + " time" + (count === 1 ? "" : "s") + ".";
+      });
+    </script>
+  </body>
+</html>

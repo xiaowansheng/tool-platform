@@ -26,36 +26,49 @@
 
     pnpm generate:tools
 
-生成文件位于 packages/tool-sdk/src/generated/*，应随相关工具变更一起提交。
+生成文件位于 `packages/tool-sdk/src/generated/*`，应随相关工具变更一起提交。
 
 ## 新增工具
 
-使用脚手架创建工具：
+创建本地工具：
 
-    pnpm create-tool my-tool --name "My Tool" --category 开发工具 --runtime simple
+    pnpm create-tool my-tool --name "My Tool" --category developer-tools --runtime simple
 
-标准工具目录包含：
+创建远程 iframe 工具：
+
+    pnpm create-tool vendor-tool --name "Vendor Tool" --category developer-tools --runtime remote --remote-url https://tools.example.com/app
+
+本地工具目录包含：
 
     tools/my-tool/
     ├── package.json
     ├── manifest.ts
-    ├── ToolClient.tsx
+    ├── app.tsx
+    └── README.md
+
+远程 iframe 工具目录包含：
+
+    tools/vendor-tool/
+    ├── package.json
+    ├── manifest.ts
     └── README.md
 
 工具要求：
 
-- manifest.id 必须和目录名一致。
-- category 必须使用 packages/tool-contracts/src/index.ts 中定义的分类。
-- description、tags、subCategory 应使用用户会搜索的关键词。
-- 工具 UI 应保持自包含，不要把工具业务逻辑写进 apps/web。
+- `manifest.id` 必须和目录名一致。
+- `category` 必须使用 `packages/tool-contracts/src/index.ts` 中定义的 category id，例如 `developer-tools`、`data-tools`。
+- 本地工具必须导出 `./manifest` 和 `./app`；远程 iframe 工具只导出 `./manifest`。
+- 远程 iframe 工具必须设置 `runtime: "remote"` 和 `microFrontend.kind: "iframe"`。
+- `description`、`tags`、`subCategory` 应使用用户会搜索的关键词。
+- 工具 UI 应保持自包含，不要把工具业务逻辑写进 `apps/web`。
 - 大文件、重计算或长任务优先使用 Worker、WASM 或专用 runtime。
 - 涉及文件、剪贴板、摄像头、麦克风、通知等能力时，应在 manifest 中声明权限，并在 UI 中保持清晰反馈。
 
 ## 分类
 
-当前支持的分类：
+当前支持的 category id：
 
-    AI工具, 开发工具, 运维工具, 网络安全, 文件工具, 图片工具, 视频音频, 文本工具, 数据工具, 办公工具, 设计工具, SEO工具, 站长工具, 学习工具, 计算工具, 社媒工具, 电商工具, 效率工具, 娱乐工具, 导航发现
+    ai-tools, developer-tools, ops-tools, security-tools, file-tools, image-tools, media-tools, text-tools, data-tools, office-tools, design-tools, seo-tools, webmaster-tools, learning-tools, calculator-tools, social-tools, ecommerce-tools, productivity-tools, entertainment-tools, discovery-tools
 
 ## 代码风格
 

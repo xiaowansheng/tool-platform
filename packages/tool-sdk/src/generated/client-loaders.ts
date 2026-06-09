@@ -301,4 +301,3 @@ export const toolAppLoaders = {
   "world-clock": () => import("@tool-platform/world-clock/app"),
   "xml-formatter": () => import("@tool-platform/xml-formatter/app")
 } satisfies Record<string, ToolAppLoader>;
-

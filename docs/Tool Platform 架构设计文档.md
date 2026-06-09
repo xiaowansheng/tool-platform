@@ -371,23 +371,20 @@ CRDT
 ## 8.1 基础 Manifest
 
 ```ts
-export default {
+import type { ToolManifest } from "@tool-platform/tool-contracts";
+
+const manifest: ToolManifest = {
   id: "json-formatter",
-
   name: "JSON Formatter",
-
   description: "JSON 格式化工具",
-
-  category: "数据工具",
-
+  category: "data-tools",
   tags: ["json", "formatter"],
-
   icon: "braces",
-
   featured: true,
-
   runtime: "simple"
-}
+};
+
+export default manifest;
 ```
 
 ---
@@ -885,22 +882,37 @@ OCR Service
 
 ## 22.1 推荐命令
 
+本地工具：
+
 ```bash
-pnpm create-tool
+pnpm create-tool my-tool --name "My Tool" --category developer-tools --runtime simple
+```
+
+远程 iframe 工具：
+
+```bash
+pnpm create-tool vendor-tool --name "Vendor Tool" --category developer-tools --runtime remote --remote-url https://tools.example.com/app
 ```
 
 ---
 
 ## 22.2 自动生成
 
-自动创建：
+本地工具自动创建：
 
 ```text
 manifest.ts
-page.tsx
-worker.ts
+app.tsx
+package.json
 README.md
-test
+```
+
+远程 iframe 工具自动创建：
+
+```text
+manifest.ts
+package.json
+README.md
 ```
 
 ---

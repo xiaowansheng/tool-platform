@@ -4,15 +4,15 @@
     "description": "A plugin-based tool platform with Manifest, categories, search, and dynamic routing."
   },
   "layout": {
-    "sidebarDescription": "A browser workstation for plugin-based tools, focused on Phase One capabilities.",
+    "sidebarDescription": "A plugin-based browser workstation for developer tools.",
     "home": "Home",
     "search": "Search",
     "feedback": "Feedback",
-    "footerFocus": "Phase focus: platform skeleton, Manifest, dynamic routing, categories & search."
+    "footerFocus": "Powered by Manifest-driven architecture with dynamic routing."
   },
   "siteFooter": {
     "ariaLabel": "Site footer",
-    "description": "Tools registered by Manifest, organized by categories and search. Runs locally in the browser for development, data, security, text, and office workflows.",
+    "description": "A browser-based tool platform for development, data, security, text, and AI workflows.",
     "principles": "Platform principles",
     "localFirst": "Local-first",
     "manifestDriven": "Manifest-driven",
@@ -49,14 +49,11 @@
     "darkMode": "Dark Mode"
   },
   "home": {
-    "subtitle": "Phase one skeleton of Browser Tool OS — get tool entries, categories, and search working first.",
     "heroTitle": "Treat tools as plugins, not ordinary pages.",
-    "heroDescription": "The current implementation focuses on platform skeleton, Manifest auto-registration, dynamic tool routing, category system, search system, and `simple` tool examples. Worker / WASM / AI Runtime support will follow.",
     "statTools": "Registered Tools",
     "statCategories": "Categories",
     "statFeatured": "Featured",
     "quickTools": "Quick Access",
-    "quickToolsDescription": "The homepage prioritizes direct tool entries over marketing copy.",
     "topTools": "Popular Tools",
     "topCategories": "Popular Categories"
   },
@@ -128,9 +125,7 @@
     "addAria": "Favorite {name}",
     "removeAria": "Unfavorite {name}"
   },
-  "toolPage": {
-    "subtitle": "Dynamic tool routing from the auto-generated Tool Registry."
-  },
+
   "toolCard": {
     "enterTool": "Open Tool",
     "visits": "{count} visits",
@@ -138,8 +133,17 @@
     "moreTags": "{count} more tags"
   },
   "toolLoader": {
-    "loadError": "Tool component not registered or failed to load.",
-    "loading": "Loading tool component..."
+    "loadError": "Tool micro frontend is not registered or failed to load.",
+    "loading": "Loading tool micro frontend...",
+    "renderError": "This tool failed while rendering. Other tools and navigation are still available.",
+    "retry": "Retry",
+    "missingLocal": "No local app loader is registered for this tool.",
+    "missingRemoteUrl": "Remote iframe micro frontend is missing its URL.",
+    "remoteEyebrow": "Remote Micro Frontend",
+    "remoteDescription": "This tool is hosted in an isolated iframe adapter.",
+    "loadErrorTitle": "Load Error",
+    "loadingTitle": "Loading",
+    "renderErrorTitle": "Render Error"
   },
   "notFound": {
     "title": "404 — Page Not Found",

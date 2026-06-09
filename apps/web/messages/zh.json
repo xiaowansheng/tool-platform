@@ -1,18 +1,18 @@
 {
   "metadata": {
     "title": "Tool Platform",
-    "description": "基于 Manifest、分类、搜索与动态路由的工具平台第一阶段实现。"
+    "description": "基于 Manifest 的浏览器端插件化工具平台。"
   },
   "layout": {
-    "sidebarDescription": "面向插件化工具的浏览器工作台，优先实现文档中的第一阶段能力。",
+    "sidebarDescription": "面向插件化工具的浏览器工作台。",
     "home": "首页",
     "search": "搜索",
     "feedback": "功能反馈",
-    "footerFocus": "阶段聚焦：平台骨架、Manifest、动态路由、分类与搜索。"
+    "footerFocus": "Manifest 驱动的动态路由工具平台。"
   },
   "siteFooter": {
     "ariaLabel": "站点底部",
-    "description": "按 Manifest 注册工具，通过分类和搜索组织入口。优先在浏览器本地运行，覆盖开发、数据、安全、文本与办公场景。",
+    "description": "浏览器中的工具平台，覆盖开发、数据、安全、文本与 AI 场景。",
     "principles": "平台原则",
     "localFirst": "本地优先",
     "manifestDriven": "Manifest 驱动",
@@ -49,14 +49,11 @@
     "darkMode": "深色模式"
   },
   "home": {
-    "subtitle": "Browser Tool OS 的第一阶段骨架，先把工具入口、分类与搜索跑通。",
     "heroTitle": "把工具当成插件，而不是普通页面。",
-    "heroDescription": "当前实现按仓库文档先完成平台骨架、Manifest 自动注册、动态工具路由、分类系统、搜索系统以及 `simple` 工具示例，后续再向 Worker / WASM / AI Runtime 推进。",
     "statTools": "已注册工具",
     "statCategories": "推荐分类",
     "statFeatured": "精选入口",
     "quickTools": "快捷工具",
-    "quickToolsDescription": "首页优先给出可直接进入的工具入口，而不是营销文案。",
     "topTools": "热门工具",
     "topCategories": "热门分类"
   },
@@ -128,9 +125,7 @@
     "addAria": "收藏 {name}",
     "removeAria": "取消收藏 {name}"
   },
-  "toolPage": {
-    "subtitle": "动态工具路由来自自动生成的 Tool Registry。"
-  },
+
   "toolCard": {
     "enterTool": "进入工具",
     "visits": "{count} 次访问",
@@ -138,8 +133,17 @@
     "moreTags": "还有 {count} 个标签"
   },
   "toolLoader": {
-    "loadError": "工具组件未注册或无法加载。",
-    "loading": "工具组件加载中。"
+    "loadError": "工具微前端未注册或无法加载。",
+    "loading": "工具微前端加载中。",
+    "renderError": "此工具渲染失败，其他工具和导航仍可继续使用。",
+    "retry": "重试",
+    "missingLocal": "此工具没有注册本地 app loader。",
+    "missingRemoteUrl": "远程 iframe 微前端缺少 URL。",
+    "remoteEyebrow": "远程微前端",
+    "remoteDescription": "此工具通过隔离 iframe adapter 承载。",
+    "loadErrorTitle": "加载失败",
+    "loadingTitle": "加载中",
+    "renderErrorTitle": "渲染失败"
   },
   "notFound": {
     "title": "404 — 页面未找到",

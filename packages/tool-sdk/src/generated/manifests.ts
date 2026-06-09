@@ -210,6 +210,7 @@ import RegexBatchExtractorManifest from "@tool-platform/regex-batch-extractor/ma
 import RegexTesterManifest from "@tool-platform/regex-tester/manifest";
 import RegexWasmEngineManifest from "@tool-platform/regex-wasm-engine/manifest";
 import ReleaseNotesBuilderManifest from "@tool-platform/release-notes-builder/manifest";
+import RemoteIframeDemoManifest from "@tool-platform/remote-iframe-demo/manifest";
 import ResourceUnitConverterManifest from "@tool-platform/resource-unit-converter/manifest";
 import ResumeBuilderManifest from "@tool-platform/resume-builder/manifest";
 import RetroArcadeManifest from "@tool-platform/retro-arcade/manifest";
@@ -505,6 +506,7 @@ export const toolManifests: ToolManifest[] = [
   RegexTesterManifest,
   RegexWasmEngineManifest,
   ReleaseNotesBuilderManifest,
+  RemoteIframeDemoManifest,
   ResourceUnitConverterManifest,
   ResumeBuilderManifest,
   RetroArcadeManifest,

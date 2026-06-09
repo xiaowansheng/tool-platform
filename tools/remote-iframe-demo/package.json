@@ -1,0 +1,12 @@
+{
+  "name": "@tool-platform/remote-iframe-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manifest": "./manifest.ts"
+  },
+  "dependencies": {
+    "@tool-platform/tool-contracts": "workspace:*"
+  }
+}
