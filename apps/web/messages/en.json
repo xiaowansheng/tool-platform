@@ -8,7 +8,8 @@
     "home": "Home",
     "search": "Search",
     "feedback": "Feedback",
-    "footerFocus": "Powered by Manifest-driven architecture with dynamic routing."
+    "footerFocus": "Powered by Manifest-driven architecture with dynamic routing.",
+    "githubLabel": "View source on GitHub"
   },
   "siteFooter": {
     "ariaLabel": "Site footer",

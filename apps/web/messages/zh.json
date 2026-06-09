@@ -8,7 +8,8 @@
     "home": "首页",
     "search": "搜索",
     "feedback": "功能反馈",
-    "footerFocus": "Manifest 驱动的动态路由工具平台。"
+    "footerFocus": "Manifest 驱动的动态路由工具平台。",
+    "githubLabel": "在 GitHub 上查看源码"
   },
   "siteFooter": {
     "ariaLabel": "站点底部",
