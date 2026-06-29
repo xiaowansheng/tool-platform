@@ -19,6 +19,59 @@ function normalizeQuery(value: string) {
   return value.trim();
 }
 
+function getRelevanceScore(tool: ToolManifest, query: string): number {
+  const normQuery = query.trim().toLowerCase();
+  if (!normQuery) return 0;
+
+  const normName = tool.name.toLowerCase();
+  const normDesc = tool.description.toLowerCase();
+  let score = 0;
+
+  // 1. Exact Name match gets highest score
+  if (normName === normQuery) {
+    score += 1000;
+  }
+  // 2. Name starts with query
+  else if (normName.startsWith(normQuery)) {
+    score += 800;
+  }
+  // 3. Name contains query
+  else if (normName.includes(normQuery)) {
+    score += 500;
+  }
+  
+  // 4. Subcategory matches
+  if (tool.subCategory && tool.subCategory.toLowerCase() === normQuery) {
+    score += 300;
+  } else if (tool.subCategory && tool.subCategory.toLowerCase().includes(normQuery)) {
+    score += 150;
+  }
+
+  // 5. Tags matches
+  if (tool.tags) {
+    tool.tags.forEach(tag => {
+      const normTag = tag.toLowerCase();
+      if (normTag === normQuery) {
+        score += 200;
+      } else if (normTag.includes(normQuery)) {
+        score += 100;
+      }
+    });
+  }
+
+  // 6. Description contains query
+  if (normDesc.includes(normQuery)) {
+    score += 50;
+  }
+
+  // 7. Category matches
+  if (tool.category && tool.category.toLowerCase() === normQuery) {
+    score += 20;
+  }
+
+  return score;
+}
+
 export function HomeSearchExperience({
   initialQuery,
   tools
@@ -41,14 +94,24 @@ export function HomeSearchExperience({
   );
 
   const sortedTools = useMemo(() => {
-    if (hasQuery) {
-      return filteredTools;
+    const normQuery = normalizeQuery(deferredQuery);
+    if (!normQuery) {
+      return [...filteredTools].sort(
+        (a, b) => (visitMap.get(b.id) ?? 0) - (visitMap.get(a.id) ?? 0)
+      );
     }
 
-    return [...filteredTools].sort(
-      (a, b) => (visitMap.get(b.id) ?? 0) - (visitMap.get(a.id) ?? 0)
-    );
-  }, [filteredTools, hasQuery, visitMap]);
+    return [...filteredTools].sort((a, b) => {
+      const scoreA = getRelevanceScore(a, normQuery);
+      const scoreB = getRelevanceScore(b, normQuery);
+
+      if (scoreA !== scoreB) {
+        return scoreB - scoreA;
+      }
+
+      return (visitMap.get(b.id) ?? 0) - (visitMap.get(a.id) ?? 0);
+    });
+  }, [filteredTools, deferredQuery, visitMap]);
 
   useEffect(() => {
     let mounted = true;
