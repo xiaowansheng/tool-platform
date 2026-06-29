@@ -288,6 +288,7 @@ import WebComponentLabManifest from "@tool-platform/web-component-lab/manifest";
 import WebgpuCapabilityReporterManifest from "@tool-platform/webgpu-capability-reporter/manifest";
 import WebhookSignatureVerifierManifest from "@tool-platform/webhook-signature-verifier/manifest";
 import WebsocketClientManifest from "@tool-platform/websocket-client/manifest";
+import WhoisLookupManifest from "@tool-platform/whois-lookup/manifest";
 import WordCounterProManifest from "@tool-platform/word-counter-pro/manifest";
 import WorldClockManifest from "@tool-platform/world-clock/manifest";
 import XmlFormatterManifest from "@tool-platform/xml-formatter/manifest";
@@ -585,6 +586,7 @@ export const toolManifests: ToolManifest[] = [
   WebgpuCapabilityReporterManifest,
   WebhookSignatureVerifierManifest,
   WebsocketClientManifest,
+  WhoisLookupManifest,
   WordCounterProManifest,
   WorldClockManifest,
   XmlFormatterManifest

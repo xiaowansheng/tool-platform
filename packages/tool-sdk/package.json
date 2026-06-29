@@ -303,6 +303,7 @@
     "@tool-platform/webgpu-capability-reporter": "workspace:*",
     "@tool-platform/webhook-signature-verifier": "workspace:*",
     "@tool-platform/websocket-client": "workspace:*",
+    "@tool-platform/whois-lookup": "workspace:*",
     "@tool-platform/word-counter-pro": "workspace:*",
     "@tool-platform/world-clock": "workspace:*",
     "@tool-platform/xml-formatter": "workspace:*"

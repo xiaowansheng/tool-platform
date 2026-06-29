@@ -298,6 +298,7 @@ export const toolAppLoaders = {
   "webgpu-capability-reporter": () => import("@tool-platform/webgpu-capability-reporter/app"),
   "webhook-signature-verifier": () => import("@tool-platform/webhook-signature-verifier/app"),
   "websocket-client": () => import("@tool-platform/websocket-client/app"),
+  "whois-lookup": () => import("@tool-platform/whois-lookup/app"),
   "word-counter-pro": () => import("@tool-platform/word-counter-pro/app"),
   "world-clock": () => import("@tool-platform/world-clock/app"),
   "xml-formatter": () => import("@tool-platform/xml-formatter/app")

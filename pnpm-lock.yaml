@@ -1004,6 +1004,9 @@ importers:
       '@tool-platform/websocket-client':
         specifier: workspace:*
         version: link:../../tools/websocket-client
+      '@tool-platform/whois-lookup':
+        specifier: workspace:*
+        version: link:../../tools/whois-lookup
       '@tool-platform/word-counter-pro':
         specifier: workspace:*
         version: link:../../tools/word-counter-pro
@@ -3732,6 +3735,15 @@ importers:
         version: 19.2.6
 
   tools/websocket-client:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/whois-lookup:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
