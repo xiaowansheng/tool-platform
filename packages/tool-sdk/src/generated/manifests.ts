@@ -253,6 +253,7 @@ import SvgPlaygroundManifest from "@tool-platform/svg-playground/manifest";
 import SystemdUnitAnalyzerManifest from "@tool-platform/systemd-unit-analyzer/manifest";
 import TailwindClassLabManifest from "@tool-platform/tailwind-class-lab/manifest";
 import TaskPriorityMatrixManifest from "@tool-platform/task-priority-matrix/manifest";
+import TcpUdpClientManifest from "@tool-platform/tcp-udp-client/manifest";
 import TerraformPlanFormatterManifest from "@tool-platform/terraform-plan-formatter/manifest";
 import TextCipherManifest from "@tool-platform/text-cipher/manifest";
 import TextDiffManifest from "@tool-platform/text-diff/manifest";
@@ -549,6 +550,7 @@ export const toolManifests: ToolManifest[] = [
   SystemdUnitAnalyzerManifest,
   TailwindClassLabManifest,
   TaskPriorityMatrixManifest,
+  TcpUdpClientManifest,
   TerraformPlanFormatterManifest,
   TextCipherManifest,
   TextDiffManifest,

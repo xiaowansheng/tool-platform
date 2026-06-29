@@ -263,6 +263,7 @@ export const toolAppLoaders = {
   "systemd-unit-analyzer": () => import("@tool-platform/systemd-unit-analyzer/app"),
   "tailwind-class-lab": () => import("@tool-platform/tailwind-class-lab/app"),
   "task-priority-matrix": () => import("@tool-platform/task-priority-matrix/app"),
+  "tcp-udp-client": () => import("@tool-platform/tcp-udp-client/app"),
   "terraform-plan-formatter": () => import("@tool-platform/terraform-plan-formatter/app"),
   "text-cipher": () => import("@tool-platform/text-cipher/app"),
   "text-diff": () => import("@tool-platform/text-diff/app"),

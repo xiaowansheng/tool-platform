@@ -896,6 +896,9 @@ importers:
       '@tool-platform/task-priority-matrix':
         specifier: workspace:*
         version: link:../../tools/task-priority-matrix
+      '@tool-platform/tcp-udp-client':
+        specifier: workspace:*
+        version: link:../../tools/tcp-udp-client
       '@tool-platform/terraform-plan-formatter':
         specifier: workspace:*
         version: link:../../tools/terraform-plan-formatter
@@ -3390,6 +3393,15 @@ importers:
         version: 19.2.6
 
   tools/task-priority-matrix:
+    dependencies:
+      '@tool-platform/tool-contracts':
+        specifier: workspace:*
+        version: link:../../packages/tool-contracts
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
+
+  tools/tcp-udp-client:
     dependencies:
       '@tool-platform/tool-contracts':
         specifier: workspace:*
