@@ -3,13 +3,13 @@ import type { ToolManifest } from "@tool-platform/tool-contracts";
 const manifest: ToolManifest = {
   id: "qr-barcode-tool",
   name: "QR Barcode Tool",
-  description: "生成本地 QR Code 与 Code 128 条形码，并通过浏览器 BarcodeDetector 解析图片。",
+  description: "生成本地 QR 二维码与一维条形码（Code 128 / Code 39 / EAN-13），并整合多引擎解析扫描图片中的条码。",
   category: "image-tools",
   subCategory: "code",
-  tags: ["qr", "barcode", "code128", "scanner"],
+  tags: ["qr", "barcode", "code128", "code39", "ean13", "scanner"],
   icon: "qr-code",
   runtime: "simple",
-  featured: false,
+  featured: true,
   permissions: ["clipboard", "filesystem"]
 };
 

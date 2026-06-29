@@ -8,7 +8,8 @@
     "./app": "./app.tsx"
   },
   "dependencies": {
-    "@tool-platform/tool-contracts": "workspace:*"
+    "@tool-platform/tool-contracts": "workspace:*",
+    "jsqr": "^1.4.0"
   },
   "peerDependencies": {
     "react": "^19.0.0"
