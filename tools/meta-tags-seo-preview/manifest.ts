@@ -3,14 +3,15 @@ import type { ToolManifest } from "@tool-platform/tool-contracts";
 const manifest: ToolManifest = {
   id: "meta-tags-seo-preview",
   name: "Meta Tags / SEO Preview",
-  description: "检查 title、description、canonical、robots，并预览搜索结果、Open Graph 和 Twitter Card。",
+  description: "一键拉取并解析在线网址的 SEO Meta 标签，支持直接生成搜索引擎和社交媒体卡片预览（SERP / Open Graph / Twitter Card），并可手动编辑导出 HTML 标签。",
   category: "seo-tools",
   subCategory: "seo",
   tags: ["meta tags", "seo", "serp", "open graph", "twitter card"],
   icon: "search-check",
   runtime: "simple",
-  featured: false,
-  permissions: ["clipboard"]
+  featured: true,
+  permissions: ["clipboard"],
+  capabilities: ["http-request"]
 };
 
 export default manifest;
