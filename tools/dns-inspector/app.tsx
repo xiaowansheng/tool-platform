@@ -1,11 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
 import type { ToolAppProps } from "@tool-platform/tool-contracts";
 
 type RecordType = "ALL" | "A" | "AAAA" | "CNAME" | "MX" | "TXT" | "NS" | "SOA" | "CAA";
-type Provider = "cloudflare" | "google";
+type Provider = "cloudflare" | "google" | "local";
 
 interface DnsRecord {
   name: string;
@@ -88,6 +87,30 @@ function responseFlags(response: DnsResponse) {
 }
 
 async function queryDns(provider: Provider, domain: string, type: string): Promise<QueryResult> {
+  if (provider === "local") {
+    // Call server-side local DNS resolver (supports hosts, intranets, private records)
+    const response = await fetch("/api/dns-resolve", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ domain, recordType: type })
+    });
+
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error || `本地 DNS 解析请求失败: HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    return {
+      type,
+      status: data.success ? 0 : 2,
+      flags: ["LocalServer"],
+      answers: data.answers ?? [],
+      authority: []
+    };
+  }
+
+  // Cloudflare or Google public DoH
   const endpoint = provider === "cloudflare"
     ? `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${type}`
     : `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`;
@@ -133,6 +156,7 @@ export default function DnsInspectorTool({ manifest }: ToolAppProps) {
     queryType: result.type,
     section: "Authority"
   })))), [results]);
+  
   const statuses = results.map((result) => `${result.type}: ${statusLabels[result.status] ?? result.status}`).join(" / ");
 
   async function inspect() {
@@ -165,72 +189,75 @@ export default function DnsInspectorTool({ manifest }: ToolAppProps) {
           <p className="eyebrow">DNS 调试</p>
           <h2>{manifest.name}</h2>
         </div>
-        <p>{manifest.description}</p>
+        <p>{manifest.description || "查询并诊断域名的 DNS 解析记录。支持 Cloudflare/Google 公共 DoH 以及本地服务器 DNS 解析以排查局域网及 Hosts 映射。"}</p>
       </div>
 
       <div className="tool-toolbar tool-toolbar--grid">
         <label className="tool-field tool-field--compact">
-          <span>域名</span>
-          <input value={domain} onChange={(event) => setDomain(event.target.value)} placeholder="域名，如 example.com" />
+          <span>域名 / 主机名</span>
+          <input value={domain} onChange={(event) => setDomain(event.target.value)} placeholder="如 example.com 或 db.local" style={{ height: "36px" }} />
         </label>
         <label className="tool-field tool-field--compact">
           <span>记录类型</span>
-          <select value={recordType} onChange={(event) => setRecordType(event.target.value as RecordType)}>
+          <select value={recordType} onChange={(event) => setRecordType(event.target.value as RecordType)} style={{ height: "36px" }}>
             {recordTypes.map((type) => <option key={type} value={type}>{type}</option>)}
           </select>
         </label>
         <label className="tool-field tool-field--compact">
-          <span>DoH 提供方</span>
-          <select value={provider} onChange={(event) => setProvider(event.target.value as Provider)}>
-            <option value="cloudflare">Cloudflare</option>
-            <option value="google">Google</option>
+          <span>DNS 查询服务器</span>
+          <select value={provider} onChange={(event) => setProvider(event.target.value as Provider)} style={{ height: "36px" }}>
+            <option value="cloudflare">Cloudflare DoH (公网推荐)</option>
+            <option value="google">Google DoH (公网推荐)</option>
+            <option value="local">本地系统 DNS (支持 Hosts & 内网域名)</option>
           </select>
         </label>
-        <button type="button" onClick={() => void inspect()} disabled={busy}>{busy ? "查询中" : "查询 DNS"}</button>
+        <button type="button" onClick={() => void inspect()} disabled={busy} style={{ height: "36px", alignSelf: "end" }}>{busy ? "查询中..." : "查询 DNS"}</button>
       </div>
 
       <div className="detail-grid">
         <article className="detail-card">
-          <h3>查询</h3>
+          <h3>查询数量</h3>
           <p>{results.length}</p>
         </article>
         <article className="detail-card">
-          <h3>记录</h3>
+          <h3>解析记录</h3>
           <p>{records.length}</p>
         </article>
         <article className="detail-card">
-          <h3>状态</h3>
+          <h3>回应状态</h3>
           <p>{statuses || "无"}</p>
         </article>
       </div>
 
       <div className="tool-table">
-        <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "5rem minmax(10rem, 1fr) 5rem 5rem minmax(12rem, 1.3fr)" }}>
-          <span>查询</span>
-          <span>名称</span>
+        <div className="tool-table__row tool-table__row--head" style={{ gridTemplateColumns: "6rem minmax(10rem, 1.2fr) 5rem 5rem minmax(12rem, 1.6fr)" }}>
           <span>类型</span>
+          <span>主机记录</span>
+          <span>类型值</span>
           <span>TTL</span>
-          <span>数据</span>
+          <span>数据值 (Value)</span>
         </div>
         {records.length > 0 ? records.map((record, index) => (
-          <div key={`${record.queryType}-${record.name}-${record.type}-${record.data}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "5rem minmax(10rem, 1fr) 5rem 5rem minmax(12rem, 1.3fr)" }}>
-            <span>{record.queryType}</span>
-            <span className="mono-output">{record.name}</span>
-            <span>{recordTypeName(record)}</span>
+          <div key={`${record.queryType}-${record.name}-${record.type}-${record.data}-${index}`} className="tool-table__row" style={{ gridTemplateColumns: "6rem minmax(10rem, 1.2fr) 5rem 5rem minmax(12rem, 1.6fr)" }}>
+            <span className="pill" style={{ fontSize: "0.72rem", backgroundColor: "rgba(59, 130, 246, 0.12)", color: "#3b82f6", textAlign: "center", display: "inline-block", width: "fit-content" }}>{record.queryType}</span>
+            <span className="mono-output" style={{ fontSize: "0.825rem" }}>{record.name}</span>
+            <span style={{ fontWeight: "600" }}>{recordTypeName(record)}</span>
             <span>{record.TTL}</span>
-            <span className="mono-output">{record.data}</span>
+            <span className="mono-output" style={{ fontSize: "0.825rem", wordBreak: "break-all", whiteSpace: "pre-line" }}>{record.data}</span>
           </div>
         )) : (
-          <div className="tool-table__row" style={{ gridTemplateColumns: "1fr" }}>
-            <span>运行查询后显示 DNS 记录。</span>
+          <div className="tool-table__row" style={{ gridTemplateColumns: "1fr", textAlign: "center", padding: "1.5rem" }}>
+            <span style={{ color: "var(--text-secondary)" }}>暂无解析结果。输入域名并点击查询以查看解析明细。</span>
           </div>
         )}
       </div>
 
       {results.some((result) => result.flags.length > 0) ? (
-        <p className="tool-note">响应 Flags：{results.map((result) => `${result.type}=${result.flags.join(",") || "无"}`).join(" / ")}</p>
+        <p className="tool-note" style={{ marginTop: "1rem" }}>
+          响应协议 Flags / 说明：{results.map((result) => `${result.type}=${result.flags.join(",") || "无"}`).join(" / ")}
+        </p>
       ) : null}
-      {error ? <p className="tool-error">{error}</p> : null}
+      {error ? <p className="tool-error" style={{ marginTop: "1rem" }}>{error}</p> : null}
     </section>
   );
 }
