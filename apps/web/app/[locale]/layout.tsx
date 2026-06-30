@@ -7,6 +7,7 @@ import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 
 import { PlatformShell } from "@/components/platform-shell";
 import { ThemeSync } from "@/components/theme-sync";
+import { SITE_NAME, SITE_URL, DEFAULT_DESCRIPTION, DEFAULT_DESCRIPTION_EN } from "@/lib/seo-metadata";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
@@ -26,14 +27,50 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono"
 });
 
-export const metadata: Metadata = {
-  title: "Tool Platform",
-  description: "基于 Manifest 的浏览器端插件化工具平台。",
-  icons: {
-    icon: "/icon.svg",
-    apple: "/icon.svg"
-  }
-};
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isZh = locale === "zh";
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: SITE_NAME,
+      template: `%s | ${SITE_NAME}`,
+    },
+    description: isZh ? DEFAULT_DESCRIPTION : DEFAULT_DESCRIPTION_EN,
+    icons: {
+      icon: "/icon.svg",
+      apple: "/icon.svg",
+    },
+    openGraph: {
+      siteName: SITE_NAME,
+      type: "website",
+      locale: isZh ? "zh_CN" : "en_US",
+      images: [
+        {
+          url: "/icon.svg",
+          width: 512,
+          height: 512,
+          alt: SITE_NAME,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["/icon.svg"],
+    },
+    alternates: {
+      languages: {
+        zh: `${SITE_URL}/zh`,
+        en: `${SITE_URL}/en`,
+      },
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

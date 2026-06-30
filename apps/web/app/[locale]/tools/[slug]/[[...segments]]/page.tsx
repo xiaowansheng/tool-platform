@@ -15,6 +15,7 @@ import {
   getToolPageManifest,
   isZhLocale
 } from "@/lib/tool-page-copy";
+import { buildPageMetadata, buildToolJsonLd } from "@/lib/seo-metadata";
 import { getToolManifest } from "@tool-platform/tool-sdk";
 
 interface ToolRouteParams {
@@ -49,10 +50,12 @@ export async function generateMetadata({
 
   const pageManifest = getToolPageManifest(manifest, locale);
 
-  return {
-    title: `${pageManifest.name} | Tool Platform`,
-    description: pageManifest.description
-  };
+  return buildPageMetadata({
+    title: pageManifest.name,
+    description: pageManifest.description,
+    locale,
+    path: `/${locale}/tools/${slug}`,
+  });
 }
 
 export default async function ToolPage({
@@ -75,8 +78,17 @@ export default async function ToolPage({
   }
 
   const pageManifest = getToolPageManifest(manifest, locale);
+  const jsonLd = buildToolJsonLd(pageManifest, locale);
 
-  return <ToolPageContent manifest={pageManifest} locale={locale} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ToolPageContent manifest={pageManifest} locale={locale} />
+    </>
+  );
 }
 
 function ToolPageContent({ manifest, locale }: { manifest: NonNullable<ReturnType<typeof getToolManifest>>; locale: string }) {
